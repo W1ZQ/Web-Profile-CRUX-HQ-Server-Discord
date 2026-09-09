@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORE REGNUM UNIFIED-X // Official Discord Basecamp (Est. 2026)</title>
+    <link rel="icon" type="image/png" href="image/CRUX LOGO.png">
+    <link rel="apple-touch-icon" href="image/CRUX LOGO.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Cinzel:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #030303;
+            --bg-secondary: #080808;
+            --accent-orange: #f97316;
+            --accent-rgb: 249, 115, 22;
+            --accent-glow: rgba(249, 115, 22, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(249, 115, 22, 0.7);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        /* Dynamic Themes */
+        body.theme-orange-red {
+            --accent-orange: #f97316;
+            --accent-rgb: 249, 115, 22;
+            --accent-glow: rgba(249, 115, 22, 0.45);
+            --border-hover: rgba(249, 115, 22, 0.75);
+        }
+        body.theme-crimson {
+            --accent-orange: #ef4444;
+            --accent-rgb: 239, 68, 68;
+            --accent-glow: rgba(239, 68, 68, 0.45);
+            --border-hover: rgba(239, 68, 68, 0.75);
+        }
+        body.theme-amber-dark {
+            --accent-orange: #f59e0b;
+            --accent-rgb: 245, 158, 11;
+            --accent-glow: rgba(245, 158, 11, 0.45);
+            --border-hover: rgba(245, 158, 11, 0.75);
+        }
+        body.theme-cyan-cyber {
+            --accent-orange: #06b6d4;
+            --accent-rgb: 6, 182, 212;
+            --accent-glow: rgba(6, 182, 212, 0.45);
+            --border-hover: rgba(6, 182, 212, 0.75);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            overflow-x: hidden;
+            transition: background-color 0.5s ease;
+            position: relative;
+        }
+
+        code, pre, .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Grid Background Pattern */
+        .cyber-grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 46px 46px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #bgCanvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020202;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222226;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-orange);
+            box-shadow: 0 0 12px var(--accent-orange);
+        }
+
+        /* Glass Panel High-Tech */
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(16, 16, 20, 0.8) 0%, rgba(8, 8, 10, 0.94) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        .glass-panel:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px var(--accent-glow);
+        }
+
+        /* High-Tech HUD Corners */
+        .hud-corner::before,
+        .hud-corner::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: var(--accent-orange);
+            pointer-events: none;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        .hud-corner::before {
+            top: -1px;
+            left: -1px;
+            border-top: 2px solid var(--accent-orange);
+            border-left: 2px solid var(--accent-orange);
+            border-top-left-radius: 6px;
+        }
+        .hud-corner::after {
+            bottom: -1px;
+            right: -1px;
+            border-bottom: 2px solid var(--accent-orange);
+            border-right: 2px solid var(--accent-orange);
+            border-bottom-right-radius: 6px;
+        }
+        .glass-panel:hover .hud-corner::before,
+        .glass-panel:hover .hud-corner::after {
+            width: 18px;
+            height: 18px;
+            opacity: 1;
+            filter: drop-shadow(0 0 6px var(--accent-orange));
+        }
+
+        .crux-glow {
+            text-shadow: 0 0 30px var(--accent-glow), 0 0 10px var(--accent-glow);
+        }
+
+        /* Hover Cards */
+        .hover-popup {
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+        .hover-popup:hover {
+            transform: translateY(-5px) scale(1.01);
+        }
+
+        /* Page Smooth Transition */
+        @keyframes pageFadeSlide {
+            0% { opacity: 0; transform: translateY(16px) scale(0.985); filter: blur(6px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+
+        .page-section {
+            display: none;
+            opacity: 0;
+        }
+
+        .page-section.active-page {
+            display: block;
+            animation: pageFadeSlide 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Floating Balloon Animation */
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) scale(0.7) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.9; }
+            85% { opacity: 0.9; }
+            100% { transform: translateY(-120vh) scale(1.2) rotate(20deg); opacity: 0; }
+        }
+
+        .floating-balloon {
+            position: fixed;
+            bottom: -100px;
+            z-index: 100;
+            pointer-events: none;
+            animation: floatUp 6.5s ease-in-out forwards;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+        }
+
+        /* Floating Hologram in Modals */
+        @keyframes holoLevitate {
+            0%, 100% {
+                transform: translateY(0px) rotateX(2deg) scale(1);
+                filter: drop-shadow(0 15px 25px rgba(var(--accent-rgb), 0.35));
+            }
+            50% {
+                transform: translateY(-10px) rotateX(-2deg) scale(1.02);
+                filter: drop-shadow(0 25px 40px rgba(var(--accent-rgb), 0.6));
+            }
+        }
+
+        .holo-floating-image {
+            animation: holoLevitate 4.5s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        /* Modal Backdrop */
+        .modal-backdrop-blur {
+            position: fixed;
+            inset: 0;
+            z-index: 120;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-backdrop-blur.active-modal {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-backdrop-blur .modal-content-box {
+            transform: scale(0.9) translateY(18px);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .modal-backdrop-blur.active-modal .modal-content-box {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        /* Navigation Buttons */
+        .nav-btn {
+            position: relative;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem 1.1rem;
+            border-radius: 9999px;
+            transition: all 0.25s ease;
+            color: #9ca3af;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-btn.active-nav {
+            background: rgba(var(--accent-rgb), 0.15);
+            color: var(--accent-orange) !important;
+            border: 1px solid rgba(var(--accent-rgb), 0.4);
+            box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.25);
+            font-weight: 700;
+        }
+
+        /* Candle Flame */
+        #candleFlame {
+            background: radial-gradient(circle, #fff7ed 10%, #f97316 60%, #c2410c 100%);
+            box-shadow: 0 0 25px var(--accent-orange), 0 0 50px #fb923c;
+            transform-origin: bottom center;
+            animation: candleFlicker 0.8s infinite alternate ease-in-out;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        @keyframes candleFlicker {
+            0% { transform: scale(1) rotate(-3deg); }
+            50% { transform: scale(1.06) rotate(1deg); }
+            100% { transform: scale(1.12) rotate(3deg); }
+        }
+
+        /* Slide Transition */
+        .slide-fade {
+            animation: slideFadeAnim 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes slideFadeAnim {
+            0% { opacity: 0; transform: scale(0.96); filter: blur(4px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+
+        /* Toast Notice */
+        #toastNotice {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 200;
+            transform: translateY(100px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #toastNotice.active-toast {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ================= EXPANDED FLOATING RUNES & DRAG WELCOME SCREEN ================= */
+        #welcomePuzzleScreen {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: radial-gradient(circle at center, #1b0a02 0%, #080301 50%, #020202 90%);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+            user-select: none;
+        }
+        #welcomePuzzleScreen.puzzle-solved {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* Ambient floating runes drifting across the entire screen */
+        .floating-rune-free {
+            position: absolute;
+            touch-action: none;
+            cursor: grab;
+            z-index: 20;
+            transition: transform 0.1s ease-out, box-shadow 0.2s ease;
+        }
+        .floating-rune-free:active {
+            cursor: grabbing;
+            transform: scale(1.18);
+            z-index: 50;
+        }
+
+        @keyframes freeDrift1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(35px, -45px) rotate(6deg); }
+            50% { transform: translate(-25px, 30px) rotate(-4deg); }
+            75% { transform: translate(40px, 20px) rotate(5deg); }
+        }
+        @keyframes freeDrift2 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-45px, 35px) rotate(-6deg); }
+            50% { transform: translate(30px, -30px) rotate(5deg); }
+            75% { transform: translate(-20px, -40px) rotate(-4deg); }
+        }
+        @keyframes freeDrift3 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(40px, 40px) rotate(5deg); }
+            50% { transform: translate(-35px, -25px) rotate(-5deg); }
+            75% { transform: translate(25px, -35px) rotate(4deg); }
+        }
+        @keyframes freeDrift4 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-30px, -40px) rotate(-5deg); }
+            50% { transform: translate(45px, 25px) rotate(6deg); }
+            75% { transform: translate(-35px, 30px) rotate(-3deg); }
+        }
+
+        .drift-anim-0 { animation: freeDrift1 9s ease-in-out infinite alternate; }
+        .drift-anim-1 { animation: freeDrift2 11s ease-in-out infinite alternate; }
+        .drift-anim-2 { animation: freeDrift3 10s ease-in-out infinite alternate; }
+        .drift-anim-3 { animation: freeDrift4 12s ease-in-out infinite alternate; }
+
+        /* Target Slot Drag Highlight */
+        .slot-drag-hover {
+            border-color: #f97316 !important;
+            background-color: rgba(249, 115, 22, 0.25) !important;
+            transform: scale(1.08) !important;
+            box-shadow: 0 0 25px rgba(249, 115, 22, 0.5) !important;
+        }
+
+        /* Hierarchy connector lines */
+        .hierarchy-line {
+            width: 2px;
+            height: 38px;
+            background: linear-gradient(to bottom, var(--accent-orange), rgba(var(--accent-rgb), 0.2));
+            margin: 0 auto;
+            box-shadow: 0 0 10px var(--accent-orange);
+        }
+    </style>
+</head>
+<body class="min-h-screen selection:bg-orange-600 selection:text-white flex flex-col justify-between theme-orange-red">
+
+    <!-- Cyber Background Canvas & Grid Pattern -->
+    <div class="cyber-grid-overlay"></div>
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Floating Toast Notification -->
+    <div id="toastNotice" class="glass-panel px-5 py-3 rounded-2xl border border-orange-500/60 shadow-2xl flex items-center space-x-3 text-xs">
+        <span class="text-base" id="toastIcon">🚀</span>
+        <span id="toastMsg" class="font-semibold text-white">Notifikasi server siap!</span>
+    </div>
+
+    <!-- ================= INTERACTIVE WELCOME SCREEN: CRUX WORD PUZZLE ================= -->
+    <div id="welcomePuzzleScreen">
+        <!-- Floating Free Runes -->
+        <div id="floatingArea" class="absolute inset-0 pointer-events-none"></div>
+
+        <!-- Center Terminal Dock -->
+        <div class="text-center space-y-7 max-w-xl px-6 relative z-30 pointer-events-auto">
+            
+            <!-- Welcome Header -->
+            <div class="space-y-3">
+                <div class="inline-flex items-center space-x-2.5 px-4 py-1.5 bg-orange-500/15 border border-orange-500/40 rounded-full text-[11px] font-mono tracking-widest text-orange-400 uppercase font-bold shadow-lg">
+                    <span class="w-2 h-2 rounded-full bg-orange-400 animate-ping"></span>
+                    <span>SELAMAT DATANG DI GERBANG KEHORMATAN</span>
+                </div>
+                <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white font-cinzel crux-glow uppercase">
+                    CORE REGNUM UNIFIED-X
+                </h1>
+                <p class="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed max-w-md mx-auto">
+                    Kamilah pembawa retakan pemecah kesunyian. <br>
+                    <strong class="text-orange-400">Seret (drag) atau ketuk (tap)</strong> huruf-huruf yang melayang di layar ke dalam slot di bawah untuk membentuk kata sandi: 
+                    <span class="text-white font-mono font-bold tracking-widest bg-neutral-900/80 px-2.5 py-0.5 rounded border border-white/15">"CRUX"</span>.
+                </p>
+            </div>
+
+            <!-- Target Slot Boxes [ _ ] [ _ ] [ _ ] [ _ ] -->
+            <div class="flex justify-center items-center space-x-3 sm:space-x-5 py-2">
+                <div id="slot-0" data-slot="0" onclick="removeSlotLetter(0)" class="target-slot w-16 h-20 sm:w-20 sm:h-24 rounded-2xl bg-neutral-950/85 border-2 border-white/20 flex flex-col items-center justify-center text-2xl sm:text-3xl font-black font-mono text-white shadow-2xl transition-all cursor-pointer hover:border-orange-500/60 backdrop-blur-md">
+                    <span class="slot-text text-neutral-600 font-mono text-xs select-none">// 01</span>
+                </div>
+                <div id="slot-1" data-slot="1" onclick="removeSlotLetter(1)" class="target-slot w-16 h-20 sm:w-20 sm:h-24 rounded-2xl bg-neutral-950/85 border-2 border-white/20 flex flex-col items-center justify-center text-2xl sm:text-3xl font-black font-mono text-white shadow-2xl transition-all cursor-pointer hover:border-orange-500/60 backdrop-blur-md">
+                    <span class="slot-text text-neutral-600 font-mono text-xs select-none">// 02</span>
+                </div>
+                <div id="slot-2" data-slot="2" onclick="removeSlotLetter(2)" class="target-slot w-16 h-20 sm:w-20 sm:h-24 rounded-2xl bg-neutral-950/85 border-2 border-white/20 flex flex-col items-center justify-center text-2xl sm:text-3xl font-black font-mono text-white shadow-2xl transition-all cursor-pointer hover:border-orange-500/60 backdrop-blur-md">
+                    <span class="slot-text text-neutral-600 font-mono text-xs select-none">// 03</span>
+                </div>
+                <div id="slot-3" data-slot="3" onclick="removeSlotLetter(3)" class="target-slot w-16 h-20 sm:w-20 sm:h-24 rounded-2xl bg-neutral-950/85 border-2 border-white/20 flex flex-col items-center justify-center text-2xl sm:text-3xl font-black font-mono text-white shadow-2xl transition-all cursor-pointer hover:border-orange-500/60 backdrop-blur-md">
+                    <span class="slot-text text-neutral-600 font-mono text-xs select-none">// 04</span>
+                </div>
+            </div>
+
+            <!-- Status Indicator & Reset Button -->
+            <div class="flex flex-col items-center space-y-2 pt-1">
+                <div id="puzzleStatusMsg" class="text-xs font-mono text-neutral-300 min-h-[22px] flex items-center justify-center">
+                    💡 Tips: Tangkap huruf melayang dengan menyeretnya atau cukup diketuk!
+                </div>
+                <button onclick="resetPuzzle()" class="px-5 py-2 rounded-xl bg-neutral-900/90 border border-white/10 hover:border-orange-500/50 text-neutral-400 hover:text-white text-xs font-mono transition flex items-center space-x-1.5 shadow-md">
+                    <span>🔄</span> <span>ULANG SUSUNAN</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= TOP NAVIGATION (RAPI, LEGA: KIRI, TENGAH, KANAN) ================= -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#030303]/92 backdrop-blur-2xl border-b border-white/5 transition-all">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 py-3.5 flex justify-between items-center w-full">
+            
+            <!-- FAR LEFT: LOGO & NAMA SERVER -->
+            <div class="flex items-center space-x-3.5 cursor-pointer group shrink-0" onclick="switchPage('home'); playSFX('click');">
+                <div class="w-10 h-10 rounded-xl overflow-hidden border border-orange-500/60 shadow-lg shadow-orange-600/30 bg-neutral-950 flex items-center justify-center p-1 transition-transform group-hover:scale-105" style="border-color: var(--accent-orange);">
+                    <img src="image/CRUX LOGO.png" alt="CRUX Logo" class="w-full h-full object-contain">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-white font-extrabold tracking-wider text-xs md:text-sm">
+                        CORE REGNUM <span style="color: var(--accent-orange);">UNIFIED-X</span>
+                    </span>
+                    <span class="text-[9px] font-mono tracking-widest text-neutral-400">DISCORD HQ // EST. 2026</span>
+                </div>
+            </div>
+            
+            <!-- CENTER: MENU NAVIGASI (LEGA) -->
+            <nav class="hidden lg:flex items-center justify-center gap-3 md:gap-4 font-semibold text-xs">
+                <button onclick="switchPage('home')" id="nav-home" class="nav-btn active-nav shrink-0">01. HOME</button>
+                <button onclick="switchPage('vibes')" id="nav-vibes" class="nav-btn shrink-0">02. VIBES</button>
+                <button onclick="switchPage('bond')" id="nav-bond" class="nav-btn shrink-0">03. BOND</button>
+                <button onclick="switchPage('energy')" id="nav-energy" class="nav-btn shrink-0">04. ENERGY</button>
+                <button onclick="switchPage('staff')" id="nav-staff" class="nav-btn shrink-0">05. STAFF</button>
+                <button onclick="switchPage('birthday')" id="nav-birthday" class="nav-btn shrink-0 text-orange-400">🔒 VAULT</button>
+            </nav>
+            
+            <!-- FAR RIGHT: LINK TIKTOK & ICON SPEAKER (TIDAK LAGI MENUMPUK, STYLE GRADASI ASLI DIPERTAHANKAN) -->
+            <div class="flex items-center space-x-2.5 sm:space-x-3 shrink-0">
+                <!-- TikTok Button (Menggantikan button gabung discord dengan mempertahankan style gradasi oranye tema) -->
+                <a href="https://www.tiktok.com/@circledc" target="_blank" rel="noopener noreferrer" 
+                   class="px-3.5 sm:px-4 py-2 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-xl font-bold text-xs tracking-wider shadow-lg shadow-orange-600/25 hover:opacity-90 transition flex items-center space-x-1.5"
+                   title="Kunjungi TikTok Resmi @circledc">
+                    <span>🎵</span>
+                    <span>TIKTOK</span>
+                    <span class="text-[10px]">↗</span>
+                </a>
+
+                <!-- Speaker Icon Toggle -->
+                <button onclick="toggleAudio()" id="audioBtn" class="p-2 rounded-xl bg-neutral-900 border border-white/15 text-neutral-300 hover:text-white transition flex items-center justify-center text-sm hover:border-orange-500/50" title="Suara Efek Antarmuka">
+                    <span id="audioIcon">🔊</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Horizontal Nav -->
+        <div class="lg:hidden flex items-center justify-start overflow-x-auto whitespace-nowrap py-2 px-4 gap-2 border-t border-white/5 scrollbar-none text-xs">
+            <button onclick="switchPage('home')" id="mob-nav-home" class="nav-btn active-nav shrink-0">01. HOME</button>
+            <button onclick="switchPage('vibes')" id="mob-nav-vibes" class="nav-btn shrink-0">02. VIBES</button>
+            <button onclick="switchPage('bond')" id="mob-nav-bond" class="nav-btn shrink-0">03. BOND</button>
+            <button onclick="switchPage('energy')" id="mob-nav-energy" class="nav-btn shrink-0">04. ENERGY</button>
+            <button onclick="switchPage('staff')" id="mob-nav-staff" class="nav-btn shrink-0">05. STAFF</button>
+            <button onclick="switchPage('birthday')" id="mob-nav-birthday" class="nav-btn shrink-0 text-orange-400">🔒 VAULT</button>
+        </div>
+    </header>
+
+    <!-- ================= MAIN CONTENT CONTAINER ================= -->
+    <main class="max-w-7xl mx-auto px-4 md:px-8 pt-36 lg:pt-28 pb-24 w-full flex-grow relative z-10 space-y-14 md:space-y-16">
+
+        <!-- ================= HALAMAN 1: HOME ================= -->
+        <section id="page-home" class="page-section active-page space-y-12">
+            
+            <!-- Hero Cyber Banner -->
+            <div class="relative rounded-3xl glass-panel hud-corner overflow-hidden p-6 md:p-14 shadow-2xl">
+                <div class="absolute inset-0 z-0">
+                    <img src="image/CRUX BANNER.png" alt="CRUX Banner" class="w-full h-full object-cover opacity-25 scale-105 filter saturate-150 transform hover:scale-110 transition duration-1000">
+                    <div class="absolute inset-0 bg-gradient-to-r from-[#030303] via-[#030303]/90 to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent"></div>
+                </div>
+
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-8 space-y-6">
+                        <div class="inline-flex items-center space-x-2.5 px-4 py-1.5 text-[10px] tracking-widest bg-orange-500/15 border border-orange-500/30 rounded-full uppercase font-mono" style="color: var(--accent-orange);">
+                            <span class="w-2 h-2 rounded-full animate-ping" style="background-color: var(--accent-orange);"></span>
+                            <span>OFFICIAL PROFILE // DISCORD SERVER HEADQUARTERS</span>
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white crux-glow uppercase leading-tight">
+                            CORE REGNUM <br><span style="color: var(--accent-orange);">UNIFIED-X</span>
+                        </h1>
+                        
+                        <p class="max-w-2xl text-xs sm:text-sm md:text-base text-neutral-300 leading-relaxed font-light">
+                            Selamat datang di markas resmi <strong>CORE REGNUM UNIFIED-X (CRUX)</strong>. Sebuah rumah yang lahir dari tekad untuk memecahkan kesunyian dan menciptakan tempat bernaung ternyaman bagi jiwa-jiwa terpilih.
+                        </p>
+
+                        <!-- Call To Actions (Discord, TikTok, Salin Link) -->
+                        <div class="flex flex-wrap items-center gap-3 pt-2">
+                            <a href="https://discord.gg/KFYPZgKbZg" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl text-white text-xs font-bold tracking-wider transition shadow-xl shadow-orange-500/25 hover:opacity-90 flex items-center space-x-2" style="background-color: var(--accent-orange);">
+                                <span>💬</span>
+                                <span>GABUNG DISCORD</span>
+                                <span>↗</span>
+                            </a>
+                            <a href="https://www.tiktok.com/@circledc" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl bg-neutral-900/90 border border-white/15 text-neutral-200 text-xs font-bold tracking-wider hover:text-white hover:border-pink-500/60 transition flex items-center space-x-2 shadow-lg">
+                                <span>🎵</span>
+                                <span>TIKTOK @CIRCLEDC</span>
+                                <span>↗</span>
+                            </a>
+                            <button onclick="copyDiscordLink()" class="px-5 py-3.5 rounded-xl bg-neutral-900 border border-white/15 text-neutral-300 text-xs font-bold tracking-wider hover:text-white hover:border-orange-500 transition flex items-center space-x-2">
+                                <span>SALIN TAUTAN</span>
+                                <span>📋</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- WIDGET JARINGAN SERVER (OWNER W1ZQ & MOTO SATU BARIS RAPI TANPA TERPOTONG) -->
+                    <div class="lg:col-span-4 bg-black/60 backdrop-blur-md p-6 rounded-2xl border border-white/10 space-y-4 shadow-xl">
+                        <div class="flex justify-between items-center text-[10px] font-mono text-neutral-400 border-b border-white/10 pb-2">
+                            <span>JARINGAN SERVER</span>
+                            <span class="text-green-400 font-bold flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span> ONLINE & TERVERIFIKASI
+                            </span>
+                        </div>
+                        <div class="space-y-2.5 text-xs">
+                            <div class="flex justify-between text-neutral-400">
+                                <span>Owner Server:</span>
+                                <span class="font-mono font-bold text-white tracking-wider" style="color: var(--accent-orange);">W1ZQ</span>
+                            </div>
+                            <div class="flex justify-between text-neutral-400">
+                                <span>Voice Channel Live:</span>
+                                <span id="telemetryVcTime" class="font-mono font-bold text-orange-400">Menghitung...</span>
+                            </div>
+                            <div class="flex justify-between text-neutral-400">
+                                <span>Jumlah Anggota Inti:</span>
+                                <span class="text-white font-mono font-bold dynamic-member-count">71 Member</span>
+                            </div>
+                        </div>
+                        <!-- Moto Server: 1 Baris Lengkap Rapi Tanpa Terpotong -->
+                        <div class="py-2.5 px-2 bg-neutral-950/90 rounded-xl border border-white/10 text-[9.5px] sm:text-[10px] xl:text-[10.5px] text-neutral-200 font-mono text-center whitespace-nowrap tracking-tight shadow-inner" title="Fostering inclusive family bonds, driven by you">
+                            "Fostering inclusive family bonds, driven by you"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-Time Stats (VC Real-Time Dari 1239 Jam 30 Menit + Member Count Terpusat) -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-panel hud-corner p-5 rounded-2xl text-center space-y-1 hover-popup">
+                    <div id="uptimeCounter" class="text-lg sm:text-xl md:text-2xl font-black text-white font-mono" style="color: var(--accent-orange);">Memuat...</div>
+                    <div class="text-[9px] md:text-[10px] text-neutral-400 font-bold uppercase tracking-wider">Uptime Server Real-Time</div>
+                </div>
+                <div class="glass-panel hud-corner p-5 rounded-2xl text-center space-y-1 hover-popup">
+                    <div class="text-xl sm:text-2xl md:text-3xl font-black dynamic-member-count" style="color: var(--accent-orange);">71 Member</div>
+                    <div class="text-[9px] md:text-[10px] text-neutral-400 font-bold uppercase tracking-wider">Keluarga Terpilih (Terkurasi)</div>
+                </div>
+                <div class="glass-panel hud-corner p-5 rounded-2xl text-center space-y-1 hover-popup">
+                    <div class="text-xl sm:text-2xl md:text-3xl font-black text-white">20-30</div>
+                    <div class="text-[9px] md:text-[10px] text-neutral-400 font-bold uppercase tracking-wider">Online & Aktif Harian</div>
+                </div>
+                <div class="glass-panel hud-corner p-5 rounded-2xl text-center space-y-1 hover-popup">
+                    <div id="liveVcCounter" class="text-lg sm:text-xl md:text-2xl font-black text-orange-400 font-mono">Menghitung...</div>
+                    <div class="text-[9px] md:text-[10px] text-neutral-400 font-bold uppercase tracking-wider">Rekor VC Murni (Est. 23 Apr 2026)</div>
+                </div>
+            </div>
+
+            <!-- MANIFESTO PENDIRI & FILOSOFI CRUX -->
+            <div class="glass-panel p-6 md:p-10 rounded-3xl space-y-6">
+                <div class="space-y-2">
+                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 01. MANIFESTO PENDIRI</span>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Dari Retakan Menuju Kerajaan Bersama</h2>
+                </div>
+                
+                <p class="text-xs md:text-sm text-neutral-300 leading-relaxed font-light">
+                    Didirikan dari nol, server ini lahir dari visi sederhana: Membangun sebuah komunitas kecil yang seru dan penuh kebersamaan.
+                </p>
+                <blockquote class="p-4 bg-black/60 rounded-2xl border-l-4 border-orange-500 text-xs md:text-sm text-neutral-200 italic font-light leading-relaxed">
+                    "Sering kali kita diminta berhati-hati dalam memilih lingkungan bergaul. Namun saya percaya, langkah terbaik adalah menciptakan lingkungan ideal itu sendiri—sebuah rumah yang aman bagi siapa pun yang butuh tempat beristirahat dan pulang sejenak dari hiruk-pikuk dunia luar."
+                </blockquote>
+
+                <!-- Bedah Arti Nama CRUX -->
+                <div class="p-5 rounded-2xl bg-neutral-950/80 border border-white/10 space-y-3">
+                    <span class="text-[11px] font-mono tracking-widest uppercase text-orange-400 font-bold">// FILOSOFI NAMA: CORE REGNUM UNIFIED-X (CRUX)</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-neutral-300 font-light leading-relaxed">
+                        <div class="p-3 bg-black/40 rounded-xl border border-white/5 space-y-1">
+                            <strong class="text-white font-mono text-orange-400">CRUX (Crack / Krek):</strong>
+                            <p>Suara retakan. Kami datang membawa retakan untuk menghancurkan kesepian dan keheningan, mengubahnya menjadi keributan (*chaos*) positif penuh tawa.</p>
+                        </div>
+                        <div class="p-3 bg-black/40 rounded-xl border border-white/5 space-y-1">
+                            <strong class="text-white font-mono text-orange-400">X (Lambang Target):</strong>
+                            <p>Anak-anak muda menjadi target arah sirkel, mewadahi jiwa-jiwa muda jaman sekarang yang mendambakan ruang interaksi jujur, hangat, dan apa adanya.</p>
+                        </div>
+                        <div class="p-3 bg-black/40 rounded-xl border border-white/5 space-y-1">
+                            <strong class="text-white font-mono text-orange-400">CORE & REGNUM:</strong>
+                            <p>Satu inti kekuatan (*Core*) yang menyatukan mereka dalam sebuah kerajaan pertemanan (*Regnum*) yang solid dan saling membela.</p>
+                        </div>
+                        <div class="p-3 bg-black/40 rounded-xl border border-white/5 space-y-1">
+                            <strong class="text-white font-mono text-orange-400">UNIFIED & SELEKSI:</strong>
+                            <p>Bergerak serentak dalam kesatuan utuh. Menjaga kualitas lewat seleksi ketat: <em class="text-white">"Hanya mereka yang terpilih yang bisa menjadi bagian dari cerita ini."</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAMPILAN MOTO & 4 PILAR -->
+            <div class="space-y-6">
+                <!-- Banner Moto Server Megah -->
+                <div class="glass-panel hud-corner p-6 md:p-10 rounded-3xl bg-gradient-to-r from-orange-950/40 via-neutral-900 to-black border-2 border-orange-500/50 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 hover-popup">
+                    <div class="space-y-2 text-center md:text-left">
+                        <div class="inline-flex items-center space-x-2 px-3 py-1 bg-orange-500/20 border border-orange-500/40 rounded-full text-[10px] font-mono tracking-widest text-orange-400 uppercase font-bold">
+                            <span>✨ CORE MOTTO & DRIVING PRINCIPLE</span>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-black text-white italic tracking-tight font-cinzel crux-glow">
+                            "Fostering inclusive family bonds, driven by you."
+                        </h3>
+                        <p class="text-xs text-neutral-300 font-light max-w-xl leading-relaxed">
+                            Menumbuhkan ikatan kekeluargaan inklusif yang tulus tanpa sekat strata—setiap langkah, ide, dan denyut nadi server ini digerakkan bersama oleh setiap anggotanya.
+                        </p>
+                    </div>
+
+                    <div class="shrink-0 p-4 bg-black/80 rounded-2xl border border-white/10 text-center font-mono space-y-1 shadow-inner">
+                        <div class="text-[10px] text-neutral-400 uppercase tracking-widest">SISTEM INTEGRITAS</div>
+                        <div class="text-xs font-bold text-orange-400">4 PILAR UTAMA</div>
+                        <div class="text-[9px] text-neutral-500">100% COMMUNITY-DRIVEN</div>
+                    </div>
+                </div>
+
+                <!-- Grid 4 Pilar Server (Home, Vibes, Bond, Energy) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <!-- Pilar 1: HOME -->
+                    <div class="glass-panel hud-corner p-6 rounded-3xl border border-white/10 hover-popup space-y-3.5 group bg-gradient-to-b from-neutral-900/90 to-black">
+                        <div class="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-2xl group-hover:scale-110 transition duration-300">
+                            🏡
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold font-mono tracking-widest uppercase text-orange-400">PILAR 01 // SANCTUARY</span>
+                            <h4 class="text-lg font-bold text-white tracking-tight">HOME</h4>
+                        </div>
+                        <p class="text-xs text-neutral-300 font-light leading-relaxed">
+                            Rumah tempat pulang dan beristirahat. Ruang aman tanpa tuntutan hierarki kaku, tempat melepas segala beban dunia luar dengan rasa tenang.
+                        </p>
+                        <div class="pt-2 border-t border-white/5 text-[10px] text-neutral-400 font-mono">
+                            Status: Zona Nyaman Mutlak
+                        </div>
+                    </div>
+
+                    <!-- Pilar 2: VIBES -->
+                    <div class="glass-panel hud-corner p-6 rounded-3xl border border-white/10 hover-popup space-y-3.5 group bg-gradient-to-b from-neutral-900/90 to-black">
+                        <div class="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-2xl group-hover:scale-110 transition duration-300">
+                            🔥
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold font-mono tracking-widest uppercase text-red-400">PILAR 02 // ATMOSPHERE</span>
+                            <h4 class="text-lg font-bold text-white tracking-tight">VIBES</h4>
+                        </div>
+                        <p class="text-xs text-neutral-300 font-light leading-relaxed">
+                            Pereda penat pemecah kesunyian. Membawa retakan yang mengubah suasana dingin menjadi keributan (*chaos*) positif penuh tawa di voice channel.
+                        </p>
+                        <div class="pt-2 border-t border-white/5 text-[10px] text-neutral-400 font-mono">
+                            Status: Selalu Ramai 24 Jam
+                        </div>
+                    </div>
+
+                    <!-- Pilar 3: BOND -->
+                    <div class="glass-panel hud-corner p-6 rounded-3xl border border-white/10 hover-popup space-y-3.5 group bg-gradient-to-b from-neutral-900/90 to-black">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-2xl group-hover:scale-110 transition duration-300">
+                            🛡️
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold font-mono tracking-widest uppercase text-amber-400">PILAR 03 // BROTHERHOOD</span>
+                            <h4 class="text-lg font-bold text-white tracking-tight">BOND</h4>
+                        </div>
+                        <p class="text-xs text-neutral-300 font-light leading-relaxed">
+                            Ikatan inklusif yang dijaga seumur hidup. Saling melindungi rahasia dan privasi sesama kawan, dibangun atas dasar saling percaya dan integritas.
+                        </p>
+                        <div class="pt-2 border-t border-white/5 text-[10px] text-neutral-400 font-mono">
+                            Status: Ikatan Tak Tergoyahkan
+                        </div>
+                    </div>
+
+                    <!-- Pilar 4: ENERGY -->
+                    <div class="glass-panel hud-corner p-6 rounded-3xl border border-white/10 hover-popup space-y-3.5 group bg-gradient-to-b from-neutral-900/90 to-black">
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-2xl group-hover:scale-110 transition duration-300">
+                            ⚡
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold font-mono tracking-widest uppercase text-cyan-400">PILAR 04 // POWER & TECH</span>
+                            <h4 class="text-lg font-bold text-white tracking-tight">ENERGY</h4>
+                        </div>
+                        <p class="text-xs text-neutral-300 font-light leading-relaxed">
+                            Daya kreativitas dan antusiasme tinggi. Dari teknologi CRUX Bot mandiri, game Werewolf, mabar Mobile Legends, hingga ekspedisi seru Roblox.
+                        </p>
+                        <div class="pt-2 border-t border-white/5 text-[10px] text-neutral-400 font-mono">
+                            Status: 100% Inovasi Mandiri
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISI & MISI -->
+            <div class="glass-panel hud-corner p-6 md:p-12 rounded-3xl space-y-8 bg-gradient-to-b from-neutral-950 via-[#0a0a0d] to-black border-2 border-orange-500/30">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="text-xs font-bold tracking-widest uppercase font-mono text-orange-400">// STRATEGIC FOUNDATION PROTOCOL</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight">Visi & Misi CORE REGNUM UNIFIED-X</h2>
+                    <p class="text-xs text-neutral-400 font-light">Kompas moral dan arah langkah jangka panjang kami dalam menjaga kesucian rumah bersama.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                    <!-- Grand Vision Card -->
+                    <div class="lg:col-span-5 bg-gradient-to-br from-orange-950/40 via-neutral-900 to-black p-6 md:p-8 rounded-3xl border border-orange-500/50 shadow-2xl flex flex-col justify-between space-y-6 hover-popup">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-xl">
+                                    🌟
+                                </div>
+                                <div>
+                                    <span class="text-[10px] font-mono text-orange-400 uppercase tracking-widest font-bold">THE NORTH STAR SANCTUARY</span>
+                                    <h3 class="text-xl font-bold text-white">Visi Utama Komunitas</h3>
+                                </div>
+                            </div>
+                            <p class="text-xs md:text-sm text-neutral-200 leading-relaxed font-light">
+                                Menjadi <strong>Sanctuary Digital Paling Otentik</strong> di mana anak muda jaman sekarang yang lelah dengan kepalsuan sirkel luar dapat menemukan tempat pulang yang sejati—sebuah kerajaan kecil yang hangat, berdaulat, dan saling merangkul tanpa syarat.
+                            </p>
+                        </div>
+                        <div class="p-4 bg-black/60 rounded-2xl border border-white/10 text-[11px] font-mono text-neutral-400 space-y-1">
+                            <div class="text-white font-bold">"Bukan sekadar server, tapi tempat kembali."</div>
+                            <div>Setiap suara didengar, setiap tawa dihargai.</div>
+                        </div>
+                    </div>
+
+                    <!-- 4 Mission Protocols Grid -->
+                    <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-black/50 p-5 rounded-2xl border border-white/10 hover-popup space-y-2">
+                            <div class="flex items-center space-x-2 text-xs font-mono text-orange-400 font-bold">
+                                <span>⚡ PROTOCOL 01</span>
+                            </div>
+                            <h4 class="font-bold text-white text-sm">Crack The Silence</h4>
+                            <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                Memecah keheningan dan kesepian dengan kehangatan obrolan, lelucon segar, dan suasana hidup 24 jam nonstop di voice channel.
+                            </p>
+                        </div>
+
+                        <div class="bg-black/50 p-5 rounded-2xl border border-white/10 hover-popup space-y-2">
+                            <div class="flex items-center space-x-2 text-xs font-mono text-orange-400 font-bold">
+                                <span>🛡️ PROTOCOL 02</span>
+                            </div>
+                            <h4 class="font-bold text-white text-sm">Sanctuary Selection</h4>
+                            <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                Menjaga gerbang masuk dengan kurasi member yang mengutamakan adab, saling menghormati, dan menjauhkan drama toksik.
+                            </p>
+                        </div>
+
+                        <div class="bg-black/50 p-5 rounded-2xl border border-white/10 hover-popup space-y-2">
+                            <div class="flex items-center space-x-2 text-xs font-mono text-orange-400 font-bold">
+                                <span>🤝 PROTOCOL 03</span>
+                            </div>
+                            <h4 class="font-bold text-white text-sm">Driven By You</h4>
+                            <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                Menumbuhkan ikatan kekeluargaan inklusif yang digerakkan bersama oleh ide kreatif, partisipasi, dan aspirasi setiap anggota.
+                            </p>
+                        </div>
+
+                        <div class="bg-black/50 p-5 rounded-2xl border border-white/10 hover-popup space-y-2">
+                            <div class="flex items-center space-x-2 text-xs font-mono text-orange-400 font-bold">
+                                <span>🤖 PROTOCOL 04</span>
+                            </div>
+                            <h4 class="font-bold text-white text-sm">Independent Energy</h4>
+                            <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                Membangun teknologi bot mandiri (CRUX Bot) serta event mabar terorganisir untuk memanjakan member tanpa bergantung bot publik.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigasi Spoiler Halaman -->
+            <div class="space-y-6">
+                <div class="text-center max-w-xl mx-auto space-y-2">
+                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// EKSPLORASI ARSIP SERVER</span>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Daftar Bagian Profil Server</h2>
+                    <p class="text-xs text-neutral-400">Jelajahi setiap pilar utama dari ekosistem CORE REGNUM UNIFIED-X.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div onclick="switchPage('vibes')" class="glass-panel hud-corner p-6 rounded-2xl hover-popup cursor-pointer space-y-3">
+                        <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">// PILAR 02</span>
+                        <h3 class="text-sm font-bold text-white">Vibes & Filosofi</h3>
+                        <p class="text-[11px] text-neutral-400 font-light">Atmosfer comfort zone, makna 3 warna utama, dan kenyamanan basecamp.</p>
+                    </div>
+                    <div onclick="switchPage('bond')" class="glass-panel hud-corner p-6 rounded-2xl hover-popup cursor-pointer space-y-3">
+                        <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">// PILAR 03</span>
+                        <h3 class="text-sm font-bold text-white">Bond & Kisah Voice Channel</h3>
+                        <p class="text-[11px] text-neutral-400 font-light">Cerita 71 member terpilih, rekor voice channel yang berjalan sejak 23 April 2026, dan anti-burnout.</p>
+                    </div>
+                    <div onclick="switchPage('energy')" class="glass-panel hud-corner p-6 rounded-2xl hover-popup cursor-pointer space-y-3">
+                        <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">// PILAR 04</span>
+                        <h3 class="text-sm font-bold text-white">Energy, Bot & Game</h3>
+                        <p class="text-[11px] text-neutral-400 font-light">Simulator CRUX Bot, Werewolf Engine, Turnamen MLBB, dan Ekspedisi Roblox.</p>
+                    </div>
+                    <div onclick="switchPage('staff')" class="glass-panel hud-corner p-6 rounded-2xl hover-popup cursor-pointer space-y-3">
+                        <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">// HIERARKI</span>
+                        <h3 class="text-sm font-bold text-white">Hierarki Staf Epik</h3>
+                        <p class="text-[11px] text-neutral-400 font-light">Susunan komando pengurus dengan dossier interaktif per divisi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HALAMAN 2: VIBES ================= -->
+        <section id="page-vibes" class="page-section space-y-12">
+            <div class="glass-panel hud-corner p-6 md:p-14 rounded-3xl space-y-10">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div class="space-y-2">
+                        <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 02. ATMOSPHERE, VIBES & SANCTUARY</span>
+                        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">The Ultimate Basecamp & Comfort Zone</h2>
+                        <p class="text-xs md:text-sm text-neutral-400 max-w-2xl font-light">
+                            Sebuah tempat pelarian ternyaman untuk melepaskan segala beban rutinitas. Di sini, Anda bisa bernyanyi, tertawa, atau sekadar beristirahat dalam suasana yang tenang.
+                        </p>
+                    </div>
+                    
+                    <!-- Theme Palettes -->
+                    <div class="flex items-center space-x-2.5 bg-black/60 p-2.5 rounded-2xl border border-white/10 backdrop-blur-md">
+                        <span class="text-[10px] text-neutral-400 px-2 font-bold uppercase tracking-wider font-mono">TEMA:</span>
+                        <button onclick="setTheme('orange-red')" class="w-6 h-6 rounded-full bg-orange-500 border border-white/40 hover:scale-115 transition shadow-lg shadow-orange-500/30" title="Classic Neon Orange"></button>
+                        <button onclick="setTheme('crimson')" class="w-6 h-6 rounded-full bg-red-600 border border-white/40 hover:scale-115 transition shadow-lg shadow-red-600/30" title="Crimson Red"></button>
+                        <button onclick="setTheme('amber-dark')" class="w-6 h-6 rounded-full bg-amber-500 border border-white/40 hover:scale-115 transition shadow-lg shadow-amber-500/30" title="Amber Gold"></button>
+                        <button onclick="setTheme('cyan-cyber')" class="w-6 h-6 rounded-full bg-cyan-500 border border-white/40 hover:scale-115 transition shadow-lg shadow-cyan-500/30" title="Cyber Cyan"></button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-black/40 p-6 md:p-8 rounded-3xl border border-white/5">
+                    <div class="lg:col-span-5 h-64 md:h-80 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden flex items-center justify-center p-6 cursor-pointer hover-popup group relative" onclick="openMultiImageModal('Galeri Identitas Visual & Filosofi', ['image/FILO.png', 'image/ZON.png', 'image/HIK.png', 'image/MEM.png'], ['Pusat kendali dan markas besar yang menyatukan solidaritas.', 'Zona istirahat dan pelarian terbaik menawarkan ketenangan mutlak.', 'Komitmen mutlak pada kejujuran, loyalitas, dan rasa saling memiliki.', 'Seleksi ketat memastikan komitmen bersama dari hati.'])">
+                        <div class="absolute inset-0 bg-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <img src="image/FILO.png" alt="Logo CRUX" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute bottom-3 right-3 px-3 py-1 bg-black/80 backdrop-blur rounded-md text-[10px] text-white font-mono flex items-center space-x-1 border border-white/10">
+                            <span>🔍 PROYEKSI HOLOGRAM</span>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7 space-y-4">
+                        <span class="text-[10px] font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">MAKNA IDENTITAS VISUAL</span>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Trisula Warna Penjaga Keseimbangan</h3>
+                        <p class="text-xs md:text-sm text-neutral-300 leading-relaxed font-light">
+                            Tampilan visual <strong>CORE REGNUM UNIFIED-X</strong> dirancang tidak mencolok mata secara berlebihan, melainkan memberikan rasa teduh namun berkarakter:
+                        </p>
+                        <div class="space-y-2.5 text-xs text-neutral-300 font-light">
+                            <div class="p-3 bg-black/40 rounded-xl border border-white/5 flex items-start space-x-3">
+                                <span class="w-3 h-3 rounded-full bg-neutral-900 border border-white/30 shrink-0 mt-0.5"></span>
+                                <div><strong class="text-white">Hitam Obsidian:</strong> Kedamaian malam hari saat mengobrol di voice chat, perlindungan privasi yang aman, dan kedewasaan dalam bergaul.</div>
+                            </div>
+                            <div class="p-3 bg-black/40 rounded-xl border border-white/5 flex items-start space-x-3">
+                                <span class="w-3 h-3 rounded-full bg-orange-500 shrink-0 mt-0.5"></span>
+                                <div><strong class="text-white">Oranye Api Semangat:</strong> Sambutan hangat tanpa membeda-bedakan latar belakang, serta letupan keceriaan saat bermain bersama.</div>
+                            </div>
+                            <div class="p-3 bg-black/40 rounded-xl border border-white/5 flex items-start space-x-3">
+                                <span class="w-3 h-3 rounded-full bg-red-600 shrink-0 mt-0.5"></span>
+                                <div><strong class="text-white">Merah Crimson:</strong> Ketegasan memegang prinsip integritas, loyalitas kawan sejati, dan keberanian menjaga rumah bersama.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 hover-popup cursor-pointer group space-y-4" onclick="openMultiImageModal('Galeri Comfort Zone & Suasana Santai', ['image/ZON.png', 'image/HIK.png', 'image/MEM.png', 'image/POIS.png'], ['Ruang istirahat terbaik melepas kepenatan hari.', 'Kejujuran dan saling peduli antar kawan.', 'Penyaringan keluarga inti yang solid.', 'Rekor kebersamaan nyata di voice channel.'])">
+                        <div class="h-44 md:h-52 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
+                            <img src="image/ZON.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider font-mono" style="color: var(--accent-orange);">COMFORT ZONE VIBE</span>
+                            <h4 class="text-lg font-bold text-white tracking-tight">Sanctuary of Warmth</h4>
+                            <p class="text-xs text-neutral-400 font-light">Tidak ada tuntutan hierarki kaku saat mengobrol. Siapa pun dapat curhat, bernyanyi, atau sekadar tertidur mendengarkan obrolan hangat teman-teman.</p>
+                        </div>
+                    </div>
+                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 hover-popup cursor-pointer group space-y-4" onclick="openMultiImageModal('Galeri Integritas & Fondasi Kepercayaan', ['image/HIK.png', 'image/MEM.png', 'image/ZON.png', 'image/OWN.png'], ['Komitmen teguh pada rasa saling memiliki.', 'Penyaringan anggota yang mengutamakan adab.', 'Kenyamanan penuh di basecamp.', 'Dedikasi tanpa henti dari pimpinan.'])">
+                        <div class="h-44 md:h-52 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden flex items-center justify-center relative">
+                            <img src="image/HIK.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider font-mono" style="color: var(--accent-orange);">BASECAMP INTEGRITY</span>
+                            <h4 class="text-lg font-bold text-white tracking-tight">Unwavering Trust</h4>
+                            <p class="text-xs text-neutral-400 font-light">Kepercayaan dibangun lewat konsistensi sikap. Seluruh member saling menghormati batas privasi dan menjaga rahasia satu sama lain.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HALAMAN 3: BOND ================= -->
+        <section id="page-bond" class="page-section space-y-12">
+            <div class="glass-panel hud-corner p-6 md:p-14 rounded-3xl space-y-10">
+                <div class="space-y-2">
+                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 03. UNBREAKABLE BOND, STORIES & ONGOING VC</span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Ikatan Kekeluargaan & Rekor Voice Channel</h2>
+                    <p class="text-xs md:text-sm text-neutral-400 max-w-2xl font-light">
+                        Di CORE REGNUM UNIFIED-X, kami menolak kepalsuan angka bot. Kami merayakan hubungan nyata antara <span class="dynamic-member-count font-bold text-white">71 member</span> yang saling melengkapi dalam suka dan duka.
+                    </p>
+                </div>
+
+                <!-- Filosofi Waktu & Fleksibilitas Anti-Burnout -->
+                <div class="bg-black/40 p-6 md:p-8 rounded-3xl border border-white/10 space-y-3">
+                    <span class="text-xs font-bold tracking-widest uppercase font-mono text-orange-400">📅 FILOSOFI KEBERSAMAAN: FLEKSIBEL & ANTI-BURNOUT</span>
+                    <h3 class="text-xl font-bold text-white tracking-tight">Menyelaraskan Kesibukan Nyata Tanpa Beban Absensi</h3>
+                    <p class="text-xs md:text-sm text-neutral-300 leading-relaxed font-light">
+                        Member kami berasal dari berbagai latar belakang kesibukan—ada yang bersekolah, kuliah tugas akhir, hingga bekerja lembur. Oleh karena itu, server ini tidak pernah menerapkan sistem absen atau jam wajib nongkrong. Ikatan di CRUX dibangun atas kerinduan alami: Anda datang saat luang untuk melepas penat, dan kami selalu siap menyambut Anda kembali dengan tangan terbuka.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Arsip 1 -->
+                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 hover-popup cursor-pointer group flex flex-col justify-between space-y-6" onclick="openMultiImageModal('Galeri Seleksi & Anggota Inti', ['image/MEM.png', 'image/POIS.png', 'image/BOS.png', 'image/PAR.png'], ['Penyaringan member dengan visi dan etika searah.', 'Kebersamaan hidup di voice chat.', 'Dukungan server boost dari member.', 'Koneksi aliansi komunitas terpercaya.'], 'Arsip Seleksi & Visi')">
+                        <div class="space-y-3">
+                            <div class="h-44 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
+                                <img src="image/MEM.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+                            <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">ARSIP #01 // SELEKSI ALAMI</span>
+                            <h3 class="text-xl font-bold text-white tracking-tight">Keluarga Inti Terpilih</h3>
+                            <p class="text-xs text-neutral-400 leading-relaxed font-light">
+                                Kami menerapkan proses penyaringan cermat berbasis adab dan keselarasan visi. Karena itu, setiap obrolan di server terasa intim, nyaman, dan bebas dari provokasi.
+                            </p>
+                        </div>
+                        <span class="text-xs font-bold flex items-center space-x-1" style="color: var(--accent-orange);"><span>BUKA PROYEKSI HOLOGRAM</span> <span>→</span></span>
+                    </div>
+
+                    <!-- Arsip 2 (Rekor VC Ongoing sejak 23 April 2026) -->
+                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 hover-popup cursor-pointer group flex flex-col justify-between space-y-6" onclick="openMultiImageModal('Galeri Rekor Voice Channel Real-Time', ['image/POIS.png', 'image/MEM.png', 'image/BOS.png', 'image/ZON.png'], ['Voice channel yang terus hidup tanpa henti.', 'Dimulai sejak 23 April 2026 pukul 23:59.', 'Semangat kebersamaan yang tak pernah padam.', 'Ruang curhat santai hingga pagi.'], 'Rekor Komunitas')">
+                        <div class="space-y-3">
+                            <div class="h-44 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
+                                <img src="image/POIS.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+                            <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">ARSIP #02 // REKOR REAL-TIME</span>
+                            <h3 class="text-xl font-bold text-white tracking-tight">Rekor VC Murni Masih Berlanjut!</h3>
+                            <p class="text-xs text-neutral-400 leading-relaxed font-light">
+                                Sesi voice channel ini dimulai sejak <strong>23 April 2026 sekitar pukul 23:59</strong> dan hingga detik ini terus berjalan aktif tanpa henti membuktikan kehangatan keluarga ini.
+                            </p>
+                        </div>
+                        <span class="text-xs font-bold flex items-center space-x-1" style="color: var(--accent-orange);"><span>BUKA PROYEKSI HOLOGRAM</span> <span>→</span></span>
+                    </div>
+
+                    <!-- Arsip 3 -->
+                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 hover-popup cursor-pointer group flex flex-col justify-between space-y-6" onclick="openMultiImageModal('Galeri Loyalitas & Server Booster', ['image/BOS.png', 'image/PAR.png', 'image/OWN.png', 'image/MEM.png'], ['Tingkat nitro boost yang loyal dari member.', 'Dukungan fasilitas audio dan emotikon berkualitas tinggi.', 'Komitmen jangka panjang para donatur.', 'Kebanggaan menjadi bagian dari CRUX.'], 'Loyalitas & Aliansi')">
+                        <div class="space-y-3">
+                            <div class="h-44 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative flex items-center justify-center">
+                                <img src="image/BOS.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+                            <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">ARSIP #03 // LOYALITAS NYATA</span>
+                            <h3 class="text-xl font-bold text-white tracking-tight">Dukungan Booster Setia</h3>
+                            <p class="text-xs text-neutral-400 leading-relaxed font-light">
+                                Fasilitas audio kualitas studio 384kbps dan slot emotikon eksklusif kami selalu terjaga berkat kerelaan member setia yang mendonasikan Nitro demi kenyamanan bersama.
+                            </p>
+                        </div>
+                        <span class="text-xs font-bold flex items-center space-x-1" style="color: var(--accent-orange);"><span>BUKA PROYEKSI HOLOGRAM</span> <span>→</span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HALAMAN 4: ENERGY ================= -->
+        <section id="page-energy" class="page-section space-y-12">
+            <div class="glass-panel hud-corner p-6 md:p-14 rounded-3xl space-y-10">
+                <div class="space-y-2">
+                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 04. POWER, BOT ENGINE, SIMULATOR & GAMING ACTIVITIES</span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Energi Komunitas, Bot Mandiri & Aksi Game</h2>
+                    <p class="text-xs md:text-sm text-neutral-400 max-w-2xl font-light">
+                        Pusat daya kreativitas CRUX! Mulai dari arsitektur CRUX Bot mandiri buatan founder, game interaktif Werewolf, hingga dokumentasi mabar kompetitif Mobile Legends dan petualangan Roblox.
+                    </p>
+                </div>
+
+                <!-- Interactive Terminal Simulator -->
+                <div class="bg-black/90 p-5 md:p-7 rounded-3xl border border-white/10 font-mono text-xs space-y-4 shadow-2xl relative overflow-hidden">
+                    <div class="flex flex-col sm:flex-row justify-between border-b border-white/10 pb-3 gap-2 items-start sm:items-center">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+                            <span class="text-white font-bold tracking-wider">CRUX_TERMINAL // v2.6.4</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-[10px] text-neutral-500">PILIH COMMAND:</span>
+                            <button onclick="runBotSim('werewolf')" class="px-2 py-1 bg-neutral-900 border border-white/10 rounded hover:border-orange-500 text-[10px] text-orange-400 transition">/werewolf</button>
+                            <button onclick="runBotSim('quiz')" class="px-2 py-1 bg-neutral-900 border border-white/10 rounded hover:border-orange-500 text-[10px] text-orange-400 transition">/quiz</button>
+                            <button onclick="runBotSim('giveaway')" class="px-2 py-1 bg-neutral-900 border border-white/10 rounded hover:border-orange-500 text-[10px] text-orange-400 transition">/giveaway</button>
+                            <button onclick="runBotSim('serverinfo')" class="px-2 py-1 bg-neutral-900 border border-white/10 rounded hover:border-orange-500 text-[10px] text-orange-400 transition">/serverinfo</button>
+                        </div>
+                    </div>
+
+                    <div id="botConsoleOutput" class="space-y-1.5 min-h-[130px] max-h-60 overflow-y-auto pr-2 text-neutral-300">
+                        <div class="text-neutral-500">[SYSTEM] CRUX Bot Engine terhubung ke Discord Gateway. Latency: 18ms.</div>
+                        <div class="text-neutral-500">[INFO] Database anggota inti terverifikasi dan termonitor aktif.</div>
+                        <div style="color: var(--accent-orange);">[BOT] Ketik atau klik tombol command di atas untuk mencoba respon instan bot!</div>
+                    </div>
+
+                    <div class="pt-2 border-t border-white/10 flex items-center space-x-2">
+                        <span class="text-orange-500 font-bold">crux@core:~$</span>
+                        <input type="text" id="terminalInput" placeholder="Ketik /werewolf, /quiz, /giveaway, /clear..." 
+                               class="bg-transparent border-none text-white focus:outline-none w-full font-mono text-xs" 
+                               onkeydown="if(event.key === 'Enter') executeUserCommand()">
+                        <button onclick="executeUserCommand()" class="px-3 py-1 bg-orange-500/20 text-orange-400 border border-orange-500/40 rounded hover:bg-orange-500 hover:text-white transition text-[11px]">Kirim</button>
+                    </div>
+                </div>
+
+                <!-- Bot Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5 bg-black/40 p-6 md:p-8 rounded-3xl border border-white/5 space-y-6 hover-popup cursor-pointer group" onclick="openMultiImageModal('Galeri Arsitektur CRUX Bot', ['image/BOT.png', 'image/WW.png', 'image/GIF.png', 'image/KUZ.png'], ['Dokumentasi pengkodean bot mandiri oleh owner.', 'Struktur data logika permainan Werewolf.', 'Sistem pengundian giveaway otomatis.', 'Kumpulan database soal kuis dan tebak kata.'], 'Ekosistem CRUX Bot')">
+                        <div class="h-48 md:h-56 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
+                            <img src="image/BOT.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="space-y-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider font-mono" style="color: var(--accent-orange);">KARYA CIPTA FOUNDER</span>
+                            <h3 class="text-xl font-bold text-white tracking-tight">Kemandirian Teknologi Bot</h3>
+                            <p class="text-xs text-neutral-400 font-light">Dikembangkan mandiri untuk menghadirkan fitur-fitur yang benar-benar diinginkan member, tanpa batasan bot publik berbayar.</p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="bg-black/40 p-6 rounded-3xl border border-white/5 space-y-3 hover-popup cursor-pointer" onclick="openMultiImageModal('Galeri Werewolf Engine Discord', ['image/WW.png', 'image/GIF.png', 'image/TRU.png', 'image/BOT.png'], ['Game Werewolf penuh diskusi dan tuduhan seru.', 'Otomasi peran malam dan voting siang hari.', 'Game tebak benar salah instan.', 'Sistem inti bot yang stabil 24/7.'], 'Modul Game Werewolf')">
+                            <div class="text-xl md:text-2xl font-black text-white tracking-tight">Werewolf Engine // Intrik & Deduksi Malam Hari</div>
+                            <p class="text-xs md:text-sm text-neutral-300 leading-relaxed font-light">
+                                Modul game interaktif terlengkap yang mengatur alur malam secara rahasia dan perdebatan seru di siang hari. Wadah favorit para member untuk mengasah insting dan saling melempar tuduhan lucu.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div class="bg-black/40 p-5 rounded-2xl border border-white/5 hover-popup cursor-pointer space-y-1" onclick="openMultiImageModal('Galeri Fitur Giveaway', ['image/GIF.png', 'image/BOT.png', 'image/KUZ.png', 'image/TRU.png'], ['Pengundian transparan tanpa kecurangan.', 'Riwayat pemenang hadiah nitro & role.', 'Kuis seru berhadiah.', 'Tebak fakta cepat.'], 'Modul Giveaway')">
+                                <div class="text-base font-bold" style="color: var(--accent-orange);">Giveaway</div>
+                                <p class="text-[11px] text-neutral-400 font-light">Sistem undian hadiah Nitro transparan.</p>
+                            </div>
+                            <div class="bg-black/40 p-5 rounded-2xl border border-white/5 hover-popup cursor-pointer space-y-1" onclick="openMultiImageModal('Galeri Kuis & Tebak Kata', ['image/KUZ.png', 'image/TRU.png', 'image/BOT.png', 'image/GIF.png'], ['Ratusan bank soal pengetahuan umum dan pop culture.', 'Kecepatan mengetik member diadu di chat.', 'Bot pengontrol skor kuis.', 'Sistem hadiah mingguan.'], 'Kuis Interaktif')">
+                                <div class="text-base font-bold" style="color: var(--accent-orange);">Quiz Master</div>
+                                <p class="text-[11px] text-neutral-400 font-light">Adu wawasan dan kecepatan mengetik.</p>
+                            </div>
+                            <div class="bg-black/40 p-5 rounded-2xl border border-white/5 hover-popup cursor-pointer space-y-1" onclick="openMultiImageModal('Galeri True or False', ['image/TRU.png', 'image/KUZ.png', 'image/BOT.png', 'image/WW.png'], ['Permainan tebak fakta kilat.', 'Menghilangkan kebosanan siang hari.', 'Papan peringkat kemenangan.', 'Fitur Werewolf pelengkap.'], 'True or False Game')">
+                                <div class="text-base font-bold" style="color: var(--accent-orange);">True / False</div>
+                                <p class="text-[11px] text-neutral-400 font-light">Tebak mitos atau fakta kilat.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOKUMENTASI MABAR MLBB & ROBLOX -->
+                <div class="pt-6 border-t border-white/10 space-y-6">
+                    <div class="space-y-1">
+                        <span class="text-xs font-bold tracking-widest uppercase font-mono text-orange-400">// DIVISI GAME UTAMA & TURNAMEN SERVER</span>
+                        <h3 class="text-2xl font-bold text-white tracking-tight">Keseruan Mabar Mobile Legends & Petualangan Roblox</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- MLBB -->
+                        <div class="bg-black/40 p-6 md:p-8 rounded-3xl border border-white/5 hover-popup cursor-pointer space-y-6 group" onclick="openMultiImageModal('Galeri Turnamen Mobile Legends CRUX', ['image/MATCH.jpg', 'image/COLLAB.jpg', 'image/SOLO.jpg', 'image/MEM.png'], ['Keseruan fun match custom 5v5 antar skuad internal.', 'Kolaborasi event bersama game Roblox.', 'Foto skuad staf pengawas pertandingan.', 'Penyaringan pemain untuk laga sparing.'], 'Turnamen Mobile Legends')">
+                            <div class="h-48 md:h-56 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
+                                <img src="image/MATCH.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+                            <div class="space-y-2">
+                                <span class="text-[10px] font-bold uppercase tracking-wider font-mono" style="color: var(--accent-orange);">ESPORTS DIVISION // MLBB</span>
+                                <h4 class="text-xl md:text-2xl font-bold text-white tracking-tight">Fun Match 5v5 & Sparing Persahabatan</h4>
+                                <p class="text-xs text-neutral-400 leading-relaxed font-light">
+                                    Dari custom match 5v5 santai yang penuh gelak tawa hingga sparing persahabatan dengan server lain. Pertandingan sering disiarkan langsung melalui voice channel Discord agar seluruh anggota bisa ikut menonton dan bersorak.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Roblox -->
+                        <div class="bg-black/40 p-6 md:p-8 rounded-3xl border border-white/5 hover-popup cursor-pointer space-y-6 group" onclick="openMultiImageModal('Galeri Ekspedisi Mendaki Gunung Roblox', ['image/COLLAB.jpg', 'image/MATCH.jpg', 'image/SOLO.jpg', 'image/ZON.png'], ['Foto kebersamaan di basecamp pendakian gunung virtual.', 'Suasana fun match game MLBB.', 'Dokumentasi tim operator kegiatan.', 'Momen santai istirahat di checkpoint puncak.'], 'Roblox Mount Expedition')">
+                            <div class="h-48 md:h-56 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
+                                <img src="image/COLLAB.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            </div>
+                            <div class="space-y-2">
+                                <span class="text-[10px] font-bold uppercase tracking-wider font-mono" style="color: var(--accent-orange);">ADVENTURE DIVISION // ROBLOX</span>
+                                <h4 class="text-xl md:text-2xl font-bold text-white tracking-tight">Roblox Mount Expedition</h4>
+                                <p class="text-xs text-neutral-400 leading-relaxed font-light">
+                                    Ekspedisi mendaki puncak gunung virtual bersama puluhan anggota. Saling tolong-menolong saat kawan terjatuh dari tebing dan merayakan pencapaian puncak bersama dalam foto bersama yang berkesan.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= HALAMAN 5: STAFF ================= -->
+        <section id="page-staff" class="page-section space-y-12">
+            <div class="glass-panel hud-corner p-6 md:p-14 rounded-3xl space-y-12">
+                
+                <div class="text-center max-w-2xl mx-auto space-y-3">
+                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 05. COMMAND STRUCTURE & STAFF HIERARCHY</span>
+                    <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">Hierarki Kepengurusan Server</h2>
+                    <p class="text-xs md:text-sm text-neutral-400 font-light">
+                        Tersusun epik dari atas ke bawah. <strong>Ketuk nama atau foto staf manapun</strong> untuk membuka dossier profil personal berukuran ideal dan jelajahi staf lain di divisinya!
+                    </p>
+                </div>
+
+                <!-- VERTICAL COMMAND HIERARCHY TREE -->
+                <div class="max-w-4xl mx-auto space-y-8 relative">
+
+                    <!-- TINGKAT 1: APEX LEADER (FOUNDER & OWNER) -->
+                    <div class="relative flex flex-col items-center">
+                        <div class="w-full max-w-xl bg-gradient-to-b from-orange-950/40 via-black to-neutral-950 p-6 md:p-8 rounded-3xl border-2 border-orange-500/70 shadow-2xl hover-popup cursor-pointer text-center space-y-4 group relative overflow-hidden" onclick="openStaffDossier('w1zq')">
+                            <div class="absolute top-4 right-4 text-[10px] font-bold px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 border border-orange-500/50 font-mono tracking-widest flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400 animate-ping"></span>
+                                <span>TIER 1 // APEX LEADER</span>
+                            </div>
+
+                            <div class="w-28 h-28 mx-auto bg-neutral-950 border-2 border-orange-500 rounded-2xl overflow-hidden shadow-2xl group-hover:scale-110 transition duration-300 relative">
+                                <img src="image/LUFFY.jpg" alt="W1ZQ Avatar" class="w-full h-full object-cover">
+                            </div>
+
+                            <div class="space-y-1">
+                                <h3 class="text-2xl font-black text-white tracking-tight">W1ZQ</h3>
+                                <div class="text-xs font-extrabold tracking-widest font-mono" style="color: var(--accent-orange);">FOUNDER // SUPREME COMMANDER</div>
+                                <div class="text-[10px] text-neutral-400 font-mono">Penanggung Jawab Penuh, Arsitek CRUX Bot, & Pembina Komunitas</div>
+                            </div>
+
+                            <blockquote class="text-xs text-neutral-300 italic font-light max-w-md mx-auto">
+                                "Ciptakan kenyamanan mutlak, bangun persahabatan dari hati, dan hadirkan rumah bagi mereka yang membutuhkan tempat pulang."
+                            </blockquote>
+
+                            <div class="pt-3 border-t border-white/10 flex justify-center items-center space-x-6 text-[10px] font-mono text-neutral-400">
+                                <span>Masa Bakti: 2026 - Sekarang</span>
+                                <span class="text-orange-400 font-bold">🔍 KETUK BUKA DOSSIER PROFIL</span>
+                            </div>
+                        </div>
+
+                        <div class="hierarchy-line"></div>
+                    </div>
+
+                    <!-- TINGKAT 2: STRATEGIC HIGH COUNCIL (REE & ZAR) -->
+                    <div class="relative flex flex-col items-center w-full">
+                        <div class="w-full max-w-2xl bg-neutral-950/90 p-6 md:p-8 rounded-3xl border border-white/15 shadow-xl space-y-5">
+                            <div class="text-center">
+                                <span class="inline-block text-[10px] font-bold px-3 py-1 rounded-full bg-neutral-900 text-neutral-300 border border-white/10 font-mono tracking-widest">
+                                    TIER 2 // STRATEGIC HIGH COUNCIL & ADMINISTRATION
+                                </span>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div onclick="openStaffDossier('ree')" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover-popup cursor-pointer space-y-3 group hover:border-orange-500/50 transition">
+                                    <div class="flex items-center space-x-3.5">
+                                        <div class="w-14 h-14 bg-neutral-950 border border-white/20 rounded-xl overflow-hidden shrink-0 group-hover:scale-105 transition">
+                                            <img src="image/KAKASHI.jpg" alt="Ree Avatar" class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-white text-base">Ree</h4>
+                                            <div class="text-[10px] font-mono text-orange-400">ADMINISTRATOR // REGULATIONS</div>
+                                        </div>
+                                    </div>
+                                    <p class="text-[11px] text-neutral-300 font-light line-clamp-2">
+                                        Mengawal ketertiban peraturan, mengaudit sistem izin peran, dan menjamin keadilan bagi seluruh member.
+                                    </p>
+                                    <div class="text-[10px] text-orange-400 font-mono flex items-center justify-between pt-1 border-t border-white/5">
+                                        <span>Buka Bio Ree</span>
+                                        <span>→</span>
+                                    </div>
+                                </div>
+
+                                <div onclick="openStaffDossier('zar')" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover-popup cursor-pointer space-y-3 group hover:border-orange-500/50 transition">
+                                    <div class="flex items-center space-x-3.5">
+                                        <div class="w-14 h-14 bg-neutral-950 border border-white/20 rounded-xl overflow-hidden shrink-0 group-hover:scale-105 transition">
+                                            <img src="image/KAKASHI.jpg" alt="Zar Avatar" class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-white text-base">Zar</h4>
+                                            <div class="text-[10px] font-mono text-orange-400">ADMINISTRATOR // PARTNERSHIP</div>
+                                        </div>
+                                    </div>
+                                    <p class="text-[11px] text-neutral-300 font-light line-clamp-2">
+                                        Jembatan diplomasi dengan aliansi server sahabat dan pengarah komunikasi internal komunitas.
+                                    </p>
+                                    <div class="text-[10px] text-orange-400 font-mono flex items-center justify-between pt-1 border-t border-white/5">
+                                        <span>Buka Bio Zar</span>
+                                        <span>→</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hierarchy-line"></div>
+                    </div>
+
+                    <!-- TINGKAT 3: DIVISIONAL OPERATORS -->
+                    <div class="relative flex flex-col items-center w-full space-y-6">
+                        
+                        <!-- DIVISI ROBLOX (5 ANGGOTA INDIVIDUAL) -->
+                        <div class="w-full bg-black/60 p-6 md:p-8 rounded-3xl border border-white/15 shadow-xl space-y-4">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-white/10 pb-3">
+                                <div>
+                                    <span class="text-[10px] font-bold px-2.5 py-0.5 rounded bg-orange-500/15 text-orange-400 border border-orange-500/30 font-mono">
+                                        TIER 3 // ADVENTURE CORPS
+                                    </span>
+                                    <h3 class="text-lg font-bold text-white tracking-tight pt-1">Roblox Operation Team</h3>
+                                </div>
+                                <span class="text-[10px] text-neutral-500 font-mono">5 Personel Terpilih • Ketuk Nama untuk Bio</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                                <div onclick="openStaffDossier('yiselle')" class="p-3 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer text-center space-y-2 group hover:border-orange-500/50">
+                                    <div class="w-12 h-12 mx-auto rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:scale-105 transition">
+                                        <img src="image/KAIZEN.jpg" alt="Yiselle" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-bold text-white">Yiselle</div>
+                                        <div class="text-[9px] text-orange-400 font-mono">Pathfinder Lead</div>
+                                    </div>
+                                </div>
+                                <div onclick="openStaffDossier('sylv')" class="p-3 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer text-center space-y-2 group hover:border-orange-500/50">
+                                    <div class="w-12 h-12 mx-auto rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:scale-105 transition">
+                                        <img src="image/KAIZEN.jpg" alt="Sylv" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-bold text-white">Sylv</div>
+                                        <div class="text-[9px] text-orange-400 font-mono">Co-op Specialist</div>
+                                    </div>
+                                </div>
+                                <div onclick="openStaffDossier('cae')" class="p-3 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer text-center space-y-2 group hover:border-orange-500/50">
+                                    <div class="w-12 h-12 mx-auto rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:scale-105 transition">
+                                        <img src="image/KAIZEN.jpg" alt="Cae" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-bold text-white">Cae</div>
+                                        <div class="text-[9px] text-orange-400 font-mono">Mountain Guide</div>
+                                    </div>
+                                </div>
+                                <div onclick="openStaffDossier('ara')" class="p-3 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer text-center space-y-2 group hover:border-orange-500/50">
+                                    <div class="w-12 h-12 mx-auto rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:scale-105 transition">
+                                        <img src="image/KAIZEN.jpg" alt="Ara" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-bold text-white">Ara</div>
+                                        <div class="text-[9px] text-orange-400 font-mono">Vibe Spark</div>
+                                    </div>
+                                </div>
+                                <div onclick="openStaffDossier('caeryn')" class="p-3 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer text-center space-y-2 group hover:border-orange-500/50">
+                                    <div class="w-12 h-12 mx-auto rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:scale-105 transition">
+                                        <img src="image/KAIZEN.jpg" alt="Caeryn" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <div class="text-xs font-bold text-white">Caeryn</div>
+                                        <div class="text-[9px] text-orange-400 font-mono">Checkpoint Guard</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DIVISI MLBB (2 ANGGOTA INDIVIDUAL) -->
+                        <div class="w-full bg-black/60 p-6 md:p-8 rounded-3xl border border-white/15 shadow-xl space-y-4">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-white/10 pb-3">
+                                <div>
+                                    <span class="text-[10px] font-bold px-2.5 py-0.5 rounded bg-orange-500/15 text-orange-400 border border-orange-500/30 font-mono">
+                                        TIER 3 // ESPORTS VANGUARD
+                                    </span>
+                                    <h3 class="text-lg font-bold text-white tracking-tight pt-1">MLBB Tournament Operators</h3>
+                                </div>
+                                <span class="text-[10px] text-neutral-500 font-mono">2 Personel Terpilih • Ketuk Nama untuk Bio</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div onclick="openStaffDossier('moumou')" class="p-4 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer flex items-center space-x-3.5 group hover:border-orange-500/50">
+                                    <div class="w-14 h-14 bg-neutral-900 border border-white/10 rounded-xl overflow-hidden shrink-0 group-hover:scale-105 transition">
+                                        <img src="image/BUTA.jpg" alt="Moumou" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-bold text-white">Moumou</div>
+                                        <div class="text-xs text-orange-400 font-mono">Tournament Director & Drafter</div>
+                                        <div class="text-[10px] text-neutral-400 pt-0.5">Spesialis Regulasi Custom 5v5</div>
+                                    </div>
+                                </div>
+
+                                <div onclick="openStaffDossier('nino')" class="p-4 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer flex items-center space-x-3.5 group hover:border-orange-500/50">
+                                    <div class="w-14 h-14 bg-neutral-900 border border-white/10 rounded-xl overflow-hidden shrink-0 group-hover:scale-105 transition">
+                                        <img src="image/BUTA.jpg" alt="Nino" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-bold text-white">Nino</div>
+                                        <div class="text-xs text-orange-400 font-mono">Match Coordinator & Shoutcaster</div>
+                                        <div class="text-[10px] text-neutral-400 pt-0.5">Spesialis Sparing Antar Server</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hierarchy-line"></div>
+                    </div>
+
+                    <!-- TINGKAT 4: DOKUMENTASI KOLEKTIF -->
+                    <div class="w-full bg-black/40 p-6 md:p-8 rounded-3xl border border-white/10 hover-popup cursor-pointer group space-y-6 shadow-xl" onclick="openMultiImageModal('Galeri Tim Staf CRUX', ['image/SOLO.jpg', 'image/LUFFY.jpg', 'image/KAKASHI.jpg', 'image/KAIZEN.jpg'], ['Dokumentasi kolektif staf pengurus CORE REGNUM UNIFIED-X.', 'W1ZQ Founder.', 'Admin Kakashi.', 'Kaizen Operator.'])">
+                        <div class="h-56 md:h-72 rounded-2xl bg-neutral-950 border border-white/10 overflow-hidden relative">
+                            <img src="image/SOLO.jpg" alt="Foto Kolektif Staf" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-700">
+                        </div>
+                        <div class="text-center space-y-2">
+                            <span class="text-[10px] font-bold uppercase tracking-widest font-mono" style="color: var(--accent-orange);">TIER 4 // HONORARY GUILD ARCHIVE</span>
+                            <h3 class="text-2xl font-bold text-white tracking-tight">Janji Kepengurusan CORE REGNUM UNIFIED-X</h3>
+                            <p class="text-xs text-neutral-400 max-w-xl mx-auto font-light">
+                                "Kami berjanji memimpin dengan empati, menjaga kerahasiaan seluruh member, dan memastikan CORE REGNUM UNIFIED-X selalu menjadi rumah terbaik bagi kita semua."
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HALAMAN 6: BIRTHDAY VAULT ================= -->
+        <section id="page-birthday" class="page-section space-y-12">
+            
+            <div id="bdayLockScreen" class="glass-panel hud-corner p-8 md:p-16 rounded-3xl border-orange-500/50 text-center max-w-2xl mx-auto space-y-6 relative overflow-hidden shadow-2xl">
+                <div class="w-20 h-20 mx-auto bg-orange-500/10 border border-orange-500/40 rounded-2xl flex items-center justify-center text-3xl shadow-inner animate-pulse" style="border-color: var(--accent-orange);">
+                    🔒
+                </div>
+                <div class="space-y-2">
+                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// SECURE BIRTHDAY VAULT (EST. 2026)</span>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight">Terminal Vault Terkunci</h2>
+                    <p class="text-xs text-neutral-400 max-w-md mx-auto font-light">
+                        Masukkan kunci rahasia atau namamu (Kunci demo: <strong class="text-white font-mono bg-neutral-900 px-2 py-0.5 rounded border border-white/10">Wiz</strong>) untuk membuka gerbang surat dan lilin kejutan ulang tahun.
+                    </p>
+                </div>
+
+                <div class="max-w-sm mx-auto space-y-4 pt-2">
+                    <input type="password" id="vaultKeyInput" placeholder="Masukkan Kunci Rahasia..." 
+                           class="w-full bg-neutral-950 border border-white/15 rounded-xl px-4 py-3.5 text-xs text-center text-white focus:outline-none focus:border-orange-500 tracking-widest font-mono shadow-inner"
+                           onkeydown="if(event.key === 'Enter') unlockBirthdayVault()">
+                    
+                    <button onclick="unlockBirthdayVault()" class="w-full py-3.5 text-white text-xs font-bold tracking-widest rounded-xl transition shadow-lg shadow-orange-500/20 hover:opacity-95 flex items-center justify-center space-x-2 font-mono" style="background-color: var(--accent-orange);">
+                        <span>🔑</span>
+                        <span>BUKA KUNCI VAULT</span>
+                    </button>
+                    <p id="lockErrorMsg" class="text-[11px] text-red-400 hidden font-mono tracking-wider font-semibold">⚠️ Kunci tidak valid. Silakan coba lagi!</p>
+                </div>
+            </div>
+
+            <div id="bdayUnlockedContent" class="hidden space-y-8">
+                <div class="glass-panel hud-corner p-6 md:p-14 rounded-3xl border-orange-500/80 bg-gradient-to-r from-orange-950/30 via-neutral-900 to-black relative overflow-hidden space-y-6 shadow-2xl">
+                    <div class="space-y-2">
+                        <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// ACCESS GRANTED: SELAMAT DATANG, <span id="welcomeMemberName" class="text-white"></span>!</span>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white crux-glow">HAPPY BIRTHDAY! 🎂</h2>
+                        <p class="text-xs md:text-sm text-neutral-300 max-w-2xl leading-relaxed font-light">
+                            Selamat bertambah usia! Semoga panjang umur, sehat selalu, dan dikelilingi kebahagiaan. Buka surat istimewa dan tiup lilin virtual yang disiapkan khusus untukmu di bawah ini.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                        <div class="bg-black/60 p-6 rounded-2xl border border-orange-500/30 space-y-3 shadow-xl">
+                            <div class="flex items-center space-x-2 text-xs font-bold" style="color: var(--accent-orange);">
+                                <span>🛡️</span>
+                                <span>UCAPAN DARI KELUARGA BESAR CRUX</span>
+                            </div>
+                            <p class="text-xs text-neutral-300 leading-relaxed italic font-light">
+                                "Terima kasih telah hadir dan memberi warna indah bagi server CORE REGNUM UNIFIED-X. Semoga tahun ini membawa banyak pencapaian baru yang membanggakan bagimu!"
+                            </p>
+                        </div>
+
+                        <div class="bg-black/60 p-6 rounded-2xl border border-orange-500/30 space-y-3 shadow-xl">
+                            <div class="flex items-center space-x-2 text-xs font-bold" style="color: var(--accent-orange);">
+                                <span>✨</span>
+                                <span id="repWishTitle">HARAPAN KAMI UNTUKMU</span>
+                            </div>
+                            <p class="text-xs text-neutral-300 leading-relaxed italic font-light" id="repWishText">
+                                "Tetaplah menjadi pribadi yang hangat dan ceria. Semoga segala cita-citamu dilancarkan dan impian terbesarmu lekas terwujud!"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 md:p-14 rounded-3xl border-orange-500/50 space-y-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div class="space-y-1">
+                            <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 06. SURAT & KUE INTERAKTIF</span>
+                            <h3 class="text-xl md:text-2xl font-bold text-white tracking-tight">Amplop Pesan Khusus & Lilin Virtual</h3>
+                        </div>
+                        <button onclick="triggerCakeInteraction()" class="px-6 py-3.5 bg-gradient-to-r from-orange-600 to-amber-600 text-white text-xs font-bold tracking-wider rounded-xl hover:opacity-90 transition shadow-lg shadow-orange-600/30 flex items-center space-x-2 font-mono">
+                            <span>🎂 BUKA KUE & TIUP LILIN</span>
+                        </button>
+                    </div>
+
+                    <div id="envelopeContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div onclick="openEnvelopeModal('Wiz', 'W1ZQ & Seluruh Anggota CRUX', 'Selamat ulang tahun yang luar biasa! Terima kasih atas senyum, tawa, dan kesetiaan yang selalu kamu hadirkan di server CORE REGNUM UNIFIED-X. Rumah ini selalu terbuka untukmu.')" class="glass-panel p-6 rounded-2xl border border-orange-500/40 hover-popup cursor-pointer relative group flex flex-col justify-between space-y-4 bg-gradient-to-br from-neutral-900 to-black shadow-xl">
+                            <div class="absolute top-4 right-4 text-orange-500 text-xl group-hover:scale-125 transition">💌</div>
+                            <div class="space-y-1">
+                                <span class="text-[10px] font-bold uppercase tracking-wider font-mono" style="color: var(--accent-orange);">SURAT EKSKLUSIF #1</span>
+                                <h4 class="text-lg font-bold text-white tracking-tight">Catatan Khusus Vault</h4>
+                                <p class="text-[10px] text-neutral-400 font-light">Dari: W1ZQ & Anggota CRUX</p>
+                            </div>
+                            <div class="pt-2 flex items-center justify-between text-xs font-bold" style="color: var(--accent-orange);">
+                                <span>BACA SURAT LENGKAP →</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= MODAL DOSSIER STAF ================= -->
+    <div id="staffDetailModal" class="modal-backdrop-blur p-4">
+        <div class="glass-panel p-5 sm:p-7 rounded-3xl max-w-lg w-full max-h-[86vh] overflow-y-auto border-2 border-orange-500/60 relative shadow-2xl modal-content-box space-y-5 bg-gradient-to-b from-neutral-900 via-[#0a0a0c] to-black">
+            <!-- Close Button -->
+            <button onclick="closeStaffDossier()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-900/90 border border-white/20 flex items-center justify-center text-neutral-300 hover:text-white hover:border-orange-500 transition font-bold text-sm z-20">✕</button>
+
+            <!-- Division Isolated Navigation Bar -->
+            <div class="flex items-center justify-between bg-black/60 px-3.5 py-1.5 rounded-xl border border-white/10 text-xs font-mono">
+                <button id="prevStaffBtn" onclick="navigateDivisionStaff(-1)" class="text-neutral-400 hover:text-orange-400 transition flex items-center space-x-1 font-bold text-[11px]">
+                    <span>❮</span> <span class="hidden sm:inline">SEBELUMNYA</span>
+                </button>
+                <div class="flex items-center space-x-1.5 text-neutral-300 text-[10px] sm:text-[11px]">
+                    <span class="text-orange-400 font-bold">DIVISI:</span>
+                    <span id="dossierDivisionBadge" class="font-bold uppercase text-white truncate max-w-[130px] sm:max-w-none">ROBLOX</span>
+                    <span class="text-neutral-500" id="dossierIndexIndicator">(1/5)</span>
+                </div>
+                <button id="nextStaffBtn" onclick="navigateDivisionStaff(1)" class="text-neutral-400 hover:text-orange-400 transition flex items-center space-x-1 font-bold text-[11px]">
+                    <span class="hidden sm:inline">BERIKUTNYA</span> <span>❯</span>
+                </button>
+            </div>
+
+            <!-- Dossier Content Area -->
+            <div id="dossierContentArea" class="space-y-4 slide-fade">
+                <!-- Header (Avatar & Title) -->
+                <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 border-b border-white/10 pb-4">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-neutral-950 border-2 border-orange-500/60 overflow-hidden shadow-xl relative shrink-0">
+                        <img id="staffAvatar" src="" alt="Staff Avatar" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center sm:text-left space-y-1 flex-grow">
+                        <div class="inline-block px-2.5 py-0.5 bg-orange-500/15 border border-orange-500/40 rounded-full text-[9px] font-mono tracking-widest text-orange-400 uppercase font-bold" id="staffTierBadge">
+                            TIER LEVEL
+                        </div>
+                        <h3 id="staffName" class="text-xl sm:text-2xl font-black text-white tracking-tight">Nama Staf</h3>
+                        <div id="staffRole" class="text-[11px] font-bold font-mono tracking-wider" style="color: var(--accent-orange);">JABATAN OPERASIONAL</div>
+                        <div id="staffHandle" class="text-[10px] text-neutral-400 font-mono">@handle_discord</div>
+                    </div>
+                </div>
+
+                <!-- Bio & Motto -->
+                <div class="space-y-3">
+                    <div class="space-y-1">
+                        <span class="text-[9px] font-mono tracking-widest uppercase text-neutral-400 font-bold">// BIOGRAFI & PERAN</span>
+                        <p id="staffBio" class="text-xs text-neutral-200 leading-relaxed font-light">Bio staf...</p>
+                    </div>
+
+                    <div class="p-3 bg-black/60 rounded-xl border border-white/10 space-y-0.5">
+                        <span class="text-[9px] font-mono tracking-widest uppercase text-orange-400 font-bold">MOTTO KEPEMIMPINAN</span>
+                        <p id="staffMotto" class="text-[11px] text-neutral-300 italic font-light">"Motto..."</p>
+                    </div>
+
+                    <!-- Telemetry Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-0.5">
+                        <div class="p-2.5 bg-neutral-950 rounded-xl border border-white/5 space-y-0.5">
+                            <span class="text-[9px] font-mono text-neutral-400 uppercase">📅 BERGABUNG</span>
+                            <div id="staffJoinDate" class="text-[11px] font-bold text-white font-mono">20 Mei 2026</div>
+                        </div>
+                        <div class="p-2.5 bg-neutral-950 rounded-xl border border-white/5 space-y-0.5">
+                            <span class="text-[9px] font-mono text-neutral-400 uppercase">🎮 GAME FAVORIT</span>
+                            <div id="staffFavGame" class="text-[11px] font-bold text-white font-mono">Game Title</div>
+                        </div>
+                        <div class="sm:col-span-2 p-2.5 bg-neutral-950 rounded-xl border border-white/5 space-y-0.5">
+                            <span class="text-[9px] font-mono text-neutral-400 uppercase">✨ HARAPAN UNTUK CRUX</span>
+                            <p id="staffHope" class="text-[11px] text-neutral-300 font-light">Harapan staf...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-1">
+                <button onclick="closeStaffDossier()" class="w-full py-2.5 bg-neutral-900 border border-white/10 rounded-xl text-xs font-bold text-white hover:border-orange-500 transition font-mono">
+                    TUTUP DOSSIER PROFIL
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODAL SURAT, KUE & MULTI-IMAGE ================= -->
+    <div id="envelopeModal" class="modal-backdrop-blur">
+        <div class="glass-panel p-6 md:p-8 rounded-3xl max-w-lg w-full border border-orange-500/60 relative shadow-2xl modal-content-box space-y-6 bg-gradient-to-b from-neutral-900 via-[#0a0a0a] to-black">
+            <button onclick="closeEnvelopeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-900 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:border-orange-500 transition font-bold text-sm z-10">✕</button>
+            <div class="text-center space-y-1">
+                <span class="text-[10px] font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// SPECIAL BIRTHDAY LETTER</span>
+                <h3 id="envTitle" class="text-xl md:text-2xl font-bold text-white tracking-tight">Pesan Pribadi Anggota</h3>
+            </div>
+            <div class="bg-neutral-950 p-6 rounded-2xl border border-white/10 shadow-inner relative overflow-hidden space-y-4">
+                <div class="text-xs text-neutral-400 flex flex-col sm:flex-row justify-between border-b border-white/10 pb-2 gap-1 font-mono">
+                    <span>Untuk: <strong id="envTargetName" class="text-white">-</strong></span>
+                    <span>Pengirim: <strong id="envSenderName" style="color: var(--accent-orange);">-</strong></span>
+                </div>
+                <p id="envMessageText" class="text-sm text-neutral-200 leading-relaxed italic min-h-[90px] flex items-center justify-center text-center font-light">"Isi surat..."</p>
+            </div>
+            <button onclick="closeEnvelopeModal()" class="w-full py-3 bg-neutral-900 border border-white/10 rounded-xl text-xs font-bold text-white hover:border-orange-500 transition font-mono">TUTUP SURAT</button>
+        </div>
+    </div>
+
+    <div id="cakeModal" class="modal-backdrop-blur">
+        <div class="glass-panel p-6 md:p-8 rounded-3xl max-w-md w-full border border-orange-500/60 relative shadow-2xl text-center space-y-6 modal-content-box">
+            <button onclick="closeCakeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-900 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white transition font-bold text-sm">✕</button>
+            <div class="space-y-2">
+                <span class="text-[10px] font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// VIRTUAL CELEBRATION</span>
+                <h3 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Tiup Lilin Kuenya!</h3>
+                <p id="cakeSubtitle" class="text-xs text-neutral-400 font-light">Klik api lilin atau tekan tombol di bawah untuk meniupnya!</p>
+            </div>
+            
+            <div class="py-8 relative flex flex-col items-center justify-center">
+                <div id="candleFlame" onclick="blowCandle()" class="w-5 h-9 rounded-full mb-1 cursor-pointer transition-all"></div>
+                <div class="w-3.5 h-6 bg-amber-100 rounded-t shadow"></div>
+                <div class="w-32 h-9 rounded-t-2xl border-t-2 shadow-md flex items-center justify-center" style="background-color: var(--accent-orange); border-color: var(--border-hover);">
+                    <span class="text-[10px] font-bold text-white tracking-wider font-mono">MAKE A WISH</span>
+                </div>
+                <div class="w-44 h-16 bg-neutral-900 rounded-2xl border border-white/10 shadow-2xl flex items-center justify-center">
+                    <span class="text-xs font-black tracking-widest uppercase font-mono" style="color: var(--accent-orange);">CORE REGNUM 2026</span>
+                </div>
+            </div>
+            
+            <button onclick="blowCandle()" id="blowButton" class="w-full py-3.5 text-white text-xs font-bold tracking-widest rounded-xl transition shadow-lg shadow-orange-500/20 hover:opacity-95 font-mono" style="background-color: var(--accent-orange);">
+                💨 TIUP LILIN SEKARANG
+            </button>
+        </div>
+    </div>
+
+    <!-- Enhanced Image Gallery Modal -->
+    <div id="detailModal" class="modal-backdrop-blur">
+        <div class="glass-panel p-6 md:p-8 rounded-3xl max-w-3xl w-full border border-orange-500/60 space-y-5 relative shadow-2xl modal-content-box">
+            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-900 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white transition font-bold text-sm z-20">✕</button>
+            
+            <div class="space-y-1">
+                <span class="text-[10px] font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);" id="modalCategory">// HOLOGRAM PROJECTION</span>
+                <h3 id="modalTitle" class="text-xl md:text-2xl font-bold text-white tracking-tight">Judul Galeri</h3>
+            </div>
+
+            <div id="swipeContainer" class="relative w-full h-72 md:h-96 rounded-2xl bg-neutral-950/90 border border-white/10 overflow-hidden flex items-center justify-center shadow-2xl p-4 cursor-grab active:cursor-grabbing select-none group">
+                <div class="absolute inset-0 bg-radial from-orange-500/10 via-transparent to-transparent pointer-events-none"></div>
+                <img id="modalImg" src="" alt="Slide Image" class="max-w-full max-h-full object-contain holo-floating-image slide-fade pointer-events-none rounded-xl">
+                
+                <button onclick="prevSlide(); playSFX('blip');" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 border border-white/20 text-white flex items-center justify-center hover:bg-orange-500 transition opacity-80 hover:opacity-100 z-10 shadow-lg" title="Sebelumnya">
+                    ❮
+                </button>
+                <button onclick="nextSlide(); playSFX('blip');" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 border border-white/20 text-white flex items-center justify-center hover:bg-orange-500 transition opacity-80 hover:opacity-100 z-10 shadow-lg" title="Selanjutnya">
+                    ❯
+                </button>
+
+                <div id="dotIndicators" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2 bg-black/80 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-md z-10"></div>
+            </div>
+
+            <div class="p-3 bg-neutral-950/70 rounded-xl border border-white/5">
+                <p id="modalDesc" class="text-xs md:text-sm text-neutral-300 leading-relaxed font-light text-center min-h-[44px] flex items-center justify-center">Deskripsi arsip...</p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-between items-center pt-2 border-t border-white/5 gap-2">
+                <span class="text-[10px] text-neutral-500 font-mono">💡 Tips: Usap layar, gunakan panah keyboard ◄ ► atau tombol panah.</span>
+                <button onclick="closeModal()" class="px-6 py-2.5 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-orange-500/20 hover:opacity-95 font-mono" style="background-color: var(--accent-orange);">TUTUP PROYEKSI</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= FOOTER DENGAN TAUTAN DISCORD & TIKTOK ================= -->
+    <footer class="max-w-7xl mx-auto px-4 md:px-8 text-center text-xs text-neutral-500 border-t border-white/5 pt-8 pb-12 w-full font-mono relative z-10 flex flex-col items-center justify-center space-y-3">
+        <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-bold">
+            <a href="https://discord.gg/KFYPZgKbZg" target="_blank" rel="noopener noreferrer" class="text-neutral-400 hover:text-orange-400 transition flex items-center space-x-1">
+                <span>💬 DISCORD SERVER</span>
+                <span>↗</span>
+            </a>
+            <span class="text-neutral-700">•</span>
+            <a href="https://www.tiktok.com/@circledc" target="_blank" rel="noopener noreferrer" class="text-neutral-400 hover:text-pink-400 transition flex items-center space-x-1">
+                <span>🎵 TIKTOK @CIRCLEDC</span>
+                <span>↗</span>
+            </a>
+        </div>
+        <div class="font-bold text-neutral-400">CORE REGNUM UNIFIED-X (CRUX) // EST. 2026. ALL RIGHTS RESERVED.</div>
+        <div class="text-[10px] text-neutral-600">Fostering inclusive family bonds, driven by you • Official Basecamp</div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT LOGICS ================= -->
+    <script>
+        // PENGATURAN MANUAL JUMLAH MEMBER
+        const MANUAL_MEMBER_COUNT = 71;
+
+        function applyMemberCount() {
+            const elements = document.querySelectorAll('.dynamic-member-count');
+            elements.forEach(el => {
+                el.innerText = `${MANUAL_MEMBER_COUNT} Member`;
+            });
+        }
+        applyMemberCount();
+
+        // ================= PENGHITUNGAN REAL-TIME VOICE CHANNEL (1239 JAM 30 MENIT) =================
+        // Berjalan real-time detik demi detik, tersinkronisasi dan TIDAK PERNAH RESET ke 0 saat web di-refresh!
+        const VC_BASE_HOURS = 1239;
+        const VC_BASE_MINUTES = 30;
+        const VC_BASE_MS = (VC_BASE_HOURS * 3600 + VC_BASE_MINUTES * 60) * 1000;
+        const VC_STORAGE_KEY = 'crux_vc_anchor_final';
+
+        function getVcAnchor() {
+            const now = Date.now();
+            let anchor = null;
+            try {
+                anchor = localStorage.getItem(VC_STORAGE_KEY);
+            } catch (e) {
+                anchor = null;
+            }
+
+            if (!anchor) {
+                // Inisialisasi titik tolak pertama kali agar tepat bernilai 1239 Jam 30 Menit
+                anchor = now - VC_BASE_MS;
+                try {
+                    localStorage.setItem(VC_STORAGE_KEY, anchor.toString());
+                } catch (e) {}
+            } else {
+                anchor = parseInt(anchor, 10);
+                const elapsed = (now - anchor) / (3600 * 1000);
+                // Jika data lama korup atau berada di atas 2000 jam (seperti bug 3000 jam), kalibrasi ulang ke baseline 1239 jam 30 menit
+                if (isNaN(anchor) || elapsed < 1239 || elapsed > 2000) {
+                    anchor = now - VC_BASE_MS;
+                    try {
+                        localStorage.setItem(VC_STORAGE_KEY, anchor.toString());
+                    } catch (e) {}
+                }
+            }
+            return anchor;
+        }
+
+        const vcStartTimestamp = getVcAnchor();
+
+        function updateRealtimeVoiceChannel() {
+            const now = Date.now();
+            let elapsedMs = now - vcStartTimestamp;
+
+            if (elapsedMs < 0) {
+                elapsedMs = Math.abs(elapsedMs);
+            }
+
+            const totalSeconds = Math.floor(elapsedMs / 1000);
+            const totalHours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+
+            const vcDetailedString = `${totalHours} Jam ${minutes}m ${seconds}s`;
+            const vcCompactString = `${totalHours} Jam ${minutes}m (Live)`;
+
+            const cardCounter = document.getElementById('liveVcCounter');
+            const telemetryCounter = document.getElementById('telemetryVcTime');
+
+            if (cardCounter) cardCounter.innerText = vcDetailedString;
+            if (telemetryCounter) telemetryCounter.innerText = vcCompactString;
+        }
+        setInterval(updateRealtimeVoiceChannel, 1000);
+        updateRealtimeVoiceChannel();
+
+        // TEKA-TEKI KATA "CRUX" DENGAN HURUF MELAYANG DI SELURUH LAYAR + DRAG & DROP
+        const targetWord = ['C', 'R', 'U', 'X'];
+        let currentSlots = ['', '', '', ''];
+        let lettersPoolData = [
+            { id: 1, letter: 'R', xPercent: 12, yPercent: 18, anim: 'drift-anim-0' },
+            { id: 2, letter: 'U', xPercent: 82, yPercent: 22, anim: 'drift-anim-1' },
+            { id: 3, letter: 'C', xPercent: 16, yPercent: 78, anim: 'drift-anim-2' },
+            { id: 4, letter: 'X', xPercent: 84, yPercent: 76, anim: 'drift-anim-3' }
+        ];
+
+        function renderPuzzle() {
+            for (let i = 0; i < 4; i++) {
+                const slot = document.getElementById(`slot-${i}`);
+                if (currentSlots[i]) {
+                    slot.innerHTML = `<span class="text-3xl sm:text-4xl font-black text-orange-400 font-cinzel select-none">${currentSlots[i]}</span>`;
+                    slot.classList.add('border-orange-500', 'bg-orange-500/20', 'shadow-orange-500/30');
+                    slot.classList.remove('border-white/20');
+                } else {
+                    slot.innerHTML = `<span class="slot-text text-neutral-600 font-mono text-xs select-none">// 0${i+1}</span>`;
+                    slot.classList.remove('border-orange-500', 'bg-orange-500/20', 'shadow-orange-500/30');
+                    slot.classList.add('border-white/20');
+                }
+            }
+
+            const container = document.getElementById('floatingArea');
+            container.innerHTML = '';
+            lettersPoolData.forEach(item => {
+                const rune = document.createElement('div');
+                rune.id = `rune-${item.id}`;
+                rune.className = `floating-rune-free pointer-events-auto w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-neutral-900 to-black border-2 border-orange-500 text-orange-400 font-cinzel font-black text-3xl sm:text-4xl flex items-center justify-center shadow-2xl shadow-orange-500/30 backdrop-blur-md ${item.anim}`;
+                rune.style.left = `${item.xPercent}vw`;
+                rune.style.top = `${item.yPercent}vh`;
+                rune.innerText = item.letter;
+
+                rune.onclick = (e) => {
+                    if (rune.dataset.dragged === 'true') return;
+                    placeLetterInNextSlot(item);
+                };
+
+                initRuneDrag(rune, item);
+                container.appendChild(rune);
+            });
+        }
+
+        function placeLetterInNextSlot(item) {
+            playSFX('blip');
+            const emptyIdx = currentSlots.findIndex(s => s === '');
+            if (emptyIdx === -1) return;
+
+            currentSlots[emptyIdx] = item.letter;
+            lettersPoolData = lettersPoolData.filter(p => p.id !== item.id);
+            renderPuzzle();
+            checkPuzzleSolution();
+        }
+
+        function removeSlotLetter(index) {
+            if (!currentSlots[index]) return;
+            playSFX('blip');
+            const letter = currentSlots[index];
+            currentSlots[index] = '';
+
+            lettersPoolData.push({
+                id: Date.now() + Math.random(),
+                letter: letter,
+                xPercent: Math.floor(Math.random() * 70 + 10),
+                yPercent: Math.floor(Math.random() * 65 + 15),
+                anim: `drift-anim-${lettersPoolData.length % 4}`
+            });
+            renderPuzzle();
+            document.getElementById('puzzleStatusMsg').innerText = "💡 Tangkap huruf melayang dengan menyeretnya atau cukup diketuk!";
+            document.getElementById('puzzleStatusMsg').className = "text-xs font-mono text-neutral-300 min-h-[22px] flex items-center justify-center";
+        }
+
+        function resetPuzzle() {
+            playSFX('click');
+            currentSlots = ['', '', '', ''];
+            lettersPoolData = [
+                { id: 1, letter: 'R', xPercent: 12, yPercent: 18, anim: 'drift-anim-0' },
+                { id: 2, letter: 'U', xPercent: 82, yPercent: 22, anim: 'drift-anim-1' },
+                { id: 3, letter: 'C', xPercent: 16, yPercent: 78, anim: 'drift-anim-2' },
+                { id: 4, letter: 'X', xPercent: 84, yPercent: 76, anim: 'drift-anim-3' }
+            ];
+            renderPuzzle();
+            document.getElementById('puzzleStatusMsg').innerText = "Susunan direset. Silakan tangkap huruf kembali.";
+            document.getElementById('puzzleStatusMsg').className = "text-xs font-mono text-neutral-300 min-h-[22px] flex items-center justify-center";
+        }
+
+        function checkPuzzleSolution() {
+            if (currentSlots.includes('')) return;
+
+            const assembledWord = currentSlots.join('');
+            if (assembledWord === 'CRUX') {
+                playSFX('granted');
+                document.getElementById('puzzleStatusMsg').innerHTML = "✨ <strong class='text-green-400'>KODE CRUX VALID! MEMBUKA GERBANG MARKAS...</strong>";
+                confetti({ particleCount: 160, spread: 110, origin: { y: 0.6 } });
+                
+                setTimeout(() => {
+                    const screen = document.getElementById('welcomePuzzleScreen');
+                    screen.classList.add('puzzle-solved');
+                    showToast('🚀', 'Selamat datang di CORE REGNUM UNIFIED-X!');
+                }, 1000);
+            } else {
+                playSFX('denied');
+                document.getElementById('puzzleStatusMsg').innerHTML = "⚠️ <strong class='text-red-400'>SUSUNAN SALAH. KATA SANDI YANG BENAR ADALAH 'CRUX'!</strong>";
+                setTimeout(resetPuzzle, 1400);
+            }
+        }
+
+        function initRuneDrag(elem, item) {
+            let startX, startY, origLeft, origTop;
+            let isDragging = false;
+
+            elem.onpointerdown = function(e) {
+                elem.dataset.dragged = 'false';
+                isDragging = true;
+                elem.setPointerCapture(e.pointerId);
+                startX = e.clientX;
+                startY = e.clientY;
+
+                const rect = elem.getBoundingClientRect();
+                origLeft = rect.left;
+                origTop = rect.top;
+
+                elem.classList.remove(item.anim);
+                elem.style.position = 'fixed';
+                elem.style.left = `${origLeft}px`;
+                elem.style.top = `${origTop}px`;
+            };
+
+            elem.onpointermove = function(e) {
+                if (!isDragging) return;
+                const dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+                if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+                    elem.dataset.dragged = 'true';
+                }
+
+                elem.style.left = `${origLeft + dx}px`;
+                elem.style.top = `${origTop + dy}px`;
+
+                highlightHoveredSlot(e.clientX, e.clientY);
+            };
+
+            elem.onpointerup = function(e) {
+                if (!isDragging) return;
+                isDragging = false;
+                elem.releasePointerCapture(e.pointerId);
+
+                const droppedSlotIndex = findSlotAtCoords(e.clientX, e.clientY);
+                clearSlotHighlights();
+
+                if (droppedSlotIndex !== -1 && currentSlots[droppedSlotIndex] === '') {
+                    playSFX('blip');
+                    currentSlots[droppedSlotIndex] = item.letter;
+                    lettersPoolData = lettersPoolData.filter(p => p.id !== item.id);
+                    renderPuzzle();
+                    checkPuzzleSolution();
+                } else {
+                    elem.style.position = 'absolute';
+                    elem.style.left = `${item.xPercent}vw`;
+                    elem.style.top = `${item.yPercent}vh`;
+                    elem.classList.add(item.anim);
+                }
+            };
+        }
+
+        function findSlotAtCoords(x, y) {
+            for (let i = 0; i < 4; i++) {
+                const slot = document.getElementById(`slot-${i}`);
+                if (slot) {
+                    const rect = slot.getBoundingClientRect();
+                    if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                        return i;
+                    }
+                }
+            }
+            return -1;
+        }
+
+        function highlightHoveredSlot(x, y) {
+            for (let i = 0; i < 4; i++) {
+                const slot = document.getElementById(`slot-${i}`);
+                if (slot) {
+                    const rect = slot.getBoundingClientRect();
+                    if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                        slot.classList.add('slot-drag-hover');
+                    } else {
+                        slot.classList.remove('slot-drag-hover');
+                    }
+                }
+            }
+        }
+
+        function clearSlotHighlights() {
+            for (let i = 0; i < 4; i++) {
+                const slot = document.getElementById(`slot-${i}`);
+                if (slot) slot.classList.remove('slot-drag-hover');
+            }
+        }
+
+        renderPuzzle();
+
+        // DOSSIER DATABASE DENGAN NAVIGASI TERISOLASI PER DIVISI
+        const staffDatabase = {
+            w1zq: {
+                division: "apex",
+                divisionName: "FOUNDER & SUPREME COMMAND",
+                name: "W1ZQ",
+                tier: "TIER 1 // APEX LEADER",
+                role: "FOUNDER & COMMUNITY ARCHITECT",
+                handle: "@w1zq_crux",
+                avatar: "image/LUFFY.jpg",
+                bio: "Pendiri tunggal CORE REGNUM UNIFIED-X. Merintis markas ini dari nol berlandaskan filosofi retakan pemecah kesunyian. Penanggung jawab penuh arah kebijakan komunitas, pengembang tunggal CRUX Bot, dan pembina ikatan keluarga besar.",
+                motto: "Ciptakan kenyamanan mutlak, bangun persahabatan dari hati, dan hadirkan rumah bagi mereka yang memerlukan tempat untuk pulang.",
+                joinDate: "20 Mei 2026 (Founding Day)",
+                favGame: "Roblox Expedition, Werewolf Engine, Strategy Co-op",
+                hope: "CRUX menjadi tempat bernaung paling tulus, solid seumur hidup, dan menjadi rumah kedua terbaik bagi setiap jiwa terpilih."
+            },
+            ree: {
+                division: "admin",
+                divisionName: "STRATEGIC ADMIN COUNCIL",
+                name: "Ree",
+                tier: "TIER 2 // CORE ADMINISTRATOR",
+                role: "RULES & REGULATIONS DIRECTOR",
+                handle: "@ree_management",
+                avatar: "image/KAKASHI.jpg",
+                bio: "Mengawal regulasi server dengan kepala dingin dan keadilan. Bertanggung jawab memverifikasi calon member baru melalui seleksi cermat agar keharmonisan dan kenyamanan basecamp tetap terlindungi.",
+                motto: "Aturan ditegakkan bukan untuk membatasi kebebasan, melainkan untuk melindungi kenyamanan dan privasi sesama kawan.",
+                joinDate: "20 Mei 2026 (Co-Founding Council)",
+                favGame: "Mobile Legends, Chill Voice Chat, Survival Co-op",
+                hope: "Komunitas tetap terjaga dari drama negatif dan selalu menjadi sirkel paling adem."
+            },
+            zar: {
+                division: "admin",
+                divisionName: "STRATEGIC ADMIN COUNCIL",
+                name: "Zar",
+                tier: "TIER 2 // CORE ADMINISTRATOR",
+                role: "EXTERNAL PARTNERSHIP & DIPLOMACY",
+                handle: "@zar_relations",
+                avatar: "image/KAKASHI.jpg",
+                bio: "Mengelola jalinan kemitraan aliansi dengan server discord terpercaya lainnya. Menjadi garda depan diplomasi komunitas dan memastikan nama baik CORE REGNUM UNIFIED-X selalu harum di mata publik.",
+                motto: "Solidaritas tanpa batas waktu. Menjalin pertemanan dengan integritas tinggi.",
+                joinDate: "20 Mei 2026 (Co-Founding Council)",
+                favGame: "Mobile Legends, RPG Adventure, Music Bot Jamming",
+                hope: "Jaringan persahabatan CRUX semakin luas dan member selalu merasa bangga menjadi bagian dari keluarga ini."
+            },
+            yiselle: {
+                division: "roblox",
+                divisionName: "ROBLOX ADVENTURE CORPS",
+                name: "Yiselle",
+                tier: "TIER 3 // ADVENTURE LEAD",
+                role: "ROBLOX EXPEDITION PATHFINDER",
+                handle: "@yiselle_roblox",
+                avatar: "image/KAIZEN.jpg",
+                bio: "Pimpinan penjelajah map mendaki rintangan di Roblox. Menemukan map-map pegunungan ekstrem, menguji kelayakan jalur, dan memimpin rombongan member dari pos awal hingga menancapkan bendera di puncak.",
+                motto: "Taklukkan tebing tertinggi bersama! Jangan tinggalkan kawan di belakang.",
+                joinDate: "Juni 2026",
+                favGame: "Roblox (Mount Expedition, Tower Obby, Horror)",
+                hope: "Setiap pendakian gunung virtual selalu melahirkan tawa dan kekompakan baru."
+            },
+            sylv: {
+                division: "roblox",
+                divisionName: "ROBLOX ADVENTURE CORPS",
+                name: "Sylv",
+                tier: "TIER 3 // ADVENTURE OPERATOR",
+                role: "CO-OP EVENT COORDINATOR",
+                handle: "@sylv_crux",
+                avatar: "image/KAIZEN.jpg",
+                bio: "Koordinator teknis bermain bersama. Memastikan seluruh member mendapatkan server private Roblox yang lancar dan mengatur jadwal mabar akhir pekan tanpa membebani kesibukan sekolah/kuliah/kerja.",
+                motto: "Game adalah sarana melepas penat, bukan arena menambah beban hidup.",
+                joinDate: "Juni 2026",
+                favGame: "Roblox (Co-op Story, Simulation)",
+                hope: "Semua member bisa ikut bersenang-senang tanpa ada rasa canggung."
+            },
+            cae: {
+                division: "roblox",
+                divisionName: "ROBLOX ADVENTURE CORPS",
+                name: "Cae",
+                tier: "TIER 3 // ADVENTURE OPERATOR",
+                role: "TACTICAL MOUNTAIN GUIDE",
+                handle: "@cae_climber",
+                avatar: "image/KAIZEN.jpg",
+                bio: "Pemandu taktik pendakian. Paling sigap menolong member yang terjatuh dari rintangan, memberikan arahan lompatan, dan menjaga moral tim agar tidak menyerah di tengah jalur curam.",
+                motto: "Jatuh sepuluh kali, bangkit sebelas kali bersama kawan di sampingmu.",
+                joinDate: "Juli 2026",
+                favGame: "Roblox (Difficulty Chart Obby, Climb Map)",
+                hope: "Melihat seluruh member berhasil foto bersama di puncak tertinggi tanpa ada yang tertinggal."
+            },
+            ara: {
+                division: "roblox",
+                divisionName: "ROBLOX ADVENTURE CORPS",
+                name: "Ara",
+                tier: "TIER 3 // ADVENTURE OPERATOR",
+                role: "VIBES & MORALE SPARK",
+                handle: "@ara_vibe",
+                avatar: "image/KAIZEN.jpg",
+                bio: "Penyemangat utama di ruang suara selama ekspedisi Roblox berlangsung. Mengisi perjalanan dengan celoteh ceria, canda tawa, dan memastikan tidak ada momen hening yang membosankan.",
+                motto: "Tawa adalah bahan bakar terbaik untuk menaklukkan setiap rintangan.",
+                joinDate: "Juli 2026",
+                favGame: "Roblox (Party Games, Fashion Famous, Hangout)",
+                hope: "Voice channel selalu ramai dengan canda tawa lepas setiap malam."
+            },
+            caeryn: {
+                division: "roblox",
+                divisionName: "ROBLOX ADVENTURE CORPS",
+                name: "Caeryn",
+                tier: "TIER 3 // ADVENTURE OPERATOR",
+                role: "SAFETY & CHECKPOINT GUARD",
+                handle: "@caeryn_guard",
+                avatar: "image/KAIZEN.jpg",
+                bio: "Penjaga checkpoint dan keselamatan rombongan. Memastikan setiap member telah mencapai pos istirahat dengan selamat sebelum tim melanjutkan langkah ke zona rintangan berikutnya.",
+                motto: "Kemenangan sejati adalah saat kita sampai di garis akhir secara utuh.",
+                joinDate: "Juli 2026",
+                favGame: "Roblox (Adventure RPG, Parkour)",
+                hope: "Komunitas semakin erat dan kompak dalam setiap petualangan baru."
+            },
+            moumou: {
+                division: "mlbb",
+                divisionName: "MLBB ESPORTS VANGUARD",
+                name: "Moumou",
+                tier: "TIER 3 // ESPORTS LEAD",
+                role: "TOURNAMENT DIRECTOR & DRAFT MASTER",
+                handle: "@moumou_mlbb",
+                avatar: "image/BUTA.jpg",
+                bio: "Pengatur utama laga Land of Dawn di server. Mengatur jadwal turnamen internal bulanan, menyusun regulasi draft pick yang seimbang, serta memfasilitasi fun match 5v5 santai yang menghibur.",
+                motto: "Kuasai makro, percayai kawan satu tim, dan rayakan setiap kemenangan bersama.",
+                joinDate: "Juni 2026",
+                favGame: "Mobile Legends: Bang Bang (Roamer & Midlane)",
+                hope: "Laga internal selalu berjalan sportif, seru, dan menjadi tontonan favorit member."
+            },
+            nino: {
+                division: "mlbb",
+                divisionName: "MLBB ESPORTS VANGUARD",
+                name: "Nino",
+                tier: "TIER 3 // ESPORTS LEAD",
+                role: "MATCH COORDINATOR & SHOUTCASTER",
+                handle: "@nino_caster",
+                avatar: "image/BUTA.jpg",
+                bio: "Komentator penuh antusiasme dan koordinator pertandingan. Menghidupkan suasana live streaming screen share Discord saat skuad CRUX bertanding, memandu jalannya laga dengan ulasan yang kocak dan menghibur.",
+                motto: "Menang kita rayakan bersama, kalah kita evaluasi sambil tertawa.",
+                joinDate: "Juni 2026",
+                favGame: "Mobile Legends: Bang Bang (Goldlane & Jungler)",
+                hope: "Skuad MLBB CRUX semakin solid dan terus menorehkan win streak menyenangkan."
+            }
+        };
+
+        const divisionRosters = {
+            apex: ['w1zq'],
+            admin: ['ree', 'zar'],
+            roblox: ['yiselle', 'sylv', 'cae', 'ara', 'caeryn'],
+            mlbb: ['moumou', 'nino']
+        };
+
+        let currentActiveStaffKey = null;
+
+        function openStaffDossier(staffKey) {
+            playSFX('click');
+            currentActiveStaffKey = staffKey;
+            renderDossierModal();
+            document.getElementById('staffDetailModal').classList.add('active-modal');
+        }
+
+        function renderDossierModal() {
+            const data = staffDatabase[currentActiveStaffKey];
+            if (!data) return;
+
+            const contentArea = document.getElementById('dossierContentArea');
+            contentArea.classList.remove('slide-fade');
+            void contentArea.offsetWidth;
+
+            document.getElementById('dossierDivisionBadge').innerText = data.divisionName;
+            document.getElementById('staffAvatar').src = data.avatar;
+            document.getElementById('staffName').innerText = data.name;
+            document.getElementById('staffTierBadge').innerText = data.tier;
+            document.getElementById('staffRole').innerText = data.role;
+            document.getElementById('staffHandle').innerText = data.handle;
+            document.getElementById('staffBio').innerText = data.bio;
+            document.getElementById('staffMotto').innerText = `"${data.motto}"`;
+            document.getElementById('staffJoinDate').innerText = data.joinDate;
+            document.getElementById('staffFavGame').innerText = data.favGame;
+            document.getElementById('staffHope').innerText = data.hope;
+
+            const roster = divisionRosters[data.division];
+            const currentIdx = roster.indexOf(currentActiveStaffKey);
+            document.getElementById('dossierIndexIndicator').innerText = `(${currentIdx + 1}/${roster.length})`;
+
+            const prevBtn = document.getElementById('prevStaffBtn');
+            const nextBtn = document.getElementById('nextStaffBtn');
+
+            if (roster.length <= 1) {
+                prevBtn.style.opacity = '0.3';
+                prevBtn.style.pointerEvents = 'none';
+                nextBtn.style.opacity = '0.3';
+                nextBtn.style.pointerEvents = 'none';
+            } else {
+                prevBtn.style.opacity = '1';
+                prevBtn.style.pointerEvents = 'auto';
+                nextBtn.style.opacity = '1';
+                nextBtn.style.pointerEvents = 'auto';
+            }
+
+            contentArea.classList.add('slide-fade');
+        }
+
+        function navigateDivisionStaff(direction) {
+            playSFX('blip');
+            const currentData = staffDatabase[currentActiveStaffKey];
+            if (!currentData) return;
+
+            const roster = divisionRosters[currentData.division];
+            if (roster.length <= 1) return;
+
+            let currentIndex = roster.indexOf(currentActiveStaffKey);
+            currentIndex = (currentIndex + direction + roster.length) % roster.length;
+            currentActiveStaffKey = roster[currentIndex];
+
+            renderDossierModal();
+        }
+
+        function closeStaffDossier() {
+            playSFX('click');
+            document.getElementById('staffDetailModal').classList.remove('active-modal');
+        }
+
+        document.getElementById('staffDetailModal').addEventListener('click', function(e) {
+            if (e.target === this) closeStaffDossier();
+        });
+
+        // Web Audio API
+        let audioEnabled = true;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) audioCtx = new AudioContext();
+            }
+        }
+
+        function playSFX(type) {
+            if (!audioEnabled) return;
+            initAudio();
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(750, now);
+                osc.frequency.exponentialRampToValueAtTime(320, now + 0.07);
+                gain.gain.setValueAtTime(0.08, now);
+                gain.gain.linearRampToValueAtTime(0.001, now + 0.07);
+                osc.start(now);
+                osc.stop(now + 0.07);
+            } else if (type === 'blip') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(1150, now);
+                gain.gain.setValueAtTime(0.05, now);
+                gain.gain.linearRampToValueAtTime(0.001, now + 0.05);
+                osc.start(now);
+                osc.stop(now + 0.05);
+            } else if (type === 'granted') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.setValueAtTime(659.25, now + 0.1);
+                osc.frequency.setValueAtTime(783.99, now + 0.2);
+                gain.gain.setValueAtTime(0.09, now);
+                gain.gain.linearRampToValueAtTime(0.001, now + 0.35);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            } else if (type === 'denied') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(140, now);
+                osc.frequency.linearRampToValueAtTime(90, now + 0.15);
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.linearRampToValueAtTime(0.001, now + 0.2);
+                osc.start(now);
+                osc.stop(now + 0.2);
+            }
+        }
+
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            const statusText = audioEnabled ? 'SFX ON' : 'SFX OFF';
+            const icon = audioEnabled ? '🔊' : '🔇';
+            
+            const btnIcon = document.getElementById('audioIcon');
+            if (btnIcon) btnIcon.innerText = icon;
+
+            showToast(icon, `Suara Antarmuka: ${statusText}`);
+            if (audioEnabled) playSFX('click');
+        }
+
+        // Background Particles
+        (function setupParticles() {
+            const canvas = document.getElementById('bgCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const particleCount = 42;
+            let mouseX = -1000, mouseY = -1000;
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.35,
+                    vy: (Math.random() - 0.5) * 0.35,
+                    size: Math.random() * 2 + 1,
+                    alpha: Math.random() * 0.5 + 0.2
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-orange').trim() || '#f97316';
+
+                ctx.fillStyle = accentColor;
+                ctx.strokeStyle = accentColor;
+
+                for (let i = 0; i < particles.length; i++) {
+                    let p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
+
+                    const dx = mouseX - p.x;
+                    const dy = mouseY - p.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 110) {
+                        p.x -= (dx / dist) * 1.5;
+                        p.y -= (dy / dist) * 1.5;
+                    }
+
+                    ctx.globalAlpha = p.alpha * 0.7;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        let p2 = particles[j];
+                        const d = Math.hypot(p.x - p2.x, p.y - p2.y);
+                        if (d < 110) {
+                            ctx.globalAlpha = (1 - d / 110) * 0.15;
+                            ctx.lineWidth = 0.8;
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                ctx.globalAlpha = 1;
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        // Real-Time Server Uptime Calculator
+        function updateServerUptime() {
+            const startDate = new Date('2026-05-20T00:00:00');
+            const now = new Date();
+            const diff = now - startDate;
+
+            const elem = document.getElementById('uptimeCounter');
+            if (!elem) return;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                elem.innerText = `${days}h ${hours}j ${minutes}m ${seconds}s`;
+            } else {
+                elem.innerText = "EST. 20 MEI 2026";
+            }
+        }
+        setInterval(updateServerUptime, 1000);
+        updateServerUptime();
+
+        // Page Switcher
+        function switchPage(pageId) {
+            playSFX('click');
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(p => p.classList.remove('active-page'));
+
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => btn.classList.remove('active-nav'));
+
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) targetPage.classList.add('active-page');
+
+            const activeNav = document.getElementById('nav-' + pageId);
+            if (activeNav) activeNav.classList.add('active-nav');
+
+            const mobActiveNav = document.getElementById('mob-nav-' + pageId);
+            if (mobActiveNav) mobActiveNav.classList.add('active-nav');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Theme Switcher
+        function setTheme(themeName) {
+            playSFX('blip');
+            document.body.className = document.body.className.replace(/theme-\S+/g, '');
+            document.body.classList.add('theme-' + themeName);
+            showToast('🎨', `Tema warna diubah ke: ${themeName.toUpperCase()}`);
+        }
+
+        // Toast Alerts
+        let toastTimeout = null;
+        function showToast(icon, message) {
+            const toast = document.getElementById('toastNotice');
+            const iconElem = document.getElementById('toastIcon');
+            const msgElem = document.getElementById('toastMsg');
+            if (!toast) return;
+
+            iconElem.innerText = icon;
+            msgElem.innerText = message;
+            toast.classList.add('active-toast');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('active-toast');
+            }, 3200);
+        }
+
+        function copyDiscordLink() {
+            playSFX('blip');
+            const link = "https://discord.gg/KFYPZgKbZg";
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(link).then(() => {
+                    showToast('🔗', 'Tautan Discord berhasil disalin: discord.gg/KFYPZgKbZg');
+                }).catch(() => {
+                    showToast('📋', link);
+                });
+            } else {
+                showToast('📋', link);
+            }
+        }
+
+        // Birthday Vault
+        const birthdayPeople = {
+            "wiz": "Wiz"
+        };
+
+        function unlockBirthdayVault() {
+            const inputElem = document.getElementById('vaultKeyInput');
+            const inputVal = inputElem.value.trim().toLowerCase();
+            const errorMsg = document.getElementById('lockErrorMsg');
+
+            if (birthdayPeople[inputVal]) {
+                playSFX('granted');
+                const memberName = birthdayPeople[inputVal];
+                errorMsg.classList.add('hidden');
+
+                document.getElementById('bdayLockScreen').classList.add('hidden');
+                document.getElementById('bdayUnlockedContent').classList.remove('hidden');
+                document.getElementById('welcomeMemberName').innerText = memberName.toUpperCase();
+                document.getElementById('repWishTitle').innerText = `HARAPAN KELUARGA CRUX UNTUK ${memberName.toUpperCase()}`;
+                document.getElementById('nav-birthday').innerHTML = `<span>🎂</span> <span>${memberName.toUpperCase()}'S VAULT</span>`;
+
+                triggerGrandWelcome();
+                showToast('🎉', `Akses Terbuka! Selamat Ulang Tahun, ${memberName}!`);
+            } else {
+                playSFX('denied');
+                errorMsg.classList.remove('hidden');
+                inputElem.classList.add('border-red-500');
+                setTimeout(() => inputElem.classList.remove('border-red-500'), 1500);
+            }
+        }
+
+        function triggerGrandWelcome() {
+            var duration = 3.5 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({ particleCount: 8, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 8, angle: 120, spread: 55, origin: { x: 1 } });
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+
+            for (let i = 0; i < 14; i++) {
+                createFloatingBalloon();
+            }
+        }
+
+        function createFloatingBalloon() {
+            const balloon = document.createElement('div');
+            balloon.className = 'floating-balloon';
+            balloon.innerHTML = '🎈';
+            balloon.style.left = Math.random() * 90 + 'vw';
+            balloon.style.fontSize = (Math.random() * 20 + 32) + 'px';
+            balloon.style.animationDuration = (Math.random() * 3 + 4.5) + 's';
+            balloon.style.animationDelay = (Math.random() * 1.5) + 's';
+            document.body.appendChild(balloon);
+
+            setTimeout(() => { balloon.remove(); }, 8000);
+        }
+
+        // Multi-Image Modal Gallery
+        let currentSlideImages = [];
+        let currentSlideDescriptions = [];
+        let currentSlideIndex = 0;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function openMultiImageModal(title, imageArray, descArray, categoryText = '// HOLOGRAM PROJECTION') {
+            playSFX('click');
+            currentSlideImages = imageArray;
+            currentSlideDescriptions = descArray;
+            currentSlideIndex = 0;
+
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalCategory').innerText = categoryText;
+            
+            updateSlideContent();
+            document.getElementById('detailModal').classList.add('active-modal');
+        }
+
+        function updateSlideContent() {
+            const imgElement = document.getElementById('modalImg');
+            imgElement.classList.remove('slide-fade');
+            void imgElement.offsetWidth;
+
+            imgElement.src = currentSlideImages[currentSlideIndex];
+            document.getElementById('modalDesc').innerText = currentSlideDescriptions[currentSlideIndex];
+            
+            const dotsContainer = document.getElementById('dotIndicators');
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < currentSlideImages.length; i++) {
+                const dot = document.createElement('div');
+                dot.className = `w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${i === currentSlideIndex ? 'bg-orange-500 w-6' : 'bg-white/30 hover:bg-white/60'}`;
+                dot.onclick = () => {
+                    currentSlideIndex = i;
+                    updateSlideContent();
+                    playSFX('blip');
+                };
+                dotsContainer.appendChild(dot);
+            }
+
+            imgElement.classList.add('slide-fade');
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % currentSlideImages.length;
+            updateSlideContent();
+        }
+
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + currentSlideImages.length) % currentSlideImages.length;
+            updateSlideContent();
+        }
+
+        window.addEventListener('keydown', (e) => {
+            const detailModal = document.getElementById('detailModal');
+            if (detailModal && detailModal.classList.contains('active-modal')) {
+                if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    playSFX('blip');
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    playSFX('blip');
+                } else if (e.key === 'Escape') {
+                    closeModal();
+                }
+            }
+            if (e.key === 'Escape') {
+                closeStaffDossier();
+            }
+        });
+
+        const swipeContainer = document.getElementById('swipeContainer');
+        swipeContainer.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        swipeContainer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipeGesture();
+        }, {passive: true});
+
+        swipeContainer.addEventListener('mousedown', e => {
+            touchStartX = e.clientX;
+        });
+
+        swipeContainer.addEventListener('mouseup', e => {
+            touchEndX = e.clientX;
+            handleSwipeGesture();
+        });
+
+        function handleSwipeGesture() {
+            const threshold = 45;
+            if (touchEndX < touchStartX - threshold) {
+                nextSlide();
+                playSFX('blip');
+            } else if (touchEndX > touchStartX + threshold) {
+                prevSlide();
+                playSFX('blip');
+            }
+        }
+
+        function closeModal() {
+            playSFX('click');
+            document.getElementById('detailModal').classList.remove('active-modal');
+        }
+
+        document.getElementById('detailModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Birthday Modals
+        function openEnvelopeModal(target, sender, message) {
+            playSFX('granted');
+            document.getElementById('envTargetName').innerText = target;
+            document.getElementById('envSenderName').innerText = sender;
+            document.getElementById('envMessageText').innerText = `"${message}"`;
+            document.getElementById('envTitle').innerText = `Surat Untuk ${target}`;
+
+            const modal = document.getElementById('envelopeModal');
+            modal.classList.add('active-modal');
+            confetti({ particleCount: 70, spread: 80, origin: { y: 0.5 } });
+        }
+
+        function closeEnvelopeModal() {
+            playSFX('click');
+            document.getElementById('envelopeModal').classList.remove('active-modal');
+        }
+
+        document.getElementById('envelopeModal').addEventListener('click', function(e) {
+            if (e.target === this) closeEnvelopeModal();
+        });
+
+        function triggerCakeInteraction() {
+            playSFX('click');
+            const cakeModal = document.getElementById('cakeModal');
+            cakeModal.classList.add('active-modal');
+            
+            const flame = document.getElementById('candleFlame');
+            flame.style.opacity = '1';
+            flame.style.transform = 'scale(1)';
+            flame.style.pointerEvents = 'auto';
+            document.getElementById('cakeSubtitle').innerText = "Klik api lilin atau tombol di bawah untuk meniupnya!";
+            document.getElementById('blowButton').innerText = "💨 TIUP LILIN SEKARANG";
+        }
+
+        function closeCakeModal() {
+            playSFX('click');
+            document.getElementById('cakeModal').classList.remove('active-modal');
+        }
+
+        document.getElementById('cakeModal').addEventListener('click', function(e) {
+            if (e.target === this) closeCakeModal();
+        });
+
+        function blowCandle() {
+            playSFX('granted');
+            const flame = document.getElementById('candleFlame');
+            flame.style.opacity = '0';
+            flame.style.transform = 'scale(0.2)';
+            flame.style.pointerEvents = 'none';
+
+            document.getElementById('cakeSubtitle').innerText = "🎉 Lilin padam! Harapanmu terkabul! Selamat Ulang Tahun! 🎈";
+            document.getElementById('blowButton').innerText = "✨ NYALAKAN LAGI";
+            document.getElementById('blowButton').onclick = triggerCakeInteraction;
+
+            confetti({ particleCount: 160, spread: 130, origin: { y: 0.6 } });
+        }
+
+        // Interactive Bot Console Simulator
+        function executeUserCommand() {
+            const input = document.getElementById('terminalInput');
+            const cmd = input.value.trim().toLowerCase();
+            if (!cmd) return;
+            input.value = '';
+            runBotSim(cmd.replace('/', ''));
+        }
+
+        function runBotSim(cmdName) {
+            playSFX('blip');
+            const out = document.getElementById('botConsoleOutput');
+            const userLine = document.createElement('div');
+            userLine.className = 'text-white font-bold';
+            userLine.innerHTML = `<span class="text-orange-400">&gt;</span> /${cmdName}`;
+            out.appendChild(userLine);
+
+            const botLine = document.createElement('div');
+            botLine.className = 'text-neutral-300 font-mono pl-3 border-l-2 border-orange-500/60 my-1 py-0.5 text-[11px]';
+
+            if (cmdName === 'werewolf') {
+                botLine.innerHTML = `🐺 <strong>[WEREWOLF MODULE]</strong> Memulai lobby permainan Werewolf...<br>Status: Menunggu 6-12 pemain bersiap. Role aktif: Seer, Guardian, Werewolf, Villager.`;
+            } else if (cmdName === 'quiz') {
+                botLine.innerHTML = `❓ <strong>[QUIZ ENGINE]</strong> Pertanyaan Harian: "Apa kepanjangan dan filosofi dari nama server CRUX?"<br>Ketik jawabanmu di channel kuis Discord!`;
+            } else if (cmdName === 'giveaway') {
+                botLine.innerHTML = `🎁 <strong>[GIVEAWAY BOT]</strong> Giveaway Aktif: Discord Nitro & Role Khusus. Member telah bereaksi 🎉!`;
+            } else if (cmdName === 'serverinfo') {
+                botLine.innerHTML = `🛡️ <strong>[SERVER TELEMETRY]</strong> CORE REGNUM UNIFIED-X // Est. 20 Mei 2026.<br>${MANUAL_MEMBER_COUNT} Member terpilih • Voice Chat Dimulai 23 April 2026 • Founder: W1ZQ.`;
+            } else if (cmdName === 'clear') {
+                out.innerHTML = `<div class="text-neutral-500">[SYSTEM] Layar terminal dibersihkan.</div>`;
+                return;
+            } else {
+                botLine.innerHTML = `⚠️ Command <code>/${cmdName}</code> tidak dikenal. Coba: <em>/werewolf</em>, <em>/quiz</em>, <em>/giveaway</em>, <em>/serverinfo</em>.`;
+            }
+
+            out.appendChild(botLine);
+            out.scrollTop = out.scrollHeight;
+        }
+    </script>
+</body>
+</html>
