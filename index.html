@@ -23,7 +23,7 @@
             --accent-rgb: 249, 115, 22;
             --accent-glow: rgba(249, 115, 22, 0.45);
             --border-color: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(249, 115, 22, 0.7);
+            --border-hover: rgba(249, 115, 22, 0.75);
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
         }
@@ -113,20 +113,25 @@
             box-shadow: 0 0 12px var(--accent-orange);
         }
 
-        /* Glass Panel High-Tech */
-        .glass-panel {
+        /* ================= EFEK CAHAYA & MELAYANG PADA SEMUA FRAME ================= */
+        .glass-panel, .hover-popup {
             background: linear-gradient(135deg, rgba(16, 16, 20, 0.8) 0%, rgba(8, 8, 10, 0.94) 100%);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-color);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
             position: relative;
         }
 
-        .glass-panel:hover {
+        /* Hover pada PC & Tap/Sentuh pada HP */
+        .glass-panel:hover, 
+        .glass-panel.card-touched,
+        .hover-popup:hover,
+        .hover-popup.card-touched {
+            transform: translateY(-6px) scale(1.015);
             border-color: var(--border-hover);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px var(--accent-glow);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px var(--accent-glow);
         }
 
         /* High-Tech HUD Corners */
@@ -156,7 +161,9 @@
             border-bottom-right-radius: 6px;
         }
         .glass-panel:hover .hud-corner::before,
-        .glass-panel:hover .hud-corner::after {
+        .glass-panel:hover .hud-corner::after,
+        .glass-panel.card-touched .hud-corner::before,
+        .glass-panel.card-touched .hud-corner::after {
             width: 18px;
             height: 18px;
             opacity: 1;
@@ -167,15 +174,7 @@
             text-shadow: 0 0 30px var(--accent-glow), 0 0 10px var(--accent-glow);
         }
 
-        /* Hover Cards */
-        .hover-popup {
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
-        }
-        .hover-popup:hover {
-            transform: translateY(-5px) scale(1.01);
-        }
-
-        /* Page Smooth Transition */
+        /* Page Transition */
         @keyframes pageFadeSlide {
             0% { opacity: 0; transform: translateY(16px) scale(0.985); filter: blur(6px); }
             100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
@@ -206,23 +205,6 @@
             pointer-events: none;
             animation: floatUp 6.5s ease-in-out forwards;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
-        }
-
-        /* Floating Hologram in Modals */
-        @keyframes holoLevitate {
-            0%, 100% {
-                transform: translateY(0px) rotateX(2deg) scale(1);
-                filter: drop-shadow(0 15px 25px rgba(var(--accent-rgb), 0.35));
-            }
-            50% {
-                transform: translateY(-10px) rotateX(-2deg) scale(1.02);
-                filter: drop-shadow(0 25px 40px rgba(var(--accent-rgb), 0.6));
-            }
-        }
-
-        .holo-floating-image {
-            animation: holoLevitate 4.5s ease-in-out infinite;
-            transform-style: preserve-3d;
         }
 
         /* Modal Backdrop */
@@ -347,7 +329,6 @@
             pointer-events: none;
         }
 
-        /* Ambient floating runes drifting across the entire screen */
         .floating-rune-free {
             position: absolute;
             touch-action: none;
@@ -391,7 +372,6 @@
         .drift-anim-2 { animation: freeDrift3 10s ease-in-out infinite alternate; }
         .drift-anim-3 { animation: freeDrift4 12s ease-in-out infinite alternate; }
 
-        /* Target Slot Drag Highlight */
         .slot-drag-hover {
             border-color: #f97316 !important;
             background-color: rgba(249, 115, 22, 0.25) !important;
@@ -399,13 +379,67 @@
             box-shadow: 0 0 25px rgba(249, 115, 22, 0.5) !important;
         }
 
-        /* Hierarchy connector lines */
         .hierarchy-line {
             width: 2px;
             height: 38px;
             background: linear-gradient(to bottom, var(--accent-orange), rgba(var(--accent-rgb), 0.2));
             margin: 0 auto;
             box-shadow: 0 0 10px var(--accent-orange);
+        }
+
+        /* ================= AURA KHUSUS TIAP JABATAN / POSISI ================= */
+        .aura-owner {
+            border: 2px solid rgba(245, 158, 11, 0.8) !important;
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.35), 0 20px 45px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(245, 158, 11, 0.15) !important;
+            transition: all 0.4s ease;
+        }
+        .aura-owner:hover, .aura-owner.card-touched {
+            border-color: #fbbf24 !important;
+            box-shadow: 0 0 55px rgba(245, 158, 11, 0.75), 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 0 30px rgba(245, 158, 11, 0.3) !important;
+            transform: translateY(-6px) scale(1.015);
+        }
+
+        .aura-admin {
+            border: 2px solid rgba(239, 68, 68, 0.7) !important;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.3), 0 20px 45px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(239, 68, 68, 0.12) !important;
+            transition: all 0.4s ease;
+        }
+        .aura-admin:hover, .aura-admin.card-touched {
+            border-color: #f87171 !important;
+            box-shadow: 0 0 45px rgba(239, 68, 68, 0.65), 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 0 25px rgba(239, 68, 68, 0.25) !important;
+            transform: translateY(-6px) scale(1.015);
+        }
+
+        .aura-roblox {
+            border: 2px solid rgba(16, 185, 129, 0.7) !important;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.3), 0 20px 45px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(16, 185, 129, 0.12) !important;
+            transition: all 0.4s ease;
+        }
+        .aura-roblox:hover, .aura-roblox.card-touched {
+            border-color: #34d399 !important;
+            box-shadow: 0 0 45px rgba(16, 185, 129, 0.65), 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 0 25px rgba(16, 185, 129, 0.25) !important;
+            transform: translateY(-6px) scale(1.015);
+        }
+
+        .aura-mlbb {
+            border: 2px solid rgba(168, 85, 247, 0.7) !important;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.3), 0 20px 45px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(168, 85, 247, 0.12) !important;
+            transition: all 0.4s ease;
+        }
+        .aura-mlbb:hover, .aura-mlbb.card-touched {
+            border-color: #c084fc !important;
+            box-shadow: 0 0 45px rgba(168, 85, 247, 0.65), 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 0 25px rgba(168, 85, 247, 0.25) !important;
+            transform: translateY(-6px) scale(1.015);
+        }
+
+        /* Role Cards Hover Glow */
+        .role-card-glow {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .role-card-glow:hover, .role-card-glow.card-touched {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.8), 0 0 20px var(--accent-glow);
+            border-color: var(--accent-orange);
         }
     </style>
 </head>
@@ -423,13 +457,9 @@
 
     <!-- ================= INTERACTIVE WELCOME SCREEN: CRUX WORD PUZZLE ================= -->
     <div id="welcomePuzzleScreen">
-        <!-- Floating Free Runes -->
         <div id="floatingArea" class="absolute inset-0 pointer-events-none"></div>
 
-        <!-- Center Terminal Dock -->
         <div class="text-center space-y-7 max-w-xl px-6 relative z-30 pointer-events-auto">
-            
-            <!-- Welcome Header -->
             <div class="space-y-3">
                 <div class="inline-flex items-center space-x-2.5 px-4 py-1.5 bg-orange-500/15 border border-orange-500/40 rounded-full text-[11px] font-mono tracking-widest text-orange-400 uppercase font-bold shadow-lg">
                     <span class="w-2 h-2 rounded-full bg-orange-400 animate-ping"></span>
@@ -441,7 +471,7 @@
                 <p class="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed max-w-md mx-auto">
                     Kamilah pembawa retakan pemecah kesunyian. <br>
                     <strong class="text-orange-400">Seret (drag) atau ketuk (tap)</strong> huruf-huruf yang melayang di layar ke dalam slot di bawah untuk membentuk kata sandi: 
-                    <span class="text-white font-mono font-bold tracking-widest bg-neutral-900/80 px-2.5 py-0.5 rounded border border-white/15">"CRUX"</span>.
+                    <span class="text-white font-mono font-bold tracking-widest bg-neutral-900/80 px-2.5 py-0.5 rounded border border-white/15">"CRUX"</span>, atau gunakan tombol lewati langsung.
                 </p>
             </div>
 
@@ -461,20 +491,26 @@
                 </div>
             </div>
 
-            <!-- Status Indicator & Reset Button -->
-            <div class="flex flex-col items-center space-y-2 pt-1">
+            <!-- Status Indicator, Reset Button & LEWATI TEKA-TEKI BUTTON -->
+            <div class="flex flex-col items-center space-y-3 pt-1">
                 <div id="puzzleStatusMsg" class="text-xs font-mono text-neutral-300 min-h-[22px] flex items-center justify-center">
                     💡 Tips: Tangkap huruf melayang dengan menyeretnya atau cukup diketuk!
                 </div>
-                <button onclick="resetPuzzle()" class="px-5 py-2 rounded-xl bg-neutral-900/90 border border-white/10 hover:border-orange-500/50 text-neutral-400 hover:text-white text-xs font-mono transition flex items-center space-x-1.5 shadow-md">
-                    <span>🔄</span> <span>ULANG SUSUNAN</span>
-                </button>
+                
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <button onclick="resetPuzzle()" class="px-5 py-2 rounded-xl bg-neutral-900/90 border border-white/10 hover:border-orange-500/50 text-neutral-400 hover:text-white text-xs font-mono transition flex items-center space-x-1.5 shadow-md">
+                        <span>🔄</span> <span>ULANG SUSUNAN</span>
+                    </button>
+                    <!-- BUTTON LEWATI TEKA-TEKI RESMI -->
+                    <button onclick="skipPuzzle()" class="px-5 py-2 rounded-xl bg-orange-500/20 border border-orange-500/60 hover:bg-orange-500 hover:text-white text-orange-400 hover:shadow-orange-500/40 text-xs font-mono font-bold transition flex items-center space-x-1.5 shadow-lg">
+                        <span>⚡</span> <span>LEWATI TEKA-TEKI →</span>
+                    </button>
+                </div>
             </div>
-
         </div>
     </div>
 
-    <!-- ================= TOP NAVIGATION (RAPI, LEGA: KIRI, TENGAH, KANAN) ================= -->
+    <!-- ================= TOP NAVIGATION ================= -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-[#030303]/92 backdrop-blur-2xl border-b border-white/5 transition-all">
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-3.5 flex justify-between items-center w-full">
             
@@ -491,7 +527,7 @@
                 </div>
             </div>
             
-            <!-- CENTER: MENU NAVIGASI (LEGA) -->
+            <!-- CENTER: MENU NAVIGASI -->
             <nav class="hidden lg:flex items-center justify-center gap-3 md:gap-4 font-semibold text-xs">
                 <button onclick="switchPage('home')" id="nav-home" class="nav-btn active-nav shrink-0">01. HOME</button>
                 <button onclick="switchPage('vibes')" id="nav-vibes" class="nav-btn shrink-0">02. VIBES</button>
@@ -501,9 +537,8 @@
                 <button onclick="switchPage('birthday')" id="nav-birthday" class="nav-btn shrink-0 text-orange-400">🔒 VAULT</button>
             </nav>
             
-            <!-- FAR RIGHT: LINK TIKTOK & ICON SPEAKER (TIDAK LAGI MENUMPUK, STYLE GRADASI ASLI DIPERTAHANKAN) -->
+            <!-- FAR RIGHT: LINK TIKTOK & ICON AUDIO ATMOSPHERE -->
             <div class="flex items-center space-x-2.5 sm:space-x-3 shrink-0">
-                <!-- TikTok Button (Menggantikan button gabung discord dengan mempertahankan style gradasi oranye tema) -->
                 <a href="https://www.tiktok.com/@circledc" target="_blank" rel="noopener noreferrer" 
                    class="px-3.5 sm:px-4 py-2 bg-gradient-to-r from-orange-600 to-amber-600 text-white rounded-xl font-bold text-xs tracking-wider shadow-lg shadow-orange-600/25 hover:opacity-90 transition flex items-center space-x-1.5"
                    title="Kunjungi TikTok Resmi @circledc">
@@ -512,8 +547,7 @@
                     <span class="text-[10px]">↗</span>
                 </a>
 
-                <!-- Speaker Icon Toggle -->
-                <button onclick="toggleAudio()" id="audioBtn" class="p-2 rounded-xl bg-neutral-900 border border-white/15 text-neutral-300 hover:text-white transition flex items-center justify-center text-sm hover:border-orange-500/50" title="Suara Efek Antarmuka">
+                <button onclick="toggleAudio()" id="audioBtn" class="p-2 rounded-xl bg-neutral-900 border border-white/15 text-neutral-300 hover:text-white transition flex items-center justify-center text-sm hover:border-orange-500/50" title="Audio Atmosphere & SFX">
                     <span id="audioIcon">🔊</span>
                 </button>
             </div>
@@ -536,7 +570,6 @@
         <!-- ================= HALAMAN 1: HOME ================= -->
         <section id="page-home" class="page-section active-page space-y-12">
             
-            <!-- Hero Cyber Banner -->
             <div class="relative rounded-3xl glass-panel hud-corner overflow-hidden p-6 md:p-14 shadow-2xl">
                 <div class="absolute inset-0 z-0">
                     <img src="image/CRUX BANNER.png" alt="CRUX Banner" class="w-full h-full object-cover opacity-25 scale-105 filter saturate-150 transform hover:scale-110 transition duration-1000">
@@ -556,10 +589,9 @@
                         </h1>
                         
                         <p class="max-w-2xl text-xs sm:text-sm md:text-base text-neutral-300 leading-relaxed font-light">
-                            Selamat datang di markas resmi <strong>CORE REGNUM UNIFIED-X (CRUX)</strong>. Sebuah rumah yang lahir dari tekad untuk memecahkan kesunyian dan menciptakan tempat bernaung ternyaman bagi jiwa-jiwa terpilih.
+                            Selamat datang di markas resmi <strong>CRUX HQ</strong>. Sebuah rumah yang lahir dari tekad untuk memecahkan kesunyian dan menciptakan tempat bernaung ternyaman bagi jiwa-jiwa terpilih. Apa kamu merasa yang terpilih? Buktikan!!
                         </p>
 
-                        <!-- Call To Actions (Discord, TikTok, Salin Link) -->
                         <div class="flex flex-wrap items-center gap-3 pt-2">
                             <a href="https://discord.gg/KFYPZgKbZg" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl text-white text-xs font-bold tracking-wider transition shadow-xl shadow-orange-500/25 hover:opacity-90 flex items-center space-x-2" style="background-color: var(--accent-orange);">
                                 <span>💬</span>
@@ -571,14 +603,13 @@
                                 <span>TIKTOK @CIRCLEDC</span>
                                 <span>↗</span>
                             </a>
-                            <button onclick="copyDiscordLink()" class="px-5 py-3.5 rounded-xl bg-neutral-900 border border-white/15 text-neutral-300 text-xs font-bold tracking-wider hover:text-white hover:border-orange-500 transition flex items-center space-x-2">
-                                <span>SALIN TAUTAN</span>
-                                <span>📋</span>
+                            <button onclick="triggerHomeEnergySpark()" class="px-5 py-3.5 rounded-xl bg-neutral-900 border border-white/15 text-neutral-300 text-xs font-bold tracking-wider hover:text-white hover:border-orange-500 transition flex items-center space-x-2" title="Ketuk untuk memancarkan energi sambutan">
+                                <span>⚡ CRUX ENERGI</span>
+                                <span>⚡</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- WIDGET JARINGAN SERVER (OWNER W1ZQ & MOTO SATU BARIS RAPI TANPA TERPOTONG) -->
                     <div class="lg:col-span-4 bg-black/60 backdrop-blur-md p-6 rounded-2xl border border-white/10 space-y-4 shadow-xl">
                         <div class="flex justify-between items-center text-[10px] font-mono text-neutral-400 border-b border-white/10 pb-2">
                             <span>JARINGAN SERVER</span>
@@ -600,7 +631,6 @@
                                 <span class="text-white font-mono font-bold dynamic-member-count">71 Member</span>
                             </div>
                         </div>
-                        <!-- Moto Server: 1 Baris Lengkap Rapi Tanpa Terpotong -->
                         <div class="py-2.5 px-2 bg-neutral-950/90 rounded-xl border border-white/10 text-[9.5px] sm:text-[10px] xl:text-[10.5px] text-neutral-200 font-mono text-center whitespace-nowrap tracking-tight shadow-inner" title="Fostering inclusive family bonds, driven by you">
                             "Fostering inclusive family bonds, driven by you"
                         </div>
@@ -608,7 +638,6 @@
                 </div>
             </div>
 
-            <!-- Real-Time Stats (VC Real-Time Dari 1239 Jam 30 Menit + Member Count Terpusat) -->
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="glass-panel hud-corner p-5 rounded-2xl text-center space-y-1 hover-popup">
                     <div id="uptimeCounter" class="text-lg sm:text-xl md:text-2xl font-black text-white font-mono" style="color: var(--accent-orange);">Memuat...</div>
@@ -624,7 +653,7 @@
                 </div>
                 <div class="glass-panel hud-corner p-5 rounded-2xl text-center space-y-1 hover-popup">
                     <div id="liveVcCounter" class="text-lg sm:text-xl md:text-2xl font-black text-orange-400 font-mono">Menghitung...</div>
-                    <div class="text-[9px] md:text-[10px] text-neutral-400 font-bold uppercase tracking-wider">Rekor VC Murni (Est. 23 Apr 2026)</div>
+                    <div class="text-[9px] md:text-[10px] text-neutral-400 font-bold uppercase tracking-wider">Real-Time VC (Ticking Live)</div>
                 </div>
             </div>
 
@@ -632,23 +661,22 @@
             <div class="glass-panel p-6 md:p-10 rounded-3xl space-y-6">
                 <div class="space-y-2">
                     <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 01. MANIFESTO PENDIRI</span>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Dari Retakan Menuju Kerajaan Bersama</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Dari Dasar Retakan Menuju Puncak Kejayaan</h2>
                 </div>
                 
                 <p class="text-xs md:text-sm text-neutral-300 leading-relaxed font-light">
-                    Didirikan dari nol, server ini lahir dari visi sederhana: Membangun sebuah komunitas kecil yang seru dan penuh kebersamaan.
+                    Didirikan dari nol, server ini lahir dari visi sederhana: Membangun sebuah komunitas kecil yang seru dan penuh kebersamaan. Kami percaya bahwa setiap orang berhak memiliki tempat untuk bersantai, berbagi cerita, dan menemukan teman sejati. Dengan semangat inklusif, kami mengundang siapa pun yang ingin menjadi bagian dari perjalanan ini, tanpa memandang latar belakang atau status sosial.
                 </p>
                 <blockquote class="p-4 bg-black/60 rounded-2xl border-l-4 border-orange-500 text-xs md:text-sm text-neutral-200 italic font-light leading-relaxed">
-                    "Sering kali kita diminta berhati-hati dalam memilih lingkungan bergaul. Namun saya percaya, langkah terbaik adalah menciptakan lingkungan ideal itu sendiri—sebuah rumah yang aman bagi siapa pun yang butuh tempat beristirahat dan pulang sejenak dari hiruk-pikuk dunia luar."
+                    "Sering kali kita diminta berhati-hati dalam memilih lingkungan bergaul. Namun sang pendiri percaya, langkah terbaik adalah menciptakan lingkungan ideal itu sendiri — sebuah rumah yang aman bagi siapa pun yang butuh tempat beristirahat dan pulang sejenak dari hiruk-pikuk dunia luar."
                 </blockquote>
 
-                <!-- Bedah Arti Nama CRUX -->
                 <div class="p-5 rounded-2xl bg-neutral-950/80 border border-white/10 space-y-3">
                     <span class="text-[11px] font-mono tracking-widest uppercase text-orange-400 font-bold">// FILOSOFI NAMA: CORE REGNUM UNIFIED-X (CRUX)</span>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-neutral-300 font-light leading-relaxed">
                         <div class="p-3 bg-black/40 rounded-xl border border-white/5 space-y-1">
                             <strong class="text-white font-mono text-orange-400">CRUX (Crack / Krek):</strong>
-                            <p>Suara retakan. Kami datang membawa retakan untuk menghancurkan kesepian dan keheningan, mengubahnya menjadi keributan (*chaos*) positif penuh tawa.</p>
+                            <p>Suara retakan. Kami datang membawa retakan untuk menghancurkan kesepian dan keheningan, mengubahnya menjadi keributan kekacauan (CHAOS) positif penuh tawa.</p>
                         </div>
                         <div class="p-3 bg-black/40 rounded-xl border border-white/5 space-y-1">
                             <strong class="text-white font-mono text-orange-400">X (Lambang Target):</strong>
@@ -656,7 +684,7 @@
                         </div>
                         <div class="p-3 bg-black/40 rounded-xl border border-white/5 space-y-1">
                             <strong class="text-white font-mono text-orange-400">CORE & REGNUM:</strong>
-                            <p>Satu inti kekuatan (*Core*) yang menyatukan mereka dalam sebuah kerajaan pertemanan (*Regnum*) yang solid dan saling membela.</p>
+                            <p>Satu inti kekuatan (CORE) yang menyatukan mereka dalam sebuah kerajaan pertemanan (REGNUM) yang solid dan saling membela.</p>
                         </div>
                         <div class="p-3 bg-black/40 rounded-xl border border-white/5 space-y-1">
                             <strong class="text-white font-mono text-orange-400">UNIFIED & SELEKSI:</strong>
@@ -668,7 +696,6 @@
 
             <!-- TAMPILAN MOTO & 4 PILAR -->
             <div class="space-y-6">
-                <!-- Banner Moto Server Megah -->
                 <div class="glass-panel hud-corner p-6 md:p-10 rounded-3xl bg-gradient-to-r from-orange-950/40 via-neutral-900 to-black border-2 border-orange-500/50 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 hover-popup">
                     <div class="space-y-2 text-center md:text-left">
                         <div class="inline-flex items-center space-x-2 px-3 py-1 bg-orange-500/20 border border-orange-500/40 rounded-full text-[10px] font-mono tracking-widest text-orange-400 uppercase font-bold">
@@ -678,7 +705,7 @@
                             "Fostering inclusive family bonds, driven by you."
                         </h3>
                         <p class="text-xs text-neutral-300 font-light max-w-xl leading-relaxed">
-                            Menumbuhkan ikatan kekeluargaan inklusif yang tulus tanpa sekat strata—setiap langkah, ide, dan denyut nadi server ini digerakkan bersama oleh setiap anggotanya.
+                            Menumbuhkan ikatan kekeluargaan inklusif yang tulus tanpa sekat strata — setiap langkah, ide, dan denyut nadi server ini digerakkan bersama oleh setiap anggotanya.
                         </p>
                     </div>
 
@@ -689,9 +716,7 @@
                     </div>
                 </div>
 
-                <!-- Grid 4 Pilar Server (Home, Vibes, Bond, Energy) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    <!-- Pilar 1: HOME -->
                     <div class="glass-panel hud-corner p-6 rounded-3xl border border-white/10 hover-popup space-y-3.5 group bg-gradient-to-b from-neutral-900/90 to-black">
                         <div class="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-2xl group-hover:scale-110 transition duration-300">
                             🏡
@@ -703,12 +728,8 @@
                         <p class="text-xs text-neutral-300 font-light leading-relaxed">
                             Rumah tempat pulang dan beristirahat. Ruang aman tanpa tuntutan hierarki kaku, tempat melepas segala beban dunia luar dengan rasa tenang.
                         </p>
-                        <div class="pt-2 border-t border-white/5 text-[10px] text-neutral-400 font-mono">
-                            Status: Zona Nyaman Mutlak
-                        </div>
                     </div>
 
-                    <!-- Pilar 2: VIBES -->
                     <div class="glass-panel hud-corner p-6 rounded-3xl border border-white/10 hover-popup space-y-3.5 group bg-gradient-to-b from-neutral-900/90 to-black">
                         <div class="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-2xl group-hover:scale-110 transition duration-300">
                             🔥
@@ -718,14 +739,10 @@
                             <h4 class="text-lg font-bold text-white tracking-tight">VIBES</h4>
                         </div>
                         <p class="text-xs text-neutral-300 font-light leading-relaxed">
-                            Pereda penat pemecah kesunyian. Membawa retakan yang mengubah suasana dingin menjadi keributan (*chaos*) positif penuh tawa di voice channel.
+                            Pereda penat pemecah kesunyian. Membawa retakan yang mengubah suasana dingin menjadi keributan kekacauan (CHAOS) positif penuh tawa di setiap sudut sirkel.
                         </p>
-                        <div class="pt-2 border-t border-white/5 text-[10px] text-neutral-400 font-mono">
-                            Status: Selalu Ramai 24 Jam
-                        </div>
                     </div>
 
-                    <!-- Pilar 3: BOND -->
                     <div class="glass-panel hud-corner p-6 rounded-3xl border border-white/10 hover-popup space-y-3.5 group bg-gradient-to-b from-neutral-900/90 to-black">
                         <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-2xl group-hover:scale-110 transition duration-300">
                             🛡️
@@ -735,14 +752,10 @@
                             <h4 class="text-lg font-bold text-white tracking-tight">BOND</h4>
                         </div>
                         <p class="text-xs text-neutral-300 font-light leading-relaxed">
-                            Ikatan inklusif yang dijaga seumur hidup. Saling melindungi rahasia dan privasi sesama kawan, dibangun atas dasar saling percaya dan integritas.
+                            Ikatan inklusif yang dijaga seumur hidup. Saling melindungi rahasia dan privasi sesama keluarga, dibangun atas dasar saling percaya dan integritas.
                         </p>
-                        <div class="pt-2 border-t border-white/5 text-[10px] text-neutral-400 font-mono">
-                            Status: Ikatan Tak Tergoyahkan
-                        </div>
                     </div>
 
-                    <!-- Pilar 4: ENERGY -->
                     <div class="glass-panel hud-corner p-6 rounded-3xl border border-white/10 hover-popup space-y-3.5 group bg-gradient-to-b from-neutral-900/90 to-black">
                         <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-2xl group-hover:scale-110 transition duration-300">
                             ⚡
@@ -752,118 +765,8 @@
                             <h4 class="text-lg font-bold text-white tracking-tight">ENERGY</h4>
                         </div>
                         <p class="text-xs text-neutral-300 font-light leading-relaxed">
-                            Daya kreativitas dan antusiasme tinggi. Dari teknologi CRUX Bot mandiri, game Werewolf, mabar Mobile Legends, hingga ekspedisi seru Roblox.
+                            Daya kreativitas dan antusiasme tinggi. Dari teknologi CRUX BOT, game Werewolf, kuis komunitas, hingga mabar MLBB dan ekspedisi Roblox.
                         </p>
-                        <div class="pt-2 border-t border-white/5 text-[10px] text-neutral-400 font-mono">
-                            Status: 100% Inovasi Mandiri
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- VISI & MISI -->
-            <div class="glass-panel hud-corner p-6 md:p-12 rounded-3xl space-y-8 bg-gradient-to-b from-neutral-950 via-[#0a0a0d] to-black border-2 border-orange-500/30">
-                <div class="text-center max-w-2xl mx-auto space-y-2">
-                    <span class="text-xs font-bold tracking-widest uppercase font-mono text-orange-400">// STRATEGIC FOUNDATION PROTOCOL</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-white tracking-tight">Visi & Misi CORE REGNUM UNIFIED-X</h2>
-                    <p class="text-xs text-neutral-400 font-light">Kompas moral dan arah langkah jangka panjang kami dalam menjaga kesucian rumah bersama.</p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                    <!-- Grand Vision Card -->
-                    <div class="lg:col-span-5 bg-gradient-to-br from-orange-950/40 via-neutral-900 to-black p-6 md:p-8 rounded-3xl border border-orange-500/50 shadow-2xl flex flex-col justify-between space-y-6 hover-popup">
-                        <div class="space-y-4">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-xl">
-                                    🌟
-                                </div>
-                                <div>
-                                    <span class="text-[10px] font-mono text-orange-400 uppercase tracking-widest font-bold">THE NORTH STAR SANCTUARY</span>
-                                    <h3 class="text-xl font-bold text-white">Visi Utama Komunitas</h3>
-                                </div>
-                            </div>
-                            <p class="text-xs md:text-sm text-neutral-200 leading-relaxed font-light">
-                                Menjadi <strong>Sanctuary Digital Paling Otentik</strong> di mana anak muda jaman sekarang yang lelah dengan kepalsuan sirkel luar dapat menemukan tempat pulang yang sejati—sebuah kerajaan kecil yang hangat, berdaulat, dan saling merangkul tanpa syarat.
-                            </p>
-                        </div>
-                        <div class="p-4 bg-black/60 rounded-2xl border border-white/10 text-[11px] font-mono text-neutral-400 space-y-1">
-                            <div class="text-white font-bold">"Bukan sekadar server, tapi tempat kembali."</div>
-                            <div>Setiap suara didengar, setiap tawa dihargai.</div>
-                        </div>
-                    </div>
-
-                    <!-- 4 Mission Protocols Grid -->
-                    <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-black/50 p-5 rounded-2xl border border-white/10 hover-popup space-y-2">
-                            <div class="flex items-center space-x-2 text-xs font-mono text-orange-400 font-bold">
-                                <span>⚡ PROTOCOL 01</span>
-                            </div>
-                            <h4 class="font-bold text-white text-sm">Crack The Silence</h4>
-                            <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
-                                Memecah keheningan dan kesepian dengan kehangatan obrolan, lelucon segar, dan suasana hidup 24 jam nonstop di voice channel.
-                            </p>
-                        </div>
-
-                        <div class="bg-black/50 p-5 rounded-2xl border border-white/10 hover-popup space-y-2">
-                            <div class="flex items-center space-x-2 text-xs font-mono text-orange-400 font-bold">
-                                <span>🛡️ PROTOCOL 02</span>
-                            </div>
-                            <h4 class="font-bold text-white text-sm">Sanctuary Selection</h4>
-                            <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
-                                Menjaga gerbang masuk dengan kurasi member yang mengutamakan adab, saling menghormati, dan menjauhkan drama toksik.
-                            </p>
-                        </div>
-
-                        <div class="bg-black/50 p-5 rounded-2xl border border-white/10 hover-popup space-y-2">
-                            <div class="flex items-center space-x-2 text-xs font-mono text-orange-400 font-bold">
-                                <span>🤝 PROTOCOL 03</span>
-                            </div>
-                            <h4 class="font-bold text-white text-sm">Driven By You</h4>
-                            <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
-                                Menumbuhkan ikatan kekeluargaan inklusif yang digerakkan bersama oleh ide kreatif, partisipasi, dan aspirasi setiap anggota.
-                            </p>
-                        </div>
-
-                        <div class="bg-black/50 p-5 rounded-2xl border border-white/10 hover-popup space-y-2">
-                            <div class="flex items-center space-x-2 text-xs font-mono text-orange-400 font-bold">
-                                <span>🤖 PROTOCOL 04</span>
-                            </div>
-                            <h4 class="font-bold text-white text-sm">Independent Energy</h4>
-                            <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
-                                Membangun teknologi bot mandiri (CRUX Bot) serta event mabar terorganisir untuk memanjakan member tanpa bergantung bot publik.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Navigasi Spoiler Halaman -->
-            <div class="space-y-6">
-                <div class="text-center max-w-xl mx-auto space-y-2">
-                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// EKSPLORASI ARSIP SERVER</span>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Daftar Bagian Profil Server</h2>
-                    <p class="text-xs text-neutral-400">Jelajahi setiap pilar utama dari ekosistem CORE REGNUM UNIFIED-X.</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div onclick="switchPage('vibes')" class="glass-panel hud-corner p-6 rounded-2xl hover-popup cursor-pointer space-y-3">
-                        <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">// PILAR 02</span>
-                        <h3 class="text-sm font-bold text-white">Vibes & Filosofi</h3>
-                        <p class="text-[11px] text-neutral-400 font-light">Atmosfer comfort zone, makna 3 warna utama, dan kenyamanan basecamp.</p>
-                    </div>
-                    <div onclick="switchPage('bond')" class="glass-panel hud-corner p-6 rounded-2xl hover-popup cursor-pointer space-y-3">
-                        <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">// PILAR 03</span>
-                        <h3 class="text-sm font-bold text-white">Bond & Kisah Voice Channel</h3>
-                        <p class="text-[11px] text-neutral-400 font-light">Cerita 71 member terpilih, rekor voice channel yang berjalan sejak 23 April 2026, dan anti-burnout.</p>
-                    </div>
-                    <div onclick="switchPage('energy')" class="glass-panel hud-corner p-6 rounded-2xl hover-popup cursor-pointer space-y-3">
-                        <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">// PILAR 04</span>
-                        <h3 class="text-sm font-bold text-white">Energy, Bot & Game</h3>
-                        <p class="text-[11px] text-neutral-400 font-light">Simulator CRUX Bot, Werewolf Engine, Turnamen MLBB, dan Ekspedisi Roblox.</p>
-                    </div>
-                    <div onclick="switchPage('staff')" class="glass-panel hud-corner p-6 rounded-2xl hover-popup cursor-pointer space-y-3">
-                        <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">// HIERARKI</span>
-                        <h3 class="text-sm font-bold text-white">Hierarki Staf Epik</h3>
-                        <p class="text-[11px] text-neutral-400 font-light">Susunan komando pengurus dengan dossier interaktif per divisi.</p>
                     </div>
                 </div>
             </div>
@@ -881,7 +784,6 @@
                         </p>
                     </div>
                     
-                    <!-- Theme Palettes -->
                     <div class="flex items-center space-x-2.5 bg-black/60 p-2.5 rounded-2xl border border-white/10 backdrop-blur-md">
                         <span class="text-[10px] text-neutral-400 px-2 font-bold uppercase tracking-wider font-mono">TEMA:</span>
                         <button onclick="setTheme('orange-red')" class="w-6 h-6 rounded-full bg-orange-500 border border-white/40 hover:scale-115 transition shadow-lg shadow-orange-500/30" title="Classic Neon Orange"></button>
@@ -891,13 +793,12 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-black/40 p-6 md:p-8 rounded-3xl border border-white/5">
-                    <div class="lg:col-span-5 h-64 md:h-80 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden flex items-center justify-center p-6 cursor-pointer hover-popup group relative" onclick="openMultiImageModal('Galeri Identitas Visual & Filosofi', ['image/FILO.png', 'image/ZON.png', 'image/HIK.png', 'image/MEM.png'], ['Pusat kendali dan markas besar yang menyatukan solidaritas.', 'Zona istirahat dan pelarian terbaik menawarkan ketenangan mutlak.', 'Komitmen mutlak pada kejujuran, loyalitas, dan rasa saling memiliki.', 'Seleksi ketat memastikan komitmen bersama dari hati.'])">
-                        <div class="absolute inset-0 bg-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <img src="image/FILO.png" alt="Logo CRUX" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute bottom-3 right-3 px-3 py-1 bg-black/80 backdrop-blur rounded-md text-[10px] text-white font-mono flex items-center space-x-1 border border-white/10">
-                            <span>🔍 PROYEKSI HOLOGRAM</span>
-                        </div>
+                <!-- Card 1: Identitas Visual -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-black/40 p-6 md:p-8 rounded-3xl border border-white/5 hover-popup">
+                    <div class="lg:col-span-5 min-h-[260px] md:h-80 rounded-2xl bg-gradient-to-b from-neutral-950 to-black border border-white/10 overflow-hidden flex items-center justify-center p-6 relative group shadow-2xl">
+                        <div class="absolute inset-0 bg-radial from-orange-500/10 via-transparent to-transparent pointer-events-none"></div>
+                        <!-- OBJECT -->
+                        <img src="image/FILO.png" alt="Makna Identitas Visual CRUX" class="max-w-full max-h-full object-contain filter drop-shadow-[0_10px_25px_rgba(249,115,22,0.4)] group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="lg:col-span-7 space-y-4">
                         <span class="text-[10px] font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">MAKNA IDENTITAS VISUAL</span>
@@ -922,10 +823,11 @@
                     </div>
                 </div>
 
+                <!-- Grid 2: Comfort Zone & Integrity -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 hover-popup cursor-pointer group space-y-4" onclick="openMultiImageModal('Galeri Comfort Zone & Suasana Santai', ['image/ZON.png', 'image/HIK.png', 'image/MEM.png', 'image/POIS.png'], ['Ruang istirahat terbaik melepas kepenatan hari.', 'Kejujuran dan saling peduli antar kawan.', 'Penyaringan keluarga inti yang solid.', 'Rekor kebersamaan nyata di voice channel.'])">
-                        <div class="h-44 md:h-52 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
-                            <img src="image/ZON.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 space-y-4 hover-popup">
+                        <div class="h-48 md:h-56 rounded-2xl bg-neutral-950 border border-white/10 overflow-hidden relative">
+                            <img src="image/ZON.png" alt="Sanctuary of Warmth" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-1">
                             <span class="text-[10px] font-bold uppercase tracking-wider font-mono" style="color: var(--accent-orange);">COMFORT ZONE VIBE</span>
@@ -933,9 +835,9 @@
                             <p class="text-xs text-neutral-400 font-light">Tidak ada tuntutan hierarki kaku saat mengobrol. Siapa pun dapat curhat, bernyanyi, atau sekadar tertidur mendengarkan obrolan hangat teman-teman.</p>
                         </div>
                     </div>
-                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 hover-popup cursor-pointer group space-y-4" onclick="openMultiImageModal('Galeri Integritas & Fondasi Kepercayaan', ['image/HIK.png', 'image/MEM.png', 'image/ZON.png', 'image/OWN.png'], ['Komitmen teguh pada rasa saling memiliki.', 'Penyaringan anggota yang mengutamakan adab.', 'Kenyamanan penuh di basecamp.', 'Dedikasi tanpa henti dari pimpinan.'])">
-                        <div class="h-44 md:h-52 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden flex items-center justify-center relative">
-                            <img src="image/HIK.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 space-y-4 hover-popup">
+                        <div class="h-48 md:h-56 rounded-2xl bg-neutral-950 border border-white/10 overflow-hidden relative">
+                            <img src="image/HIK.png" alt="Unwavering Trust" class="w-full h-full object-cover">
                         </div>
                         <div class="space-y-1">
                             <span class="text-[10px] font-bold uppercase tracking-wider font-mono" style="color: var(--accent-orange);">BASECAMP INTEGRITY</span>
@@ -950,59 +852,60 @@
         <!-- ================= HALAMAN 3: BOND ================= -->
         <section id="page-bond" class="page-section space-y-12">
             <div class="glass-panel hud-corner p-6 md:p-14 rounded-3xl space-y-10">
-                <div class="space-y-2">
-                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 03. UNBREAKABLE BOND, STORIES & ONGOING VC</span>
-                    <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Ikatan Kekeluargaan & Rekor Voice Channel</h2>
-                    <p class="text-xs md:text-sm text-neutral-400 max-w-2xl font-light">
-                        Di CORE REGNUM UNIFIED-X, kami menolak kepalsuan angka bot. Kami merayakan hubungan nyata antara <span class="dynamic-member-count font-bold text-white">71 member</span> yang saling melengkapi dalam suka dan duka.
-                    </p>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div class="space-y-2">
+                        <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 03. UNBREAKABLE BOND & LIVE SOLIDARITY</span>
+                        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Solidaritas & Loyalitas Tanpa Batas</h2>
+                        <p class="text-xs md:text-sm text-neutral-400 max-w-2xl font-light">
+                            Di CORE REGNUM UNIFIED-X, kami merayakan hubungan nyata antara <span class="dynamic-member-count font-bold text-white">71 member</span> yang saling melengkapi dalam suka dan duka. Mereka membentuk ikatan yang tak tergoyahkan, dan kami bangga menjadi saksi dari solidaritas yang terus berkembang di setiap sesi voice channel yang berlangsung tanpa henti.
+                        </p>
+                    </div>
+                    <!-- REAL-TIME FIST BUMP BUTTON DENGAN SINKRONISASI GLOBAL & LOCALSTORAGE -->
+                    <button onclick="sendCommunityRespect()" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-orange-600 to-amber-600 text-white font-mono text-xs font-bold tracking-wider hover:opacity-95 transition shadow-lg shadow-orange-500/25 flex items-center space-x-2 shrink-0 group active:scale-95">
+                        <span class="text-base group-hover:scale-125 transition-transform">🤝</span>
+                        <span>FIST BUMP KELUARGA (<span id="respectCount">205</span>)</span>
+                    </button>
                 </div>
 
-                <!-- Filosofi Waktu & Fleksibilitas Anti-Burnout -->
                 <div class="bg-black/40 p-6 md:p-8 rounded-3xl border border-white/10 space-y-3">
                     <span class="text-xs font-bold tracking-widest uppercase font-mono text-orange-400">📅 FILOSOFI KEBERSAMAAN: FLEKSIBEL & ANTI-BURNOUT</span>
                     <h3 class="text-xl font-bold text-white tracking-tight">Menyelaraskan Kesibukan Nyata Tanpa Beban Absensi</h3>
                     <p class="text-xs md:text-sm text-neutral-300 leading-relaxed font-light">
-                        Member kami berasal dari berbagai latar belakang kesibukan—ada yang bersekolah, kuliah tugas akhir, hingga bekerja lembur. Oleh karena itu, server ini tidak pernah menerapkan sistem absen atau jam wajib nongkrong. Ikatan di CRUX dibangun atas kerinduan alami: Anda datang saat luang untuk melepas penat, dan kami selalu siap menyambut Anda kembali dengan tangan terbuka.
+                        Member kami berasal dari berbagai latar belakang kesibukan — ada yang bersekolah, kuliah tugas akhir, hingga bekerja lembur. Oleh karena itu, server ini tidak pernah menerapkan sistem absen atau jam wajib nongkrong. Ikatan di CRUX dibangun atas kerinduan alami: Anda datang saat luang untuk melepas penat, dan kami selalu siap menyambut Anda kembali dengan tangan terbuka.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Arsip 1 -->
-                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 hover-popup cursor-pointer group flex flex-col justify-between space-y-6" onclick="openMultiImageModal('Galeri Seleksi & Anggota Inti', ['image/MEM.png', 'image/POIS.png', 'image/BOS.png', 'image/PAR.png'], ['Penyaringan member dengan visi dan etika searah.', 'Kebersamaan hidup di voice chat.', 'Dukungan server boost dari member.', 'Koneksi aliansi komunitas terpercaya.'], 'Arsip Seleksi & Visi')">
+                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 flex flex-col justify-between space-y-5 hover-popup">
                         <div class="space-y-3">
-                            <div class="h-44 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
-                                <img src="image/MEM.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="h-44 rounded-2xl bg-neutral-950 border border-white/10 overflow-hidden relative">
+                                <img src="image/MEM.png" alt="Keluarga Inti Terpilih" class="w-full h-full object-cover">
                             </div>
                             <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">ARSIP #01 // SELEKSI ALAMI</span>
                             <h3 class="text-xl font-bold text-white tracking-tight">Keluarga Inti Terpilih</h3>
                             <p class="text-xs text-neutral-400 leading-relaxed font-light">
-                                Kami menerapkan proses penyaringan cermat berbasis adab dan keselarasan visi. Karena itu, setiap obrolan di server terasa intim, nyaman, dan bebas dari provokasi.
+                                Kami menerapkan proses penyaringan berbasis adab dan keselarasan visi. Karena itu, setiap obrolan di server terasa intim, nyaman, dan bebas dari provokasi.
                             </p>
                         </div>
-                        <span class="text-xs font-bold flex items-center space-x-1" style="color: var(--accent-orange);"><span>BUKA PROYEKSI HOLOGRAM</span> <span>→</span></span>
                     </div>
 
-                    <!-- Arsip 2 (Rekor VC Ongoing sejak 23 April 2026) -->
-                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 hover-popup cursor-pointer group flex flex-col justify-between space-y-6" onclick="openMultiImageModal('Galeri Rekor Voice Channel Real-Time', ['image/POIS.png', 'image/MEM.png', 'image/BOS.png', 'image/ZON.png'], ['Voice channel yang terus hidup tanpa henti.', 'Dimulai sejak 23 April 2026 pukul 23:59.', 'Semangat kebersamaan yang tak pernah padam.', 'Ruang curhat santai hingga pagi.'], 'Rekor Komunitas')">
+                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 flex flex-col justify-between space-y-5 hover-popup">
                         <div class="space-y-3">
-                            <div class="h-44 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
-                                <img src="image/POIS.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="h-44 rounded-2xl bg-neutral-950 border border-white/10 overflow-hidden relative">
+                                <img src="image/POIS.png" alt="Rekor VC Murni" class="w-full h-full object-cover">
                             </div>
                             <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">ARSIP #02 // REKOR REAL-TIME</span>
                             <h3 class="text-xl font-bold text-white tracking-tight">Rekor VC Murni Masih Berlanjut!</h3>
                             <p class="text-xs text-neutral-400 leading-relaxed font-light">
-                                Sesi voice channel ini dimulai sejak <strong>23 April 2026 sekitar pukul 23:59</strong> dan hingga detik ini terus berjalan aktif tanpa henti membuktikan kehangatan keluarga ini.
+                                Sesi voice channel ini dimulai sejak <strong>23 April 2026</strong> dan hingga detik ini terus berjalan aktif tanpa henti membuktikan kehangatan keluarga.
                             </p>
                         </div>
-                        <span class="text-xs font-bold flex items-center space-x-1" style="color: var(--accent-orange);"><span>BUKA PROYEKSI HOLOGRAM</span> <span>→</span></span>
                     </div>
 
-                    <!-- Arsip 3 -->
-                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 hover-popup cursor-pointer group flex flex-col justify-between space-y-6" onclick="openMultiImageModal('Galeri Loyalitas & Server Booster', ['image/BOS.png', 'image/PAR.png', 'image/OWN.png', 'image/MEM.png'], ['Tingkat nitro boost yang loyal dari member.', 'Dukungan fasilitas audio dan emotikon berkualitas tinggi.', 'Komitmen jangka panjang para donatur.', 'Kebanggaan menjadi bagian dari CRUX.'], 'Loyalitas & Aliansi')">
+                    <div class="bg-black/40 p-6 rounded-3xl border border-white/5 flex flex-col justify-between space-y-5 hover-popup">
                         <div class="space-y-3">
-                            <div class="h-44 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative flex items-center justify-center">
-                                <img src="image/BOS.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <div class="h-44 rounded-2xl bg-neutral-950 border border-white/10 overflow-hidden relative">
+                                <img src="image/BOS.png" alt="Dukungan Booster" class="w-full h-full object-cover">
                             </div>
                             <span class="text-[10px] font-bold font-mono" style="color: var(--accent-orange);">ARSIP #03 // LOYALITAS NYATA</span>
                             <h3 class="text-xl font-bold text-white tracking-tight">Dukungan Booster Setia</h3>
@@ -1010,7 +913,6 @@
                                 Fasilitas audio kualitas studio 384kbps dan slot emotikon eksklusif kami selalu terjaga berkat kerelaan member setia yang mendonasikan Nitro demi kenyamanan bersama.
                             </p>
                         </div>
-                        <span class="text-xs font-bold flex items-center space-x-1" style="color: var(--accent-orange);"><span>BUKA PROYEKSI HOLOGRAM</span> <span>→</span></span>
                     </div>
                 </div>
             </div>
@@ -1018,118 +920,448 @@
 
         <!-- ================= HALAMAN 4: ENERGY ================= -->
         <section id="page-energy" class="page-section space-y-12">
-            <div class="glass-panel hud-corner p-6 md:p-14 rounded-3xl space-y-10">
+            <div class="glass-panel hud-corner p-6 md:p-14 rounded-3xl space-y-12">
                 <div class="space-y-2">
-                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 04. POWER, BOT ENGINE, SIMULATOR & GAMING ACTIVITIES</span>
-                    <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Energi Komunitas, Bot Mandiri & Aksi Game</h2>
+                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 04. POWER STATION & CYBERNETIC HUB</span>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Energi Komunitas, CRUX Bot & Aksi Game</h2>
                     <p class="text-xs md:text-sm text-neutral-400 max-w-2xl font-light">
-                        Pusat daya kreativitas CRUX! Mulai dari arsitektur CRUX Bot mandiri buatan founder, game interaktif Werewolf, hingga dokumentasi mabar kompetitif Mobile Legends dan petualangan Roblox.
+                        Pusat daya kreativitas CRUX! Bot private karya founder dengan 5 fitur resmi pilihan, arena deduksi 14 peran Werewolf berimbang, dan turnamen internal.
                     </p>
                 </div>
 
-                <!-- Interactive Terminal Simulator -->
-                <div class="bg-black/90 p-5 md:p-7 rounded-3xl border border-white/10 font-mono text-xs space-y-4 shadow-2xl relative overflow-hidden">
+                <!-- CRUX BOT DOSSIER: 5 FITUR RESMI TERVERIFIKASI -->
+                <div class="bg-gradient-to-br from-neutral-950 via-neutral-900 to-black p-6 md:p-10 rounded-3xl border-2 border-orange-500/50 shadow-2xl space-y-8 hover-popup">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-4 h-64 md:h-72 rounded-2xl bg-neutral-950 border border-orange-500/40 overflow-hidden relative flex items-center justify-center p-3 shadow-xl">
+                            <img src="image/BOT.png" alt="CRUX-CORE Bot" class="w-full h-full object-cover rounded-xl">
+                            <div class="absolute bottom-3 left-3 right-3 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 flex justify-between items-center text-[10px] font-mono">
+                                <span class="text-green-400 font-bold">● SYSTEM ACTIVE</span>
+                                <span class="text-orange-400">CRUX-CORE v2.6.4</span>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-8 space-y-4">
+                            <div class="inline-flex items-center space-x-2 px-3 py-1 bg-orange-500/20 border border-orange-500/40 rounded-full text-[10px] font-mono tracking-widest text-orange-400 uppercase font-bold">
+                                <span>🤖 ARSITEKTUR MANDIRI KARYA FOUNDER W1ZQ</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-black text-white tracking-tight">CRUX-BOT // The Ultimate Brain Of CRUX HQ</h3>
+                            <div class="space-y-2 text-xs md:text-sm text-neutral-300 leading-relaxed font-light">
+                                <p>
+                                    <strong class="text-white">Sejarah Singkat:</strong> Dikembangkan secara mandiri oleh Founder <strong>W1ZQ</strong> demi membebaskan komunitas dari ketergantungan bot publik berbayar. Bot publik sering mengalami server *down*, pembatasan fitur di balik langganan, dan respon yang lambat. W1ZQ merancang CRUX Bot dari baris kode awal untuk menyajikan ekosistem permainan interaktif, adil, dan responsif bagi seluruh member.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5 FITUR MURNI CRUX BOT RESMI (GIVEAWAY, KUIZ, TEBAK KATA, TRUE OR FALSE, WEREWOLF) -->
+                    <div class="pt-4 border-t border-white/10 space-y-4">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                            <span class="text-xs font-mono font-bold tracking-wider text-orange-400 uppercase">// 5 FITUR RESMI CRUX BOT SAAT INI:</span>
+                            <span class="text-[10px] font-mono text-neutral-400 bg-neutral-900 px-3 py-1 rounded-full border border-white/10">Terverifikasi 100% Bebas Lag</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+                            <div class="p-4 bg-black/60 rounded-2xl border border-white/5 space-y-1.5 hover-popup">
+                                <div class="font-bold text-white flex items-center justify-between">
+                                    <span class="flex items-center gap-2"><span>🎁</span> <span>Giveaway Engine</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-orange-500/20 text-orange-400 border border-orange-500/40">/giveaway</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-400 font-light leading-relaxed">Pengundian hadiah Nitro & role khusus otomatis, acak, transparan, dan bebas manipulasi manusia.</p>
+                            </div>
+                            <div class="p-4 bg-black/60 rounded-2xl border border-white/5 space-y-1.5 hover-popup">
+                                <div class="font-bold text-white flex items-center justify-between">
+                                    <span class="flex items-center gap-2"><span>❓</span> <span>Kuis Interaktif</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/40">/quiz</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-400 font-light leading-relaxed">Ratusan bank soal pengetahuan umum, anime, dan gaming untuk adu kecepatan menjawab di leaderboard.</p>
+                            </div>
+                            <div class="p-4 bg-black/60 rounded-2xl border border-white/5 space-y-1.5 hover-popup">
+                                <div class="font-bold text-white flex items-center justify-between">
+                                    <span class="flex items-center gap-2"><span>🔤</span> <span>Tebak Kata Kilat</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">/tebakkata</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-400 font-light leading-relaxed">Mengasah kosakata dengan mengurai huruf acak, tebak istilah rahasia, dan kompetisi poin kata.</p>
+                            </div>
+                            <div class="p-4 bg-black/60 rounded-2xl border border-white/5 space-y-1.5 hover-popup">
+                                <div class="font-bold text-white flex items-center justify-between">
+                                    <span class="flex items-center gap-2"><span>⚖️</span> <span>True or False</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-purple-500/20 text-purple-400 border border-purple-500/40">/truefalse</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-400 font-light leading-relaxed">Tantangan cepat fakta atau mitos. Salah memilih langsung tereliminasi hingga tersisa sang juara.</p>
+                            </div>
+                            <div class="sm:col-span-2 lg:col-span-2 p-4 bg-gradient-to-r from-red-950/40 to-neutral-900 rounded-2xl border border-red-500/40 space-y-1.5 hover-popup">
+                                <div class="font-bold text-red-400 flex items-center justify-between">
+                                    <span class="flex items-center gap-2 text-base"><span>🐺</span> <span>Werewolf Host Engine</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/40">/werewolf</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">Otomasi penuh alur malam rahasia, peran tersembunyi, voting siang hari, dan eliminasi instan untuk 14 peran resmi secara otomatis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CRUX TERMINAL SIMULATOR (HANYA 5 FITUR BOT & UTILITY RESMI) -->
+                <div class="bg-black/90 p-5 md:p-7 rounded-3xl border border-white/10 font-mono text-xs space-y-4 shadow-2xl relative overflow-hidden hover-popup">
                     <div class="flex flex-col sm:flex-row justify-between border-b border-white/10 pb-3 gap-2 items-start sm:items-center">
                         <div class="flex items-center space-x-2">
                             <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
                             <span class="text-white font-bold tracking-wider">CRUX_TERMINAL // v2.6.4</span>
                         </div>
-                        <div class="flex items-center space-x-2">
-                            <span class="text-[10px] text-neutral-500">PILIH COMMAND:</span>
-                            <button onclick="runBotSim('werewolf')" class="px-2 py-1 bg-neutral-900 border border-white/10 rounded hover:border-orange-500 text-[10px] text-orange-400 transition">/werewolf</button>
-                            <button onclick="runBotSim('quiz')" class="px-2 py-1 bg-neutral-900 border border-white/10 rounded hover:border-orange-500 text-[10px] text-orange-400 transition">/quiz</button>
-                            <button onclick="runBotSim('giveaway')" class="px-2 py-1 bg-neutral-900 border border-white/10 rounded hover:border-orange-500 text-[10px] text-orange-400 transition">/giveaway</button>
-                            <button onclick="runBotSim('serverinfo')" class="px-2 py-1 bg-neutral-900 border border-white/10 rounded hover:border-orange-500 text-[10px] text-orange-400 transition">/serverinfo</button>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="text-[10px] text-neutral-500">QUICK COMMANDS:</span>
+                            <button onclick="runBotSim('werewolf')" class="px-2.5 py-1 bg-neutral-900 border border-white/10 rounded-lg hover:border-orange-500 text-[10px] text-orange-400 transition">/werewolf</button>
+                            <button onclick="runBotSim('quiz')" class="px-2.5 py-1 bg-neutral-900 border border-white/10 rounded-lg hover:border-orange-500 text-[10px] text-orange-400 transition">/quiz</button>
+                            <button onclick="runBotSim('giveaway')" class="px-2.5 py-1 bg-neutral-900 border border-white/10 rounded-lg hover:border-orange-500 text-[10px] text-orange-400 transition">/giveaway</button>
+                            <button onclick="runBotSim('tebakkata')" class="px-2.5 py-1 bg-neutral-900 border border-white/10 rounded-lg hover:border-orange-500 text-[10px] text-orange-400 transition">/tebakkata</button>
+                            <button onclick="runBotSim('truefalse')" class="px-2.5 py-1 bg-neutral-900 border border-white/10 rounded-lg hover:border-orange-500 text-[10px] text-orange-400 transition">/truefalse</button>
+                            <button onclick="runBotSim('serverinfo')" class="px-2.5 py-1 bg-neutral-900 border border-white/10 rounded-lg hover:border-orange-500 text-[10px] text-orange-400 transition">/serverinfo</button>
+                            <button onclick="runBotSim('clear')" class="px-2 py-1 bg-neutral-950 border border-white/10 rounded-lg text-neutral-500 hover:text-white text-[10px] transition">/clear</button>
                         </div>
                     </div>
 
-                    <div id="botConsoleOutput" class="space-y-1.5 min-h-[130px] max-h-60 overflow-y-auto pr-2 text-neutral-300">
-                        <div class="text-neutral-500">[SYSTEM] CRUX Bot Engine terhubung ke Discord Gateway. Latency: 18ms.</div>
-                        <div class="text-neutral-500">[INFO] Database anggota inti terverifikasi dan termonitor aktif.</div>
-                        <div style="color: var(--accent-orange);">[BOT] Ketik atau klik tombol command di atas untuk mencoba respon instan bot!</div>
+                    <div id="botConsoleOutput" class="space-y-1.5 min-h-[120px] max-h-56 overflow-y-auto pr-2 text-neutral-300">
+                        <div class="text-neutral-500">[SYSTEM] CRUX Bot Engine terhubung ke Discord Gateway. Latency: 16ms.</div>
+                        <div class="text-neutral-500">[MODULES] Werewolf Engine, Kuis Komunitas, Giveaway, Tebak Kata, & True or False siap dijalankan.</div>
+                        <div style="color: var(--accent-orange);">[BOT] Ketuk tombol perintah di atas atau ketik perintah di bawah!</div>
                     </div>
 
                     <div class="pt-2 border-t border-white/10 flex items-center space-x-2">
                         <span class="text-orange-500 font-bold">crux@core:~$</span>
-                        <input type="text" id="terminalInput" placeholder="Ketik /werewolf, /quiz, /giveaway, /clear..." 
+                        <input type="text" id="terminalInput" placeholder="Ketik /werewolf, /quiz, /giveaway, /tebakkata, /truefalse..." 
                                class="bg-transparent border-none text-white focus:outline-none w-full font-mono text-xs" 
                                onkeydown="if(event.key === 'Enter') executeUserCommand()">
                         <button onclick="executeUserCommand()" class="px-3 py-1 bg-orange-500/20 text-orange-400 border border-orange-500/40 rounded hover:bg-orange-500 hover:text-white transition text-[11px]">Kirim</button>
                     </div>
                 </div>
 
-                <!-- Bot Grid -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <div class="lg:col-span-5 bg-black/40 p-6 md:p-8 rounded-3xl border border-white/5 space-y-6 hover-popup cursor-pointer group" onclick="openMultiImageModal('Galeri Arsitektur CRUX Bot', ['image/BOT.png', 'image/WW.png', 'image/GIF.png', 'image/KUZ.png'], ['Dokumentasi pengkodean bot mandiri oleh owner.', 'Struktur data logika permainan Werewolf.', 'Sistem pengundian giveaway otomatis.', 'Kumpulan database soal kuis dan tebak kata.'], 'Ekosistem CRUX Bot')">
-                        <div class="h-48 md:h-56 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
-                            <img src="image/BOT.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <!-- ================= WEREWOLF ENGINE & 14 ROLE LENGKAP: REDESAIN SIMETRIS ================= -->
+                <div class="bg-black/60 p-6 md:p-10 rounded-3xl border border-white/10 space-y-8 hover-popup">
+                    
+                    <!-- Header Werewolf & Banner -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-4 h-56 md:h-64 rounded-2xl bg-neutral-950 border border-white/10 overflow-hidden relative">
+                            <img src="image/WW.png" alt="Werewolf Engine" class="w-full h-full object-cover">
                         </div>
-                        <div class="space-y-2">
-                            <span class="text-[10px] font-bold uppercase tracking-wider font-mono" style="color: var(--accent-orange);">KARYA CIPTA FOUNDER</span>
-                            <h3 class="text-xl font-bold text-white tracking-tight">Kemandirian Teknologi Bot</h3>
-                            <p class="text-xs text-neutral-400 font-light">Dikembangkan mandiri untuk menghadirkan fitur-fitur yang benar-benar diinginkan member, tanpa batasan bot publik berbayar.</p>
+                        <div class="lg:col-span-8 space-y-3">
+                            <div class="inline-flex items-center space-x-2 px-3 py-1 bg-red-500/20 border border-red-500/40 rounded-full text-[10px] font-mono tracking-widest text-red-400 uppercase font-bold">
+                                <span>🐺 THE ULTIMATE DEDUCTION GAME</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-black text-white tracking-tight">Werewolf Engine // Intrik, Sandiwara & Misteri Malam Hari</h3>
+                            <p class="text-xs md:text-sm text-neutral-300 leading-relaxed font-light">
+                                Ketika kabut malam menyelimuti desa CRUX, keheningan berubah menjadi medan perang pikiran. Di balik obrolan santai, ada serigala yang bersembunyi dalam wujud kawan akrab. Seluruh 14 peran dirancang memiliki tugas taktis yang seimbang demi terciptanya intrik terbaik.
+                            </p>
+                            <div class="p-3 bg-red-950/30 rounded-xl border border-red-800/40 text-[11px] text-red-300 font-mono">
+                                💡 Ketuk kartu peran mana saja untuk melihat deskripsi lengkap dan memicu resonansi audio!
+                            </div>
                         </div>
                     </div>
 
-                    <div class="lg:col-span-7 space-y-6">
-                        <div class="bg-black/40 p-6 rounded-3xl border border-white/5 space-y-3 hover-popup cursor-pointer" onclick="openMultiImageModal('Galeri Werewolf Engine Discord', ['image/WW.png', 'image/GIF.png', 'image/TRU.png', 'image/BOT.png'], ['Game Werewolf penuh diskusi dan tuduhan seru.', 'Otomasi peran malam dan voting siang hari.', 'Game tebak benar salah instan.', 'Sistem inti bot yang stabil 24/7.'], 'Modul Game Werewolf')">
-                            <div class="text-xl md:text-2xl font-black text-white tracking-tight">Werewolf Engine // Intrik & Deduksi Malam Hari</div>
-                            <p class="text-xs md:text-sm text-neutral-300 leading-relaxed font-light">
-                                Modul game interaktif terlengkap yang mengatur alur malam secara rahasia dan perdebatan seru di siang hari. Wadah favorit para member untuk mengasah insting dan saling melempar tuduhan lucu.
-                            </p>
+                    <!-- Ringkasan Alur 4 Fase Permainan -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono pt-2">
+                        <div class="p-3 rounded-2xl bg-neutral-950 border border-white/5 space-y-1">
+                            <span class="text-indigo-400 font-bold block text-[11px]">🌑 1. FASE MALAM</span>
+                            <p class="text-neutral-400 text-[10px] font-light">Serigala berburu mangsa, peramal menyingkap rahasia, dan pelindung bersiaga.</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-neutral-950 border border-white/5 space-y-1">
+                            <span class="text-amber-400 font-bold block text-[11px]">☀️ 2. FAJAR PAGI</span>
+                            <p class="text-neutral-400 text-[10px] font-light">Lonceng desa berdentang mengumumkan korban gugur serta wasiat terakhir.</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-neutral-950 border border-white/5 space-y-1">
+                            <span class="text-yellow-400 font-bold block text-[11px]">📢 3. DISKUSI SIANG</span>
+                            <p class="text-neutral-400 text-[10px] font-light">Debat terbuka antarwarga mencari kejanggalan alibi para tersangka.</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-neutral-950 border border-white/5 space-y-1">
+                            <span class="text-red-400 font-bold block text-[11px]">⚖️ 4. VOTING SENJA</span>
+                            <p class="text-neutral-400 text-[10px] font-light">Hak suara mayoritas memutuskan eksekusi tiang gantung bagi tertuduh.</p>
+                        </div>
+                    </div>
+
+                    <!-- Filter Faksi Interaktif (Semua 14 Peran) -->
+                    <div class="flex flex-wrap items-center justify-between border-t border-white/10 pt-4 gap-3">
+                        <div class="text-xs font-mono font-bold text-neutral-300 flex items-center gap-2">
+                            <span>📜 DAFTAR 14 ROLE RESMI CRUX:</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-mono">
+                            <button onclick="filterWwRoles('all')" class="ww-filter-btn px-3 py-1 rounded-xl bg-orange-500 text-white font-bold border border-orange-400 transition" id="ww-btn-all">SEMUA (14)</button>
+                            <button onclick="filterWwRoles('wolf')" class="ww-filter-btn px-3 py-1 rounded-xl bg-neutral-900 text-neutral-300 hover:text-white border border-white/10 transition" id="ww-btn-wolf">🐺 SERIGALA (3)</button>
+                            <button onclick="filterWwRoles('village')" class="ww-filter-btn px-3 py-1 rounded-xl bg-neutral-900 text-neutral-300 hover:text-white border border-white/10 transition" id="ww-btn-village">🛡️ WARGA (4)</button>
+                            <button onclick="filterWwRoles('chaos')" class="ww-filter-btn px-3 py-1 rounded-xl bg-neutral-900 text-neutral-300 hover:text-white border border-white/10 transition" id="ww-btn-chaos">⚡ KHUSUS & NETRAL (7)</button>
+                        </div>
+                    </div>
+
+                    <!-- ================= 14 ROLE DALAM GRID 2-KOLOM SIMETRIS (7 KIRI vs 7 KANAN = 14 PENUH) ================= -->
+                    <div id="wwRolesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        
+                        <!-- 1. Werewolf -->
+                        <div data-faction="wolf" onclick="inspectRole('Werewolf', 'Predator malam utama. Memilih mangsa tiap malam bersama kawanannya dan bersandiwara saat siang hari.', 'red')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-red-500/50 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-red-400">
+                                    <span class="text-sm flex items-center gap-2"><span>🐺</span> <span>1. Werewolf</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-red-950/80 text-red-300 border border-red-800">KUBU SERIGALA</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Predator malam utama. Berkoordinasi dalam kegelapan untuk memangsa satu warga setiap malam dan berkilah di siang hari seolah tak berdosa.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-red-400">
+                                <span>🌙 Aksi Malam: Memangsa</span>
+                                <span>Tipe: Fatal</span>
+                            </div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <div class="bg-black/40 p-5 rounded-2xl border border-white/5 hover-popup cursor-pointer space-y-1" onclick="openMultiImageModal('Galeri Fitur Giveaway', ['image/GIF.png', 'image/BOT.png', 'image/KUZ.png', 'image/TRU.png'], ['Pengundian transparan tanpa kecurangan.', 'Riwayat pemenang hadiah nitro & role.', 'Kuis seru berhadiah.', 'Tebak fakta cepat.'], 'Modul Giveaway')">
-                                <div class="text-base font-bold" style="color: var(--accent-orange);">Giveaway</div>
-                                <p class="text-[11px] text-neutral-400 font-light">Sistem undian hadiah Nitro transparan.</p>
+                        <!-- 2. Seer -->
+                        <div data-faction="village" onclick="inspectRole('Seer', 'Mata batin terkuat warga desa. Setiap malam menyingkap tabir satu pemain untuk mengetahui identitas aslinya.', 'blue')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-blue-500/50 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-blue-400">
+                                    <span class="text-sm flex items-center gap-2"><span>👁️</span> <span>2. Seer</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-blue-950/80 text-blue-300 border border-blue-800">KUBU WARGA</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Mata batin terkuat warga desa. Setiap malam menyingkap tabir satu pemain untuk mengetahui apakah ia berhati serigala atau manusia.
+                                </p>
                             </div>
-                            <div class="bg-black/40 p-5 rounded-2xl border border-white/5 hover-popup cursor-pointer space-y-1" onclick="openMultiImageModal('Galeri Kuis & Tebak Kata', ['image/KUZ.png', 'image/TRU.png', 'image/BOT.png', 'image/GIF.png'], ['Ratusan bank soal pengetahuan umum dan pop culture.', 'Kecepatan mengetik member diadu di chat.', 'Bot pengontrol skor kuis.', 'Sistem hadiah mingguan.'], 'Kuis Interaktif')">
-                                <div class="text-base font-bold" style="color: var(--accent-orange);">Quiz Master</div>
-                                <p class="text-[11px] text-neutral-400 font-light">Adu wawasan dan kecepatan mengetik.</p>
-                            </div>
-                            <div class="bg-black/40 p-5 rounded-2xl border border-white/5 hover-popup cursor-pointer space-y-1" onclick="openMultiImageModal('Galeri True or False', ['image/TRU.png', 'image/KUZ.png', 'image/BOT.png', 'image/WW.png'], ['Permainan tebak fakta kilat.', 'Menghilangkan kebosanan siang hari.', 'Papan peringkat kemenangan.', 'Fitur Werewolf pelengkap.'], 'True or False Game')">
-                                <div class="text-base font-bold" style="color: var(--accent-orange);">True / False</div>
-                                <p class="text-[11px] text-neutral-400 font-light">Tebak mitos atau fakta kilat.</p>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-blue-400">
+                                <span>🌙 Aksi Malam: Terawang</span>
+                                <span>Pilar: Intelijen Warga</span>
                             </div>
                         </div>
+
+                        <!-- 3. Alpha Werewolf -->
+                        <div data-faction="wolf" onclick="inspectRole('Alpha Werewolf', 'Pemimpin kawanan serigala berdarah dingin yang dapat mewariskan darah serigala ke warga biasa.', 'red')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-red-500/60 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-red-300">
+                                    <span class="text-sm flex items-center gap-2"><span>👑</span> <span>3. Alpha Werewolf</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-red-950/80 text-red-300 border border-red-800">PEMIMPIN KAWANAN</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Pemimpin serigala berdarah dingin. Memiliki kekuatan veto penentuan mangsa dan kemampuan mewariskan darah serigala ke warga desa.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-red-400">
+                                <span>🌙 Aksi Malam: Veto Mangsa</span>
+                                <span>Aura: Otoritas Tertinggi</span>
+                            </div>
+                        </div>
+
+                        <!-- 4. Guardian -->
+                        <div data-faction="village" onclick="inspectRole('Guardian', 'Ksatria pelindung malam. Menjaga satu nyawa dari teror cakaran serigala tiap malam.', 'cyan')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-cyan-500/50 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-cyan-400">
+                                    <span class="text-sm flex items-center gap-2"><span>🛡️</span> <span>4. Guardian</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-800">KUBU WARGA</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Ksatria pelindung setia. Memilih satu warga tiap malam untuk diselamatkan dari serangan maut kawanan serigala buas.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-cyan-400">
+                                <span>🌙 Aksi Malam: Pasang Perisai</span>
+                                <span>Aturan: Bebas Sasaran</span>
+                            </div>
+                        </div>
+
+                        <!-- 5. Sorcerer -->
+                        <div data-faction="wolf" onclick="inspectRole('Sorcerer', 'Penyihir kegelapan sekutu serigala. Mencari keberadaan Seer demi kejayaan kawanan serigala.', 'purple')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-purple-500/50 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-purple-400">
+                                    <span class="text-sm flex items-center gap-2"><span>🔮</span> <span>5. Sorcerer</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-purple-950/80 text-purple-300 border border-purple-800">SEKUTU SERIGALA</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Penyihir kegelapan sekutu serigala. Tiap malam menerawang pemain untuk menemukan Seer dan memandu serigala memburu peramal desa.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-purple-400">
+                                <span>🌙 Aksi Malam: Lacak Seer</span>
+                                <span>Menang: Bersama Werewolf</span>
+                            </div>
+                        </div>
+
+                        <!-- 6. Hunter -->
+                        <div data-faction="village" onclick="inspectRole('Hunter', 'Penembak jitu desa. Pemburu dimalam gelap berharap tembakannya mengenai tepat dijantung werewolf.', 'green')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-green-500/50 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-green-400">
+                                    <span class="text-sm flex items-center gap-2"><span>🏹</span> <span>6. Hunter</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-green-950/80 text-green-300 border border-green-800">KUBU WARGA</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Penembak jitu desa. Melakukan perburuan serigala di malam gelap, berharap yang tertembak memang benar adalah seekor werewolf.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-green-400">
+                                <span>⚡ Pasif: Pemburu Malam</span>
+                                <span>Target: 1 Pemain Bebas</span>
+                            </div>
+                        </div>
+
+                        <!-- 7. Lycan -->
+                        <div data-faction="chaos" onclick="inspectRole('Lycan', 'Manusia biasa yang beraroma serigala. Berhati warga, namun terdeteksi serigala oleh penglihatan Seer.', 'amber')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-amber-500/50 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-amber-400">
+                                    <span class="text-sm flex items-center gap-2"><span>🐾</span> <span>7. Lycan</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-800">TERFITNAH</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Manusia biasa yang membawa aroma serigala. Berpihak pada warga desa, namun saat diterawang oleh Seer, ia terdeteksi sebagai Werewolf!
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-amber-400">
+                                <span>⚡ Pasif: Yang Tertuduh</span>
+                                <span>Pihak: Kemenangan Warga</span>
+                            </div>
+                        </div>
+
+                        <!-- 8. Villager -->
+                        <div data-faction="village" onclick="inspectRole('Villager', 'Pondasi kekuatan desa. Mengandalkan logika, deduksi, dan integritas voting siang hari.', 'neutral')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-white/20 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-white">
+                                    <span class="text-sm flex items-center gap-2"><span>🧑</span> <span>8. Villager</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-neutral-900 text-neutral-300 border border-white/20">WARGA BIASA</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Pondasi kekuatan desa tanpa kemampuan supranatural. Mengandalkan logika murni, ketajaman argumen, dan suara voting siang untuk menghukum serigala.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-neutral-400">
+                                <span>☀️ Fase Siang: Hak Suara</span>
+                                <span>Kunci: Mayoritas Suara</span>
+                            </div>
+                        </div>
+
+                        <!-- 9. Cursed -->
+                        <div data-faction="chaos" onclick="inspectRole('Cursed', 'Manusia terkutuk. Jika diserang kawanan serigala di malam hari, ia bangkit menjadi Werewolf baru.', 'neutral')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-neutral-600 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-neutral-300">
+                                    <span class="text-sm flex items-center gap-2"><span>💀</span> <span>9. Cursed</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-neutral-900 text-neutral-300 border border-neutral-700">TERKUTUK</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Manusia terkutuk. Awalnya berpihak pada warga, namun jika diserang Werewolf ia tidak mati melainkan bertransformasi menjadi Werewolf baru.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-neutral-400">
+                                <span>⚡ Pasif: Mutasi Cakaran</span>
+                                <span>Efek: Berganti Kubu</span>
+                            </div>
+                        </div>
+
+                        <!-- 10. Drunker -->
+                        <div data-faction="chaos" onclick="inspectRole('Drunker', 'Si pemabuk desa. Membuat werewolf yang memakannya akan terkena sakit perut yang parah.', 'yellow')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-yellow-500/50 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-yellow-400">
+                                    <span class="text-sm flex items-center gap-2"><span>🍺</span> <span>10. Drunker</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-yellow-950/80 text-yellow-300 border border-yellow-800">PEMABUK DESA</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Warga yang terlalu mabuk untuk menyadari perannya. Membuat werewolf yang memakannya akan terkena sakit perut yang parah.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-yellow-400">
+                                <span>⚡ Pasif: +1 Nyawa</span>
+                                <span>Status: Kubu Warga</span>
+                            </div>
+                        </div>
+
+                        <!-- 11. Lovers -->
+                        <div data-faction="chaos" onclick="inspectRole('Lovers', 'Dua sejoli terikat takdir abadi. Jika salah satu mati, pasangannya akan menyusul tewas seketika.', 'pink')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-pink-500/50 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-pink-400">
+                                    <span class="text-sm flex items-center gap-2"><span>💖</span> <span>11. Lovers</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-pink-950/80 text-pink-300 border border-pink-800">IKATAN CINTA</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Dua jiwa yang diikat sumpah cinta abadi. Jika salah satu kekasih tereliminasi, pasangannya akan langsung mati menyusul karena patah hati.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-pink-400">
+                                <span>⚡ Pasif: Sehidup Semati</span>
+                                <span>Target: Menang Berdua</span>
+                            </div>
+                        </div>
+
+                        <!-- 12. Bomber -->
+                        <div data-faction="chaos" onclick="inspectRole('Bomber', 'Pengebom nekat. Jika werewolf memakannya, ledakannya memusnahkan werewolf dan pemain disekitarnya!', 'orange')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-orange-500/50 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-orange-400">
+                                    <span class="text-sm flex items-center gap-2"><span>💣</span> <span>12. Bomber</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-orange-950/80 text-orange-300 border border-orange-800">PENGEBOM</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Membawa peledak di balik bajunya. Jika werewolf memakannya, bom meledak memusnahkan werewolf dan pemain di sebelah kiri dan kanannya!
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-orange-400">
+                                <span>⚖️ Reaksi: Ranjau Berjalan</span>
+                                <span>Radius: Kiri & Kanan</span>
+                            </div>
+                        </div>
+
+                        <!-- 13. Silencer -->
+                        <div data-faction="chaos" onclick="inspectRole('Silencer', 'Pembungkam suara malam. Mengunci pita suara target agar dilarang mengetik/bersuara di siang hari.', 'indigo')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-indigo-500/50 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-indigo-400">
+                                    <span class="text-sm flex items-center gap-2"><span>🤫</span> <span>13. Silencer</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-indigo-950/80 text-indigo-300 border border-indigo-800">PEMBUNGKAM</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Menyusup di kegelapan untuk menyegel suara satu target. Pemain yang dibungkam dilarang berbicara atau mengetik selama voting siang hari.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-indigo-400">
+                                <span>🌙 Aksi Malam: Kunci Suara</span>
+                                <span>Durasi: 1 Fase Siang</span>
+                            </div>
+                        </div>
+
+                        <!-- 14. Poisoner -->
+                        <div data-faction="chaos" onclick="inspectRole('Poisoner', 'Ahli racun maut mandiri. Meracuni werewolf yang mengigitnya dan menewaskan menghabisi kedua nyawa.', 'teal')" class="ww-role-card p-4 bg-neutral-950 rounded-2xl border border-teal-500/50 space-y-2 role-card-glow cursor-pointer flex flex-col justify-between">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between font-bold text-teal-400">
+                                    <span class="text-sm flex items-center gap-2"><span>🧪</span> <span>14. Poisoner</span></span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-teal-950/80 text-teal-300 border border-teal-800">AHLI RACUN</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Ahli racun pembawa ramuan mematikan. Meracuni werewolf yang mengigitnya dan menewaskan menghabisi kedua nyawa.
+                                </p>
+                            </div>
+                            <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-teal-400">
+                                <span>🌙 Aksi Malam: Beri Racun</span>
+                                <span>Karakter: Silent Killer</span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- DOKUMENTASI MABAR MLBB & ROBLOX -->
-                <div class="pt-6 border-t border-white/10 space-y-6">
-                    <div class="space-y-1">
-                        <span class="text-xs font-bold tracking-widest uppercase font-mono text-orange-400">// DIVISI GAME UTAMA & TURNAMEN SERVER</span>
-                        <h3 class="text-2xl font-bold text-white tracking-tight">Keseruan Mabar Mobile Legends & Petualangan Roblox</h3>
+                <!-- DOKUMENTASI GAME -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-black/40 p-6 md:p-8 rounded-3xl border border-white/5 space-y-5 hover-popup">
+                        <div class="h-48 md:h-56 rounded-2xl bg-neutral-950 border border-white/10 overflow-hidden relative">
+                            <img src="image/MATCH.jpg" alt="Turnamen MLBB" class="w-full h-full object-cover">
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[10px] font-bold uppercase tracking-wider font-mono text-purple-400">ESPORTS DIVISION // MLBB</span>
+                                <span class="text-[10px] font-mono text-neutral-400">Custom 5v5 Live</span>
+                            </div>
+                            <h4 class="text-xl md:text-2xl font-bold text-white tracking-tight">Fun Match 5v5 & Sparing Persahabatan</h4>
+                            <p class="text-xs text-neutral-400 leading-relaxed font-light">
+                                Pertandingan kompetitif Land of Dawn santai antarmember disiarkan secara live melalui Voice Channel Discord dilengkapi ulasan seru para shoutcaster server.
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- MLBB -->
-                        <div class="bg-black/40 p-6 md:p-8 rounded-3xl border border-white/5 hover-popup cursor-pointer space-y-6 group" onclick="openMultiImageModal('Galeri Turnamen Mobile Legends CRUX', ['image/MATCH.jpg', 'image/COLLAB.jpg', 'image/SOLO.jpg', 'image/MEM.png'], ['Keseruan fun match custom 5v5 antar skuad internal.', 'Kolaborasi event bersama game Roblox.', 'Foto skuad staf pengawas pertandingan.', 'Penyaringan pemain untuk laga sparing.'], 'Turnamen Mobile Legends')">
-                            <div class="h-48 md:h-56 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
-                                <img src="image/MATCH.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            </div>
-                            <div class="space-y-2">
-                                <span class="text-[10px] font-bold uppercase tracking-wider font-mono" style="color: var(--accent-orange);">ESPORTS DIVISION // MLBB</span>
-                                <h4 class="text-xl md:text-2xl font-bold text-white tracking-tight">Fun Match 5v5 & Sparing Persahabatan</h4>
-                                <p class="text-xs text-neutral-400 leading-relaxed font-light">
-                                    Dari custom match 5v5 santai yang penuh gelak tawa hingga sparing persahabatan dengan server lain. Pertandingan sering disiarkan langsung melalui voice channel Discord agar seluruh anggota bisa ikut menonton dan bersorak.
-                                </p>
-                            </div>
+                    <div class="bg-black/40 p-6 md:p-8 rounded-3xl border border-white/5 space-y-5 hover-popup">
+                        <div class="h-48 md:h-56 rounded-2xl bg-neutral-950 border border-white/10 overflow-hidden relative">
+                            <img src="image/COLLAB.jpg" alt="Roblox Expedition" class="w-full h-full object-cover">
                         </div>
-
-                        <!-- Roblox -->
-                        <div class="bg-black/40 p-6 md:p-8 rounded-3xl border border-white/5 hover-popup cursor-pointer space-y-6 group" onclick="openMultiImageModal('Galeri Ekspedisi Mendaki Gunung Roblox', ['image/COLLAB.jpg', 'image/MATCH.jpg', 'image/SOLO.jpg', 'image/ZON.png'], ['Foto kebersamaan di basecamp pendakian gunung virtual.', 'Suasana fun match game MLBB.', 'Dokumentasi tim operator kegiatan.', 'Momen santai istirahat di checkpoint puncak.'], 'Roblox Mount Expedition')">
-                            <div class="h-48 md:h-56 rounded-2xl bg-neutral-950 border border-white/5 overflow-hidden relative">
-                                <img src="image/COLLAB.jpg" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[10px] font-bold uppercase tracking-wider font-mono text-emerald-400">ADVENTURE CORPS // ROBLOX</span>
+                                <span class="text-[10px] font-mono text-neutral-400">Mount Checkpoint</span>
                             </div>
-                            <div class="space-y-2">
-                                <span class="text-[10px] font-bold uppercase tracking-wider font-mono" style="color: var(--accent-orange);">ADVENTURE DIVISION // ROBLOX</span>
-                                <h4 class="text-xl md:text-2xl font-bold text-white tracking-tight">Roblox Mount Expedition</h4>
-                                <p class="text-xs text-neutral-400 leading-relaxed font-light">
-                                    Ekspedisi mendaki puncak gunung virtual bersama puluhan anggota. Saling tolong-menolong saat kawan terjatuh dari tebing dan merayakan pencapaian puncak bersama dalam foto bersama yang berkesan.
-                                </p>
-                            </div>
+                            <h4 class="text-xl md:text-2xl font-bold text-white tracking-tight">Roblox Mount Expedition</h4>
+                            <p class="text-xs text-neutral-400 leading-relaxed font-light">
+                                Ekspedisi mendaki puncak gunung virtual bersama puluhan anggota. Menaklukkan rintangan ekstrem, saling membantu kawan terjatuh, dan merayakan puncak bersama.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1137,220 +1369,219 @@
             </div>
         </section>
 
-        <!-- ================= HALAMAN 5: STAFF ================= -->
+        <!-- ================= HALAMAN 5: STAFF (STRUKTUR JABATAN & AURA KHUSUS) ================= -->
         <section id="page-staff" class="page-section space-y-12">
             <div class="glass-panel hud-corner p-6 md:p-14 rounded-3xl space-y-12">
                 
                 <div class="text-center max-w-2xl mx-auto space-y-3">
-                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 05. COMMAND STRUCTURE & STAFF HIERARCHY</span>
-                    <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">Hierarki Kepengurusan Server</h2>
+                    <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 05. COMMAND STRUCTURE & OPERATIONAL ROLES</span>
+                    <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">Command Pillars & Operators</h2>
                     <p class="text-xs md:text-sm text-neutral-400 font-light">
-                        Tersusun epik dari atas ke bawah. <strong>Ketuk nama atau foto staf manapun</strong> untuk membuka dossier profil personal berukuran ideal dan jelajahi staf lain di divisinya!
+                        Struktur resmi pembagian tugas dan fungsi di CORE REGNUM UNIFIED-X. <strong>Ketuk kartu posisi jabatan</strong> untuk melihat personel yang bertugas, dan usap layar ke samping untuk berganti profil staf!
                     </p>
                 </div>
 
-                <!-- VERTICAL COMMAND HIERARCHY TREE -->
-                <div class="max-w-4xl mx-auto space-y-8 relative">
+                <!-- STRUKTUR JABATAN RESMI -->
+                <div class="max-w-5xl mx-auto space-y-10 relative">
 
-                    <!-- TINGKAT 1: APEX LEADER (FOUNDER & OWNER) -->
+                    <!-- TINGKAT 1 (PUNCAK): OWNER / SUPREME COMMANDER (AURA EMAS ORANYE) -->
                     <div class="relative flex flex-col items-center">
-                        <div class="w-full max-w-xl bg-gradient-to-b from-orange-950/40 via-black to-neutral-950 p-6 md:p-8 rounded-3xl border-2 border-orange-500/70 shadow-2xl hover-popup cursor-pointer text-center space-y-4 group relative overflow-hidden" onclick="openStaffDossier('w1zq')">
-                            <div class="absolute top-4 right-4 text-[10px] font-bold px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 border border-orange-500/50 font-mono tracking-widest flex items-center gap-1.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-orange-400 animate-ping"></span>
-                                <span>TIER 1 // APEX LEADER</span>
-                            </div>
-
-                            <div class="w-28 h-28 mx-auto bg-neutral-950 border-2 border-orange-500 rounded-2xl overflow-hidden shadow-2xl group-hover:scale-110 transition duration-300 relative">
-                                <img src="image/LUFFY.jpg" alt="W1ZQ Avatar" class="w-full h-full object-cover">
+                        <div onclick="openDivisionStaffModal('apex')" 
+                             class="w-full max-w-2xl bg-gradient-to-b from-amber-950/40 via-neutral-900 to-black p-6 md:p-8 rounded-3xl aura-owner cursor-pointer space-y-4 text-center group">
+                            
+                            <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-500/50 text-[10px] font-mono text-amber-400 uppercase tracking-widest font-bold">
+                                <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                                <span>PUNCAK HIRARKI // APEX LEADER</span>
                             </div>
 
                             <div class="space-y-1">
-                                <h3 class="text-2xl font-black text-white tracking-tight">W1ZQ</h3>
-                                <div class="text-xs font-extrabold tracking-widest font-mono" style="color: var(--accent-orange);">FOUNDER // SUPREME COMMANDER</div>
-                                <div class="text-[10px] text-neutral-400 font-mono">Penanggung Jawab Penuh, Arsitek CRUX Bot, & Pembina Komunitas</div>
+                                <h3 class="text-2xl md:text-3xl font-black text-white tracking-tight font-cinzel">OWNER // SUPREME COMMANDER</h3>
+                                <div class="text-xs font-mono text-amber-400 font-bold tracking-wider">PIMPINAN TERTINGGI & ARSITEK FONDASI SERVER</div>
                             </div>
 
-                            <blockquote class="text-xs text-neutral-300 italic font-light max-w-md mx-auto">
-                                "Ciptakan kenyamanan mutlak, bangun persahabatan dari hati, dan hadirkan rumah bagi mereka yang membutuhkan tempat pulang."
-                            </blockquote>
-
-                            <div class="pt-3 border-t border-white/10 flex justify-center items-center space-x-6 text-[10px] font-mono text-neutral-400">
-                                <span>Masa Bakti: 2026 - Sekarang</span>
-                                <span class="text-orange-400 font-bold">🔍 KETUK BUKA DOSSIER PROFIL</span>
-                            </div>
-                        </div>
-
-                        <div class="hierarchy-line"></div>
-                    </div>
-
-                    <!-- TINGKAT 2: STRATEGIC HIGH COUNCIL (REE & ZAR) -->
-                    <div class="relative flex flex-col items-center w-full">
-                        <div class="w-full max-w-2xl bg-neutral-950/90 p-6 md:p-8 rounded-3xl border border-white/15 shadow-xl space-y-5">
-                            <div class="text-center">
-                                <span class="inline-block text-[10px] font-bold px-3 py-1 rounded-full bg-neutral-900 text-neutral-300 border border-white/10 font-mono tracking-widest">
-                                    TIER 2 // STRATEGIC HIGH COUNCIL & ADMINISTRATION
-                                </span>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div onclick="openStaffDossier('ree')" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover-popup cursor-pointer space-y-3 group hover:border-orange-500/50 transition">
-                                    <div class="flex items-center space-x-3.5">
-                                        <div class="w-14 h-14 bg-neutral-950 border border-white/20 rounded-xl overflow-hidden shrink-0 group-hover:scale-105 transition">
-                                            <img src="image/KAKASHI.jpg" alt="Ree Avatar" class="w-full h-full object-cover">
-                                        </div>
-                                        <div>
-                                            <h4 class="font-bold text-white text-base">Ree</h4>
-                                            <div class="text-[10px] font-mono text-orange-400">ADMINISTRATOR // REGULATIONS</div>
-                                        </div>
-                                    </div>
-                                    <p class="text-[11px] text-neutral-300 font-light line-clamp-2">
-                                        Mengawal ketertiban peraturan, mengaudit sistem izin peran, dan menjamin keadilan bagi seluruh member.
-                                    </p>
-                                    <div class="text-[10px] text-orange-400 font-mono flex items-center justify-between pt-1 border-t border-white/5">
-                                        <span>Buka Bio Ree</span>
-                                        <span>→</span>
-                                    </div>
-                                </div>
-
-                                <div onclick="openStaffDossier('zar')" class="bg-black/60 p-5 rounded-2xl border border-white/10 hover-popup cursor-pointer space-y-3 group hover:border-orange-500/50 transition">
-                                    <div class="flex items-center space-x-3.5">
-                                        <div class="w-14 h-14 bg-neutral-950 border border-white/20 rounded-xl overflow-hidden shrink-0 group-hover:scale-105 transition">
-                                            <img src="image/KAKASHI.jpg" alt="Zar Avatar" class="w-full h-full object-cover">
-                                        </div>
-                                        <div>
-                                            <h4 class="font-bold text-white text-base">Zar</h4>
-                                            <div class="text-[10px] font-mono text-orange-400">ADMINISTRATOR // PARTNERSHIP</div>
-                                        </div>
-                                    </div>
-                                    <p class="text-[11px] text-neutral-300 font-light line-clamp-2">
-                                        Jembatan diplomasi dengan aliansi server sahabat dan pengarah komunikasi internal komunitas.
-                                    </p>
-                                    <div class="text-[10px] text-orange-400 font-mono flex items-center justify-between pt-1 border-t border-white/5">
-                                        <span>Buka Bio Zar</span>
-                                        <span>→</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="hierarchy-line"></div>
-                    </div>
-
-                    <!-- TINGKAT 3: DIVISIONAL OPERATORS -->
-                    <div class="relative flex flex-col items-center w-full space-y-6">
-                        
-                        <!-- DIVISI ROBLOX (5 ANGGOTA INDIVIDUAL) -->
-                        <div class="w-full bg-black/60 p-6 md:p-8 rounded-3xl border border-white/15 shadow-xl space-y-4">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-white/10 pb-3">
-                                <div>
-                                    <span class="text-[10px] font-bold px-2.5 py-0.5 rounded bg-orange-500/15 text-orange-400 border border-orange-500/30 font-mono">
-                                        TIER 3 // ADVENTURE CORPS
-                                    </span>
-                                    <h3 class="text-lg font-bold text-white tracking-tight pt-1">Roblox Operation Team</h3>
-                                </div>
-                                <span class="text-[10px] text-neutral-500 font-mono">5 Personel Terpilih • Ketuk Nama untuk Bio</span>
-                            </div>
-
-                            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-                                <div onclick="openStaffDossier('yiselle')" class="p-3 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer text-center space-y-2 group hover:border-orange-500/50">
-                                    <div class="w-12 h-12 mx-auto rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:scale-105 transition">
-                                        <img src="image/KAIZEN.jpg" alt="Yiselle" class="w-full h-full object-cover">
-                                    </div>
-                                    <div>
-                                        <div class="text-xs font-bold text-white">Yiselle</div>
-                                        <div class="text-[9px] text-orange-400 font-mono">Pathfinder Lead</div>
-                                    </div>
-                                </div>
-                                <div onclick="openStaffDossier('sylv')" class="p-3 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer text-center space-y-2 group hover:border-orange-500/50">
-                                    <div class="w-12 h-12 mx-auto rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:scale-105 transition">
-                                        <img src="image/KAIZEN.jpg" alt="Sylv" class="w-full h-full object-cover">
-                                    </div>
-                                    <div>
-                                        <div class="text-xs font-bold text-white">Sylv</div>
-                                        <div class="text-[9px] text-orange-400 font-mono">Co-op Specialist</div>
-                                    </div>
-                                </div>
-                                <div onclick="openStaffDossier('cae')" class="p-3 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer text-center space-y-2 group hover:border-orange-500/50">
-                                    <div class="w-12 h-12 mx-auto rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:scale-105 transition">
-                                        <img src="image/KAIZEN.jpg" alt="Cae" class="w-full h-full object-cover">
-                                    </div>
-                                    <div>
-                                        <div class="text-xs font-bold text-white">Cae</div>
-                                        <div class="text-[9px] text-orange-400 font-mono">Mountain Guide</div>
-                                    </div>
-                                </div>
-                                <div onclick="openStaffDossier('ara')" class="p-3 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer text-center space-y-2 group hover:border-orange-500/50">
-                                    <div class="w-12 h-12 mx-auto rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:scale-105 transition">
-                                        <img src="image/KAIZEN.jpg" alt="Ara" class="w-full h-full object-cover">
-                                    </div>
-                                    <div>
-                                        <div class="text-xs font-bold text-white">Ara</div>
-                                        <div class="text-[9px] text-orange-400 font-mono">Vibe Spark</div>
-                                    </div>
-                                </div>
-                                <div onclick="openStaffDossier('caeryn')" class="p-3 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer text-center space-y-2 group hover:border-orange-500/50">
-                                    <div class="w-12 h-12 mx-auto rounded-xl overflow-hidden bg-neutral-900 border border-white/10 group-hover:scale-105 transition">
-                                        <img src="image/KAIZEN.jpg" alt="Caeryn" class="w-full h-full object-cover">
-                                    </div>
-                                    <div>
-                                        <div class="text-xs font-bold text-white">Caeryn</div>
-                                        <div class="text-[9px] text-orange-400 font-mono">Checkpoint Guard</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- DIVISI MLBB (2 ANGGOTA INDIVIDUAL) -->
-                        <div class="w-full bg-black/60 p-6 md:p-8 rounded-3xl border border-white/15 shadow-xl space-y-4">
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-white/10 pb-3">
-                                <div>
-                                    <span class="text-[10px] font-bold px-2.5 py-0.5 rounded bg-orange-500/15 text-orange-400 border border-orange-500/30 font-mono">
-                                        TIER 3 // ESPORTS VANGUARD
-                                    </span>
-                                    <h3 class="text-lg font-bold text-white tracking-tight pt-1">MLBB Tournament Operators</h3>
-                                </div>
-                                <span class="text-[10px] text-neutral-500 font-mono">2 Personel Terpilih • Ketuk Nama untuk Bio</span>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div onclick="openStaffDossier('moumou')" class="p-4 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer flex items-center space-x-3.5 group hover:border-orange-500/50">
-                                    <div class="w-14 h-14 bg-neutral-900 border border-white/10 rounded-xl overflow-hidden shrink-0 group-hover:scale-105 transition">
-                                        <img src="image/BUTA.jpg" alt="Moumou" class="w-full h-full object-cover">
-                                    </div>
-                                    <div>
-                                        <div class="text-sm font-bold text-white">Moumou</div>
-                                        <div class="text-xs text-orange-400 font-mono">Tournament Director & Drafter</div>
-                                        <div class="text-[10px] text-neutral-400 pt-0.5">Spesialis Regulasi Custom 5v5</div>
-                                    </div>
-                                </div>
-
-                                <div onclick="openStaffDossier('nino')" class="p-4 bg-neutral-950/80 rounded-2xl border border-white/10 hover-popup cursor-pointer flex items-center space-x-3.5 group hover:border-orange-500/50">
-                                    <div class="w-14 h-14 bg-neutral-900 border border-white/10 rounded-xl overflow-hidden shrink-0 group-hover:scale-105 transition">
-                                        <img src="image/BUTA.jpg" alt="Nino" class="w-full h-full object-cover">
-                                    </div>
-                                    <div>
-                                        <div class="text-sm font-bold text-white">Nino</div>
-                                        <div class="text-xs text-orange-400 font-mono">Match Coordinator & Shoutcaster</div>
-                                        <div class="text-[10px] text-neutral-400 pt-0.5">Spesialis Sparing Antar Server</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="hierarchy-line"></div>
-                    </div>
-
-                    <!-- TINGKAT 4: DOKUMENTASI KOLEKTIF -->
-                    <div class="w-full bg-black/40 p-6 md:p-8 rounded-3xl border border-white/10 hover-popup cursor-pointer group space-y-6 shadow-xl" onclick="openMultiImageModal('Galeri Tim Staf CRUX', ['image/SOLO.jpg', 'image/LUFFY.jpg', 'image/KAKASHI.jpg', 'image/KAIZEN.jpg'], ['Dokumentasi kolektif staf pengurus CORE REGNUM UNIFIED-X.', 'W1ZQ Founder.', 'Admin Kakashi.', 'Kaizen Operator.'])">
-                        <div class="h-56 md:h-72 rounded-2xl bg-neutral-950 border border-white/10 overflow-hidden relative">
-                            <img src="image/SOLO.jpg" alt="Foto Kolektif Staf" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-700">
-                        </div>
-                        <div class="text-center space-y-2">
-                            <span class="text-[10px] font-bold uppercase tracking-widest font-mono" style="color: var(--accent-orange);">TIER 4 // HONORARY GUILD ARCHIVE</span>
-                            <h3 class="text-2xl font-bold text-white tracking-tight">Janji Kepengurusan CORE REGNUM UNIFIED-X</h3>
-                            <p class="text-xs text-neutral-400 max-w-xl mx-auto font-light">
-                                "Kami berjanji memimpin dengan empati, menjaga kerahasiaan seluruh member, dan memastikan CORE REGNUM UNIFIED-X selalu menjadi rumah terbaik bagi kita semua."
+                            <p class="text-xs text-neutral-300 leading-relaxed font-light max-w-xl mx-auto">
+                                Pemegang kedaulatan utama dan penjaga keluarga besar CRUX. Bertanggung jawab atas integritas moral, keamanan sirkel, dan kelangsungan visi jangka panjang komunitas.
                             </p>
+
+                            <!-- TUPOKSI OWNER -->
+                            <div class="text-left bg-black/60 p-4 rounded-2xl border border-amber-500/30 space-y-2 text-xs">
+                                <span class="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider">📋 INFORMASI TUPOKSI (TUGAS POKOK & FUNGSI):</span>
+                                <ul class="space-y-1 text-[11px] text-neutral-300 font-light list-disc list-inside">
+                                    <li>Menetapkan arah kebijakan, kode etik, dan regulasi tertinggi server.</li>
+                                    <li>Memegang hak veto mutlak terhadap keputusan strategis dan keamanan komunitas.</li>
+                                    <li>Mengembangkan, memelihara, dan memperbarui sistem bot mandiri (CRUX Bot).</li>
+                                    <li>Merawat ikatan kekeluargaan serta memastikan seluruh member merasa nyaman.</li>
+                                </ul>
+                            </div>
+
+                            <div class="pt-2 flex items-center justify-center space-x-2 text-[11px] font-mono text-amber-400 font-bold">
+                                <span>🔍 KETUK UNTUK MELIHAT PROFILE OWNER</span>
+                                <span>→</span>
+                            </div>
+                        </div>
+
+                        <div class="hierarchy-line"></div>
+                    </div>
+
+                    <!-- TINGKAT 2 (SEJAJAR): 3 POSISI SETARA DALAM SATU GARIS -->
+                    <div class="space-y-3">
+                        <div class="text-center">
+                            <span class="inline-block text-[10px] font-bold px-3 py-1 rounded-full bg-neutral-900 text-neutral-300 border border-white/10 font-mono tracking-widest">
+                                TINGKAT OPERASIONAL // 3 JABATAN SETARA
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            
+                            <!-- 1. JABATAN ADMIN (AURA CRIMSON MERAH) -->
+                            <div onclick="openDivisionStaffModal('admin')" 
+                                 class="bg-gradient-to-b from-red-950/30 via-neutral-900 to-black p-6 rounded-3xl aura-admin cursor-pointer space-y-4 flex flex-col justify-between group">
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-red-500/20 text-red-400 border border-red-500/40">ADMIN COUNCIL</span>
+                                        <span class="text-xs text-neutral-400 font-mono">2 Personel</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-black text-white tracking-tight">STRATEGIC ADMIN</h4>
+                                        <div class="text-[10px] font-mono text-red-400 font-bold">PENGAWAS SISTEM & RELASI</div>
+                                    </div>
+                                    <p class="text-xs text-neutral-300 font-light leading-relaxed">
+                                        Garda depan penjaga keadilan peraturan dan jembatan hubungan diplomasi server.
+                                    </p>
+
+                                    <!-- Tupoksi Admin -->
+                                    <div class="bg-black/60 p-3 rounded-xl border border-red-500/20 space-y-1.5 text-[11px]">
+                                        <span class="text-[9px] font-mono text-red-400 font-bold uppercase">TUPOKSI:</span>
+                                        <ul class="space-y-1 text-neutral-300 font-light list-disc list-inside text-[10px]">
+                                            <li>Mengaudit izin peran dan hak akses member.</li>
+                                            <li>Menyeleksi calon anggota baru secara objektif.</li>
+                                            <li>Menjaga diplomasi dengan server mitra luar.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-white/5 text-[10px] font-mono text-red-400 font-bold flex justify-between items-center">
+                                    <span>Buka Personel Admin</span>
+                                    <span>→</span>
+                                </div>
+                            </div>
+
+                            <!-- 2. JABATAN TIM OPERATOR ROBLOX (AURA HIJAU ZAMRUD) -->
+                            <div onclick="openDivisionStaffModal('roblox')" 
+                                 class="bg-gradient-to-b from-emerald-950/30 via-neutral-900 to-black p-6 rounded-3xl aura-roblox cursor-pointer space-y-4 flex flex-col justify-between group">
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">ADVENTURE CORPS</span>
+                                        <span class="text-xs text-neutral-400 font-mono">5 Personel</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-black text-white tracking-tight">OPERATOR ROBLOX</h4>
+                                        <div class="text-[10px] font-mono text-emerald-400 font-bold">EKSPEDISI & CO-OP EVENT</div>
+                                    </div>
+                                    <p class="text-xs text-neutral-300 font-light leading-relaxed">
+                                        Pemimpin penjelajahan map gunung dan pengatur server bermain bersama.
+                                    </p>
+
+                                    <!-- Tupoksi Roblox -->
+                                    <div class="bg-black/60 p-3 rounded-xl border border-emerald-500/20 space-y-1.5 text-[11px]">
+                                        <span class="text-[9px] font-mono text-emerald-400 font-bold uppercase">TUPOKSI:</span>
+                                        <ul class="space-y-1 text-neutral-300 font-light list-disc list-inside text-[10px]">
+                                            <li>Merancang rute ekspedisi pendakian Roblox.</li>
+                                            <li>Menyiapkan server privat yang aman & lancar.</li>
+                                            <li>Menjaga keceriaan suara di voice channel.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-white/5 text-[10px] font-mono text-emerald-400 font-bold flex justify-between items-center">
+                                    <span>Buka Personel Roblox</span>
+                                    <span>→</span>
+                                </div>
+                            </div>
+
+                            <!-- 3. JABATAN TIM OPERATOR MLBB (AURA UNGU ESPORTS) -->
+                            <div onclick="openDivisionStaffModal('mlbb')" 
+                                 class="bg-gradient-to-b from-purple-950/30 via-neutral-900 to-black p-6 rounded-3xl aura-mlbb cursor-pointer space-y-4 flex flex-col justify-between group">
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-purple-500/20 text-purple-400 border border-purple-500/40">ESPORTS VANGUARD</span>
+                                        <span class="text-xs text-neutral-400 font-mono">2 Personel</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-black text-white tracking-tight">OPERATOR MLBB</h4>
+                                        <div class="text-[10px] font-mono text-purple-400 font-bold">TURNAMEN & SHOUTCASTING</div>
+                                    </div>
+                                    <p class="text-xs text-neutral-300 font-light leading-relaxed">
+                                        Pengatur laga custom Land of Dawn dan pemandu jalannya pertandingan seru.
+                                    </p>
+
+                                    <!-- Tupoksi MLBB -->
+                                    <div class="bg-black/60 p-3 rounded-xl border border-purple-500/20 space-y-1.5 text-[11px]">
+                                        <span class="text-[9px] font-mono text-purple-400 font-bold uppercase">TUPOKSI:</span>
+                                        <ul class="space-y-1 text-neutral-300 font-light list-disc list-inside text-[10px]">
+                                            <li>Mengatur jadwal laga internal 5v5 bulanan.</li>
+                                            <li>Menyusun regulasi draft pick yang seimbang.</li>
+                                            <li>Menyuguhkan live streaming & ulasan menghibur.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-white/5 text-[10px] font-mono text-purple-400 font-bold flex justify-between items-center">
+                                    <span>Buka Personel MLBB</span>
+                                    <span>→</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- JANJI DAN KOMITMEN KEPENGURUSAN -->
+                    <div class="w-full bg-gradient-to-br from-neutral-950 via-neutral-900 to-black p-8 md:p-12 rounded-3xl border border-orange-500/40 shadow-2xl space-y-6 hover-popup">
+                        <div class="text-center space-y-2">
+                            <span class="text-[10px] font-bold uppercase tracking-widest font-mono text-orange-400">// INTEGRITY & SACRED PLEDGE</span>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white tracking-tight font-cinzel">Janji dan Komitmen Kepengurusan CRUX</h3>
+                            <p class="text-xs text-neutral-400 max-w-xl mx-auto font-light">
+                                Prinsip etika yang diikrarkan oleh seluruh jajaran pengurus demi merawat kenyamanan dan martabat keluarga besar CORE REGNUM UNIFIED-X.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-2">
+                            <div class="p-4 bg-black/60 rounded-2xl border border-white/5 space-y-1.5 hover-popup">
+                                <div class="font-bold text-white flex items-center space-x-2">
+                                    <span class="text-orange-400">⚖️</span>
+                                    <span>Keadilan Tanpa Pandang Bulu</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Memimpin dengan teladan, mendengarkan semua pihak secara objektif, serta menegakkan peraturan tanpa keberpihakan atas dasar pertemanan semata.
+                                </p>
+                            </div>
+
+                            <div class="p-4 bg-black/60 rounded-2xl border border-white/5 space-y-1.5 hover-popup">
+                                <div class="font-bold text-white flex items-center space-x-2">
+                                    <span class="text-orange-400">🔒</span>
+                                    <span>Penjagaan Privasi Mutlak</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Menjamin seluruh cerita, obrolan pribadi, dan identitas anggota tetap terlindungi aman di dalam lingkaran tanpa pernah disebarluaskan.
+                                </p>
+                            </div>
+
+                            <div class="p-4 bg-black/60 rounded-2xl border border-white/5 space-y-1.5 hover-popup">
+                                <div class="font-bold text-white flex items-center space-x-2">
+                                    <span class="text-orange-400">🤝</span>
+                                    <span>Pelayanan Sepenuh Hati</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Mengedepankan empati dan kehangatan. Staf hadir sebagai kawan untuk merangkul, bukan penguasa yang mengintimidasi.
+                                </p>
+                            </div>
+
+                            <div class="p-4 bg-black/60 rounded-2xl border border-white/5 space-y-1.5 hover-popup">
+                                <div class="font-bold text-white flex items-center space-x-2">
+                                    <span class="text-orange-400">🏡</span>
+                                    <span>Sanctuary yang Bebas Toksisitas</span>
+                                </div>
+                                <p class="text-[11px] text-neutral-300 font-light leading-relaxed">
+                                    Sigap menindak segala bentuk provokasi dan perundungan demi menjaga server tetap menjadi rumah paling nyaman untuk pulang.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -1361,7 +1592,7 @@
         <!-- ================= HALAMAN 6: BIRTHDAY VAULT ================= -->
         <section id="page-birthday" class="page-section space-y-12">
             
-            <div id="bdayLockScreen" class="glass-panel hud-corner p-8 md:p-16 rounded-3xl border-orange-500/50 text-center max-w-2xl mx-auto space-y-6 relative overflow-hidden shadow-2xl">
+            <div id="bdayLockScreen" class="glass-panel hud-corner p-8 md:p-16 rounded-3xl border-orange-500/50 text-center max-w-2xl mx-auto space-y-6 relative overflow-hidden shadow-2xl hover-popup">
                 <div class="w-20 h-20 mx-auto bg-orange-500/10 border border-orange-500/40 rounded-2xl flex items-center justify-center text-3xl shadow-inner animate-pulse" style="border-color: var(--accent-orange);">
                     🔒
                 </div>
@@ -1369,7 +1600,7 @@
                     <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// SECURE BIRTHDAY VAULT (EST. 2026)</span>
                     <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight">Terminal Vault Terkunci</h2>
                     <p class="text-xs text-neutral-400 max-w-md mx-auto font-light">
-                        Masukkan kunci rahasia atau namamu (Kunci demo: <strong class="text-white font-mono bg-neutral-900 px-2 py-0.5 rounded border border-white/10">Wiz</strong>) untuk membuka gerbang surat dan lilin kejutan ulang tahun.
+                        Masukkan kunci rahasia atau namamu (Kunci demo: <strong class="text-white font-mono bg-neutral-900 px-2 py-0.5 rounded border border-white/10">???</strong>) untuk membuka gerbang surat dan lilin kejutan ulang tahun.
                     </p>
                 </div>
 
@@ -1387,7 +1618,7 @@
             </div>
 
             <div id="bdayUnlockedContent" class="hidden space-y-8">
-                <div class="glass-panel hud-corner p-6 md:p-14 rounded-3xl border-orange-500/80 bg-gradient-to-r from-orange-950/30 via-neutral-900 to-black relative overflow-hidden space-y-6 shadow-2xl">
+                <div class="glass-panel hud-corner p-6 md:p-14 rounded-3xl border-orange-500/80 bg-gradient-to-r from-orange-950/30 via-neutral-900 to-black relative overflow-hidden space-y-6 shadow-2xl hover-popup">
                     <div class="space-y-2">
                         <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// ACCESS GRANTED: SELAMAT DATANG, <span id="welcomeMemberName" class="text-white"></span>!</span>
                         <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white crux-glow">HAPPY BIRTHDAY! 🎂</h2>
@@ -1419,7 +1650,7 @@
                     </div>
                 </div>
 
-                <div class="glass-panel p-6 md:p-14 rounded-3xl border-orange-500/50 space-y-8">
+                <div class="glass-panel p-6 md:p-14 rounded-3xl border-orange-500/50 space-y-8 hover-popup">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div class="space-y-1">
                             <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 06. SURAT & KUE INTERAKTIF</span>
@@ -1449,30 +1680,22 @@
 
     </main>
 
-    <!-- ================= MODAL DOSSIER STAF ================= -->
+    <!-- ================= MODAL DOSSIER STAF (SWIPE LAYAR KIRI / KANAN, TANPA X & TANPA PANAH) ================= -->
     <div id="staffDetailModal" class="modal-backdrop-blur p-4">
-        <div class="glass-panel p-5 sm:p-7 rounded-3xl max-w-lg w-full max-h-[86vh] overflow-y-auto border-2 border-orange-500/60 relative shadow-2xl modal-content-box space-y-5 bg-gradient-to-b from-neutral-900 via-[#0a0a0c] to-black">
-            <!-- Close Button -->
-            <button onclick="closeStaffDossier()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-900/90 border border-white/20 flex items-center justify-center text-neutral-300 hover:text-white hover:border-orange-500 transition font-bold text-sm z-20">✕</button>
+        <div id="dossierModalBox" class="glass-panel p-5 sm:p-7 rounded-3xl max-w-lg w-full max-h-[86vh] overflow-y-auto border-2 border-orange-500/60 relative shadow-2xl modal-content-box space-y-5 bg-gradient-to-b from-neutral-900 via-[#0a0a0c] to-black cursor-grab active:cursor-grabbing select-none">
 
-            <!-- Division Isolated Navigation Bar -->
-            <div class="flex items-center justify-between bg-black/60 px-3.5 py-1.5 rounded-xl border border-white/10 text-xs font-mono">
-                <button id="prevStaffBtn" onclick="navigateDivisionStaff(-1)" class="text-neutral-400 hover:text-orange-400 transition flex items-center space-x-1 font-bold text-[11px]">
-                    <span>❮</span> <span class="hidden sm:inline">SEBELUMNYA</span>
-                </button>
+            <div class="flex items-center justify-between bg-black/60 px-3.5 py-2 rounded-xl border border-white/10 text-xs font-mono">
                 <div class="flex items-center space-x-1.5 text-neutral-300 text-[10px] sm:text-[11px]">
                     <span class="text-orange-400 font-bold">DIVISI:</span>
-                    <span id="dossierDivisionBadge" class="font-bold uppercase text-white truncate max-w-[130px] sm:max-w-none">ROBLOX</span>
+                    <span id="dossierDivisionBadge" class="font-bold uppercase text-white truncate max-w-[150px] sm:max-w-none">ROBLOX</span>
                     <span class="text-neutral-500" id="dossierIndexIndicator">(1/5)</span>
                 </div>
-                <button id="nextStaffBtn" onclick="navigateDivisionStaff(1)" class="text-neutral-400 hover:text-orange-400 transition flex items-center space-x-1 font-bold text-[11px]">
-                    <span class="hidden sm:inline">BERIKUTNYA</span> <span>❯</span>
-                </button>
+                <div class="text-[10px] text-orange-400 font-mono font-bold flex items-center gap-1">
+                    <span>👈 USAP LAYAR 👉</span>
+                </div>
             </div>
 
-            <!-- Dossier Content Area -->
             <div id="dossierContentArea" class="space-y-4 slide-fade">
-                <!-- Header (Avatar & Title) -->
                 <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 border-b border-white/10 pb-4">
                     <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-neutral-950 border-2 border-orange-500/60 overflow-hidden shadow-xl relative shrink-0">
                         <img id="staffAvatar" src="" alt="Staff Avatar" class="w-full h-full object-cover">
@@ -1487,7 +1710,6 @@
                     </div>
                 </div>
 
-                <!-- Bio & Motto -->
                 <div class="space-y-3">
                     <div class="space-y-1">
                         <span class="text-[9px] font-mono tracking-widest uppercase text-neutral-400 font-bold">// BIOGRAFI & PERAN</span>
@@ -1499,11 +1721,11 @@
                         <p id="staffMotto" class="text-[11px] text-neutral-300 italic font-light">"Motto..."</p>
                     </div>
 
-                    <!-- Telemetry Grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-0.5">
-                        <div class="p-2.5 bg-neutral-950 rounded-xl border border-white/5 space-y-0.5">
+                        <!-- TANGGAL BERGABUNG TERMASUK UNTUK OWNER (DENGAN NOTE BERDIRINYA SERVER) -->
+                        <div id="staffJoinDateContainer" class="p-2.5 bg-neutral-950 rounded-xl border border-white/5 space-y-0.5">
                             <span class="text-[9px] font-mono text-neutral-400 uppercase">📅 BERGABUNG</span>
-                            <div id="staffJoinDate" class="text-[11px] font-bold text-white font-mono">20 Mei 2026</div>
+                            <div id="staffJoinDate" class="text-[11px] font-bold text-white font-mono">-</div>
                         </div>
                         <div class="p-2.5 bg-neutral-950 rounded-xl border border-white/5 space-y-0.5">
                             <span class="text-[9px] font-mono text-neutral-400 uppercase">🎮 GAME FAVORIT</span>
@@ -1518,17 +1740,16 @@
             </div>
 
             <div class="pt-1">
-                <button onclick="closeStaffDossier()" class="w-full py-2.5 bg-neutral-900 border border-white/10 rounded-xl text-xs font-bold text-white hover:border-orange-500 transition font-mono">
-                    TUTUP DOSSIER PROFIL
+                <button onclick="closeStaffDossier()" class="w-full py-2.5 bg-neutral-900 border border-white/10 rounded-xl text-xs font-bold text-neutral-300 hover:text-white hover:border-orange-500 transition font-mono">
+                    TUTUP (ATAU KETUK LUAR FRAME)
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- ================= MODAL SURAT, KUE & MULTI-IMAGE ================= -->
+    <!-- ================= MODAL SURAT & KUE ================= -->
     <div id="envelopeModal" class="modal-backdrop-blur">
         <div class="glass-panel p-6 md:p-8 rounded-3xl max-w-lg w-full border border-orange-500/60 relative shadow-2xl modal-content-box space-y-6 bg-gradient-to-b from-neutral-900 via-[#0a0a0a] to-black">
-            <button onclick="closeEnvelopeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-900 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:border-orange-500 transition font-bold text-sm z-10">✕</button>
             <div class="text-center space-y-1">
                 <span class="text-[10px] font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// SPECIAL BIRTHDAY LETTER</span>
                 <h3 id="envTitle" class="text-xl md:text-2xl font-bold text-white tracking-tight">Pesan Pribadi Anggota</h3>
@@ -1540,13 +1761,12 @@
                 </div>
                 <p id="envMessageText" class="text-sm text-neutral-200 leading-relaxed italic min-h-[90px] flex items-center justify-center text-center font-light">"Isi surat..."</p>
             </div>
-            <button onclick="closeEnvelopeModal()" class="w-full py-3 bg-neutral-900 border border-white/10 rounded-xl text-xs font-bold text-white hover:border-orange-500 transition font-mono">TUTUP SURAT</button>
+            <button onclick="closeEnvelopeModal()" class="w-full py-3 bg-neutral-900 border border-white/10 rounded-xl text-xs font-bold text-white hover:border-orange-500 transition font-mono">TUTUP SURAT (ATAU KETUK LUAR)</button>
         </div>
     </div>
 
     <div id="cakeModal" class="modal-backdrop-blur">
         <div class="glass-panel p-6 md:p-8 rounded-3xl max-w-md w-full border border-orange-500/60 relative shadow-2xl text-center space-y-6 modal-content-box">
-            <button onclick="closeCakeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-900 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white transition font-bold text-sm">✕</button>
             <div class="space-y-2">
                 <span class="text-[10px] font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// VIRTUAL CELEBRATION</span>
                 <h3 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Tiup Lilin Kuenya!</h3>
@@ -1570,42 +1790,7 @@
         </div>
     </div>
 
-    <!-- Enhanced Image Gallery Modal -->
-    <div id="detailModal" class="modal-backdrop-blur">
-        <div class="glass-panel p-6 md:p-8 rounded-3xl max-w-3xl w-full border border-orange-500/60 space-y-5 relative shadow-2xl modal-content-box">
-            <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-neutral-900 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white transition font-bold text-sm z-20">✕</button>
-            
-            <div class="space-y-1">
-                <span class="text-[10px] font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);" id="modalCategory">// HOLOGRAM PROJECTION</span>
-                <h3 id="modalTitle" class="text-xl md:text-2xl font-bold text-white tracking-tight">Judul Galeri</h3>
-            </div>
-
-            <div id="swipeContainer" class="relative w-full h-72 md:h-96 rounded-2xl bg-neutral-950/90 border border-white/10 overflow-hidden flex items-center justify-center shadow-2xl p-4 cursor-grab active:cursor-grabbing select-none group">
-                <div class="absolute inset-0 bg-radial from-orange-500/10 via-transparent to-transparent pointer-events-none"></div>
-                <img id="modalImg" src="" alt="Slide Image" class="max-w-full max-h-full object-contain holo-floating-image slide-fade pointer-events-none rounded-xl">
-                
-                <button onclick="prevSlide(); playSFX('blip');" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 border border-white/20 text-white flex items-center justify-center hover:bg-orange-500 transition opacity-80 hover:opacity-100 z-10 shadow-lg" title="Sebelumnya">
-                    ❮
-                </button>
-                <button onclick="nextSlide(); playSFX('blip');" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 border border-white/20 text-white flex items-center justify-center hover:bg-orange-500 transition opacity-80 hover:opacity-100 z-10 shadow-lg" title="Selanjutnya">
-                    ❯
-                </button>
-
-                <div id="dotIndicators" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2 bg-black/80 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-md z-10"></div>
-            </div>
-
-            <div class="p-3 bg-neutral-950/70 rounded-xl border border-white/5">
-                <p id="modalDesc" class="text-xs md:text-sm text-neutral-300 leading-relaxed font-light text-center min-h-[44px] flex items-center justify-center">Deskripsi arsip...</p>
-            </div>
-            
-            <div class="flex flex-col sm:flex-row justify-between items-center pt-2 border-t border-white/5 gap-2">
-                <span class="text-[10px] text-neutral-500 font-mono">💡 Tips: Usap layar, gunakan panah keyboard ◄ ► atau tombol panah.</span>
-                <button onclick="closeModal()" class="px-6 py-2.5 text-white text-xs font-bold rounded-xl transition shadow-lg shadow-orange-500/20 hover:opacity-95 font-mono" style="background-color: var(--accent-orange);">TUTUP PROYEKSI</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ================= FOOTER DENGAN TAUTAN DISCORD & TIKTOK ================= -->
+    <!-- ================= FOOTER ================= -->
     <footer class="max-w-7xl mx-auto px-4 md:px-8 text-center text-xs text-neutral-500 border-t border-white/5 pt-8 pb-12 w-full font-mono relative z-10 flex flex-col items-center justify-center space-y-3">
         <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-bold">
             <a href="https://discord.gg/KFYPZgKbZg" target="_blank" rel="noopener noreferrer" class="text-neutral-400 hover:text-orange-400 transition flex items-center space-x-1">
@@ -1624,7 +1809,6 @@
 
     <!-- ================= JAVASCRIPT LOGICS ================= -->
     <script>
-        // PENGATURAN MANUAL JUMLAH MEMBER
         const MANUAL_MEMBER_COUNT = 71;
 
         function applyMemberCount() {
@@ -1636,7 +1820,6 @@
         applyMemberCount();
 
         // ================= PENGHITUNGAN REAL-TIME VOICE CHANNEL (1239 JAM 30 MENIT) =================
-        // Berjalan real-time detik demi detik, tersinkronisasi dan TIDAK PERNAH RESET ke 0 saat web di-refresh!
         const VC_BASE_HOURS = 1239;
         const VC_BASE_MINUTES = 30;
         const VC_BASE_MS = (VC_BASE_HOURS * 3600 + VC_BASE_MINUTES * 60) * 1000;
@@ -1652,7 +1835,6 @@
             }
 
             if (!anchor) {
-                // Inisialisasi titik tolak pertama kali agar tepat bernilai 1239 Jam 30 Menit
                 anchor = now - VC_BASE_MS;
                 try {
                     localStorage.setItem(VC_STORAGE_KEY, anchor.toString());
@@ -1660,7 +1842,6 @@
             } else {
                 anchor = parseInt(anchor, 10);
                 const elapsed = (now - anchor) / (3600 * 1000);
-                // Jika data lama korup atau berada di atas 2000 jam (seperti bug 3000 jam), kalibrasi ulang ke baseline 1239 jam 30 menit
                 if (isNaN(anchor) || elapsed < 1239 || elapsed > 2000) {
                     anchor = now - VC_BASE_MS;
                     try {
@@ -1686,7 +1867,9 @@
             const minutes = Math.floor((totalSeconds % 3600) / 60);
             const seconds = totalSeconds % 60;
 
-            const vcDetailedString = `${totalHours} Jam ${minutes}m ${seconds}s`;
+            const pad = (n) => String(n).padStart(2, '0');
+
+            const vcDetailedString = `${totalHours} Jam ${minutes}m ${pad(seconds)}s`;
             const vcCompactString = `${totalHours} Jam ${minutes}m (Live)`;
 
             const cardCounter = document.getElementById('liveVcCounter');
@@ -1698,7 +1881,22 @@
         setInterval(updateRealtimeVoiceChannel, 1000);
         updateRealtimeVoiceChannel();
 
-        // TEKA-TEKI KATA "CRUX" DENGAN HURUF MELAYANG DI SELURUH LAYAR + DRAG & DROP
+        // ================= TOUCH INTERACTION PADA MOBILE UNTUK EFEK CAHAYA / MELAYANG =================
+        function initTouchGlowEffects() {
+            const allCards = document.querySelectorAll('.glass-panel, .hover-popup, .aura-owner, .aura-admin, .aura-roblox, .aura-mlbb, .role-card-glow, .ww-role-card');
+            allCards.forEach(card => {
+                card.addEventListener('touchstart', function(e) {
+                    allCards.forEach(c => {
+                        if (c !== card) c.classList.remove('card-touched');
+                    });
+                    card.classList.toggle('card-touched');
+                }, { passive: true });
+            });
+        }
+        document.addEventListener('DOMContentLoaded', initTouchGlowEffects);
+        setTimeout(initTouchGlowEffects, 500);
+
+        // ================= TEKA-TEKI KATA "CRUX" + FITUR LEWATI TEKA-TEKI =================
         const targetWord = ['C', 'R', 'U', 'X'];
         let currentSlots = ['', '', '', ''];
         let lettersPoolData = [
@@ -1768,7 +1966,6 @@
             });
             renderPuzzle();
             document.getElementById('puzzleStatusMsg').innerText = "💡 Tangkap huruf melayang dengan menyeretnya atau cukup diketuk!";
-            document.getElementById('puzzleStatusMsg').className = "text-xs font-mono text-neutral-300 min-h-[22px] flex items-center justify-center";
         }
 
         function resetPuzzle() {
@@ -1781,8 +1978,21 @@
                 { id: 4, letter: 'X', xPercent: 84, yPercent: 76, anim: 'drift-anim-3' }
             ];
             renderPuzzle();
-            document.getElementById('puzzleStatusMsg').innerText = "Susunan direset. Silakan tangkap huruf kembali.";
-            document.getElementById('puzzleStatusMsg').className = "text-xs font-mono text-neutral-300 min-h-[22px] flex items-center justify-center";
+            document.getElementById('puzzleStatusMsg').innerText = "Susunan direset. Silakan tangkap huruf kembali atau lewati teka-teki.";
+        }
+
+        // FUNGSI RESMI: LEWATI TEKA-TEKI LANGSUNG KE BASECAMP
+        function skipPuzzle() {
+            playSFX('granted');
+            confetti({ particleCount: 110, spread: 85, origin: { y: 0.6 } });
+            document.getElementById('puzzleStatusMsg').innerHTML = "✨ <strong class='text-orange-400'>AKSES LANGSUNG DIBERIKAN! MEMASUKI BASECAMP...</strong>";
+            
+            setTimeout(() => {
+                const screen = document.getElementById('welcomePuzzleScreen');
+                screen.classList.add('puzzle-solved');
+                showToast('🚀', 'Selamat datang di CORE REGNUM UNIFIED-X!');
+                startAtmosphere();
+            }, 600);
         }
 
         function checkPuzzleSolution() {
@@ -1798,6 +2008,7 @@
                     const screen = document.getElementById('welcomePuzzleScreen');
                     screen.classList.add('puzzle-solved');
                     showToast('🚀', 'Selamat datang di CORE REGNUM UNIFIED-X!');
+                    startAtmosphere();
                 }, 1000);
             } else {
                 playSFX('denied');
@@ -1900,7 +2111,7 @@
 
         renderPuzzle();
 
-        // DOSSIER DATABASE DENGAN NAVIGASI TERISOLASI PER DIVISI
+        // ================= DOSSIER DATABASE RESMI STAF =================
         const staffDatabase = {
             w1zq: {
                 division: "apex",
@@ -1908,12 +2119,12 @@
                 name: "W1ZQ",
                 tier: "TIER 1 // APEX LEADER",
                 role: "FOUNDER & COMMUNITY ARCHITECT",
-                handle: "@w1zq_crux",
-                avatar: "image/LUFFY.jpg",
-                bio: "Pendiri tunggal CORE REGNUM UNIFIED-X. Merintis markas ini dari nol berlandaskan filosofi retakan pemecah kesunyian. Penanggung jawab penuh arah kebijakan komunitas, pengembang tunggal CRUX Bot, dan pembina ikatan keluarga besar.",
+                handle: "@CRUXxW1ZQ",
+                avatar: "image/WIZ.jpeg",
+                bio: "Pendiri tunggal CORE REGNUM UNIFIED-X. Membangun markas dari nol berlandaskan filosofi retakan pemecah kesunyian. Penanggung jawab penuh kebijakan tertinggi, pengembang tunggal CRUX Bot, dan pelindung kenyamanan seluruh keluarga besar.",
                 motto: "Ciptakan kenyamanan mutlak, bangun persahabatan dari hati, dan hadirkan rumah bagi mereka yang memerlukan tempat untuk pulang.",
-                joinDate: "20 Mei 2026 (Founding Day)",
-                favGame: "Roblox Expedition, Werewolf Engine, Strategy Co-op",
+                joinDate: "20 Mei 2026",
+                favGame: "Roblox Expedition, Mobile Legends (Marksman & Support), Chill Voice Chat",
                 hope: "CRUX menjadi tempat bernaung paling tulus, solid seumur hidup, dan menjadi rumah kedua terbaik bagi setiap jiwa terpilih."
             },
             ree: {
@@ -1923,10 +2134,10 @@
                 tier: "TIER 2 // CORE ADMINISTRATOR",
                 role: "RULES & REGULATIONS DIRECTOR",
                 handle: "@ree_management",
-                avatar: "image/KAKASHI.jpg",
-                bio: "Mengawal regulasi server dengan kepala dingin dan keadilan. Bertanggung jawab memverifikasi calon member baru melalui seleksi cermat agar keharmonisan dan kenyamanan basecamp tetap terlindungi.",
+                avatar: "image/REE.jpeg",
+                bio: "Mengawal regulasi server dengan kepala dingin dan keadilan. Bertanggung jawab memverifikasi calon member baru melalui seleksi cermat agar keharmonisan basecamp tetap terlindungi.",
                 motto: "Aturan ditegakkan bukan untuk membatasi kebebasan, melainkan untuk melindungi kenyamanan dan privasi sesama kawan.",
-                joinDate: "20 Mei 2026 (Co-Founding Council)",
+                joinDate: "20 Mei 2026",
                 favGame: "Mobile Legends, Chill Voice Chat, Survival Co-op",
                 hope: "Komunitas tetap terjaga dari drama negatif dan selalu menjadi sirkel paling adem."
             },
@@ -1937,10 +2148,10 @@
                 tier: "TIER 2 // CORE ADMINISTRATOR",
                 role: "EXTERNAL PARTNERSHIP & DIPLOMACY",
                 handle: "@zar_relations",
-                avatar: "image/KAKASHI.jpg",
-                bio: "Mengelola jalinan kemitraan aliansi dengan server discord terpercaya lainnya. Menjadi garda depan diplomasi komunitas dan memastikan nama baik CORE REGNUM UNIFIED-X selalu harum di mata publik.",
+                avatar: "image/ZAR.jpeg",
+                bio: "Mengelola jalinan kemitraan aliansi dengan server discord terpercaya lainnya. Menjadi garda depan diplomasi komunitas dan memastikan nama baik CORE REGNUM UNIFIED-X selalu harum.",
                 motto: "Solidaritas tanpa batas waktu. Menjalin pertemanan dengan integritas tinggi.",
-                joinDate: "20 Mei 2026 (Co-Founding Council)",
+                joinDate: "20 Mei 2026",
                 favGame: "Mobile Legends, RPG Adventure, Music Bot Jamming",
                 hope: "Jaringan persahabatan CRUX semakin luas dan member selalu merasa bangga menjadi bagian dari keluarga ini."
             },
@@ -1951,8 +2162,8 @@
                 tier: "TIER 3 // ADVENTURE LEAD",
                 role: "ROBLOX EXPEDITION PATHFINDER",
                 handle: "@yiselle_roblox",
-                avatar: "image/KAIZEN.jpg",
-                bio: "Pimpinan penjelajah map mendaki rintangan di Roblox. Menemukan map-map pegunungan ekstrem, menguji kelayakan jalur, dan memimpin rombongan member dari pos awal hingga menancapkan bendera di puncak.",
+                avatar: "image/CIL.jpeg",
+                bio: "Pimpinan penjelajah map rintangan di Roblox. Menemukan map-map pegunungan ekstrem, menguji kelayakan jalur, dan memimpin rombongan member hingga ke puncak.",
                 motto: "Taklukkan tebing tertinggi bersama! Jangan tinggalkan kawan di belakang.",
                 joinDate: "Juni 2026",
                 favGame: "Roblox (Mount Expedition, Tower Obby, Horror)",
@@ -1965,8 +2176,8 @@
                 tier: "TIER 3 // ADVENTURE OPERATOR",
                 role: "CO-OP EVENT COORDINATOR",
                 handle: "@sylv_crux",
-                avatar: "image/KAIZEN.jpg",
-                bio: "Koordinator teknis bermain bersama. Memastikan seluruh member mendapatkan server private Roblox yang lancar dan mengatur jadwal mabar akhir pekan tanpa membebani kesibukan sekolah/kuliah/kerja.",
+                avatar: "image/SIL.jpeg",
+                bio: "Koordinator teknis bermain bersama. Memastikan seluruh member mendapatkan server private Roblox yang lancar dan mengatur jadwal mabar akhir pekan.",
                 motto: "Game adalah sarana melepas penat, bukan arena menambah beban hidup.",
                 joinDate: "Juni 2026",
                 favGame: "Roblox (Co-op Story, Simulation)",
@@ -1979,12 +2190,12 @@
                 tier: "TIER 3 // ADVENTURE OPERATOR",
                 role: "TACTICAL MOUNTAIN GUIDE",
                 handle: "@cae_climber",
-                avatar: "image/KAIZEN.jpg",
-                bio: "Pemandu taktik pendakian. Paling sigap menolong member yang terjatuh dari rintangan, memberikan arahan lompatan, dan menjaga moral tim agar tidak menyerah di tengah jalur curam.",
+                avatar: "image/CAE.jpeg",
+                bio: "Pemandu taktik pendakian. Paling sigap menolong member yang terjatuh dari rintangan, memberikan arahan lompatan, dan menjaga moral tim.",
                 motto: "Jatuh sepuluh kali, bangkit sebelas kali bersama kawan di sampingmu.",
                 joinDate: "Juli 2026",
                 favGame: "Roblox (Difficulty Chart Obby, Climb Map)",
-                hope: "Melihat seluruh member berhasil foto bersama di puncak tertinggi tanpa ada yang tertinggal."
+                hope: "Melihat seluruh member berhasil foto bersama di puncak tertinggi."
             },
             ara: {
                 division: "roblox",
@@ -1993,8 +2204,8 @@
                 tier: "TIER 3 // ADVENTURE OPERATOR",
                 role: "VIBES & MORALE SPARK",
                 handle: "@ara_vibe",
-                avatar: "image/KAIZEN.jpg",
-                bio: "Penyemangat utama di ruang suara selama ekspedisi Roblox berlangsung. Mengisi perjalanan dengan celoteh ceria, canda tawa, dan memastikan tidak ada momen hening yang membosankan.",
+                avatar: "image/ARA.jpeg",
+                bio: "Penyemangat utama di ruang suara selama ekspedisi Roblox berlangsung. Mengisi perjalanan dengan celoteh ceria dan canda tawa.",
                 motto: "Tawa adalah bahan bakar terbaik untuk menaklukkan setiap rintangan.",
                 joinDate: "Juli 2026",
                 favGame: "Roblox (Party Games, Fashion Famous, Hangout)",
@@ -2007,8 +2218,8 @@
                 tier: "TIER 3 // ADVENTURE OPERATOR",
                 role: "SAFETY & CHECKPOINT GUARD",
                 handle: "@caeryn_guard",
-                avatar: "image/KAIZEN.jpg",
-                bio: "Penjaga checkpoint dan keselamatan rombongan. Memastikan setiap member telah mencapai pos istirahat dengan selamat sebelum tim melanjutkan langkah ke zona rintangan berikutnya.",
+                avatar: "image/RIN.jpeg",
+                bio: "Penjaga checkpoint dan keselamatan rombongan. Memastikan setiap member telah mencapai pos istirahat dengan selamat.",
                 motto: "Kemenangan sejati adalah saat kita sampai di garis akhir secara utuh.",
                 joinDate: "Juli 2026",
                 favGame: "Roblox (Adventure RPG, Parkour)",
@@ -2021,12 +2232,12 @@
                 tier: "TIER 3 // ESPORTS LEAD",
                 role: "TOURNAMENT DIRECTOR & DRAFT MASTER",
                 handle: "@moumou_mlbb",
-                avatar: "image/BUTA.jpg",
-                bio: "Pengatur utama laga Land of Dawn di server. Mengatur jadwal turnamen internal bulanan, menyusun regulasi draft pick yang seimbang, serta memfasilitasi fun match 5v5 santai yang menghibur.",
+                avatar: "image/MOM.jpeg",
+                bio: "Pengatur utama laga Land of Dawn di server. Mengatur jadwal turnamen internal bulanan dan menyusun regulasi draft pick seimbang.",
                 motto: "Kuasai makro, percayai kawan satu tim, dan rayakan setiap kemenangan bersama.",
                 joinDate: "Juni 2026",
                 favGame: "Mobile Legends: Bang Bang (Roamer & Midlane)",
-                hope: "Laga internal selalu berjalan sportif, seru, dan menjadi tontonan favorit member."
+                hope: "Laga internal selalu berjalan sportif, seru, dan menghibur."
             },
             nino: {
                 division: "mlbb",
@@ -2036,11 +2247,11 @@
                 role: "MATCH COORDINATOR & SHOUTCASTER",
                 handle: "@nino_caster",
                 avatar: "image/BUTA.jpg",
-                bio: "Komentator penuh antusiasme dan koordinator pertandingan. Menghidupkan suasana live streaming screen share Discord saat skuad CRUX bertanding, memandu jalannya laga dengan ulasan yang kocak dan menghibur.",
+                bio: "Komentator penuh antusiasme dan koordinator pertandingan. Menghidupkan suasana live stream voice Discord dengan ulasan kocak.",
                 motto: "Menang kita rayakan bersama, kalah kita evaluasi sambil tertawa.",
                 joinDate: "Juni 2026",
                 favGame: "Mobile Legends: Bang Bang (Goldlane & Jungler)",
-                hope: "Skuad MLBB CRUX semakin solid dan terus menorehkan win streak menyenangkan."
+                hope: "Skuad MLBB CRUX semakin solid dan terus menikmati permainan."
             }
         };
 
@@ -2053,11 +2264,14 @@
 
         let currentActiveStaffKey = null;
 
-        function openStaffDossier(staffKey) {
+        function openDivisionStaffModal(divisionKey) {
             playSFX('click');
-            currentActiveStaffKey = staffKey;
-            renderDossierModal();
-            document.getElementById('staffDetailModal').classList.add('active-modal');
+            const roster = divisionRosters[divisionKey];
+            if (roster && roster.length > 0) {
+                currentActiveStaffKey = roster[0];
+                renderDossierModal();
+                document.getElementById('staffDetailModal').classList.add('active-modal');
+            }
         }
 
         function renderDossierModal() {
@@ -2076,28 +2290,23 @@
             document.getElementById('staffHandle').innerText = data.handle;
             document.getElementById('staffBio').innerText = data.bio;
             document.getElementById('staffMotto').innerText = `"${data.motto}"`;
-            document.getElementById('staffJoinDate').innerText = data.joinDate;
             document.getElementById('staffFavGame').innerText = data.favGame;
             document.getElementById('staffHope').innerText = data.hope;
+
+            // TANGGAL BERGABUNG: DITAMPILKAN UNTUK SEMUA STAF TERMASUK OWNER (DENGAN NOTE BERDIRINYA SERVER)
+            const joinContainer = document.getElementById('staffJoinDateContainer');
+            joinContainer.style.display = 'block';
+
+            const joinDateEl = document.getElementById('staffJoinDate');
+            if (data.division === 'apex') {
+                joinDateEl.innerHTML = `<span class="text-white font-bold">${data.joinDate}</span> <span class="text-[9.5px] text-amber-400 font-mono block mt-0.5 font-bold">★ (Tanggal Berdirinya Server)</span>`;
+            } else {
+                joinDateEl.innerText = data.joinDate || '-';
+            }
 
             const roster = divisionRosters[data.division];
             const currentIdx = roster.indexOf(currentActiveStaffKey);
             document.getElementById('dossierIndexIndicator').innerText = `(${currentIdx + 1}/${roster.length})`;
-
-            const prevBtn = document.getElementById('prevStaffBtn');
-            const nextBtn = document.getElementById('nextStaffBtn');
-
-            if (roster.length <= 1) {
-                prevBtn.style.opacity = '0.3';
-                prevBtn.style.pointerEvents = 'none';
-                nextBtn.style.opacity = '0.3';
-                nextBtn.style.pointerEvents = 'none';
-            } else {
-                prevBtn.style.opacity = '1';
-                prevBtn.style.pointerEvents = 'auto';
-                nextBtn.style.opacity = '1';
-                nextBtn.style.pointerEvents = 'auto';
-            }
 
             contentArea.classList.add('slide-fade');
         }
@@ -2126,14 +2335,107 @@
             if (e.target === this) closeStaffDossier();
         });
 
-        // Web Audio API
+        // ================= USAP LAYAR KIRI / KANAN (SWIPE GESTURE) =================
+        const modalBox = document.getElementById('dossierModalBox');
+        let swipeStartX = 0;
+        let swipeEndX = 0;
+
+        modalBox.addEventListener('touchstart', e => {
+            swipeStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        modalBox.addEventListener('touchend', e => {
+            swipeEndX = e.changedTouches[0].screenX;
+            handleStaffSwipe();
+        }, {passive: true});
+
+        modalBox.addEventListener('mousedown', e => {
+            swipeStartX = e.clientX;
+        });
+
+        modalBox.addEventListener('mouseup', e => {
+            swipeEndX = e.clientX;
+            handleStaffSwipe();
+        });
+
+        function handleStaffSwipe() {
+            const threshold = 40;
+            if (swipeEndX < swipeStartX - threshold) {
+                navigateDivisionStaff(1);
+            } else if (swipeEndX > swipeStartX + threshold) {
+                navigateDivisionStaff(-1);
+            }
+        }
+
+        // ================= WEB AUDIO API: SFX & FUTURISTIC ATMOSPHERE BACKSOUND =================
         let audioEnabled = true;
         let audioCtx = null;
+        let atmosphereGain = null;
+        let atmosphereNodes = [];
 
         function initAudio() {
             if (!audioCtx) {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
-                if (AudioContext) audioCtx = new AudioContext();
+                if (AudioContext) {
+                    audioCtx = new AudioContext();
+                }
+            }
+        }
+
+        // Synthesizer Ambience Backsound (Ethereal Sci-Fi Drone)
+        function startAtmosphere() {
+            if (!audioEnabled) return;
+            initAudio();
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            if (atmosphereGain) return;
+
+            try {
+                atmosphereGain = audioCtx.createGain();
+                atmosphereGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                atmosphereGain.gain.exponentialRampToValueAtTime(0.04, audioCtx.currentTime + 3);
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(360, audioCtx.currentTime);
+
+                const freqs = [55, 82.4, 110];
+                atmosphereNodes = [];
+
+                freqs.forEach(freq => {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                    osc.detune.setValueAtTime((Math.random() - 0.5) * 8, audioCtx.currentTime);
+
+                    osc.connect(filter);
+                    osc.start();
+                    atmosphereNodes.push(osc);
+                });
+
+                filter.connect(atmosphereGain);
+                atmosphereGain.connect(audioCtx.destination);
+            } catch (err) {
+                console.log("Audio ambience start prevented:", err);
+            }
+        }
+
+        function stopAtmosphere() {
+            if (!atmosphereGain || !audioCtx) return;
+            try {
+                atmosphereGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
+                setTimeout(() => {
+                    atmosphereNodes.forEach(node => {
+                        try { node.stop(); } catch(e){}
+                    });
+                    atmosphereNodes = [];
+                    atmosphereGain = null;
+                }, 1000);
+            } catch(e) {
+                atmosphereGain = null;
             }
         }
 
@@ -2183,19 +2485,137 @@
                 gain.gain.linearRampToValueAtTime(0.001, now + 0.2);
                 osc.start(now);
                 osc.stop(now + 0.2);
+            } else if (type === 'power') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(220, now);
+                osc.frequency.exponentialRampToValueAtTime(880, now + 0.25);
+                gain.gain.setValueAtTime(0.08, now);
+                gain.gain.linearRampToValueAtTime(0.001, now + 0.25);
+                osc.start(now);
+                osc.stop(now + 0.25);
             }
         }
 
         function toggleAudio() {
             audioEnabled = !audioEnabled;
-            const statusText = audioEnabled ? 'SFX ON' : 'SFX OFF';
+            const statusText = audioEnabled ? 'ATMOSPHERE & SFX ON' : 'MUTED';
             const icon = audioEnabled ? '🔊' : '🔇';
             
             const btnIcon = document.getElementById('audioIcon');
             if (btnIcon) btnIcon.innerText = icon;
 
+            if (audioEnabled) {
+                startAtmosphere();
+                playSFX('click');
+            } else {
+                stopAtmosphere();
+            }
+
             showToast(icon, `Suara Antarmuka: ${statusText}`);
-            if (audioEnabled) playSFX('click');
+        }
+
+        // ================= INTERAKSI HIDUP DI TIAP HALAMAN =================
+        function triggerHomeEnergySpark() {
+            playSFX('power');
+            confetti({ particleCount: 70, spread: 90, origin: { y: 0.7 } });
+            showToast('⚡', 'CRUX Energi Sanctuary Berhasil Dipancarkan!');
+        }
+
+        // ================= REAL-TIME FIST BUMP KELUARGA (GLOBAL SINKRONISASI + LOCAL PERSISTENCE) =================
+        const FISTBUMP_STORAGE_KEY = 'crux_fistbump_live_anchor_v2';
+        const FISTBUMP_BASE_COUNT = 205;
+        let respectCounterVal = FISTBUMP_BASE_COUNT;
+
+        // Baca cache lokal
+        try {
+            const savedLocal = localStorage.getItem(FISTBUMP_STORAGE_KEY);
+            if (savedLocal && !isNaN(parseInt(savedLocal, 10))) {
+                respectCounterVal = Math.max(FISTBUMP_BASE_COUNT, parseInt(savedLocal, 10));
+            }
+        } catch(e) {}
+
+        function updateRespectDisplay(val) {
+            if (val >= respectCounterVal) {
+                respectCounterVal = val;
+            }
+            try {
+                localStorage.setItem(FISTBUMP_STORAGE_KEY, respectCounterVal.toString());
+            } catch(e) {}
+            const countEl = document.getElementById('respectCount');
+            if (countEl) countEl.innerText = respectCounterVal;
+        }
+
+        // Sinkronisasi data real-time dari API cloud publik (CounterAPI)
+        async function syncRealtimeRespect() {
+            try {
+                const res = await fetch('https://api.counterapi.dev/v1/crux_official_hq_2026/fistbump');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && typeof data.count === 'number') {
+                        const totalGlobal = FISTBUMP_BASE_COUNT + data.count;
+                        updateRespectDisplay(totalGlobal);
+                    }
+                }
+            } catch(err) {
+                // Bila offline, fallback menggunakan nilai tersimpan di localStorage
+                updateRespectDisplay(respectCounterVal);
+            }
+        }
+
+        // Polling berkala setiap 6 detik agar jika ada pengunjung lain yang menekan, angka bergerak real-time
+        setInterval(syncRealtimeRespect, 6000);
+        syncRealtimeRespect();
+
+        async function sendCommunityRespect() {
+            // Optimistic update instan di layar
+            respectCounterVal++;
+            updateRespectDisplay(respectCounterVal);
+            playSFX('granted');
+            confetti({ particleCount: 50, spread: 70, origin: { y: 0.8 } });
+            showToast('🤝', `Respek terkirim! Total dukungan keluarga: ${respectCounterVal}`);
+
+            // Kirim penambahan ke server cloud publik agar tercatat untuk semua pengunjung
+            try {
+                fetch('https://api.counterapi.dev/v1/crux_official_hq_2026/fistbump/up')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data && typeof data.count === 'number') {
+                            updateRespectDisplay(FISTBUMP_BASE_COUNT + data.count);
+                        }
+                    })
+                    .catch(() => {});
+            } catch(e) {}
+        }
+
+        function inspectRole(roleName, roleDesc, auraColor) {
+            playSFX('blip');
+            showToast('🐺', `${roleName.toUpperCase()}: ${roleDesc}`);
+        }
+
+        // Filter 14 Role Werewolf
+        function filterWwRoles(faction) {
+            playSFX('blip');
+            const cards = document.querySelectorAll('.ww-role-card');
+            const btns = document.querySelectorAll('.ww-filter-btn');
+
+            btns.forEach(b => {
+                b.classList.remove('bg-orange-500', 'text-white');
+                b.classList.add('bg-neutral-900', 'text-neutral-300');
+            });
+
+            const activeBtn = document.getElementById('ww-btn-' + faction);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-neutral-900', 'text-neutral-300');
+                activeBtn.classList.add('bg-orange-500', 'text-white');
+            }
+
+            cards.forEach(card => {
+                if (faction === 'all' || card.dataset.faction === faction) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
         // Background Particles
@@ -2280,7 +2700,7 @@
             animate();
         })();
 
-        // Real-Time Server Uptime Calculator
+        // Server Uptime
         function updateServerUptime() {
             const startDate = new Date('2026-05-20T00:00:00');
             const now = new Date();
@@ -2349,20 +2769,6 @@
             }, 3200);
         }
 
-        function copyDiscordLink() {
-            playSFX('blip');
-            const link = "https://discord.gg/KFYPZgKbZg";
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(link).then(() => {
-                    showToast('🔗', 'Tautan Discord berhasil disalin: discord.gg/KFYPZgKbZg');
-                }).catch(() => {
-                    showToast('📋', link);
-                });
-            } else {
-                showToast('📋', link);
-            }
-        }
-
         // Birthday Vault
         const birthdayPeople = {
             "wiz": "Wiz"
@@ -2424,115 +2830,22 @@
             setTimeout(() => { balloon.remove(); }, 8000);
         }
 
-        // Multi-Image Modal Gallery
-        let currentSlideImages = [];
-        let currentSlideDescriptions = [];
-        let currentSlideIndex = 0;
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        function openMultiImageModal(title, imageArray, descArray, categoryText = '// HOLOGRAM PROJECTION') {
-            playSFX('click');
-            currentSlideImages = imageArray;
-            currentSlideDescriptions = descArray;
-            currentSlideIndex = 0;
-
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalCategory').innerText = categoryText;
-            
-            updateSlideContent();
-            document.getElementById('detailModal').classList.add('active-modal');
-        }
-
-        function updateSlideContent() {
-            const imgElement = document.getElementById('modalImg');
-            imgElement.classList.remove('slide-fade');
-            void imgElement.offsetWidth;
-
-            imgElement.src = currentSlideImages[currentSlideIndex];
-            document.getElementById('modalDesc').innerText = currentSlideDescriptions[currentSlideIndex];
-            
-            const dotsContainer = document.getElementById('dotIndicators');
-            dotsContainer.innerHTML = '';
-            for (let i = 0; i < currentSlideImages.length; i++) {
-                const dot = document.createElement('div');
-                dot.className = `w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${i === currentSlideIndex ? 'bg-orange-500 w-6' : 'bg-white/30 hover:bg-white/60'}`;
-                dot.onclick = () => {
-                    currentSlideIndex = i;
-                    updateSlideContent();
-                    playSFX('blip');
-                };
-                dotsContainer.appendChild(dot);
-            }
-
-            imgElement.classList.add('slide-fade');
-        }
-
-        function nextSlide() {
-            currentSlideIndex = (currentSlideIndex + 1) % currentSlideImages.length;
-            updateSlideContent();
-        }
-
-        function prevSlide() {
-            currentSlideIndex = (currentSlideIndex - 1 + currentSlideImages.length) % currentSlideImages.length;
-            updateSlideContent();
-        }
-
+        // Keyboard Arrow & ESC
         window.addEventListener('keydown', (e) => {
-            const detailModal = document.getElementById('detailModal');
-            if (detailModal && detailModal.classList.contains('active-modal')) {
+            const staffModal = document.getElementById('staffDetailModal');
+            if (staffModal && staffModal.classList.contains('active-modal')) {
                 if (e.key === 'ArrowRight') {
-                    nextSlide();
-                    playSFX('blip');
+                    navigateDivisionStaff(1);
                 } else if (e.key === 'ArrowLeft') {
-                    prevSlide();
-                    playSFX('blip');
+                    navigateDivisionStaff(-1);
                 } else if (e.key === 'Escape') {
-                    closeModal();
+                    closeStaffDossier();
                 }
             }
             if (e.key === 'Escape') {
-                closeStaffDossier();
+                closeEnvelopeModal();
+                closeCakeModal();
             }
-        });
-
-        const swipeContainer = document.getElementById('swipeContainer');
-        swipeContainer.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-
-        swipeContainer.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipeGesture();
-        }, {passive: true});
-
-        swipeContainer.addEventListener('mousedown', e => {
-            touchStartX = e.clientX;
-        });
-
-        swipeContainer.addEventListener('mouseup', e => {
-            touchEndX = e.clientX;
-            handleSwipeGesture();
-        });
-
-        function handleSwipeGesture() {
-            const threshold = 45;
-            if (touchEndX < touchStartX - threshold) {
-                nextSlide();
-                playSFX('blip');
-            } else if (touchEndX > touchStartX + threshold) {
-                prevSlide();
-                playSFX('blip');
-            }
-        }
-
-        function closeModal() {
-            playSFX('click');
-            document.getElementById('detailModal').classList.remove('active-modal');
-        }
-
-        document.getElementById('detailModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
         });
 
         // Birthday Modals
@@ -2593,7 +2906,7 @@
             confetti({ particleCount: 160, spread: 130, origin: { y: 0.6 } });
         }
 
-        // Interactive Bot Console Simulator
+        // ================= TERMINAL SIMULATOR RESMI CRUX BOT (HANYA 5 FITUR) =================
         function executeUserCommand() {
             const input = document.getElementById('terminalInput');
             const cmd = input.value.trim().toLowerCase();
@@ -2614,18 +2927,22 @@
             botLine.className = 'text-neutral-300 font-mono pl-3 border-l-2 border-orange-500/60 my-1 py-0.5 text-[11px]';
 
             if (cmdName === 'werewolf') {
-                botLine.innerHTML = `🐺 <strong>[WEREWOLF MODULE]</strong> Memulai lobby permainan Werewolf...<br>Status: Menunggu 6-12 pemain bersiap. Role aktif: Seer, Guardian, Werewolf, Villager.`;
+                botLine.innerHTML = `🐺 <strong>[WEREWOLF MODULE]</strong> Menyiapkan deck 14 role resmi permainan...<br>Status: Menunggu 6-14 pemain. 14 Peran siap dimainkan secara adil!`;
             } else if (cmdName === 'quiz') {
-                botLine.innerHTML = `❓ <strong>[QUIZ ENGINE]</strong> Pertanyaan Harian: "Apa kepanjangan dan filosofi dari nama server CRUX?"<br>Ketik jawabanmu di channel kuis Discord!`;
+                botLine.innerHTML = `❓ <strong>[QUIZ ENGINE]</strong> Pertanyaan Harian: "Apa makna huruf X pada nama CORE REGNUM UNIFIED-X?"<br>Ketik jawabanmu di channel kuis Discord untuk meraih poin leaderboard!`;
             } else if (cmdName === 'giveaway') {
-                botLine.innerHTML = `🎁 <strong>[GIVEAWAY BOT]</strong> Giveaway Aktif: Discord Nitro & Role Khusus. Member telah bereaksi 🎉!`;
+                botLine.innerHTML = `🎁 <strong>[GIVEAWAY BOT]</strong> Undian aktif: Discord Nitro & Role Khusus. Siap memproses pemenang otomatis secara adil & transparan!`;
+            } else if (cmdName === 'tebakkata') {
+                botLine.innerHTML = `🔤 <strong>[TEBAK KATA]</strong> Susun kata acak: <strong>R - E - G - N - U - M</strong> (Petunjuk: Identitas Kerajaan Server).<br>Ketik jawabanmu di chat permainan!`;
+            } else if (cmdName === 'truefalse') {
+                botLine.innerHTML = `⚖️ <strong>[TRUE OR FALSE]</strong> Tantangan Cepat: "CRUX BOT memiliki tepat 5 fitur resmi saat ini?" [TRUE / FALSE].<br>Waktu tersisa 15 detik!`;
             } else if (cmdName === 'serverinfo') {
-                botLine.innerHTML = `🛡️ <strong>[SERVER TELEMETRY]</strong> CORE REGNUM UNIFIED-X // Est. 20 Mei 2026.<br>${MANUAL_MEMBER_COUNT} Member terpilih • Voice Chat Dimulai 23 April 2026 • Founder: W1ZQ.`;
+                botLine.innerHTML = `🛡️ <strong>[SERVER TELEMETRY]</strong> CORE REGNUM UNIFIED-X // Est. 20 Mei 2026.<br>${MANUAL_MEMBER_COUNT} Member terpilih • Founder: W1ZQ • Bot Features: 5 Fitur Resmi.`;
             } else if (cmdName === 'clear') {
                 out.innerHTML = `<div class="text-neutral-500">[SYSTEM] Layar terminal dibersihkan.</div>`;
                 return;
             } else {
-                botLine.innerHTML = `⚠️ Command <code>/${cmdName}</code> tidak dikenal. Coba: <em>/werewolf</em>, <em>/quiz</em>, <em>/giveaway</em>, <em>/serverinfo</em>.`;
+                botLine.innerHTML = `⚠️ Command <code>/${cmdName}</code> tidak dikenal. Perintah sah: <em>/werewolf</em>, <em>/quiz</em>, <em>/giveaway</em>, <em>/tebakkata</em>, <em>/truefalse</em>, <em>/serverinfo</em>.`;
             }
 
             out.appendChild(botLine);
