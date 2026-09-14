@@ -3537,59 +3537,66 @@
             if (modal) modal.classList.remove('active-modal');
         }
 
-        /**
-         * Mengatur transisi volume latar secara mulus (fade in / fade out).
-         * @param {boolean} enableDucking - true untuk meredupkan musik latar, false untuk memulihkan normal.
+                // =====================================================================
+        // SISTEM DUCKING AUDIO ADAPTIF (KOMPATIBEL ANDROID, IPHONE/IOS, & PC)
+        // =====================================================================
+        isDuckingActive = false;
+
+        // Deteksi apakah pengunjung menggunakan perangkat Apple iOS (iPhone/iPad)
+        const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                            (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+                /**
+         * Mengatur ducking (peredaman halus) musik latar secara cerdas & adaptif.
+         * Menjamin hanya 1 musik latar yang aktif dan volume tetap terdengar proporsional di semua HP.
          */
         function setBackgroundAudioDucking(enableDucking) {
             isDuckingActive = enableDucking;
-            if (duckFadeRafId) cancelAnimationFrame(duckFadeRafId);
 
-            // Saat ducking aktif, turunkan volume latar menjadi 15% dari batas normal agar vokal dominan dan jernih
-            const duckFactor = enableDucking ? 0.15 : 1.0;
-            const duration = enableDucking ? 500 : 800; // Meredup cepat (500ms), kembali normal bertahap (800ms)
-            const startTime = performance.now();
+            // 1. Cek apakah pengunjung sedang berada di dalam ruang rahasia Omega
+            const isOmegaActive = document.getElementById('sanctumStoryline') && 
+                                  !document.getElementById('sanctumStoryline').classList.contains('hidden');
 
-            const targetSanctumVol = (CUSTOM_AUDIO_CONFIG.sanctumVolume || 0.60) * duckFactor;
-            const targetMainVol = (CUSTOM_AUDIO_CONFIG.mainVolume || 0.35) * duckFactor;
+            // 2. Keseimbangan Volume Proporsional:
+            // Volume ducking diatur ke 0.18 (bukan 0.02) agar musik tetap terdengar mengalun syahdu di HP,
+            // sementara vokal narasi tetap jernih dan dominan di depan.
+            const targetSanctumVol = enableDucking ? 0.18 : (CUSTOM_AUDIO_CONFIG.sanctumVolume || 0.60);
+            const targetMainVol = enableDucking ? 0.10 : (CUSTOM_AUDIO_CONFIG.mainVolume || 0.35);
+            const duration = enableDucking ? 400 : 700;
 
-            const startSanctumVol = sanctumAudioElement ? sanctumAudioElement.volume : targetSanctumVol;
-            const startMainVol = mainAudioElement ? mainAudioElement.volume : targetMainVol;
-
-            function fadeStep(now) {
-                const elapsed = now - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                // Kurva transisi lembut (cubic ease) agar perpindahan suara tidak mengagetkan telinga
-                const ease = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-
+            if (isOmegaActive) {
+                // JIKA DI DALAM HALAMAN OMEGA:
+                // HANYA atur musik Omega! JANGAN PERNAH menyalakan musik beranda utama.
                 if (sanctumAudioElement && sanctumMusicPlaying) {
-                    sanctumAudioElement.volume = Math.max(0, Math.min(1, startSanctumVol + (targetSanctumVol - startSanctumVol) * ease));
+                    fadeAudioElement(sanctumAudioElement, targetSanctumVol, duration);
                 }
+                // Pastikan musik utama tetap diam/pause agar tidak terjadi tabrakan 2 musik
+                if (mainAudioElement && !mainAudioElement.paused) {
+                    mainAudioElement.pause();
+                }
+            } else {
+                // JIKA DI HALAMAN BIASA / BERANDA:
+                // HANYA atur musik utama beranda
                 if (mainAudioElement && audioEnabled) {
-                    mainAudioElement.volume = Math.max(0, Math.min(1, startMainVol + (targetMainVol - startMainVol) * ease));
-                }
-
-                if (progress < 1) {
-                    duckFadeRafId = requestAnimationFrame(fadeStep);
+                    fadeAudioElement(mainAudioElement, targetMainVol, duration);
                 }
             }
-            duckFadeRafId = requestAnimationFrame(fadeStep);
 
-            // Penyesuaian untuk Synthesizer Web Audio (jika file MP3 tidak terpasang)
+            // 3. Penyesuaian Synthesizer Web Audio (Fallback jika MP3 belum dimasukkan)
             if (audioCtx && audioCtx.state !== 'closed') {
                 const nowCtx = audioCtx.currentTime;
-                if (sanctumSynthGain) {
+                if (sanctumSynthGain && isOmegaActive) {
                     sanctumSynthGain.gain.cancelScheduledValues(nowCtx);
-                    sanctumSynthGain.gain.linearRampToValueAtTime(enableDucking ? 0.012 : 0.07, nowCtx + (duration / 1000));
+                    sanctumSynthGain.gain.linearRampToValueAtTime(enableDucking ? 0.02 : 0.07, nowCtx + 0.4);
                 }
-                if (atmosphereGain) {
+                if (atmosphereGain && !isOmegaActive) {
                     atmosphereGain.gain.cancelScheduledValues(nowCtx);
-                    atmosphereGain.gain.linearRampToValueAtTime(enableDucking ? 0.008 : 0.04, nowCtx + (duration / 1000));
+                    atmosphereGain.gain.linearRampToValueAtTime(enableDucking ? 0.012 : 0.04, nowCtx + 0.4);
                 }
             }
         }
 
-                // ================= PEMUTAR REKAMAN SUARA PENDIRI (DENGAN DUCKING & FADE OTOMATIS) =================
+        // ================= PEMUTAR REKAMAN SUARA PENDIRI (MP3 & SYNTH) =================
         let isAudioLogPlaying = false;
         let founderVoiceAudioElement = null;
         let audioLogSynthGain = null;
@@ -3604,14 +3611,14 @@
                 if (visualizer) visualizer.classList.add('waveform-active');
                 playSFX('power');
 
-                // Musik latar otomatis mengecil secara halus (Ducking)
-                if (typeof setBackgroundAudioDucking === 'function') {
-                    setBackgroundAudioDucking(true);
-                }
+                // Redupkan musik latar seketika
+                setBackgroundAudioDucking(true);
 
                 if (!founderVoiceAudioElement && CUSTOM_AUDIO_CONFIG.founderVoiceUrl) {
                     founderVoiceAudioElement = new Audio(CUSTOM_AUDIO_CONFIG.founderVoiceUrl);
                     founderVoiceAudioElement.volume = 1.0;
+                    
+                    // Otomatis normalkan kembali musik latar ketika rekaman usai
                     founderVoiceAudioElement.onended = () => {
                         stopFounderAudioLog(true);
                         showToast('🎙️', 'Transmisi rekaman pendiri telah selesai.');
@@ -3628,6 +3635,7 @@
 
                 showToast('🎙️', 'Memutar rekaman suara asli Founder W1ZQ...');
             } else {
+                // Saat tombol pause ditekan: tahan posisi durasi & pulihkan musik latar
                 stopFounderAudioLog(false);
                 showToast('⏸️', 'Rekaman suara dijeda.');
             }
@@ -3649,10 +3657,8 @@
             }
             stopFounderAudioLogSynth();
 
-            // Musik latar otomatis kembali normal secara bertahap
-            if (typeof setBackgroundAudioDucking === 'function') {
-                setBackgroundAudioDucking(false);
-            }
+            // Kembalikan musik latar ke tingkat normal
+            setBackgroundAudioDucking(false);
         }
 
         function startFounderAudioLogSynth() {
