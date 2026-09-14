@@ -1422,7 +1422,7 @@
                         </button>
                     </div>
 
-                    <div id="creditsViewport" class="w-full max-h-[78vh] overflow-y-auto relative scrollbar-none rounded-3xl border border-amber-500/30 bg-black/90 p-6 md:p-12 shadow-[0_0_60px_rgba(0,0,0,0.9)]">
+                    <div id="creditsViewport" class="w-full max-h-[78vh] overflow-y-auto relative scrollbar-none rounded-3xl border border-amber-500/30 bg-black/90 p-6 md:p-12 shadow-[0_0_60px_rgba(0,0,0,0.9)]" style="touch-action: pan-y; -webkit-overflow-scrolling: touch;">
                         <div id="creditsTrack" class="max-w-2xl mx-auto space-y-24 text-center font-mono py-16">
                             
                             <!-- MONUMEN PROLOGUE AGUNG -->
@@ -2649,10 +2649,16 @@
             showToast('🔓', 'Segel terbuka! Silakan baca surat peninggalan pendiri.');
         }
 
-        // TAHAP 2: BUKA KREDIT SEJARAH BERGULIR DARI BAWAH KE ATAS
+                // =====================================================================
+        // TAHAP 2: BUKA KREDIT SEJARAH BERGULIR (KOMPATIBEL SEMUA HP & DESKTOP)
+        // =====================================================================
         let creditsScrolling = true;
         let creditsSpeedMultiplier = 1;
         let creditsRafId = null;
+        let creditsVirtualScroll = 0;       // Akumulator virtual float agar tidak dibulatkan ke 0 oleh browser HP
+        let creditsLastTimestamp = null;    // Timestamp delta-time (konsisten di layar 60Hz, 90Hz, 120Hz & hemat baterai)
+        let isUserTouchingCredits = false;  // Penanda saat layar smartphone sedang disentuh jari
+        let creditsTouchResumeTimeout = null;
 
         function advanceToCreditsStage() {
             playSFX('granted');
@@ -2665,29 +2671,104 @@
             if (stageCredits) stageCredits.classList.remove('hidden');
 
             stageCredits.scrollIntoView({ behavior: 'smooth' });
-            startCreditsAutoScroll();
+            
+            // Mulai autoscroll baru dari titik 0
+            startCreditsAutoScroll(true);
         }
 
-        function startCreditsAutoScroll() {
+        function startCreditsAutoScroll(resetToTop = false) {
             const viewport = document.getElementById('creditsViewport');
             if (!viewport) return;
-            viewport.scrollTop = 0;
-            creditsScrolling = true;
-            const baseSpeed = 0.85;
 
-            function step() {
-                if (creditsScrolling && viewport) {
-                    const maxScroll = viewport.scrollHeight - viewport.clientHeight;
-                    if (viewport.scrollTop < maxScroll - 6) {
-                        viewport.scrollTop += (baseSpeed * creditsSpeedMultiplier);
-                        creditsRafId = requestAnimationFrame(step);
-                    } else {
-                        creditsScrolling = false;
-                        // Otomatis lanjut ke Pantheon setelah kredit selesai bergulir
-                        setTimeout(() => advanceToPantheonStage(), 1500);
-                    }
-                }
+            // 1. Matikan smooth scroll CSS agar tidak mengunci pergeseran frame per frame di HP
+            viewport.style.scrollBehavior = 'auto';
+
+            if (resetToTop) {
+                viewport.scrollTop = 0;
+                creditsVirtualScroll = 0;
+            } else {
+                // Jika melanjutkan dari jeda, sinkronkan posisi saat ini agar tidak melompat ke atas
+                creditsVirtualScroll = viewport.scrollTop;
             }
+
+            creditsScrolling = true;
+            creditsLastTimestamp = performance.now();
+
+            const icon = document.getElementById('creditsPauseIcon');
+            if (icon) icon.innerText = "⏸ JEDA";
+
+            // 2. Pasang Touch Event Listener untuk Smartphone (hanya didaftarkan 1 kali)
+            if (!viewport.dataset.touchBound) {
+                viewport.dataset.touchBound = "true";
+
+                // Saat jari menyentuh layar di HP: tahan guliran otomatis agar pengunjung bisa membaca
+                viewport.addEventListener('touchstart', () => {
+                    isUserTouchingCredits = true;
+                    if (creditsTouchResumeTimeout) clearTimeout(creditsTouchResumeTimeout);
+                }, { passive: true });
+
+                // Saat jari menggeser layar di HP: ikuti posisi sentuhan manual
+                viewport.addEventListener('touchmove', () => {
+                    creditsVirtualScroll = viewport.scrollTop;
+                }, { passive: true });
+
+                // Saat jari dilepas: beri jeda 1.2 detik lalu lanjutkan autoscroll otomatis secara mulus
+                viewport.addEventListener('touchend', () => {
+                    isUserTouchingCredits = false;
+                    creditsVirtualScroll = viewport.scrollTop;
+                    if (creditsTouchResumeTimeout) clearTimeout(creditsTouchResumeTimeout);
+                    creditsTouchResumeTimeout = setTimeout(() => {
+                        if (creditsScrolling) {
+                            creditsLastTimestamp = performance.now();
+                        }
+                    }, 1200);
+                }, { passive: true });
+            }
+
+            // Kecepatan standar: ~48 pixel per detik (sangat nyaman dibaca di layar HP maupun monitor PC)
+            const basePixelsPerSecond = 48;
+
+            function step(currentTimestamp) {
+                if (!creditsScrolling) return;
+
+                if (!creditsLastTimestamp) creditsLastTimestamp = currentTimestamp;
+                const deltaTime = Math.min((currentTimestamp - creditsLastTimestamp) / 1000, 0.1);
+                creditsLastTimestamp = currentTimestamp;
+
+                const maxScroll = viewport.scrollHeight - viewport.clientHeight;
+
+                // Tunggu jika layout browser belum selesai menghitung tinggi konten
+                if (maxScroll <= 10) {
+                    creditsRafId = requestAnimationFrame(step);
+                    return;
+                }
+
+                // Autoscroll berjalan saat tidak dijeda dan tidak sedang disentuh jari
+                if (!isUserTouchingCredits) {
+                    const movement = basePixelsPerSecond * creditsSpeedMultiplier * deltaTime;
+                    creditsVirtualScroll += movement;
+
+                    // Math.round adalah kunci mutlak agar nilai scrollTop dibaca valid oleh Safari iOS & Android Chrome
+                    viewport.scrollTop = Math.round(creditsVirtualScroll);
+
+                    // Cek jika sudah mencapai bagian paling bawah kredit
+                    if (viewport.scrollTop >= maxScroll - 6) {
+                        creditsScrolling = false;
+                        if (creditsRafId) cancelAnimationFrame(creditsRafId);
+                        creditsRafId = null;
+
+                        // Otomatis lanjut ke tahap 10 Nama Kehormatan (Pantheon)
+                        setTimeout(() => advanceToPantheonStage(), 1600);
+                        return;
+                    }
+                } else {
+                    // Sinkronkan posisi virtual jika sedang digulir manual oleh pengunjung
+                    creditsVirtualScroll = viewport.scrollTop;
+                }
+
+                creditsRafId = requestAnimationFrame(step);
+            }
+
             if (creditsRafId) cancelAnimationFrame(creditsRafId);
             creditsRafId = requestAnimationFrame(step);
         }
@@ -2696,7 +2777,13 @@
             creditsScrolling = !creditsScrolling;
             const icon = document.getElementById('creditsPauseIcon');
             if (icon) icon.innerText = creditsScrolling ? "⏸ JEDA" : "▶ LANJUT";
-            if (creditsScrolling) startCreditsAutoScroll();
+
+            if (creditsScrolling) {
+                startCreditsAutoScroll(false); // Lanjutkan dari posisi saat ini tanpa mereset ke paling atas
+            } else {
+                if (creditsRafId) cancelAnimationFrame(creditsRafId);
+                creditsRafId = null;
+            }
             playSFX('blip');
         }
 
