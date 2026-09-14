@@ -140,6 +140,301 @@
 
         @keyframes emberFadeOut { 0% { opacity: 1; transform: scale(1); filter: blur(0); } 50% { opacity: 0.6; filter: blur(3px) saturate(180%); transform: scale(0.98); } 100% { opacity: 0; transform: scale(0.94) translateY(-20px); filter: blur(8px); } }
         .parchment-dissolving { animation: emberFadeOut 0.8s forwards ease-in-out; pointer-events: none; }
+
+                /* =========================================================================
+           AURA BERGRADASI 10 NAMA KEHORMATAN OMEGA (DARI SANGAT TERANG KE BIASA)
+           ========================================================================= */
+        /* Rank 1: Mahkota Tertinggi - Aura Emas Paling Terang & Berdenyut */
+        .aura-rank-1 {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(20, 12, 4, 0.95) 100%);
+            border: 2px solid #fbbf24 !important;
+            box-shadow: 0 0 50px rgba(245, 158, 11, 0.9), 0 0 100px rgba(245, 158, 11, 0.5), inset 0 0 30px rgba(245, 158, 11, 0.4) !important;
+            animation: pulseRank1 2.8s ease-in-out infinite alternate;
+        }
+        @keyframes pulseRank1 {
+            0% { box-shadow: 0 0 35px rgba(245, 158, 11, 0.8), 0 0 70px rgba(245, 158, 11, 0.4), inset 0 0 20px rgba(245, 158, 11, 0.3); }
+            100% { box-shadow: 0 0 65px rgba(245, 158, 11, 1), 0 0 120px rgba(245, 158, 11, 0.65), inset 0 0 40px rgba(245, 158, 11, 0.55); }
+        }
+
+        /* Rank 2: Sangat Terang - Aura Cyber Cyan */
+        .aura-rank-2 {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.2) 0%, rgba(4, 15, 20, 0.95) 100%);
+            border: 2px solid #38bdf8 !important;
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.75), 0 0 75px rgba(56, 189, 248, 0.35), inset 0 0 20px rgba(56, 189, 248, 0.25) !important;
+        }
+
+        /* Rank 3: Terang Cemerlang - Aura Arcane Purple */
+        .aura-rank-3 {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.18) 0%, rgba(15, 6, 22, 0.95) 100%);
+            border: 2px solid #c084fc !important;
+            box-shadow: 0 0 32px rgba(168, 85, 247, 0.65), 0 0 55px rgba(168, 85, 247, 0.3), inset 0 0 15px rgba(168, 85, 247, 0.2) !important;
+        }
+
+        /* Rank 4: Terang Berkarakter - Aura Crimson Orange */
+        .aura-rank-4 {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(15, 10, 8, 0.95) 100%);
+            border: 1.5px solid rgba(249, 115, 22, 0.8) !important;
+            box-shadow: 0 0 26px rgba(249, 115, 22, 0.55), inset 0 0 12px rgba(249, 115, 22, 0.15) !important;
+        }
+
+        /* Rank 5: Pendar Sedang Tinggi - Aura Amber */
+        .aura-rank-5 {
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.12) 0%, rgba(12, 10, 8, 0.95) 100%);
+            border: 1.5px solid rgba(234, 179, 8, 0.7) !important;
+            box-shadow: 0 0 20px rgba(234, 179, 8, 0.45) !important;
+        }
+
+        /* Rank 6: Pendar Sedang - Aura Emerald Soft */
+        .aura-rank-6 {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.10) 0%, rgba(8, 12, 10, 0.95) 100%);
+            border: 1.5px solid rgba(16, 185, 129, 0.6) !important;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.35) !important;
+        }
+
+        /* Rank 7: Pendar Mulai Redup - Aura Soft Silver */
+        .aura-rank-7 {
+            background: rgba(14, 14, 18, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 0 11px rgba(255, 255, 255, 0.2) !important;
+        }
+
+        /* Rank 8: Cukup Redup */
+        .aura-rank-8 {
+            background: rgba(12, 12, 16, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 0 7px rgba(255, 255, 255, 0.12) !important;
+        }
+
+        /* Rank 9: Redup Halus */
+        .aura-rank-9 {
+            background: rgba(10, 10, 14, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.08) !important;
+        }
+
+        /* Rank 10: Aura Biasa Saja (Minimal Border, Tanpa Glow Menonjol) */
+        .aura-rank-10 {
+            background: rgba(8, 8, 12, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            box-shadow: none !important;
+        }
+
+                /* Efek Glitch & Animasi Berkas Dekripsi */
+        @keyframes dossierGlitch {
+            0% { transform: translate(0); filter: drop-shadow(0 0 0 transparent); }
+            20% { transform: translate(-2px, 2px); filter: drop-shadow(2px -2px 10px rgba(245,158,11,0.6)); }
+            40% { transform: translate(2px, -1px); filter: drop-shadow(-2px 2px 10px rgba(6,182,212,0.6)); }
+            60% { transform: translate(-1px, -2px); }
+            100% { transform: translate(0); }
+        }
+        .dossier-entry-anim { animation: dossierGlitch 0.4s ease-out; }
+
+        /* Polaroid Memory Cards (Time-Capsule) */
+        .polaroid-card {
+            background: #0d0d11;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.85), 0 0 15px rgba(249,115,22,0.15);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+        }
+        .polaroid-card:hover {
+            transform: scale(1.05) rotate(0deg) !important;
+            border-color: var(--accent-orange);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.95), 0 0 30px var(--accent-glow);
+            z-index: 30;
+        }
+
+        /* Hidden Audio Log Waveform Animation */
+        .waveform-bar {
+            width: 3px;
+            background: #f59e0b;
+            border-radius: 9999px;
+            height: 6px;
+            transition: height 0.15s ease;
+        }
+        .waveform-active .waveform-bar {
+            animation: waveBounce 0.8s ease-in-out infinite alternate;
+        }
+        .waveform-active .waveform-bar:nth-child(2) { animation-delay: 0.1s; }
+        .waveform-active .waveform-bar:nth-child(3) { animation-delay: 0.25s; }
+        .waveform-active .waveform-bar:nth-child(4) { animation-delay: 0.15s; }
+        .waveform-active .waveform-bar:nth-child(5) { animation-delay: 0.3s; }
+        .waveform-active .waveform-bar:nth-child(6) { animation-delay: 0.05s; }
+        .waveform-active .waveform-bar:nth-child(7) { animation-delay: 0.2s; }
+        .waveform-active .waveform-bar:nth-child(8) { animation-delay: 0.35s; }
+        @keyframes waveBounce {
+            0% { height: 4px; opacity: 0.4; }
+            100% { height: 22px; opacity: 1; filter: drop-shadow(0 0 6px #f59e0b); }
+        }
+
+        /* ==========================================================================
+   SACRED VAULT // OMEGA MAJESTIC BACKGROUND & PROLOGUE MONUMENT
+   ========================================================================== */
+
+/* Background Atmosferik Nebula & Grid untuk Omega Section & Credits */
+#omegaSanctumSection,
+#sanctumCreditsOverlay {
+  background-color: #030202 !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 15%, rgba(245, 158, 11, 0.12) 0%, rgba(30, 12, 3, 0.6) 45%, rgba(6, 4, 3, 0.95) 80%, #020101 100%),
+    radial-gradient(rgba(245, 158, 11, 0.05) 1px, transparent 0) !important;
+  background-size: 100% 100%, 32px 32px !important;
+  position: relative;
+}
+
+/* Lapisan Partikel Bara Emas Mengambang (Floating Embers) */
+.vault-embers-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: transparent;
+  z-index: 1;
+  opacity: 0.65;
+}
+
+/* Wadah Monumen Megah Prologue */
+.prologue-monument-card {
+  position: relative;
+  background: radial-gradient(circle at center, rgba(30, 16, 6, 0.85) 0%, rgba(12, 7, 3, 0.95) 75%, rgba(3, 2, 2, 0.98) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 0 50px rgba(245, 158, 11, 0.12), inset 0 0 35px rgba(245, 158, 11, 0.05);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+}
+
+.prologue-monument-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f59e0b, #fbbf24, #f59e0b, transparent);
+  box-shadow: 0 0 15px #f59e0b;
+}
+
+/* Insignia Emas Berputar & Halo */
+.monument-crest-ring {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crest-ring-spin {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px dashed rgba(245, 158, 11, 0.6);
+  animation: spinRing 24s linear infinite;
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
+}
+
+.crest-ring-pulse {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, transparent 70%);
+  animation: pulseAura 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseAura {
+  from { transform: scale(0.92); opacity: 0.5; }
+  to { transform: scale(1.08); opacity: 1; }
+}
+
+/* Teks Judul Monumental Liquid Gold */
+.monument-title-gold {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FEF3C7 25%, #F59E0B 70%, #92400E 100%);
+  -webkit-background-clip: text;
+  background-clip: text; /* <-- Tambahkan baris ini */
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 35px rgba(245, 158, 11, 0.5);
+  letter-spacing: 0.2em;
+}
+
+/* HUD Divider Lines dengan Diamond Core */
+.hud-ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.hud-line {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.4), transparent);
+}
+
+.hud-diamond {
+  width: 8px;
+  height: 8px;
+  background: #f59e0b;
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px #f59e0b;
+}
+
+/* Kartu Pemecah: Status Belum Terisi (Unclaimed Challenge) */
+.solver-card-unclaimed {
+  background: linear-gradient(145deg, rgba(20, 12, 5, 0.9) 0%, rgba(10, 6, 3, 0.95) 100%);
+  border: 1px dashed rgba(245, 158, 11, 0.3);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.solver-card-unclaimed:hover {
+  transform: translateY(-4px) scale(1.015);
+  border-style: solid;
+  border-color: rgba(251, 191, 36, 0.8);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(245, 158, 11, 0.35);
+}
+
+/* Aura Bertingkat dari Rank 1 ke Rank 10 */
+.aura-tier-1 {
+  border-color: rgba(245, 158, 11, 0.9) !important;
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.5), inset 0 0 15px rgba(245, 158, 11, 0.25) !important;
+}
+.aura-tier-2 {
+  border-color: rgba(245, 158, 11, 0.75) !important;
+  box-shadow: 0 0 28px rgba(245, 158, 11, 0.4) !important;
+}
+.aura-tier-3 {
+  border-color: rgba(234, 88, 12, 0.65) !important;
+  box-shadow: 0 0 22px rgba(234, 88, 12, 0.35) !important;
+}
+.aura-tier-4, .aura-tier-5, .aura-tier-6 {
+  border-color: rgba(217, 119, 6, 0.5) !important;
+  box-shadow: 0 0 16px rgba(217, 119, 6, 0.25) !important;
+}
+.aura-tier-7, .aura-tier-8, .aura-tier-9, .aura-tier-10 {
+  border-color: rgba(180, 83, 9, 0.35) !important;
+  box-shadow: 0 0 10px rgba(180, 83, 9, 0.15) !important;
+}
+
+/* Animasi Glitch Teks Sandi */
+@keyframes codeGlitch {
+  0% { opacity: 0.8; }
+  50% { opacity: 0.4; transform: skewX(-3deg); }
+  100% { opacity: 0.9; transform: skewX(0); }
+}
+
+.text-glitch-subtle {
+  animation: codeGlitch 3s infinite ease-in-out;
+}
     </style>
 </head>
 <body class="min-h-screen selection:bg-orange-600 selection:text-white flex flex-col justify-between theme-orange-red">
@@ -205,7 +500,7 @@
                 <button onclick="switchPage('bond')" id="nav-bond" class="nav-btn shrink-0">03. BOND</button>
                 <button onclick="switchPage('energy')" id="nav-energy" class="nav-btn shrink-0">04. ENERGY</button>
                 <button onclick="switchPage('staff')" id="nav-staff" class="nav-btn shrink-0">05. STAFF</button>
-                <button onclick="switchPage('birthday')" id="nav-birthday" class="nav-btn shrink-0 text-orange-400">🔒 OMEGA</button>
+                <button onclick="switchPage('omega')" id="nav-omega" class="nav-btn shrink-0 text-orange-400">🔒 OMEGA</button>
             </nav>
             
             <div class="flex items-center space-x-2.5 sm:space-x-3 shrink-0">
@@ -224,7 +519,7 @@
             <button onclick="switchPage('bond')" id="mob-nav-bond" class="nav-btn shrink-0">03. BOND</button>
             <button onclick="switchPage('energy')" id="mob-nav-energy" class="nav-btn shrink-0">04. ENERGY</button>
             <button onclick="switchPage('staff')" id="mob-nav-staff" class="nav-btn shrink-0">05. STAFF</button>
-            <button onclick="switchPage('birthday')" id="mob-nav-birthday" class="nav-btn shrink-0 text-orange-400">🔒 OMEGA</button>
+            <button onclick="switchPage('omega')" id="mob-nav-omega" class="nav-btn shrink-0 text-orange-400">🔒 OMEGA</button>
         </div>
     </header>
 
@@ -951,8 +1246,10 @@
             </div>
         </section>
 
-        <!-- ================= HALAMAN 6: THE SANCTUM // PROTOCOL: OMEGA ================= -->
-        <section id="page-birthday" class="page-section space-y-12">
+                                <!-- ================= HALAMAN 6: THE SANCTUM // PROTOCOL: OMEGA ================= -->
+        <section id="page-omega" class="page-section space-y-12">
+            
+            <!-- TAHAP 0: GERBANG TERKUNCI (INPUT SANDI 4 DIGIT: 4341) -->
             <div id="sanctumGateway" class="glass-panel hud-corner p-6 md:p-14 rounded-3xl border-orange-500/50 space-y-8 relative overflow-hidden shadow-2xl">
                 <div class="text-center max-w-3xl mx-auto space-y-3">
                     <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-orange-500/15 border border-orange-500/40 text-[10px] font-mono text-orange-400 uppercase tracking-widest font-bold">
@@ -1025,7 +1322,6 @@
                             <div class="text-xl sm:text-2xl font-black font-mono text-red-400 tracking-widest py-1 bg-black/60 rounded-lg border border-red-500/30" id="cipherCountdownDisplay">
                                 23:59:59
                             </div>
-                            <div class="text-[9px] text-neutral-400 font-mono italic">Countdown berjalan otomatis &amp; tidak dapat direset dengan refresh.</div>
                         </div>
 
                         <div id="cipherStatusFeedback" class="text-xs font-mono text-neutral-400 min-h-[20px]">Menunggu input 4 digit sandi protokol...</div>
@@ -1033,168 +1329,387 @@
                 </div>
             </div>
 
-            <!-- FASE 1: SURAT PENDIRI -->
-            <div id="sanctumParchmentModal" class="modal-backdrop-blur p-4">
-                <div id="parchmentBox" class="glass-panel p-6 sm:p-10 md:p-12 rounded-3xl max-w-2xl w-full max-h-[88vh] overflow-y-auto border-2 border-orange-500/70 shadow-2xl modal-content-box space-y-6 bg-gradient-to-b from-[#140b05] via-[#09090b] to-black text-neutral-200">
-                    <div class="border-b border-orange-500/30 pb-4 space-y-2">
-                        <div class="inline-block px-2.5 py-0.5 bg-orange-500/20 text-orange-400 border border-orange-500/40 rounded text-[9.5px] font-mono tracking-widest uppercase font-bold">[ ENCRYPTED TRANSMISSION // DECRYPTED ]</div>
-                        <div class="font-mono text-xs sm:text-sm space-y-0.5 text-neutral-300">
-                            <div>Dari &nbsp;: <strong class="text-orange-400">W1ZQ</strong></div>
-                            <div>Untuk : <span class="text-white font-bold">Kamu yang Menemukan Jalan Pulang</span></div>
+            <!-- ====================================================================
+                 ALUR BERTARAP OMEGA (STAGED STORYLINE SEQUENCE)
+                 ==================================================================== -->
+            <div id="sanctumStoryline" class="hidden space-y-12">
+                
+                <!-- TAHAP 1: SURAT PENDIRI (THE SACRED PARCHMENT & REKAMAN SUARA) -->
+                <div id="sanctumStageLetter" class="space-y-8 animate-fade-in">
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-neutral-950/90 border border-amber-500/40 backdrop-blur-md shadow-2xl font-mono text-xs">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                            <span class="text-emerald-400 font-bold tracking-widest uppercase">STAGE 01 // SURAT RAHASIA PENDIRI MARKAS</span>
                         </div>
-                    </div>
-                    <div class="space-y-4 text-xs sm:text-sm font-light leading-relaxed text-neutral-200 text-justify sm:text-left">
-                        <p>
-                            Jika lembaran ini terbuka di hadapanmu, itu artinya kamu bukan sekadar pelintas yang singgah sejenak lalu pergi.
-                        </p>
-                        <p class="font-medium text-white">
-                            Kamu adalah alasan kenapa tempat ini tetap bernyawa.
-                        </p>
-                        <p>
-                            Menyelesaikan empat teka-teki tadi membuktikan bahwa kamu tidak hanya melihat dinding luar benteng ini, tetapi kamu benar-benar mengamati, mendengar, dan merasakan setiap detail kecil yang saya bangun selama ini. Terima kasih sudah meluangkan waktu dan pikiranmu hanya untuk sampai ke titik ini.
-                        </p>
-                        <p>
-                            CRUX tidak pernah dimulai dari ambisi yang muluk-muluk. Beberapa waktu lalu, tempat ini hanyalah sebuah kanvas kosong di layar monitor—bermula dari rasa sepi, baris-baris kode sederhana, dan keinginan sederhana untuk menciptakan satu sudut aman di mana kita bisa melepas topeng dunia luar tanpa takut dihakimi.
-                        </p>
-                        <p>
-                            Ada malam-malam di mana saya duduk sendirian merapikan sistem, memikirkan arah tempat ini, dan bertanya-tanya apakah semua waktu dan energi ini bermakna. Namun keraguan itu selalu runtuh setiap kali melihat ruang suara terisi tawa lepas larut malam, obrolan acak yang menemani lelahnya hari, dan ikatan tulus yang tumbuh di antara orang-orang yang awalnya saling asing.
-                        </p>
-                        <p>
-                            Bara api ini tidak pernah dinyalakan untuk meredup. Rumah ini bisa berdiri tegak bukan karena kehebatan sistemnya, melainkan karena kehadiranmu, obrolanmu, dan jejak langkah yang kamu tinggalkan di sini setiap hari.
-                        </p>
-                        <p>
-                            Terima kasih telah menjadi bagian dari denyut nadi CRUX. Apa yang kamu lihat hari ini adalah bukti kerja keras bersama, dan tempat ini akan selalu menjadi rumahmu.
-                        </p>
-                        <p class="text-orange-400 font-semibold pt-1">
-                            Perjalanan ini terlalu berharga untuk dilalui sendirian. Sekarang, mari tengok kembali wajah-wajah dan nama-nama yang telah menopang pilar ini hingga detik ini.
-                        </p>
-                    </div>
-                    <div class="pt-4 border-t border-white/10 text-center">
-                        <button onclick="launchCinematicCredits()" class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:opacity-95 text-white font-mono text-xs font-bold tracking-wider rounded-xl transition shadow-xl shadow-orange-600/30 flex items-center justify-center space-x-2 mx-auto active:scale-95">
-                            <span>🎬</span><span>[ BUKA LEMBARAN SEJARAH // THE HALL OF LEGACY ]</span>
+                        <button onclick="lockOmegaVault()" class="px-3.5 py-1.5 rounded-xl bg-neutral-900 border border-white/10 hover:border-red-500/50 text-neutral-400 hover:text-red-300 transition text-[10px] tracking-wider">
+                            🔒 KUNCI KEMBALI
                         </button>
                     </div>
-                </div>
-            </div>
 
-            <!-- FASE 2: KREDIT SINEMATIK -->
-            <div id="sanctumCreditsOverlay" class="fixed inset-0 z-[150] bg-black hidden flex flex-col justify-between overflow-hidden select-none">
-                <div class="absolute top-5 right-5 sm:top-7 sm:right-8 z-50 flex items-center space-x-2.5 bg-neutral-950/85 backdrop-blur-md p-2 rounded-2xl border border-orange-500/40 shadow-2xl">
-                    <button onclick="toggleCreditsScroll()" id="btnCreditsPause" class="p-2 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500 text-neutral-300 hover:text-white transition text-xs font-mono flex items-center gap-1.5"><span id="creditsPauseIcon">⏸</span> <span class="hidden sm:inline text-[10px]">PAUSE</span></button>
-                    <button onclick="toggleCreditsSpeed()" id="btnCreditsSpeed" class="px-2.5 py-1.5 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500 text-orange-400 hover:text-white transition text-[11px] font-mono font-bold"><span id="creditsSpeedText">1x</span></button>
-                    <button onclick="toggleCreditsMusic()" id="btnCreditsMusic" class="p-2 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500 text-neutral-300 hover:text-white transition text-xs font-mono"><span id="creditsMusicIcon">🔊</span></button>
-                </div>
-
-                <div id="creditsViewport" class="w-full h-full overflow-y-auto relative scrollbar-none px-4 flex flex-col items-center">
-                    <div id="creditsTrack" class="max-w-2xl w-full py-32 space-y-24 text-center font-mono transition-transform duration-75">
-                        <div class="space-y-4 pt-16">
-                            <div class="text-xs text-orange-500 font-bold tracking-widest uppercase">CRUX HQ ARCHIVE</div>
-                            <div class="text-sm text-neutral-500 tracking-widest">[ PROTOCOL // LEGACY REEL ]</div>
-                            <blockquote class="text-lg sm:text-xl text-neutral-200 font-cinzel italic max-w-lg mx-auto leading-relaxed pt-2">"Sebuah rumah tidak dibangun dari dinding beton, melainkan dari jiwa-jiwa yang memilih untuk menetap."</blockquote>
+                    <div class="glass-panel p-6 sm:p-10 md:p-12 rounded-3xl border-2 border-orange-500/70 shadow-2xl space-y-6 bg-gradient-to-b from-[#140b05] via-[#09090b] to-black text-neutral-200">
+                        <div class="border-b border-orange-500/30 pb-4 space-y-2">
+                            <div class="inline-block px-2.5 py-0.5 bg-orange-500/20 text-orange-400 border border-orange-500/40 rounded text-[9.5px] font-mono tracking-widest uppercase font-bold">[ ENCRYPTED TRANSMISSION // DECRYPTED ]</div>
+                            <div class="font-mono text-xs sm:text-sm space-y-0.5 text-neutral-300">
+                                <div>Dari &nbsp;: <strong class="text-orange-400">W1ZQ</strong></div>
+                                <div>Untuk : <span class="text-white font-bold">Kamu yang Menemukan Jalan Pulang</span></div>
+                            </div>
+                        </div>
+                        <div class="space-y-4 text-xs sm:text-sm font-light leading-relaxed text-neutral-200 text-justify sm:text-left">
+                            <p>Jika lembaran ini terbuka di hadapanmu, itu artinya kamu bukan sekadar pelintas yang singgah sejenak lalu pergi.</p>
+                            <p class="font-medium text-white text-base">Kamu adalah alasan kenapa tempat ini tetap bernyawa.</p>
+                            <p>Menyelesaikan empat teka-teki tadi membuktikan bahwa kamu tidak hanya melihat dinding luar benteng ini, tetapi kamu benar-benar mengamati, mendengar, dan merasakan setiap detail kecil yang saya bangun selama ini. Terima kasih sudah meluangkan waktu dan pikiranmu hanya untuk sampai ke titik ini.</p>
+                            <p>CRUX tidak pernah dimulai dari ambisi yang muluk-muluk. Beberapa waktu lalu, tempat ini hanyalah sebuah kanvas kosong di layar monitor—bermula dari rasa sepi, baris-baris kode sederhana, dan keinginan sederhana untuk menciptakan satu sudut aman di mana kita bisa melepas topeng dunia luar tanpa takut dihakimi.</p>
+                            <p>Ada malam-malam di mana saya duduk sendirian merapikan sistem, memikirkan arah tempat ini, dan bertanya-tanya apakah semua waktu dan energi ini bermakna. Namun keraguan itu selalu runtuh setiap kali melihat ruang suara terisi tawa lepas larut malam, obrolan acak yang menemani lelahnya hari, dan ikatan tulus yang tumbuh di antara orang-orang yang awalnya saling asing.</p>
+                            <p>Bara api ini tidak pernah dinyalakan untuk meredup. Rumah ini bisa berdiri tegak bukan karena kehebatan sistemnya, melainkan karena kehadiranmu, obrolanmu, dan jejak langkah yang kamu tinggalkan di sini setiap hari.</p>
+                            <p class="text-orange-400 font-semibold pt-1">Terima kasih telah menjadi bagian dari denyut nadi CRUX. Apa yang kamu lihat hari ini adalah bukti kerja keras bersama, dan tempat ini akan selalu menjadi rumahmu.</p>
                         </div>
 
-                        <div class="space-y-6">
-                            <div class="space-y-1">
-                                <div class="text-[11px] text-orange-400 tracking-widest uppercase">— FOUNDER &amp; SOLE INITIATOR —</div>
-                                <h3 class="text-3xl sm:text-4xl font-black text-white font-cinzel tracking-wider">W1ZQ</h3>
-                                <p class="text-xs text-neutral-400 italic max-w-md mx-auto pt-1">"Yang menyalakan riak pertama di detik nol, menuangkan visi, kode, dan waktu dari ketiadaan."</p>
-                            </div>
-                            <div class="max-w-sm mx-auto p-4 bg-neutral-950/80 rounded-2xl border border-orange-500/40 shadow-2xl space-y-3">
-                                <div class="grid grid-cols-2 gap-3 items-center">
-                                    <div class="h-32 rounded-xl overflow-hidden bg-black border border-white/10"><img src="image/WIZ.jpeg" alt="Founder W1ZQ" class="w-full h-full object-cover"></div>
-                                    <div class="h-32 rounded-xl overflow-hidden bg-black border border-white/10 p-2 flex items-center justify-center"><img src="image/CRUX LOGO.png" alt="CRUX Logo" class="max-h-full max-w-full object-contain"></div>
+                        <!-- MODUL REKAMAN SUARA ASLI PENDIRI W1ZQ -->
+                        <div class="p-4 sm:p-5 rounded-2xl bg-black/70 border border-amber-500/40 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <button onclick="toggleFounderAudioLog()" id="btnAudioLogPlay" class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-black font-bold hover:scale-105 transition flex items-center justify-center text-base shadow-lg shadow-amber-500/30">
+                                        <span id="audioLogIcon">▶</span>
+                                    </button>
+                                    <div>
+                                        <div class="text-xs font-mono font-bold text-amber-300">AUDIO LOG // SUARA PENDIRI W1ZQ</div>
+                                        <div class="text-[10px] font-mono text-neutral-400">Transmisi Audio Eksklusif Bagi Pemecah Segel</div>
+                                    </div>
                                 </div>
-                                <div class="text-[10px] text-neutral-400 italic">"Titik Nol — Awal sebuah perjalanan panjang."</div>
-                            </div>
-                        </div>
-
-                        <div class="space-y-6">
-                            <div class="space-y-1">
-                                <div class="text-[11px] text-red-400 tracking-widest uppercase">— THE HIGH COUNCIL / ADMINS —</div>
-                                <h3 class="text-2xl sm:text-3xl font-black text-white font-cinzel tracking-wider">REE &nbsp;•&nbsp; ZAR</h3>
-                                <p class="text-xs text-neutral-400 italic max-w-md mx-auto pt-1">"Penjaga keseimbangan ritme dan arah gerak markas, mengawal pilar pimpinan tepat di bawah sang pendiri."</p>
-                            </div>
-                            <div class="max-w-sm mx-auto p-4 bg-neutral-950/80 rounded-2xl border border-red-500/40 shadow-2xl space-y-3">
-                                <div class="grid grid-cols-2 gap-3 items-center">
-                                    <div class="h-32 rounded-xl overflow-hidden bg-black border border-white/10"><img src="image/REE.jpg" alt="Admin Ree" class="w-full h-full object-cover"></div>
-                                    <div class="h-32 rounded-xl overflow-hidden bg-black border border-white/10"><img src="image/ZAR.jpg" alt="Admin Zar" class="w-full h-full object-cover"></div>
+                                <div id="waveformVisualizer" class="flex items-center gap-1 h-7 px-3 bg-neutral-950 rounded-xl border border-white/10">
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
+                                    <span class="waveform-bar"></span>
                                 </div>
-                                <div class="text-[10px] text-neutral-400 italic">"Pengawal Pilar — Menjaga lentera tetap menyala."</div>
                             </div>
+                            <p class="text-[11px] font-mono text-neutral-400 italic leading-relaxed border-t border-white/5 pt-2">
+                                "Dengarkan langsung rekaman suara dari pendiri markas sebelum Anda melangkah ke babak sejarah berikutnya..."
+                            </p>
                         </div>
 
-                        <div class="space-y-6">
-                            <div class="space-y-3">
-                                <div><div class="text-[10px] text-emerald-400 tracking-widest uppercase">— ROBLOX DIVISION OPERATORS —</div><div class="text-sm font-bold text-white tracking-wider pt-0.5">YISELLE • SYLV • CAE • ARA • CAERYN</div></div>
-                                <div><div class="text-[10px] text-purple-400 tracking-widest uppercase">— MLBB DIVISION OPERATORS —</div><div class="text-sm font-bold text-white tracking-wider pt-0.5">MOUMOU • NINO</div></div>
-                                <p class="text-xs text-neutral-400 italic max-w-md mx-auto pt-1">"Penggerak tawa di medan laga, merajut ikatan lewat kompetisi, dan memastikan setiap langkah terasa berharga."</p>
-                            </div>
-                            <div class="max-w-md mx-auto p-4 bg-neutral-950/80 rounded-2xl border border-white/15 shadow-2xl space-y-3">
-                                <div class="grid grid-cols-4 sm:grid-cols-7 gap-1.5">
-                                    <img src="image/CIL.jpeg" alt="Yiselle" class="w-full h-12 rounded object-cover border border-white/10">
-                                    <img src="image/SIL.jpg" alt="Sylv" class="w-full h-12 rounded object-cover border border-white/10">
-                                    <img src="image/CAE.jpg" alt="Cae" class="w-full h-12 rounded object-cover border border-white/10">
-                                    <img src="image/ARA.jpeg" alt="Ara" class="w-full h-12 rounded object-cover border border-white/10">
-                                    <img src="image/RIN.jpeg" alt="Caeryn" class="w-full h-12 rounded object-cover border border-white/10">
-                                    <img src="image/MOM.jpeg" alt="Moumou" class="w-full h-12 rounded object-cover border border-white/10">
-                                    <img src="image/BUTA.jpg" alt="Nino" class="w-full h-12 rounded object-cover border border-white/10">
-                                </div>
-                                <div class="h-40 rounded-xl overflow-hidden border border-white/10"><img src="image/FILO.png" alt="Match MLBB" class="w-full h-full object-cover"></div>
-                                <div class="text-[10px] text-neutral-400 italic">"Garda Depan — Arena tawa dan medan laga."</div>
-                            </div>
-                        </div>
-
-                        <div class="space-y-6">
-                            <div class="space-y-1">
-                                <div class="text-[11px] text-amber-400 tracking-widest uppercase">— MILESTONE OF ENDURANCE —</div>
-                                <h3 class="text-xl sm:text-2xl font-black text-white tracking-wider">THE 1000-HOUR PURE VOICE ARCHIVE</h3>
-                                <p class="text-xs text-neutral-300 italic max-w-md mx-auto pt-2 leading-relaxed">"0% Mesin • 100% Jiwa Murni<br>Seribu jam tanpa henti, menepis sunyi malam hanya dengan tawa dan obrolan tulus antaranggota."</p>
-                            </div>
-                            <div class="max-w-sm mx-auto p-4 bg-neutral-950/80 rounded-2xl border border-amber-500/40 shadow-2xl space-y-3">
-                                <div class="h-44 rounded-xl overflow-hidden border border-white/10"><img src="image/POIS.png" alt="Pure Voice Record" class="w-full h-full object-cover"></div>
-                                <div class="text-[10px] text-neutral-400 italic">"Rekor Murni — Ruang suara yang menolak mati."</div>
-                            </div>
-                        </div>
-
-                        <div class="space-y-6">
-                            <div class="space-y-1">
-                                <div class="text-[11px] text-cyan-400 tracking-widest uppercase">— ALLIED SANCTUARIES / PARTNERS —</div>
-                                <div class="text-xs sm:text-sm font-bold text-white tracking-widest leading-loose">MAIN SUKA SUKA &nbsp;•&nbsp; CHAOTIC LOUNGE &nbsp;•&nbsp; AKIRA INFINITY<br>STARLIGHT &nbsp;•&nbsp; AKASYAA</div>
-                                <p class="text-xs text-neutral-400 italic max-w-md mx-auto pt-2">"Jembatan tak kasatmata yang melintasi semesta maya, tangan yang saling menggenggam dalam persaudaraan."</p>
-                            </div>
-                            <div class="max-w-sm mx-auto p-4 bg-neutral-950/80 rounded-2xl border border-cyan-500/40 shadow-2xl space-y-3">
-                                <div class="h-44 rounded-xl overflow-hidden border border-white/10"><img src="image/COLLAB.jpg" alt="Allied Sanctuary" class="w-full h-full object-cover"></div>
-                                <div class="text-[10px] text-neutral-400 italic">"Simpul Aliansi — Berdiri tegak bersama rekan seperjuangan."</div>
-                            </div>
-                        </div>
-
-                        <div class="space-y-8 pt-8 border-t border-white/10">
-                            <div class="space-y-2">
-                                <div class="text-[11px] text-orange-400 tracking-widest uppercase">— SPECIAL THANKS TO —</div>
-                                <h3 class="text-xl sm:text-2xl font-black text-white font-cinzel">SELURUH ANGGOTA &amp; KELUARGA BESAR CRUX HQ</h3>
-                                <p class="text-xs text-neutral-300 leading-relaxed max-w-lg mx-auto pt-2">
-                                    Kamu yang singgah untuk sekadar melepas lelah, kamu yang bertahan hingga larut malam, dan kamu yang telah memecahkan sandi ini.<br><br>
-                                    <strong class="text-orange-400">Kalian adalah bahan bakar abadi tempat ini.</strong>
-                                </p>
-                            </div>
-                            <div class="py-4 text-xs text-neutral-500 tracking-widest">===============================================</div>
-                            <div class="space-y-2">
-                                <h2 class="text-lg sm:text-2xl font-black text-white font-cinzel tracking-wider">
-                                    CRUX IS NOT JUST A SERVER.<br><span style="color: var(--accent-orange);">IT IS A HOME YOU CAN ALWAYS RETURN TO.</span>
-                                </h2>
-                                <div class="text-xs text-green-400 font-bold tracking-widest pt-1">[ PROTOCOL: OMEGA COMPLETE ]</div>
-                            </div>
-                            <div id="creditsEndActionButtons" class="pt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-                                <button onclick="replayCredits()" class="px-6 py-3 rounded-xl bg-neutral-900 border border-white/15 hover:border-orange-500 text-neutral-200 hover:text-white font-mono text-xs font-bold transition flex items-center space-x-2"><span>↺</span> <span>[ REPLAY CREDITS ]</span></button>
-                                <button onclick="exitSanctumCredits()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:opacity-90 text-white font-mono text-xs font-bold transition shadow-lg shadow-orange-600/30 flex items-center space-x-2"><span>🏠</span> <span>[ KEMBALI KE BERANDA UTAMA ]</span></button>
-                            </div>
+                        <!-- TOMBOL LANJUT KE TAHAP 2 -->
+                        <div class="pt-6 border-t border-white/10 text-center">
+                            <button onclick="advanceToCreditsStage()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-orange-600 via-amber-600 to-orange-500 hover:opacity-95 text-white font-mono text-xs font-bold tracking-wider rounded-xl transition shadow-xl shadow-orange-600/30 flex items-center justify-center space-x-2.5 mx-auto active:scale-95">
+                                <span>📜</span>
+                                <span>[ SAYA TELAH SELESAI MEMBACA // BUKA KREDIT SEJARAH → ]</span>
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-    </main>
+                <!-- TAHAP 2: CREDIT SCENE EPISODIK (BERGULIR DARI BAWAH KE ATAS) -->
+                <div id="sanctumStageCredits" class="hidden relative space-y-6">
+                    
+                    <div class="sticky top-20 z-40 flex items-center justify-between gap-3 p-3 rounded-2xl bg-black/85 backdrop-blur-md border border-amber-500/40 font-mono text-xs shadow-2xl">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                            <span class="text-amber-300 font-bold hidden sm:inline">KREDIT SEJARAH BERGULIR</span>
+                            <button onclick="toggleCreditsScroll()" id="btnCreditsPause" class="px-2.5 py-1 rounded-lg bg-neutral-900 border border-white/10 text-neutral-300 hover:text-white text-[11px]">
+                                <span id="creditsPauseIcon">⏸ JEDA</span>
+                            </button>
+                            <button onclick="toggleCreditsSpeed()" id="btnCreditsSpeed" class="px-2.5 py-1 rounded-lg bg-neutral-900 border border-white/10 text-amber-400 hover:text-white text-[11px] font-bold">
+                                <span id="creditsSpeedText">1x</span>
+                            </button>
+                        </div>
+                        <button onclick="advanceToPantheonStage()" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold text-[11px] tracking-wider transition hover:opacity-90 shadow-lg shadow-orange-500/30">
+                            LEWATI KE 10 KSATRIA KEHORMATAN →
+                        </button>
+                    </div>
+
+                    <div id="creditsViewport" class="w-full max-h-[78vh] overflow-y-auto relative scrollbar-none rounded-3xl border border-amber-500/30 bg-black/90 p-6 md:p-12 shadow-[0_0_60px_rgba(0,0,0,0.9)]">
+                        <div id="creditsTrack" class="max-w-2xl mx-auto space-y-24 text-center font-mono py-16">
+                            
+                            <!-- MONUMEN PROLOGUE AGUNG -->
+                            <div class="prologue-monument-card p-8 md:p-12 text-center max-w-4xl mx-auto">
+                                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/60 border border-amber-500/30 text-amber-300 text-xs font-mono tracking-widest uppercase mb-6 shadow-lg shadow-amber-950/40">
+                                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                                    CRUX ARCHIVAL SYSTEM // CLEARANCE LEVEL: OMEGA TITAN
+                                </div>
+
+                                <div class="monument-crest-ring mb-6">
+                                    <div class="crest-ring-spin"></div>
+                                    <div class="crest-ring-pulse"></div>
+                                    <div class="relative z-10 text-amber-300">
+                                        <svg class="w-10 h-10 drop-shadow-[0_0_12px_rgba(245,158,11,0.8)]" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-black monument-title-gold uppercase mb-4 tracking-wider">
+                                    THE HALL OF LEGACY
+                                </h1>
+
+                                <div class="hud-ornament-divider max-w-lg mx-auto">
+                                    <div class="hud-line"></div>
+                                    <div class="hud-diamond"></div>
+                                    <span class="text-xs font-mono text-amber-400/80 tracking-widest uppercase">TITIK NOL REEL</span>
+                                    <div class="hud-diamond"></div>
+                                    <div class="hud-line"></div>
+                                </div>
+
+                                <p class="font-serif italic text-amber-100/85 text-base sm:text-lg max-w-xl mx-auto leading-relaxed mb-6 font-light">
+                                    "Menyusuri kembali setiap nama, keringat, dan tawa yang telah merajut berdirinya markas besar CORE REGNUM UNIFIED-X."
+                                </p>
+                            </div>
+
+                            <!-- SEGMEN 1: FOUNDER -->
+                            <div class="space-y-6">
+                                <div class="space-y-1">
+                                    <div class="text-[11px] text-orange-400 tracking-widest uppercase font-mono">— FOUNDER &amp; SOLE INITIATOR —</div>
+                                    <h3 class="text-3xl sm:text-4xl font-black text-white font-cinzel tracking-wider">W1ZQ</h3>
+                                    <p class="text-xs text-neutral-400 italic max-w-md mx-auto pt-1 font-serif">"Yang menyalakan riak pertama di detik nol, menuangkan visi, kode, dan waktu dari ketiadaan."</p>
+                                </div>
+                                <div class="max-w-sm mx-auto p-4 bg-neutral-950/80 rounded-2xl border border-orange-500/40 shadow-2xl space-y-3">
+                                    <div class="grid grid-cols-2 gap-3 items-center">
+                                        <div class="h-32 rounded-xl overflow-hidden bg-black border border-white/10"><img src="image/WIZ.jpeg" alt="Founder W1ZQ" class="w-full h-full object-cover"></div>
+                                        <div class="h-32 rounded-xl overflow-hidden bg-black border border-white/10 p-2 flex items-center justify-center"><img src="image/CRUX LOGO.png" alt="CRUX Logo" class="max-h-full max-w-full object-contain"></div>
+                                    </div>
+                                    <div class="text-[10px] text-neutral-400 italic font-mono">"Titik Nol — Awal sebuah perjalanan panjang."</div>
+                                </div>
+                            </div>
+
+                            <!-- SEGMEN 2: HIGH COUNCIL -->
+                            <div class="space-y-6">
+                                <div class="space-y-1">
+                                    <div class="text-[11px] text-red-400 tracking-widest uppercase font-mono">— THE HIGH COUNCIL / ADMINS —</div>
+                                    <h3 class="text-2xl sm:text-3xl font-black text-white font-cinzel tracking-wider">REE &nbsp;•&nbsp; ZAR</h3>
+                                    <p class="text-xs text-neutral-400 italic max-w-md mx-auto pt-1 font-serif">"Penjaga keseimbangan ritme dan arah gerak markas, mengawal pilar pimpinan tepat di bawah sang pendiri."</p>
+                                </div>
+                                <div class="max-w-sm mx-auto p-4 bg-neutral-950/80 rounded-2xl border border-red-500/40 shadow-2xl space-y-3">
+                                    <div class="grid grid-cols-2 gap-3 items-center">
+                                        <div class="h-32 rounded-xl overflow-hidden bg-black border border-white/10"><img src="image/REE.jpg" alt="Admin Ree" class="w-full h-full object-cover"></div>
+                                        <div class="h-32 rounded-xl overflow-hidden bg-black border border-white/10"><img src="image/ZAR.jpg" alt="Admin Zar" class="w-full h-full object-cover"></div>
+                                    </div>
+                                    <div class="text-[10px] text-neutral-400 italic font-mono">"Pengawal Pilar — Menjaga lentera tetap menyala."</div>
+                                </div>
+                            </div>
+
+                            <!-- SEGMEN 3: OPERATORS -->
+                            <div class="space-y-6">
+                                <div class="space-y-3">
+                                    <div><div class="text-[10px] text-emerald-400 tracking-widest uppercase font-mono">— ROBLOX DIVISION OPERATORS —</div><div class="text-sm font-bold text-white tracking-wider pt-0.5 font-mono">YISELLE • SYLV • CAE • ARA • CAERYN</div></div>
+                                    <div><div class="text-[10px] text-purple-400 tracking-widest uppercase font-mono">— MLBB DIVISION OPERATORS —</div><div class="text-sm font-bold text-white tracking-wider pt-0.5 font-mono">MOUMOU • NINO</div></div>
+                                    <p class="text-xs text-neutral-400 italic max-w-md mx-auto pt-1 font-serif">"Penggerak tawa di medan laga, merajut ikatan lewat kompetisi, dan memastikan setiap langkah terasa berharga."</p>
+                                </div>
+                                <div class="max-w-md mx-auto p-4 bg-neutral-950/80 rounded-2xl border border-white/15 shadow-2xl space-y-3">
+                                    <div class="grid grid-cols-4 sm:grid-cols-7 gap-1.5">
+                                        <img src="image/CIL.jpeg" alt="Yiselle" class="w-full h-12 rounded object-cover border border-white/10">
+                                        <img src="image/SIL.jpg" alt="Sylv" class="w-full h-12 rounded object-cover border border-white/10">
+                                        <img src="image/CAE.jpg" alt="Cae" class="w-full h-12 rounded object-cover border border-white/10">
+                                        <img src="image/ARA.jpeg" alt="Ara" class="w-full h-12 rounded object-cover border border-white/10">
+                                        <img src="image/RIN.jpeg" alt="Caeryn" class="w-full h-12 rounded object-cover border border-white/10">
+                                        <img src="image/MOM.jpeg" alt="Moumou" class="w-full h-12 rounded object-cover border border-white/10">
+                                        <img src="image/BUTA.jpg" alt="Nino" class="w-full h-12 rounded object-cover border border-white/10">
+                                    </div>
+                                    <div class="h-40 rounded-xl overflow-hidden border border-white/10"><img src="image/FILO.png" alt="Match MLBB" class="w-full h-full object-cover"></div>
+                                    <div class="text-[10px] text-neutral-400 italic font-mono">"Garda Depan — Arena tawa dan medan laga."</div>
+                                </div>
+                            </div>
+
+                            <!-- SEGMEN 4: RECORD 1000-JAM VC -->
+                            <div class="space-y-6">
+                                <div class="space-y-1">
+                                    <div class="text-[11px] text-amber-400 tracking-widest uppercase font-mono">— MILESTONE OF ENDURANCE —</div>
+                                    <h3 class="text-xl sm:text-2xl font-black text-white tracking-wider font-cinzel">THE 1000-HOUR PURE VOICE ARCHIVE</h3>
+                                    <p class="text-xs text-neutral-300 italic max-w-md mx-auto pt-2 leading-relaxed font-serif">"0% Mesin • 100% Jiwa Murni<br>Seribu jam tanpa henti, menepis sunyi malam hanya dengan tawa dan obrolan tulus antaranggota."</p>
+                                </div>
+                                <div class="max-w-sm mx-auto p-4 bg-neutral-950/80 rounded-2xl border border-amber-500/40 shadow-2xl space-y-3">
+                                    <div class="h-44 rounded-xl overflow-hidden border border-white/10"><img src="image/POIS.png" alt="Pure Voice Record" class="w-full h-full object-cover"></div>
+                                    <div class="text-[10px] text-neutral-400 italic font-mono">"Rekor Murni — Ruang suara yang menolak mati."</div>
+                                </div>
+                            </div>
+
+                            <!-- SEGMEN 5: TIME-CAPSULE GALLERY -->
+                            <div class="space-y-6 pt-4">
+                                <div class="space-y-1">
+                                    <div class="text-[10px] font-mono tracking-widest uppercase text-orange-400 font-bold">// THE TIME-CAPSULE GALLERY</div>
+                                    <h3 class="text-xl sm:text-2xl font-black text-white font-cinzel tracking-wider">REKAM JEJAK YANG MENOLAK PADAM</h3>
+                                    <p class="text-xs text-neutral-400 italic font-serif">Ketuk foto polaroid mana saja untuk memperbesar & membaca memori rahasia di baliknya.</p>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-2xl mx-auto pt-3">
+                                    <div onclick="inspectMemory(1)" class="polaroid-card p-3 rounded-2xl -rotate-2 group">
+                                        <div class="h-40 rounded-xl overflow-hidden bg-black relative">
+                                            <img src="image/WIZ.jpeg" alt="First Night Genesis" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                                            <span class="absolute bottom-2 left-2 text-[9px] font-mono text-amber-400 font-bold">20 MEI 2026</span>
+                                        </div>
+                                        <div class="pt-3 pb-1 text-center font-mono">
+                                            <div class="text-xs font-bold text-white tracking-wide">Fajar Titik Nol</div>
+                                            <div class="text-[10px] text-neutral-400 italic mt-0.5">"Malam pertama baris kode dinyalakan."</div>
+                                        </div>
+                                    </div>
+
+                                    <div onclick="inspectMemory(2)" class="polaroid-card p-3 rounded-2xl rotate-2 group">
+                                        <div class="h-40 rounded-xl overflow-hidden bg-black relative">
+                                            <img src="image/POIS.png" alt="1000-Hour Endurance" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                                            <span class="absolute bottom-2 left-2 text-[9px] font-mono text-cyan-400 font-bold">23 APRIL 2026</span>
+                                        </div>
+                                        <div class="pt-3 pb-1 text-center font-mono">
+                                            <div class="text-xs font-bold text-white tracking-wide">Gema Suara Abadi</div>
+                                            <div class="text-[10px] text-neutral-400 italic mt-0.5">"1239+ jam voice channel tanpa jeda."</div>
+                                        </div>
+                                    </div>
+
+                                    <div onclick="inspectMemory(3)" class="polaroid-card p-3 rounded-2xl -rotate-1 group">
+                                        <div class="h-40 rounded-xl overflow-hidden bg-black relative">
+                                            <img src="image/COLLAB.jpg" alt="Brotherhood Clashes" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                                            <span class="absolute bottom-2 left-2 text-[9px] font-mono text-purple-400 font-bold">ARENA & EXPEDITION</span>
+                                        </div>
+                                        <div class="pt-3 pb-1 text-center font-mono">
+                                            <div class="text-xs font-bold text-white tracking-wide">Tawa & Riuh Laga</div>
+                                            <div class="text-[10px] text-neutral-400 italic mt-0.5">"Dari Land of Dawn ke puncak Roblox."</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SEGMEN 6: ALLIED SANCTUARIES -->
+                            <div class="space-y-6">
+                                <div class="space-y-1">
+                                    <div class="text-[11px] text-cyan-400 tracking-widest uppercase font-mono">— ALLIED SANCTUARIES / PARTNERS —</div>
+                                    <div class="text-xs sm:text-sm font-bold text-white tracking-widest leading-loose font-mono">MAIN SUKA SUKA &nbsp;•&nbsp; CHAOTIC LOUNGE &nbsp;•&nbsp; AKIRA INFINITY<br>STARLIGHT &nbsp;•&nbsp; AKASYAA</div>
+                                    <p class="text-xs text-neutral-400 italic max-w-md mx-auto pt-2 font-serif">"Jembatan tak kasatmata yang melintasi semesta maya, tangan yang saling menggenggam dalam persaudaraan."</p>
+                                </div>
+                                <div class="max-w-sm mx-auto p-4 bg-neutral-950/80 rounded-2xl border border-cyan-500/40 shadow-2xl space-y-3">
+                                    <div class="h-44 rounded-xl overflow-hidden border border-white/10"><img src="image/COLLAB.jpg" alt="Allied Sanctuary" class="w-full h-full object-cover"></div>
+                                    <div class="text-[10px] text-neutral-400 italic font-mono">"Simpul Aliansi — Berdiri tegak bersama rekan seperjuangan."</div>
+                                </div>
+                            </div>
+
+                            <!-- SEGMEN 7: EPILOG & TOMBOL MENUJU PANTHEON -->
+                            <div class="space-y-8 pt-8 border-t border-white/10">
+                                <div class="space-y-2">
+                                    <div class="text-[11px] text-orange-400 tracking-widest uppercase font-mono">— SPECIAL THANKS TO —</div>
+                                    <h3 class="text-xl sm:text-2xl font-black text-white font-cinzel">SELURUH KELUARGA BESAR CRUX HQ</h3>
+                                    <p class="text-xs text-neutral-300 leading-relaxed max-w-lg mx-auto pt-2 font-serif">
+                                        Kamu yang singgah untuk melepas lelah, dan kamu yang telah berjuang memecahkan sandi ini.<br><br>
+                                        <strong class="text-orange-400">Kalian adalah bahan bakar abadi tempat ini.</strong>
+                                    </p>
+                                </div>
+                                <div class="py-4 text-xs text-neutral-500 tracking-widest font-mono">===============================================</div>
+                                <div class="space-y-2">
+                                    <h2 class="text-lg sm:text-2xl font-black text-white font-cinzel tracking-wider">
+                                        CRUX IS NOT JUST A SERVER.<br><span style="color: var(--accent-orange);">IT IS A HOME YOU CAN ALWAYS RETURN TO.</span>
+                                    </h2>
+                                </div>
+                                <div class="pt-6">
+                                    <button onclick="advanceToPantheonStage()" class="px-8 py-4 rounded-xl bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 hover:opacity-90 text-white font-mono text-xs font-bold tracking-wider transition shadow-2xl shadow-orange-500/40 flex items-center justify-center space-x-2 mx-auto active:scale-95">
+                                        <span>👑</span>
+                                        <span>[ BUKA THE PANTHEON OF CIPHER MASTERS // 10 NAMA KEHORMATAN → ]</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAHAP 3: THE PANTHEON OF CIPHER MASTERS (10 NAMA KEHORMATAN & AURA) -->
+                <div id="sanctumStagePantheon" class="hidden space-y-12 animate-fade-in">
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-neutral-950/90 border border-amber-500/40 backdrop-blur-md shadow-2xl font-mono text-xs">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+                            <span class="text-amber-400 font-bold tracking-widest uppercase">STAGE 03 // THE PANTHEON OF CIPHER MASTERS</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="backToLetterStage()" class="px-3 py-1.5 rounded-xl bg-neutral-900 border border-white/10 text-neutral-300 hover:text-white text-[10px]">
+                                ↺ BACA ULANG SURAT
+                            </button>
+                            <button onclick="lockOmegaVault()" class="px-3.5 py-1.5 rounded-xl bg-amber-950/60 border border-amber-500/40 text-amber-300 hover:text-white text-[10px] font-bold">
+                                🔒 KUNCI GERBANG
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="prologue-monument-card p-8 md:p-12 text-center max-w-4xl mx-auto">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/60 border border-amber-500/30 text-amber-300 text-xs font-mono tracking-widest uppercase mb-6 shadow-lg shadow-amber-950/40">
+                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                            HALL OF IMMORTALS // 10 TAKHTA KEHORMATAN
+                        </div>
+
+                        <div class="monument-crest-ring mb-6">
+                            <div class="crest-ring-spin"></div>
+                            <div class="crest-ring-pulse"></div>
+                            <div class="relative z-10 text-amber-300">
+                                <svg class="w-10 h-10 drop-shadow-[0_0_12px_rgba(245,158,11,0.8)]" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-black monument-title-gold uppercase mb-4 tracking-wider">
+                            THE 10 CIPHER MASTERS
+                        </h1>
+
+                        <div class="hud-ornament-divider max-w-lg mx-auto">
+                            <div class="hud-line"></div>
+                            <div class="hud-diamond"></div>
+                            <span class="text-xs font-mono text-amber-400/80 tracking-widest uppercase">DAFTAR KESATRIA TITIK NOL</span>
+                            <div class="hud-diamond"></div>
+                            <div class="hud-line"></div>
+                        </div>
+
+                        <p class="font-serif italic text-amber-100/85 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-6 font-light">
+                            "Di balik kegelapan empat gerbang teka-teki, hanya ada sepuluh takhta kehormatan bagi mereka yang memiliki ketajaman akal untuk menembus segel markas. Nama mereka dipahat di atas batu abadi selamanya."
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto pt-4 border-t border-amber-500/20 text-xs font-mono">
+                            <div class="p-2.5 rounded-lg bg-black/40 border border-amber-500/20">
+                                <span class="text-neutral-400 block mb-1">TOTAL TAKHTA</span>
+                                <span class="text-amber-400 font-bold text-sm">10 OPERATIVE SLOTS</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-black/40 border border-amber-500/20">
+                                <span class="text-neutral-400 block mb-1">STATUS SAAT INI</span>
+                                <span class="text-amber-400 font-bold text-sm">MENUNGGU PENAKLUK</span>
+                            </div>
+                            <div class="p-2.5 rounded-lg bg-black/40 border border-amber-500/20">
+                                <span class="text-neutral-400 block mb-1">TINGKAT KLIRENS</span>
+                                <span class="text-amber-400 font-bold text-sm">OMEGA TITAN</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 max-w-3xl mx-auto">
+                        <div class="text-center space-y-1">
+                            <h3 class="text-xl sm:text-2xl font-black text-white font-cinzel tracking-wider crux-glow">
+                                REGISTRASI 10 PEMAIN PERTAMA
+                            </h3>
+                            <p class="text-xs text-neutral-400 font-mono">
+                                Ketuk kartu untuk membuka berkas atau tantangan kehormatan.
+                            </p>
+                        </div>
+
+                        <div id="pantheonListContainer" class="space-y-3.5 font-mono"></div>
+                    </div>
+
+                    <div class="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4 font-mono text-xs">
+                        <button onclick="backToLetterStage()" class="px-6 py-3 rounded-xl bg-neutral-900 border border-white/15 hover:border-amber-500 text-neutral-300 hover:text-white transition flex items-center space-x-2">
+                            <span>📜</span> <span>BACA KEMBALI SURAT PENDIRI</span>
+                        </button>
+                        <button onclick="lockOmegaVault()" class="px-6 py-3 rounded-xl bg-neutral-900 border border-white/15 hover:border-red-500 text-neutral-300 hover:text-white transition flex items-center space-x-2">
+                            <span>🔒</span> <span>KUNCI GERBANG OMEGA</span>
+                        </button>
+                        <button onclick="switchPage('home')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:opacity-90 text-white font-bold transition shadow-lg shadow-orange-600/30 flex items-center space-x-2">
+                            <span>🏠</span> <span>KEMBALI KE BERANDA</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
 
     <!-- ================= MODAL DOSSIER STAF (TERKUNCI KHUSUS PER DIVISI/POSISI) ================= -->
     <div id="staffDetailModal" class="modal-backdrop-blur p-4">
@@ -2039,6 +2554,15 @@
             }
         }
 
+                // =====================================================================
+        // THE SANCTUM // PROTOCOL: OMEGA - ALUR BERTARAP 3 TAHAP & LOGIKA AUDIO
+        // =====================================================================
+        
+        // 👉 [TEMPAT SETTING FILE SUARA PENDIRI W1ZQ]
+        // Ganti 'audio/Founder Whisper.mp3' dengan nama file rekaman Anda di folder audio/
+        CUSTOM_AUDIO_CONFIG.founderVoiceUrl = 'audio/Founder Whisper.mp3';
+        CUSTOM_AUDIO_CONFIG.founderVolume = 0.85;
+
         function checkSanctumCodeSubmission() {
             if (checkCipherLockoutState()) return;
 
@@ -2055,20 +2579,18 @@
 
                 if (entered === CIPHER_CORRECT_CODE) {
                     playSFX('granted');
-                    feedback.innerHTML = `<span class="text-green-400 font-bold">✨ [AKSES DIBERIKAN // KUNCI OTENTIK!] Membuka segel transmisi...</span>`;
+                    feedback.innerHTML = `<span class="text-green-400 font-bold">✨ [AKSES DIBERIKAN // KUNCI OTENTIK!] Membuka segel ruang suci...</span>`;
                     allBoxes.forEach(b => {
                         b.classList.remove('border-white/20');
                         b.classList.add('border-green-500', 'bg-green-500/20');
                     });
                     confetti({ particleCount: 140, spread: 90, origin: { y: 0.6 } });
 
-                    // [PENYESUAIAN 2] MUSIK LATAR OMEGA LANGSUNG BERPUTAR SAAT KUNCI TERBUKA
-                    startSanctumAudioSoundtrack();
-
                     setCipherAttemptsLeft(CIPHER_MAX_ATTEMPTS);
                     localStorage.removeItem(STORAGE_KEY_CIPHER_LOCKOUT);
 
-                    setTimeout(() => openFounderParchment(), 900);
+                    // MEMASUKI TAHAP 1: HANYA SURAT PENDIRI
+                    setTimeout(() => unlockOmegaVault(), 800);
                 } else {
                     playSFX('denied');
                     let attempts = getCipherAttemptsLeft() - 1;
@@ -2104,45 +2626,163 @@
             }
         }
 
-        function openFounderParchment() {
-            const modal = document.getElementById('sanctumParchmentModal');
-            if (modal) modal.classList.add('active-modal');
+        // TAHAP 1: KUNCI TERBUKA -> TAMPILKAN HANYA SURAT PENDIRI
+        function unlockOmegaVault() {
+            const gateway = document.getElementById('sanctumGateway');
+            const storyline = document.getElementById('sanctumStoryline');
+            const stageLetter = document.getElementById('sanctumStageLetter');
+            const stageCredits = document.getElementById('sanctumStageCredits');
+            const stagePantheon = document.getElementById('sanctumStagePantheon');
+
+            if (gateway) gateway.classList.add('hidden');
+            if (storyline) storyline.classList.remove('hidden');
+
+            if (stageLetter) stageLetter.classList.remove('hidden');
+            if (stageCredits) stageCredits.classList.add('hidden');
+            if (stagePantheon) stagePantheon.classList.add('hidden');
+
+            // Putar Suara Segel & Musik Latar Omega
+            playVaultSealSFX();
+            startSanctumAudioSoundtrack();
+
+            if (stageLetter) stageLetter.scrollIntoView({ behavior: 'smooth' });
+            showToast('🔓', 'Segel terbuka! Silakan baca surat peninggalan pendiri.');
         }
 
-        // ================= CINEMATIC CREDITS CONTROLLER =================
+        // TAHAP 2: BUKA KREDIT SEJARAH BERGULIR DARI BAWAH KE ATAS
         let creditsScrolling = true;
         let creditsSpeedMultiplier = 1;
-        let creditsMusicPlaying = true;
         let creditsRafId = null;
-        let creditsAudioNode = null;
-        let creditsGainNode = null;
 
-        function launchCinematicCredits() {
+        function advanceToCreditsStage() {
             playSFX('granted');
-            const parchmentBox = document.getElementById('parchmentBox');
-            parchmentBox.classList.add('parchment-dissolving');
+            const stageLetter = document.getElementById('sanctumStageLetter');
+            const stageCredits = document.getElementById('sanctumStageCredits');
+            const stagePantheon = document.getElementById('sanctumStagePantheon');
 
-            setTimeout(() => {
-                document.getElementById('sanctumParchmentModal').classList.remove('active-modal');
-                parchmentBox.classList.remove('parchment-dissolving');
-                document.getElementById('sanctumCreditsOverlay').classList.remove('hidden');
+            if (stageLetter) stageLetter.classList.add('hidden');
+            if (stagePantheon) stagePantheon.classList.add('hidden');
+            if (stageCredits) stageCredits.classList.remove('hidden');
 
-                // Memastikan musik tetap berputar mulus tanpa jeda
-                startSanctumAudioSoundtrack();
-                startCreditsScrollAnimation();
-            }, 750);
+            stageCredits.scrollIntoView({ behavior: 'smooth' });
+            startCreditsAutoScroll();
         }
+
+        function startCreditsAutoScroll() {
+            const viewport = document.getElementById('creditsViewport');
+            if (!viewport) return;
+            viewport.scrollTop = 0;
+            creditsScrolling = true;
+            const baseSpeed = 0.85;
+
+            function step() {
+                if (creditsScrolling && viewport) {
+                    const maxScroll = viewport.scrollHeight - viewport.clientHeight;
+                    if (viewport.scrollTop < maxScroll - 6) {
+                        viewport.scrollTop += (baseSpeed * creditsSpeedMultiplier);
+                        creditsRafId = requestAnimationFrame(step);
+                    } else {
+                        creditsScrolling = false;
+                        // Otomatis lanjut ke Pantheon setelah kredit selesai bergulir
+                        setTimeout(() => advanceToPantheonStage(), 1500);
+                    }
+                }
+            }
+            if (creditsRafId) cancelAnimationFrame(creditsRafId);
+            creditsRafId = requestAnimationFrame(step);
+        }
+
+        function toggleCreditsScroll() {
+            creditsScrolling = !creditsScrolling;
+            const icon = document.getElementById('creditsPauseIcon');
+            if (icon) icon.innerText = creditsScrolling ? "⏸ JEDA" : "▶ LANJUT";
+            if (creditsScrolling) startCreditsAutoScroll();
+            playSFX('blip');
+        }
+
+        function toggleCreditsSpeed() {
+            creditsSpeedMultiplier = (creditsSpeedMultiplier === 1) ? 2.2 : 1;
+            const text = document.getElementById('creditsSpeedText');
+            if (text) text.innerText = (creditsSpeedMultiplier > 1) ? "2.2x" : "1x";
+            playSFX('blip');
+        }
+
+        // TAHAP 3: PUNCAK KLIMAKS // THE PANTHEON OF CIPHER MASTERS (10 NAMA & AURA)
+        function advanceToPantheonStage() {
+            if (creditsRafId) cancelAnimationFrame(creditsRafId);
+            creditsScrolling = false;
+            playSFX('power');
+
+            const stageCredits = document.getElementById('sanctumStageCredits');
+            const stagePantheon = document.getElementById('sanctumStagePantheon');
+
+            if (stageCredits) stageCredits.classList.add('hidden');
+            if (stagePantheon) stagePantheon.classList.remove('hidden');
+
+            // Render 10 Kartu Kehormatan dengan Aura Bertingkat
+            renderPantheonCards();
+
+            // Pesta Kembang Api Confetti
+            confetti({ particleCount: 160, spread: 100, origin: { y: 0.6 } });
+            stagePantheon.scrollIntoView({ behavior: 'smooth' });
+            showToast('👑', 'Selamat datang di The Pantheon of Cipher Masters!');
+        }
+
+        function backToLetterStage() {
+            playSFX('click');
+            const stageLetter = document.getElementById('sanctumStageLetter');
+            const stageCredits = document.getElementById('sanctumStageCredits');
+            const stagePantheon = document.getElementById('sanctumStagePantheon');
+
+            if (stageCredits) stageCredits.classList.add('hidden');
+            if (stagePantheon) stagePantheon.classList.add('hidden');
+            if (stageLetter) {
+                stageLetter.classList.remove('hidden');
+                stageLetter.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function lockOmegaVault() {
+            playSFX('click');
+            if (creditsRafId) cancelAnimationFrame(creditsRafId);
+
+            const gateway = document.getElementById('sanctumGateway');
+            const storyline = document.getElementById('sanctumStoryline');
+
+            if (storyline) storyline.classList.add('hidden');
+            if (gateway) gateway.classList.remove('hidden');
+
+            stopSanctumAudioSoundtrack();
+
+            // Reset input boxes
+            for (let i = 0; i < 4; i++) {
+                const b = document.getElementById(`cipher-${i}`);
+                if (b) {
+                    b.value = '';
+                    b.classList.remove('border-green-500', 'bg-green-500/20');
+                    b.classList.add('border-white/20');
+                }
+            }
+            const feedback = document.getElementById('cipherStatusFeedback');
+            if (feedback) feedback.innerText = 'Menunggu input 4 digit sandi protokol...';
+            
+            if (gateway) gateway.scrollIntoView({ behavior: 'smooth' });
+            showToast('🔒', 'Gerbang Omega kembali terkunci.');
+        }
+
+        // ================= SANCTUM SOUNDTRACK CONTROLLER =================
+        let sanctumMusicPlaying = true;
+        let sanctumSynthGain = null;
+        let sanctumSynthNodes = [];
 
         function startSanctumAudioSoundtrack() {
             initAudio();
             stopAtmosphere();
 
             if (sanctumAudioElement && sanctumAudioElement.src && !sanctumAudioElement.error) {
-                if (sanctumAudioElement.paused) {
-                    sanctumAudioElement.currentTime = 0;
-                    sanctumAudioElement.volume = creditsMusicPlaying ? CUSTOM_AUDIO_CONFIG.sanctumVolume : 0;
-                    sanctumAudioElement.play().catch(() => startSanctumSynthSoundtrack());
-                }
+                sanctumAudioElement.currentTime = 0;
+                sanctumAudioElement.volume = sanctumMusicPlaying ? CUSTOM_AUDIO_CONFIG.sanctumVolume : 0;
+                sanctumAudioElement.play().catch(() => startSanctumSynthSoundtrack());
             } else {
                 startSanctumSynthSoundtrack();
             }
@@ -2157,114 +2797,615 @@
             if (audioEnabled) startAtmosphere();
         }
 
-        function toggleCreditsMusic() {
-            creditsMusicPlaying = !creditsMusicPlaying;
-            const icon = document.getElementById('creditsMusicIcon');
-            if (icon) icon.innerText = creditsMusicPlaying ? "🔊" : "🔇";
-            if (sanctumAudioElement) sanctumAudioElement.volume = creditsMusicPlaying ? CUSTOM_AUDIO_CONFIG.sanctumVolume : 0;
-            if (creditsGainNode && audioCtx) {
-                creditsGainNode.gain.setValueAtTime(creditsMusicPlaying ? 0.07 : 0.0001, audioCtx.currentTime);
-            }
-            playSFX('click');
-        }
-
         function startSanctumSynthSoundtrack() {
             if (!audioCtx) return;
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            if (creditsAudioNode) return;
+            if (sanctumSynthNodes.length > 0) return;
 
             try {
-                creditsGainNode = audioCtx.createGain();
-                creditsGainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
-                creditsGainNode.gain.exponentialRampToValueAtTime(0.07, audioCtx.currentTime + 3);
+                sanctumSynthGain = audioCtx.createGain();
+                sanctumSynthGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                sanctumSynthGain.gain.exponentialRampToValueAtTime(0.07, audioCtx.currentTime + 3);
 
                 const masterFilter = audioCtx.createBiquadFilter();
-                masterFilter.type = 'lowpass'; masterFilter.frequency.setValueAtTime(450, audioCtx.currentTime);
+                masterFilter.type = 'lowpass';
+                masterFilter.frequency.setValueAtTime(450, audioCtx.currentTime);
 
-                creditsAudioNode = [];
+                sanctumSynthNodes = [];
                 [65.41, 98.00, 130.81, 164.81, 196.00].forEach(f => {
                     const osc = audioCtx.createOscillator();
-                    osc.type = 'sawtooth'; osc.frequency.setValueAtTime(f, audioCtx.currentTime);
-                    const noteGain = audioCtx.createGain(); noteGain.gain.setValueAtTime(0.18, audioCtx.currentTime);
-                    osc.connect(noteGain); noteGain.connect(masterFilter);
-                    osc.start(); creditsAudioNode.push(osc);
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(f, audioCtx.currentTime);
+                    const noteGain = audioCtx.createGain();
+                    noteGain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+                    osc.connect(noteGain);
+                    noteGain.connect(masterFilter);
+                    osc.start();
+                    sanctumSynthNodes.push(osc);
                 });
-                masterFilter.connect(creditsGainNode);
-                creditsGainNode.connect(audioCtx.destination);
+                masterFilter.connect(sanctumSynthGain);
+                sanctumSynthGain.connect(audioCtx.destination);
             } catch (err) {}
         }
 
         function stopSanctumSynthSoundtrack() {
-            if (creditsGainNode && audioCtx) {
+            if (sanctumSynthGain && audioCtx) {
                 try {
-                    creditsGainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
+                    sanctumSynthGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
                     setTimeout(() => {
-                        if (creditsAudioNode) creditsAudioNode.forEach(o => { try { o.stop(); } catch(e){} });
-                        creditsAudioNode = null; creditsGainNode = null;
+                        sanctumSynthNodes.forEach(o => { try { o.stop(); } catch(e){} });
+                        sanctumSynthNodes = [];
+                        sanctumSynthGain = null;
                     }, 1000);
-                } catch(e) { creditsAudioNode = null; creditsGainNode = null; }
+                } catch(e) { sanctumSynthGain = null; }
             }
         }
 
-        function startCreditsScrollAnimation() {
-            const viewport = document.getElementById('creditsViewport');
-            viewport.scrollTop = 0; creditsScrolling = true;
-            const baseSpeed = 0.85;
+        // ================= SUARA MEKANIKAL SEGEL BRANKAS =================
+        let vaultAudioCtx = null;
+        function playVaultSealSFX() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                if (!vaultAudioCtx) vaultAudioCtx = new AudioContext();
+                if (vaultAudioCtx.state === 'suspended') vaultAudioCtx.resume();
 
-            function step() {
-                if (creditsScrolling) {
-                    const maxScroll = viewport.scrollHeight - viewport.clientHeight;
-                    if (viewport.scrollTop < maxScroll - 6) {
-                        viewport.scrollTop += (baseSpeed * creditsSpeedMultiplier);
-                    } else {
-                        creditsScrolling = false;
-                        const pauseIcon = document.getElementById('creditsPauseIcon');
-                        if (pauseIcon) pauseIcon.innerText = "▶";
-                        confetti({ particleCount: 70, spread: 80, origin: { y: 0.7 } });
-                    }
+                const now = vaultAudioCtx.currentTime;
+
+                const oscThud = vaultAudioCtx.createOscillator();
+                const gainThud = vaultAudioCtx.createGain();
+                oscThud.type = 'triangle';
+                oscThud.frequency.setValueAtTime(120, now);
+                oscThud.frequency.exponentialRampToValueAtTime(32, now + 0.18);
+                gainThud.gain.setValueAtTime(0.4, now);
+                gainThud.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                oscThud.connect(gainThud);
+                gainThud.connect(vaultAudioCtx.destination);
+                oscThud.start(now);
+                oscThud.stop(now + 0.22);
+
+                const oscChime = vaultAudioCtx.createOscillator();
+                const gainChime = vaultAudioCtx.createGain();
+                const filter = vaultAudioCtx.createBiquadFilter();
+                
+                oscChime.type = 'sine';
+                oscChime.frequency.setValueAtTime(520, now + 0.04);
+                oscChime.frequency.exponentialRampToValueAtTime(1480, now + 0.12);
+                
+                filter.type = 'bandpass';
+                filter.frequency.setValueAtTime(1200, now);
+                filter.Q.value = 4.0;
+
+                gainChime.gain.setValueAtTime(0.001, now);
+                gainChime.gain.linearRampToValueAtTime(0.25, now + 0.05);
+                gainChime.gain.exponentialRampToValueAtTime(0.0001, now + 0.38);
+
+                oscChime.connect(filter);
+                filter.connect(gainChime);
+                gainChime.connect(vaultAudioCtx.destination);
+                oscChime.start(now + 0.03);
+                oscChime.stop(now + 0.4);
+            } catch (err) {}
+        }
+
+        // ================= REGISTRY 10 TAKHTA KEHORMATAN =================
+        // 👉 CARA MENGISI JIKA ADA YANG BERHASIL:
+        // Cukup ubah isClaimed menjadi true, lalu isi name dan date!
+        window.OMEGA_SOLVERS_REGISTRY = [
+            { rank: 1, isClaimed: false, title: "THE PRIME CIPHER ARCHON", clearance: "TITAN LEVEL 1", name: "???", date: "??:??:?? // ??-??-????", radiance: "100% MAXIMUM RADIANCE", avatar: "image/CRUX LOGO.png", quote: "“Menembus keheningan malam dan membuktikan bahwa tak ada gerbang yang tak bisa ditembus.”", verdict: "“Ketajaman logika luar biasa dan dedikasi murni. Jiwa pertama di atas takhta abadi Titik Nol.”", serialCode: "CRUX-TITAN-001-ALPHA", badgeColor: "#fbbf24" },
+            { rank: 2, isClaimed: false, title: "FIRST GRAND BREACHER", clearance: "TITAN LEVEL 2", name: "???", date: "??:??:?? // ??-??-????", radiance: "90% HIGH RADIANCE", avatar: "image/CRUX LOGO.png", quote: "“CRUX adalah pelarian terbaik setelah hari yang melelahkan.”", verdict: "“Kecepatan nalar yang mengagumkan. Mampu membaca retakan rahasia tepat di garis batas.”", serialCode: "CRUX-TITAN-002-BETA", badgeColor: "#38bdf8" },
+            { rank: 3, isClaimed: false, title: "SHADOW CRYPTANALYST", clearance: "TITAN LEVEL 3", name: "???", date: "??:??:?? // ??-??-????", radiance: "80% BRILLIANT GLOW", avatar: "image/CRUX LOGO.png", quote: "“Di balik dinginnya dunia digital, selalu ada alasan menemukan rumah yang hangat.”", verdict: "“Kecermatan tinggi menafsirkan empat sigil alegori tanpa kehilangan kesabaran.”", serialCode: "CRUX-TITAN-003-GAMMA", badgeColor: "#c084fc" },
+            { rank: 4, isClaimed: false, title: "SANCTUM SENTINEL", clearance: "COMMANDER", name: "???", date: "??:??:?? // ??-??-????", radiance: "70% VIBRANT AURA", avatar: "image/CRUX LOGO.png", quote: "“Tempat kita tertawa lepas tanpa topeng kepura-puraan.”", verdict: "“Semangat api yang teguh pantang menyerah hingga digit terakhir.”", serialCode: "CRUX-TITAN-004-DELTA", badgeColor: "#f97316" },
+            { rank: 5, isClaimed: false, title: "CIPHER OVERSEER", clearance: "COMMANDER", name: "???", date: "??:??:?? // ??-??-????", radiance: "60% AMBER GLOW", avatar: "image/CRUX LOGO.png", quote: "“Setiap detik di voice channel ini memiliki arti tersendiri.”", verdict: "“Mengamati detail terkecil yang luput dari pandangan orang banyak.”", serialCode: "CRUX-TITAN-005-EPSILON", badgeColor: "#eab308" },
+            { rank: 6, isClaimed: false, title: "VAULT HARBINGER", clearance: "VANGUARD", name: "???", date: "??:??:?? // ??-??-????", radiance: "50% MEDIUM GLOW", avatar: "image/CRUX LOGO.png", quote: "“Menemukan kawan sejati di tempat yang tak pernah terduga sebelumnya.”", verdict: "“Konsistensi dan ketenangan pikiran yang membuahkan hasil nyata.”", serialCode: "CRUX-TITAN-006-ZETA", badgeColor: "#10b981" },
+            { rank: 7, isClaimed: false, title: "ENCRYPTION SPECIALIST", clearance: "VANGUARD", name: "???", date: "??:??:?? // ??-??-????", radiance: "40% SOFT GLOW", avatar: "image/CRUX LOGO.png", quote: "“Kesunyian dipecahkan oleh mereka yang berani melangkah lebih jauh.”", verdict: "“Membuktikan bahwa dengan kesabaran, teka-teki tersulit pun dapat diurai.”", serialCode: "CRUX-TITAN-007-ETA", badgeColor: "#e2e8f0" },
+            { rank: 8, isClaimed: false, title: "PROTOCOL OPERATIVE", clearance: "OPERATIVE", name: "???", date: "??:??:?? // ??-??-????", radiance: "30% FAINT SHIMMER", avatar: "image/CRUX LOGO.png", quote: "“Rumah ini layak diperjuangkan setiap kali kita merasa lelah.”", verdict: "“Kehadiran yang menenangkan dan kegigihan yang patut diacungi jempol.”", serialCode: "CRUX-TITAN-008-THETA", badgeColor: "#94a3b8" },
+            { rank: 9, isClaimed: false, title: "SANCTUM SEEKER", clearance: "OPERATIVE", name: "???", date: "??:??:?? // ??-??-????", radiance: "20% SUBTLE VEIL", avatar: "image/CRUX LOGO.png", quote: "“Jangan pernah meremehkan kekuatan rasa ingin tahu yang tulus.”", verdict: "“Berjalan dalam sunyi namun menorehkan jejak abadi di dinding sejarah.”", serialCode: "CRUX-TITAN-009-IOTA", badgeColor: "#64748b" },
+            { rank: 10, isClaimed: false, title: "THE FINAL VANGUARD", clearance: "HONORARY", name: "???", date: "??:??:?? // ??-??-????", radiance: "10% STANDARD BASIS", avatar: "image/CRUX LOGO.png", quote: "“Mengunci daftar sepuluh ksatria pertama dengan kehormatan utuh.”", verdict: "“Penyempurna barisan sepuluh ksatria pertama di markas ini.”", serialCode: "CRUX-TITAN-010-KAPPA", badgeColor: "#475569" }
+        ];
+
+        let activeDossierRank = 1;
+
+        function renderPantheonCards() {
+            const container = document.getElementById('pantheonListContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            window.OMEGA_SOLVERS_REGISTRY.forEach(solver => {
+                const rankPad = String(solver.rank).padStart(2, '0');
+                const auraClass = `aura-tier-${solver.rank}`;
+                
+                let rankBadgeColor = "text-amber-400 border-amber-500/40 bg-amber-950/60";
+                let crownIcon = "";
+                if (solver.rank === 1) {
+                    rankBadgeColor = "text-amber-200 border-amber-300 bg-amber-900 shadow-[0_0_15px_rgba(251,191,36,0.6)]";
+                    crownIcon = `<span class="text-xs text-amber-300">👑 TITAN #1</span>`;
+                } else if (solver.rank <= 3) {
+                    crownIcon = `<span class="text-xs text-amber-400/80">⚔️ ELITE TRIAD</span>`;
                 }
-                creditsRafId = requestAnimationFrame(step);
+
+                if (!solver.isClaimed) {
+                    // SLOT TERKUNCI (AWAITING SOLVER)
+                    const card = document.createElement('div');
+                    card.className = `solver-card-unclaimed ${auraClass} rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 transition-all`;
+                    card.onclick = () => openUnclaimedSlotChallenge(solver.rank);
+
+                    card.innerHTML = `
+                        <div class="flex items-center gap-4 w-full sm:w-auto">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-black/60 border border-amber-500/30 flex items-center justify-center text-amber-400/70 relative shrink-0">
+                                <div class="absolute inset-1 border border-dashed border-amber-500/20 rounded"></div>
+                                <svg class="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <div class="text-left">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold ${rankBadgeColor}">#${rankPad}</span>
+                                    ${crownIcon}
+                                    <span class="text-[10px] font-mono text-amber-500/70 tracking-widest uppercase text-glitch-subtle">[ AWAITING FIRST SOLVER ]</span>
+                                </div>
+                                <h4 class="font-serif font-bold text-sm sm:text-base text-neutral-300 tracking-wide flex items-center gap-2">
+                                    <span>SLOT #${rankPad} // ${solver.title}</span>
+                                </h4>
+                                <p class="text-[11px] font-mono text-neutral-500">
+                                    STATUS: <span class="text-amber-500/90 font-semibold">UNBREACHED</span> // TIME: <span class="text-neutral-400">--:--:-- UTC</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="w-full sm:w-auto flex items-center justify-end">
+                            <span class="w-full sm:w-auto text-center px-4 py-2 rounded-xl bg-amber-950/40 hover:bg-amber-900/60 border border-amber-500/40 text-amber-300 font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.15)] flex items-center justify-center gap-1.5">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                                ACCESS CHALLENGE
+                            </span>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                } else {
+                    // KARTU TERBUKA OTOMATIS JIKA isClaimed: true
+                    const card = document.createElement('div');
+                    card.className = `p-4 sm:p-5 rounded-2xl ${auraClass} cursor-pointer flex flex-col sm:flex-row items-center justify-between gap-4 transition-all hover:scale-[1.015] bg-gradient-to-r from-black/90 to-neutral-950/90`;
+                    card.onclick = () => openSolverDossier(solver.rank);
+                    card.innerHTML = `
+                        <div class="flex items-center space-x-3.5 w-full sm:w-auto">
+                            <span class="w-10 h-10 rounded-xl bg-black/80 border border-amber-400/40 text-amber-300 font-bold text-sm flex items-center justify-center shrink-0 shadow-lg">
+                                ${solver.rank === 1 ? '👑' : `#${rankPad}`}
+                            </span>
+                            <div>
+                                <div class="flex items-center gap-2 mb-0.5">
+                                    <span class="text-[9.5px] font-mono font-bold uppercase tracking-wider text-amber-400">${solver.title}</span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">● TERVERIFIKASI</span>
+                                </div>
+                                <div class="text-base sm:text-lg font-bold text-white tracking-widest font-cinzel">${solver.name}</div>
+                            </div>
+                        </div>
+                        <div class="w-full sm:w-auto text-center sm:text-right bg-black/60 px-3.5 py-2 rounded-xl border border-white/10">
+                            <div class="text-[8.5px] text-neutral-400 uppercase font-mono">WAKTU PEMECAHAN</div>
+                            <div class="text-xs font-bold text-amber-200 font-mono">${solver.date}</div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                }
+            });
+        }
+
+        // ================= POP-UP TANTANGAN SLOT TERKUNCI =================
+        function openUnclaimedSlotChallenge(rank) {
+            playVaultSealSFX();
+            const solver = window.OMEGA_SOLVERS_REGISTRY.find(s => s.rank === rank) || { rank, title: "CIPHER OPERATIVE" };
+            const modal = document.getElementById('unclaimedSlotModal');
+            const badge = document.getElementById('unclaimedModalSlotBadge');
+            const spinRing = document.getElementById('unclaimedModalSpinRing');
+
+            if (badge) badge.innerText = `[ POSITION #${String(rank).padStart(2, '0')} // ${solver.title} ]`;
+            if (spinRing) {
+                spinRing.className = (rank === 1)
+                    ? "absolute inset-0 rounded-full border-2 border-dashed border-amber-300 shadow-[0_0_20px_rgba(251,191,36,0.8)] animate-spin"
+                    : "absolute inset-0 rounded-full border-2 border-dashed border-amber-500/60 animate-spin";
             }
-            if (creditsRafId) cancelAnimationFrame(creditsRafId);
-            creditsRafId = requestAnimationFrame(step);
+
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
         }
 
-        function toggleCreditsScroll() {
-            creditsScrolling = !creditsScrolling;
-            const icon = document.getElementById('creditsPauseIcon');
-            if (icon) icon.innerText = creditsScrolling ? "⏸" : "▶";
-            playSFX('blip');
+        function closeUnclaimedSlotModal() {
+            playVaultSealSFX();
+            const modal = document.getElementById('unclaimedSlotModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
         }
 
-        function toggleCreditsSpeed() {
-            creditsSpeedMultiplier = creditsSpeedMultiplier === 1 ? 2.4 : 1;
-            const text = document.getElementById('creditsSpeedText');
-            if (text) text.innerText = creditsSpeedMultiplier > 1 ? "2.4x" : "1x";
-            playSFX('blip');
+        function inspectCipherGatesHint() {
+            closeUnclaimedSlotModal();
+            lockOmegaVault();
+            toggleCipherProtocol();
         }
 
-        function replayCredits() {
+        // ================= POP-UP BERKAS DEKRIPSI (DOSSIER) =================
+        function openSolverDossier(rank) {
+            playVaultSealSFX();
+            activeDossierRank = rank;
+            const data = window.OMEGA_SOLVERS_REGISTRY.find(s => s.rank === rank) || window.OMEGA_SOLVERS_REGISTRY[0];
+
+            document.getElementById('dossierClearanceBadge').innerText = `CLEARANCE LEVEL: TITAN // OMEGA SOLVER #${String(rank).padStart(2, '0')}`;
+            document.getElementById('dossierSolveTimestamp').innerText = `WAKTU TERSELESAIKAN: ${data.date}`;
+            document.getElementById('dossierRankTitle').innerText = data.title;
+            document.getElementById('dossierSolverName').innerText = data.name;
+            document.getElementById('dossierRadianceStatus').innerText = `Pancaran Aura: ${data.radiance}`;
+            document.getElementById('dossierQuote').innerText = data.quote;
+            document.getElementById('dossierFounderVerdict').innerText = data.verdict;
+            document.getElementById('dossierAvatar').src = data.avatar;
+
+            const modal = document.getElementById('solverDossierModal');
+            const box = document.getElementById('solverDossierBox');
+            if (modal) {
+                modal.classList.add('active-modal');
+                if (box) {
+                    box.classList.remove('dossier-entry-anim');
+                    void box.offsetWidth;
+                    box.classList.add('dossier-entry-anim');
+                }
+            }
+        }
+
+        function closeSolverDossier() {
             playSFX('click');
-            const viewport = document.getElementById('creditsViewport');
-            viewport.scrollTop = 0; creditsScrolling = true;
-            const pauseIcon = document.getElementById('creditsPauseIcon');
-            if (pauseIcon) pauseIcon.innerText = "⏸";
+            const modal = document.getElementById('solverDossierModal');
+            if (modal) modal.classList.remove('active-modal');
         }
 
-        function exitSanctumCredits() {
+        // Cetak Keycard Canvas PNG
+        function downloadDigitalKeycard() {
+            playSFX('granted');
+            const data = window.OMEGA_SOLVERS_REGISTRY.find(s => s.rank === activeDossierRank) || window.OMEGA_SOLVERS_REGISTRY[0];
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 900;
+            canvas.height = 500;
+            const ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = '#050507';
+            ctx.fillRect(0, 0, 900, 500);
+
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < 900; x += 30) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 500); ctx.stroke(); }
+            for (let y = 0; y < 500; y += 30) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(900, y); ctx.stroke(); }
+
+            ctx.strokeStyle = data.badgeColor || '#f59e0b';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(20, 20, 860, 460);
+
+            ctx.fillStyle = '#f59e0b';
+            ctx.font = 'bold 16px "JetBrains Mono", monospace';
+            ctx.fillText("CORE REGNUM UNIFIED-X // OFFICIAL BASECAMP", 50, 60);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '900 36px "Cinzel", serif';
+            ctx.fillText("THE SANCTUM // PROTOCOL: OMEGA", 50, 110);
+
+            ctx.fillStyle = '#9ca3af';
+            ctx.font = '14px "JetBrains Mono", monospace';
+            ctx.fillText("OFFICIAL DECRYPTION KEYCARD // SOVEREIGN ARCHIVE", 50, 140);
+
+            ctx.fillStyle = data.badgeColor || '#f59e0b';
+            ctx.font = 'bold 14px "JetBrains Mono", monospace';
+            ctx.fillText("OPERATIVE NAME:", 50, 210);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 38px "Plus Jakarta Sans", sans-serif';
+            ctx.fillText(data.name, 50, 255);
+
+            ctx.fillStyle = '#9ca3af';
+            ctx.font = 'bold 16px "JetBrains Mono", monospace';
+            ctx.fillText(data.title, 50, 290);
+
+            ctx.fillStyle = '#f59e0b';
+            ctx.font = '13px "JetBrains Mono", monospace';
+            ctx.fillText(`BREACH TIME : ${data.date}`, 50, 360);
+            ctx.fillText(`SERIAL HASH : ${data.serialCode}`, 50, 385);
+            ctx.fillText("STATUS      : TITAN CLEARANCE LEVEL VERIFIED", 50, 410);
+
+            ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
+            ctx.fillRect(660, 310, 180, 120);
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(660, 310, 180, 120);
+
+            ctx.fillStyle = '#f59e0b';
+            ctx.font = 'bold 13px "JetBrains Mono", monospace';
+            ctx.fillText("FOUNDER'S SEAL", 685, 345);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 18px "Cinzel", serif';
+            ctx.fillText("W1ZQ // CRUX", 685, 380);
+            ctx.fillStyle = '#4ade80';
+            ctx.font = '11px "JetBrains Mono", monospace';
+            ctx.fillText("● VERIFIED GENESIS", 685, 410);
+
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = `CRUX_OMEGA_KEYCARD_RANK_${data.rank}.png`;
+            link.href = dataURL;
+            link.click();
+
+            confetti({ particleCount: 70, spread: 80, origin: { y: 0.7 } });
+            showToast('🪪', `ID Keycard #${data.rank} berhasil diunduh!`);
+        }
+
+        // ================= TIME-CAPSULE LIGHTBOX =================
+        const memoriesDatabase = {
+            1: { title: "Fajar Titik Nol: Kelahiran Rumah Bersama", date: "20 Mei 2026", image: "image/WIZ.jpeg", description: "Malam bersejarah ketika baris pertama kode dituliskan oleh Founder W1ZQ. Berawal dari keinginan sederhana untuk memecahkan kesepian, ruang kecil ini bertransformasi menjadi markas tempat pulang bagi puluhan jiwa terpilih." },
+            2: { title: "Gema Suara Abadi: Rekor 1239+ Jam Voice Channel", date: "23 April 2026", image: "image/POIS.png", description: "Bukti nyata kehangatan keluarga tanpa rekayasa mesin. Dimulai sejak April 2026, ruang suara ini tidak pernah kosong sedetik pun berkat obrolan santai, tawa lepas, dan teman sleep call yang saling menemani tidur." },
+            3: { title: "Riuh Medan Laga: Laga MLBB & Ekspedisi Roblox", date: "Arsip Turnamen & Co-op", image: "image/COLLAB.jpg", description: "Pertarungan sengit di Land of Dawn dan tawa riuh saat rombongan saling membantu menaklukkan tebing curam di map Roblox. Di sini, menang kita rayakan bersama, kalah kita evaluasi sambil tersenyum." }
+        };
+
+        function inspectMemory(memoryId) {
+            playSFX('blip');
+            const data = memoriesDatabase[memoryId];
+            if (!data) return;
+
+            document.getElementById('memoryTitle').innerText = data.title;
+            document.getElementById('memoryDate').innerText = data.date;
+            document.getElementById('memoryImage').src = data.image;
+            document.getElementById('memoryDescription').innerText = data.description;
+
+            const modal = document.getElementById('memoryLightboxModal');
+            if (modal) modal.classList.add('active-modal');
+        }
+
+        function closeMemoryLightbox() {
             playSFX('click');
-            if (creditsRafId) cancelAnimationFrame(creditsRafId);
-            stopSanctumAudioSoundtrack();
-            document.getElementById('sanctumCreditsOverlay').classList.add('hidden');
-            switchPage('home');
-            showToast('🏠', 'Kembali ke Beranda Utama CRUX HQ.');
+            const modal = document.getElementById('memoryLightboxModal');
+            if (modal) modal.classList.remove('active-modal');
         }
 
-        // Inisialisasi awal saat load
+        // ================= PEMUTAR REKAMAN SUARA PENDIRI (MP3 & SYNTH) =================
+        let isAudioLogPlaying = false;
+        let founderVoiceAudioElement = null;
+        let audioLogSynthGain = null;
+
+        function toggleFounderAudioLog() {
+            const btnIcon = document.getElementById('audioLogIcon');
+            const visualizer = document.getElementById('waveformVisualizer');
+
+            isAudioLogPlaying = !isAudioLogPlaying;
+
+            if (isAudioLogPlaying) {
+                btnIcon.innerText = "⏸";
+                if (visualizer) visualizer.classList.add('waveform-active');
+                playSFX('power');
+
+                // Coba putar file rekaman MP3 suara founder jika sudah dimasukkan di folder audio/
+                if (!founderVoiceAudioElement && CUSTOM_AUDIO_CONFIG.founderVoiceUrl) {
+                    founderVoiceAudioElement = new Audio(CUSTOM_AUDIO_CONFIG.founderVoiceUrl);
+                    founderVoiceAudioElement.volume = CUSTOM_AUDIO_CONFIG.founderVolume || 0.85;
+                    founderVoiceAudioElement.onended = () => {
+                        if (isAudioLogPlaying) toggleFounderAudioLog();
+                    };
+                }
+
+                if (founderVoiceAudioElement && !founderVoiceAudioElement.error) {
+                    founderVoiceAudioElement.play().catch(() => {
+                        // Fallback ke synth bisikan analog jika file belum ada
+                        startFounderAudioLogSynth();
+                    });
+                } else {
+                    startFounderAudioLogSynth();
+                }
+
+                showToast('🎙️', 'Memutar rekaman suara asli Founder W1ZQ...');
+            } else {
+                btnIcon.innerText = "▶";
+                if (visualizer) visualizer.classList.remove('waveform-active');
+                if (founderVoiceAudioElement) {
+                    founderVoiceAudioElement.pause();
+                    founderVoiceAudioElement.currentTime = 0;
+                }
+                stopFounderAudioLogSynth();
+                showToast('⏹️', 'Rekaman suara dihentikan.');
+            }
+        }
+
+        function startFounderAudioLogSynth() {
+            initAudio();
+            if (!audioCtx) return;
+            try {
+                audioLogSynthGain = audioCtx.createGain();
+                audioLogSynthGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                audioLogSynthGain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 1);
+
+                const osc = audioCtx.createOscillator();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(140, audioCtx.currentTime);
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.setValueAtTime(400, audioCtx.currentTime);
+
+                osc.connect(filter);
+                filter.connect(audioLogSynthGain);
+                audioLogSynthGain.connect(audioCtx.destination);
+                osc.start();
+
+                setTimeout(() => {
+                    if (isAudioLogPlaying) toggleFounderAudioLog();
+                }, 24000);
+            } catch(e) {}
+        }
+
+        function stopFounderAudioLogSynth() {
+            if (audioLogSynthGain && audioCtx) {
+                try {
+                    audioLogSynthGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+                    setTimeout(() => { audioLogSynthGain = null; }, 500);
+                } catch(e) { audioLogSynthGain = null; }
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             checkCipherLockoutState();
             updateCipherAttemptsUI();
         });
     </script>
+
+        <!-- =========================================================================
+         MODAL 1: THE OPERATIVE DOSSIER (BERKAS DEKRIPSI JIWA)
+         ========================================================================= -->
+    <div id="solverDossierModal" class="modal-backdrop-blur p-4">
+        <div id="solverDossierBox" class="glass-panel p-6 sm:p-8 rounded-3xl max-w-xl w-full max-h-[88vh] overflow-y-auto border-2 border-amber-500/60 shadow-2xl modal-content-box space-y-6 bg-gradient-to-b from-neutral-950 via-[#0c0a08] to-black text-neutral-200 select-none relative">
+            
+            <!-- Header Klirens Intelijen -->
+            <div class="flex items-center justify-between border-b border-amber-500/30 pb-4">
+                <div>
+                    <span id="dossierClearanceBadge" class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold uppercase tracking-widest">
+                        CLEARANCE LEVEL: TITAN // OMEGA SOLVER #01
+                    </span>
+                    <div id="dossierSolveTimestamp" class="text-xs font-mono text-neutral-400 mt-1 font-bold">
+                        WAKTU TERSELESAIKAN: ??:??:?? // ??-??-????
+                    </div>
+                </div>
+                <button onclick="closeSolverDossier()" class="p-2 rounded-xl bg-neutral-900 border border-white/10 hover:border-amber-500 text-neutral-400 hover:text-white text-xs font-mono">
+                    ✕ TUTUP
+                </button>
+            </div>
+
+            <!-- Profil Polaroid Gelar & Avatar -->
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-neutral-950 border-2 border-amber-500/60 overflow-hidden shadow-[0_0_30px_rgba(245,158,11,0.3)] p-1.5 shrink-0 relative group">
+                    <img id="dossierAvatar" src="image/CRUX LOGO.png" alt="Solver Avatar" class="w-full h-full object-cover rounded-xl">
+                </div>
+                <div class="space-y-1.5 text-center sm:text-left flex-grow">
+                    <div id="dossierRankTitle" class="text-xs font-mono font-bold text-amber-400 uppercase tracking-wider">
+                        #01 // APEX SOVEREIGN
+                    </div>
+                    <h3 id="dossierSolverName" class="text-2xl sm:text-3xl font-black text-white font-cinzel tracking-wider">
+                        ???
+                    </h3>
+                    <div id="dossierRadianceStatus" class="inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-black/60 border border-amber-500/30 text-amber-200">
+                        Pancaran Aura: 100% Puncak Benderang
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Solver's Inscription (Kutipan Personal) -->
+            <div class="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-1">
+                <div class="text-[9.5px] font-mono text-neutral-400 uppercase tracking-widest font-bold">// THE SOLVER’S INSCRIPTION (INSKRIPSI JIWA):</div>
+                <blockquote id="dossierQuote" class="text-xs sm:text-sm text-neutral-200 italic font-light leading-relaxed">
+                    “Menunggu penakluk pertama menorehkan pesan keabadiannya untuk seluruh keluarga besar CRUX...”
+                </blockquote>
+            </div>
+
+            <!-- Founder's Personal Verdict (Catatan Khusus dari Founder W1ZQ) -->
+            <div class="p-4 rounded-2xl bg-gradient-to-r from-amber-950/30 to-black border border-amber-500/40 space-y-1">
+                <div class="text-[9.5px] font-mono text-amber-400 uppercase tracking-widest font-bold">// FOUNDER’S PERSONAL VERDICT:</div>
+                <p id="dossierFounderVerdict" class="text-xs text-neutral-300 font-light leading-relaxed">
+                    “Catatan penilaian personal dari Founder W1ZQ akan ditorehkan khusus bagi jiwa yang berhasil menembus empat teka-teki ini.”
+                </p>
+            </div>
+
+            <!-- Tombol Cetak ID Keycard Virtual -->
+            <div class="pt-2 flex flex-col sm:flex-row items-center gap-3">
+                <button onclick="downloadDigitalKeycard()" class="w-full sm:w-auto flex-grow py-3 px-6 rounded-xl bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 hover:opacity-95 text-white font-mono text-xs font-bold tracking-wider transition shadow-xl shadow-amber-600/30 flex items-center justify-center space-x-2">
+                    <span>🪪</span>
+                    <span>[ CETAK ID KEYCARD // CLAIM BADGE ]</span>
+                </button>
+                <button onclick="closeSolverDossier()" class="w-full sm:w-auto py-3 px-5 rounded-xl bg-neutral-900 border border-white/10 hover:border-white/30 text-neutral-400 hover:text-white font-mono text-xs transition">
+                    KEMBALI
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         MODAL 2: MEMORY LIGHTBOX PREVIEW (INSPECT MEMORY)
+         ========================================================================= -->
+    <div id="memoryLightboxModal" class="modal-backdrop-blur p-4">
+        <div class="glass-panel p-5 sm:p-8 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-orange-500/50 shadow-2xl modal-content-box space-y-4 bg-black/95">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3 font-mono">
+                <span id="memoryCategory" class="text-xs text-orange-400 font-bold uppercase">HISTORICAL ARCHIVE // MEMORY INSPECT</span>
+                <button onclick="closeMemoryLightbox()" class="text-neutral-400 hover:text-white text-xs font-mono">✕ TUTUP</button>
+            </div>
+            <div class="h-64 sm:h-80 rounded-2xl overflow-hidden bg-neutral-950 border border-white/10 relative">
+                <img id="memoryImage" src="" alt="Memory Preview" class="w-full h-full object-cover">
+            </div>
+            <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                    <h3 id="memoryTitle" class="text-xl font-bold text-white font-cinzel">Judul Memori</h3>
+                    <span id="memoryDate" class="text-xs font-mono text-orange-400 font-bold">20 Mei 2026</span>
+                </div>
+                <p id="memoryDescription" class="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed">
+                    Kisah lengkap di balik momen bersejarah ini...
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+     MODAL TANTANGAN PRESTISIUS: UNCLAIMED SLOT CHALLENGE
+     ========================================================================== -->
+<div id="unclaimedSlotModal" class="fixed inset-0 z-[1000] hidden items-center justify-center bg-black/85 backdrop-blur-xl p-4 transition-all duration-300">
+  <div class="relative w-full max-w-lg rounded-2xl bg-gradient-to-b from-[#180e05] via-[#0d0703] to-[#040201] border-2 border-amber-500/50 p-6 sm:p-8 shadow-[0_0_60px_rgba(245,158,11,0.25)] text-center overflow-hidden">
+    
+    <!-- Aksen Garis Cahaya Atas -->
+    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
+
+    <!-- Tombol Tutup Silang -->
+    <button onclick="closeUnclaimedSlotModal()" class="absolute top-4 right-4 p-2 text-neutral-400 hover:text-amber-300 hover:bg-amber-950/40 rounded-full transition-all">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- Simbol Segel Terkunci Berputar -->
+    <div class="w-20 h-20 mx-auto mb-5 relative flex items-center justify-center">
+      <div id="unclaimedModalSpinRing" class="absolute inset-0 rounded-full border-2 border-dashed border-amber-500/60 animate-spin" style="animation-duration: 12s;"></div>
+      <div class="w-14 h-14 rounded-full bg-amber-950/80 border border-amber-400/40 flex items-center justify-center text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.4)]">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Header Posisi & Clearance -->
+    <div id="unclaimedModalSlotBadge" class="inline-block px-3 py-1 rounded bg-amber-950/80 border border-amber-500/40 text-amber-300 font-mono text-xs tracking-widest uppercase mb-3">
+      [ SLOT #01 // ENCRYPTED REGISTER ]
+    </div>
+
+    <!-- Judul Tantangan -->
+    <h3 class="font-serif text-2xl sm:text-3xl font-black text-amber-100 uppercase tracking-wide mb-3">
+      TAKHTA INI BELUM BERTUAN
+    </h3>
+
+    <!-- Pesan Provokatif & Motivasi Kompetitif -->
+    <div class="p-4 rounded-xl bg-black/60 border border-amber-500/20 text-neutral-300 text-sm leading-relaxed mb-6 font-sans">
+      <p class="italic mb-3 text-amber-200/90 font-serif">
+        "Posisi ini masih kosong di dalam lembaran sejarah markas CRUX. Belum ada satu pun jiwa yang berhasil menguraikan seluruh petunjuk sandi untuk menduduki peringkat ini."
+      </p>
+      <p class="text-xs text-neutral-400">
+        Jadilah orang berikutnya yang menembus segel markas. Pecahkan 4 teka-teki enkripsi, raih berkas <span class="text-amber-400 font-bold">The Operative Dossier</span>, dan dapatkan <span class="text-amber-400 font-bold">Digital Keycard ID</span> resmi atas nama Anda.
+      </p>
+    </div>
+
+    <!-- Tombol Aksi -->
+    <div class="flex flex-col sm:flex-row gap-3">
+      <button onclick="inspectCipherGatesHint()" class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-black font-bold font-mono text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(245,158,11,0.4)] flex items-center justify-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        INSPEKSI PETUNJUK SANDI
+      </button>
+      <button onclick="closeUnclaimedSlotModal()" class="py-3 px-5 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-neutral-300 font-mono text-xs tracking-wider uppercase transition-all">
+        KEMBALI KE VAULT
+      </button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
