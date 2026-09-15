@@ -1,0 +1,14 @@
+{
+  "name": "web-profile-crux-hq-server-discord",
+  "version": "1.0.0",
+  "description": "CORE REGNUM UNIFIED-X Official Discord Basecamp",
+  "type": "module",
+  "dependencies": {
+    "@vercel/analytics": "^1.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "npx http-server -p 3000",
+    "build": "echo 'Static HTML - no build required'"
+  }
+}
