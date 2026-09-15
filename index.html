@@ -435,6 +435,19 @@
   animation: codeGlitch 3s infinite ease-in-out;
 }
     </style>
+
+        <!-- ================= VERCEL WEB ANALYTICS & SPEED INSIGHTS ================= -->
+    <!-- 1. Vercel Web Analytics (Pelacak Pengunjung, Negara, Device, & Pageviews) -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <!-- 2. Vercel Speed Insights (Pelacak Kecepatan Web & Core Web Vitals) -->
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body class="min-h-screen selection:bg-orange-600 selection:text-white flex flex-col justify-between theme-orange-red">
 
