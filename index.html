@@ -484,8 +484,8 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-[#030303]/92 backdrop-blur-2xl border-b border-white/5 transition-all">
         <div class="max-w-7xl mx-auto px-4 md:px-8 py-3.5 flex justify-between items-center w-full">
             <div class="flex items-center space-x-3.5 cursor-pointer group shrink-0" onclick="switchPage('home'); playSFX('click');">
-                <div class="w-10 h-10 rounded-xl overflow-hidden border border-orange-500/60 shadow-lg shadow-orange-600/30 bg-neutral-950 flex items-center justify-center p-1 transition-transform group-hover:scale-105" style="border-color: var(--accent-orange);">
-                    <img src="image/CRUX LOGO.png" alt="CRUX Logo" class="w-full h-full object-contain">
+                <div id="founderTriggerLogo" class="w-10 h-10 rounded-xl overflow-hidden border border-orange-500/60 shadow-lg shadow-orange-600/30 bg-neutral-950 flex items-center justify-center p-1 transition-transform group-hover:scale-105 select-none relative" style="border-color: var(--accent-orange);" title="Logo Kebanggaan Server, tapi ada yang aneh...">
+                    <img src="image/CRUX LOGO.png" alt="CRUX Logo" class="w-full h-full object-contain pointer-events-none">
                 </div>
                 <div class="flex flex-col">
                     <span class="text-white font-extrabold tracking-wider text-xs md:text-sm">CORE REGNUM <span style="color: var(--accent-orange);">UNIFIED-X</span></span>
@@ -3857,5 +3857,427 @@
     </div>
   </div>
 </div>
+
+            <!-- =========================================================================
+         1. EASTER EGG CIPHER GATEWAY MODAL (W - 1 - Z - Q)
+         ========================================================================= -->
+    <div id="founderEasterEggModal" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/90 backdrop-blur-2xl p-4 transition-all duration-500 select-none">
+        
+        <!-- Cincin Gelombang Kejut Ledakan Aura saat Kode Salah -->
+        <div id="auraShockwaveRing" class="absolute pointer-events-none rounded-full border-4 border-red-500 opacity-0 transition-all duration-700 ease-out" style="width: 100px; height: 100px; box-shadow: 0 0 80px #ef4444, inset 0 0 40px #ef4444;"></div>
+
+        <div id="founderModalCard" class="relative w-full max-w-lg rounded-3xl bg-gradient-to-b from-[#160d05] via-[#090705] to-[#020202] border-2 border-amber-400/80 p-6 sm:p-10 text-center shadow-[0_0_80px_rgba(245,158,11,0.35),inset_0_0_40px_rgba(245,158,11,0.15)] overflow-hidden transition-transform duration-300">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent shadow-[0_0_20px_#fbbf24]"></div>
+
+            <button onclick="closeFounderEasterEggModal()" class="absolute top-4 right-4 p-2 text-neutral-400 hover:text-amber-300 hover:bg-amber-950/40 rounded-full transition-all text-xs font-mono">
+                ✕ TUTUP
+            </button>
+
+            <div class="w-20 h-20 mx-auto mb-4 relative flex items-center justify-center">
+                <div class="absolute inset-0 rounded-full border-2 border-dashed border-amber-400 animate-spin" style="animation-duration: 14s; box-shadow: 0 0 25px rgba(245,158,11,0.4);"></div>
+                <div class="absolute inset-2 rounded-full border border-amber-500/40 bg-amber-950/60 flex items-center justify-center">
+                    <span class="text-3xl filter drop-shadow-[0_0_12px_rgba(245,158,11,0.8)]">👑</span>
+                </div>
+            </div>
+
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-950/70 border border-amber-500/50 text-amber-300 text-[10px] font-mono tracking-widest uppercase mb-2 shadow-[0_0_15px_rgba(245,158,11,0.25)]">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                CLASSIFIED SECTOR // FOUNDER's CIPHER
+            </div>
+
+            <h3 class="font-cinzel text-2xl sm:text-3xl font-black text-white mb-2 tracking-wider monument-title-gold crux-glow">
+                SOVEREIGN INITIATION
+            </h3>
+            <p class="text-xs text-neutral-300 font-serif italic mb-6 max-w-sm mx-auto leading-relaxed">
+                "Pecahkan 4 aksara kedaulatan sang pemrakarsa untuk menembus bilik rahasia terdalam."
+            </p>
+
+            <!-- 4 Kotak Alfanumerik W - 1 - Z - Q -->
+            <div id="founderInputBoxes" class="flex justify-center items-center space-x-3 sm:space-x-4 mb-5">
+                <input type="text" maxlength="1" id="f-cipher-0" oninput="handleFounderCipherKey(0, event)" onkeydown="handleFounderCipherBackspace(0, event)" autocapitalize="characters" class="w-14 h-16 sm:w-16 sm:h-20 text-center font-mono font-black text-2xl sm:text-3xl text-amber-400 bg-black/90 border-2 border-amber-500/40 rounded-2xl focus:border-amber-400 focus:shadow-[0_0_25px_rgba(245,158,11,0.6)] focus:outline-none transition-all uppercase">
+                <input type="text" maxlength="1" id="f-cipher-1" oninput="handleFounderCipherKey(1, event)" onkeydown="handleFounderCipherBackspace(1, event)" autocapitalize="characters" class="w-14 h-16 sm:w-16 sm:h-20 text-center font-mono font-black text-2xl sm:text-3xl text-amber-400 bg-black/90 border-2 border-amber-500/40 rounded-2xl focus:border-amber-400 focus:shadow-[0_0_25px_rgba(245,158,11,0.6)] focus:outline-none transition-all uppercase">
+                <input type="text" maxlength="1" id="f-cipher-2" oninput="handleFounderCipherKey(2, event)" onkeydown="handleFounderCipherBackspace(2, event)" autocapitalize="characters" class="w-14 h-16 sm:w-16 sm:h-20 text-center font-mono font-black text-2xl sm:text-3xl text-amber-400 bg-black/90 border-2 border-amber-500/40 rounded-2xl focus:border-amber-400 focus:shadow-[0_0_25px_rgba(245,158,11,0.6)] focus:outline-none transition-all uppercase">
+                <input type="text" maxlength="1" id="f-cipher-3" oninput="handleFounderCipherKey(3, event)" onkeydown="handleFounderCipherBackspace(3, event)" autocapitalize="characters" class="w-14 h-16 sm:w-16 sm:h-20 text-center font-mono font-black text-2xl sm:text-3xl text-amber-400 bg-black/90 border-2 border-amber-500/40 rounded-2xl focus:border-amber-400 focus:shadow-[0_0_25px_rgba(245,158,11,0.6)] focus:outline-none transition-all uppercase">
+            </div>
+
+            <div id="founderStatusFeedback" class="text-xs font-mono text-neutral-400 min-h-[22px] mb-6">
+                Masukkan 4 aksara nama kedaulatan markas...
+            </div>
+
+            <div class="flex gap-3 font-mono text-xs">
+                <button onclick="submitFounderEasterEggCode()" class="flex-1 py-3.5 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 hover:scale-105 text-white font-bold rounded-xl transition shadow-[0_0_25px_rgba(245,158,11,0.5)] border border-amber-400 active:scale-95">
+                    🔓 BUKA BILIK RAHASIA →
+                </button>
+                <button onclick="closeFounderEasterEggModal()" class="py-3.5 px-5 bg-neutral-900 border border-white/15 text-neutral-400 hover:text-white rounded-xl transition">
+                    BATAL
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         2. TEATER BIOSKOP SINEMATIK FOUNDER (TERINTEGRASI DI DALAM WEB)
+         ========================================================================= -->
+    <div id="founderVideoCinemaModal" class="fixed inset-0 z-[10000] hidden items-center justify-center bg-black/95 backdrop-blur-3xl p-3 sm:p-6 transition-all duration-500 select-none overflow-y-auto">
+        
+        <div id="cinemaTheaterContainer" class="relative w-full max-w-5xl rounded-3xl bg-gradient-to-b from-[#140b04] via-[#080502] to-[#020202] border-2 border-amber-500/70 p-5 sm:p-8 shadow-[0_0_100px_rgba(245,158,11,0.4),inset_0_0_40px_rgba(245,158,11,0.15)] my-auto transition-all duration-500">
+            
+            <!-- Laser Garis Emas Atas -->
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent shadow-[0_0_25px_#fbbf24]"></div>
+
+            <!-- Bar Header Teater -->
+            <div class="flex items-center justify-between border-b border-amber-500/30 pb-4 mb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-black border border-amber-500/60 p-1 flex items-center justify-center shadow-lg shadow-amber-500/20">
+                        <img src="image/CRUX LOGO.png" alt="CRUX" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <div class="font-cinzel font-black text-sm sm:text-base text-white tracking-wider monument-title-gold">THE SOVEREIGN RECORD</div>
+                        <div class="font-mono text-[9.5px] text-amber-400/90 font-bold">FOUNDER EXCLUSIVE MEMOIR // CLEARANCE: W1ZQ</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button onclick="closeFounderCinemaTheater()" class="px-4 py-2 rounded-xl bg-neutral-900 border border-white/20 text-neutral-300 hover:text-white hover:border-amber-400 font-mono text-xs font-bold transition flex items-center gap-1.5">
+                        <span>✕</span> <span>TUTUP TEATER</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Wadah Pemutar Video Sinematik -->
+            <div id="cinemaScreenBox" class="relative w-full rounded-2xl overflow-hidden bg-black border-2 border-amber-500/40 shadow-[0_0_50px_rgba(0,0,0,0.95)] transition-all duration-500">
+                <!-- 👉 Ganti 'video/founder.mp4' dengan lokasi file video Anda -->
+                <video id="founderCinemaPlayer" playsinline controls class="w-full max-h-[64vh] object-contain block bg-black" poster="image/CRUX BANNER.png">
+                    <source src="video/prenk.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                </video>
+            </div>
+
+            <!-- BAR TOMBOL INTERAKSI DI DALAM LAYAR VIDEO -->
+            <div class="mt-4 pt-3 border-t border-amber-500/30 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+                
+                <!-- Kelompok Tombol Interaksi Kiri -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <!-- Tombol 1: Respek Pendiri -->
+                    <button onclick="triggerFounderRespectEnergy()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 via-orange-600 to-amber-500 hover:scale-105 active:scale-95 text-white font-bold transition shadow-[0_0_20px_rgba(245,158,11,0.5)] border border-amber-300 flex items-center gap-2">
+                        <span>✨ RESPEK PENDIRI</span>
+                        <span id="founderRespectCount" class="px-2 py-0.5 rounded-full bg-black/60 text-amber-200 text-[10px]">0</span>
+                    </button>
+
+                    <!-- Tombol 2: Mode Bioskop (Dim Lights) -->
+                    <button onclick="toggleCinemaDimLights()" id="btnCinemaDim" class="px-3.5 py-2.5 rounded-xl bg-neutral-900 border border-white/15 hover:border-amber-400 text-neutral-300 hover:text-white transition flex items-center gap-1.5">
+                        <span id="dimLightIcon">💡</span> <span id="dimLightText">MODE FOKUS</span>
+                    </button>
+
+                    <!-- Tombol 3: Kecepatan Video -->
+                    <button onclick="cycleVideoSpeed()" id="btnCinemaSpeed" class="px-3.5 py-2.5 rounded-xl bg-neutral-900 border border-white/15 hover:border-amber-400 text-amber-400 font-bold transition">
+                        ⚡ 1x
+                    </button>
+
+                    <!-- Tombol 4: Putar Ulang -->
+                    <button onclick="replayCinemaVideo()" class="px-3.5 py-2.5 rounded-xl bg-neutral-900 border border-white/15 hover:border-white/40 text-neutral-400 hover:text-white transition">
+                        ↺ ULANG
+                    </button>
+                </div>
+
+                <!-- Info Resolusi & Status Kanan -->
+                <div class="text-right text-[11px] text-neutral-400 hidden sm:block">
+                    STATUS: <span class="text-green-400 font-bold">● DECRYPTED</span> // FPS: <span class="text-amber-400">60 FPS MASTER</span>
+                </div>
+            </div>
+
+            <!-- Pesan Epilog Peninggalan -->
+            <div class="mt-3 p-3 rounded-xl bg-black/60 border border-amber-500/20 text-xs text-neutral-300 font-serif italic text-center sm:text-left flex items-center justify-between">
+                <div>"Bara api ini tidak pernah dinyalakan untuk meredup. Rumah ini berdiri untukmu selamanya." — W1ZQ</div>
+                <button onclick="closeFounderCinemaTheater()" class="text-[11px] font-mono font-bold text-amber-400 hover:underline shrink-0 ml-3">
+                    Lanjutkan Jelajah Web →
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =========================================================================
+         3. LOGIKA JAVASCRIPT LENGKAP & TERPADU
+         ========================================================================= -->
+    <script>
+        // A. PENDETEKSI LONG-PRESS 2.5 DETIK PADA LOGO SERVER
+        (function setupFounderEasterEggTrigger() {
+            const logoTrigger = document.getElementById('founderTriggerLogo');
+            const cipherModal = document.getElementById('founderEasterEggModal');
+            let pressTimer = null;
+
+            if (!logoTrigger) return;
+
+            function startPress() {
+                logoTrigger.style.transform = "scale(0.92)";
+                logoTrigger.style.borderColor = "#fbbf24";
+                logoTrigger.style.boxShadow = "0 0 35px rgba(245, 158, 11, 0.85)";
+
+                pressTimer = setTimeout(() => {
+                    if (navigator.vibrate) navigator.vibrate(120);
+                    if (typeof playSFX === 'function') playSFX('power');
+                    logoTrigger.style.transform = "";
+                    logoTrigger.style.borderColor = "";
+                    logoTrigger.style.boxShadow = "";
+                    
+                    if (cipherModal) {
+                        cipherModal.classList.remove('hidden');
+                        cipherModal.classList.add('flex');
+                        resetFounderInputs();
+                    }
+                }, 2500);
+            }
+
+            function cancelPress() {
+                logoTrigger.style.transform = "";
+                logoTrigger.style.borderColor = "";
+                logoTrigger.style.boxShadow = "";
+                if (pressTimer) {
+                    clearTimeout(pressTimer);
+                    pressTimer = null;
+                }
+            }
+
+            logoTrigger.addEventListener('mousedown', startPress);
+            logoTrigger.addEventListener('mouseup', cancelPress);
+            logoTrigger.addEventListener('mouseleave', cancelPress);
+
+            logoTrigger.addEventListener('touchstart', startPress, { passive: true });
+            logoTrigger.addEventListener('touchend', cancelPress, { passive: true });
+            logoTrigger.addEventListener('touchcancel', cancelPress, { passive: true });
+        })();
+
+        // B. SISTEM INPUT KODE 4 AKSARA (W - 1 - Z - Q)
+        function handleFounderCipherKey(index, e) {
+            const input = e.target;
+            input.value = input.value.toUpperCase();
+
+            if (input.value && index < 3) {
+                if (typeof playSFX === 'function') playSFX('blip');
+                const next = document.getElementById(`f-cipher-${index + 1}`);
+                if (next) next.focus();
+            }
+            // Cek otomatis saat kotak ke-4 terisi
+            const c0 = document.getElementById('f-cipher-0').value.trim();
+            const c1 = document.getElementById('f-cipher-1').value.trim();
+            const c2 = document.getElementById('f-cipher-2').value.trim();
+            const c3 = document.getElementById('f-cipher-3').value.trim();
+            if (c0 && c1 && c2 && c3) {
+                submitFounderEasterEggCode();
+            }
+        }
+
+        function handleFounderCipherBackspace(index, e) {
+            if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                const prev = document.getElementById(`f-cipher-${index - 1}`);
+                if (prev) prev.focus();
+            }
+        }
+
+        function submitFounderEasterEggCode() {
+            const c0 = document.getElementById('f-cipher-0').value.trim().toUpperCase();
+            const c1 = document.getElementById('f-cipher-1').value.trim().toUpperCase();
+            const c2 = document.getElementById('f-cipher-2').value.trim().toUpperCase();
+            const c3 = document.getElementById('f-cipher-3').value.trim().toUpperCase();
+            const entered = `${c0}${c1}${c2}${c3}`;
+
+            const card = document.getElementById('founderModalCard');
+            const shockwave = document.getElementById('auraShockwaveRing');
+            const feedback = document.getElementById('founderStatusFeedback');
+            const allBoxes = document.querySelectorAll('#founderInputBoxes input');
+
+            if (entered === "W1ZQ") {
+                // KODE BENAR: MEMBUKA BIOSKOP SINEMATIK TERINTEGRASI
+                if (typeof playSFX === 'function') playSFX('granted');
+                allBoxes.forEach(b => {
+                    b.classList.remove('border-amber-500/40');
+                    b.classList.add('border-green-400', 'bg-green-500/20', 'text-green-300');
+                });
+                feedback.innerHTML = `<span class="text-green-400 font-bold">✨ [AKSES SOVEREIGN DISAHKAN] Membuka bilik sinematik...</span>`;
+                
+                if (typeof confetti === 'function') {
+                    confetti({ particleCount: 160, spread: 100, origin: { y: 0.6 } });
+                }
+
+                setTimeout(() => {
+                    closeFounderEasterEggModal();
+                    openFounderCinemaTheater();
+                }, 750);
+
+            } else {
+                // KODE SALAH: LEDAKAN GELOMBANG KEJUT AURA
+                triggerAuraExplosionSFX();
+                feedback.innerHTML = `<span class="text-red-400 font-bold">💥 [BREACH GAGAL] KODE TIDAK DIKENAL!</span>`;
+                
+                card.classList.add('cipher-shake-error');
+                allBoxes.forEach(b => b.classList.add('border-red-500', 'bg-red-950/60'));
+
+                if (shockwave) {
+                    shockwave.style.width = '120px';
+                    shockwave.style.height = '120px';
+                    shockwave.style.opacity = '1';
+                    shockwave.style.transform = 'scale(1)';
+                    setTimeout(() => {
+                        shockwave.style.transform = 'scale(7)';
+                        shockwave.style.opacity = '0';
+                    }, 50);
+                }
+
+                setTimeout(() => {
+                    card.classList.remove('cipher-shake-error');
+                    allBoxes.forEach(b => b.classList.remove('border-red-500', 'bg-red-950/60'));
+                    resetFounderInputs();
+                }, 800);
+            }
+        }
+
+        function triggerAuraExplosionSFX() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                const now = ctx.currentTime;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(160, now);
+                osc.frequency.exponentialRampToValueAtTime(30, now + 0.35);
+                gain.gain.setValueAtTime(0.5, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.42);
+            } catch(e) {}
+        }
+
+        function resetFounderInputs() {
+            for (let i = 0; i < 4; i++) {
+                const b = document.getElementById(`f-cipher-${i}`);
+                if (b) b.value = "";
+            }
+            const first = document.getElementById('f-cipher-0');
+            if (first) setTimeout(() => first.focus(), 250);
+        }
+
+        function closeFounderEasterEggModal() {
+            const modal = document.getElementById('founderEasterEggModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        // C. KONTROL TEATER BIOSKOP & INTERAKSI MENONTON
+        let previousAudioDuckedState = false;
+
+        function openFounderCinemaTheater() {
+            const cinema = document.getElementById('founderVideoCinemaModal');
+            const video = document.getElementById('founderCinemaPlayer');
+
+            if (cinema) {
+                cinema.classList.remove('hidden');
+                cinema.classList.add('flex');
+            }
+
+            // Redupkan musik latar website agar suara video jernih
+            if (typeof setBackgroundAudioDucking === 'function') {
+                setBackgroundAudioDucking(true);
+            }
+
+            // Putar video otomatis
+            if (video) {
+                video.currentTime = 0;
+                video.play().catch(() => {});
+            }
+            if (typeof showToast === 'function') {
+                showToast('🎬', 'Bilik Teater Sovereign Terbuka.');
+            }
+        }
+
+        function closeFounderCinemaTheater() {
+            const cinema = document.getElementById('founderVideoCinemaModal');
+            const video = document.getElementById('founderCinemaPlayer');
+
+            if (video) {
+                video.pause();
+                video.currentTime = 0;
+            }
+
+            if (cinema) {
+                cinema.classList.add('hidden');
+                cinema.classList.remove('flex');
+            }
+
+            // Kembalikan musik latar website ke normal
+            if (typeof setBackgroundAudioDucking === 'function') {
+                setBackgroundAudioDucking(false);
+            }
+
+            if (typeof showToast === 'function') {
+                showToast('🏠', 'Kembali ke aktivitas markas.');
+            }
+        }
+
+        // Interaksi 1: Respek Energi Pendiri (+ Konfeti Emas & Suara)
+        let respectCounter = 0;
+        function triggerFounderRespectEnergy() {
+            respectCounter++;
+            const badge = document.getElementById('founderRespectCount');
+            if (badge) badge.innerText = `+${respectCounter}`;
+
+            if (typeof playSFX === 'function') playSFX('power');
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 50,
+                    spread: 80,
+                    origin: { y: 0.75 },
+                    colors: ['#f59e0b', '#fbbf24', '#ffffff', '#ea580c']
+                });
+            }
+        }
+
+        // Interaksi 2: Mode Bioskop (Dim Lights / Fokus Penuh)
+        let isCinemaDimmed = false;
+        function toggleCinemaDimLights() {
+            isCinemaDimmed = !isCinemaDimmed;
+            const container = document.getElementById('cinemaTheaterContainer');
+            const text = document.getElementById('dimLightText');
+
+            if (isCinemaDimmed) {
+                container.style.boxShadow = "0 0 160px rgba(245, 158, 11, 0.75), inset 0 0 60px rgba(245, 158, 11, 0.3)";
+                if (text) text.innerText = "MODE NORMAL";
+                if (typeof showToast === 'function') showToast('💡', 'Lampu teater diredupkan.');
+            } else {
+                container.style.boxShadow = "0 0 100px rgba(245,158,11,0.4), inset 0 0 40px rgba(245,158,11,0.15)";
+                if (text) text.innerText = "MODE FOKUS";
+            }
+        }
+
+        // Interaksi 3: Pengatur Kecepatan Video (1x -> 1.25x -> 1.5x)
+        const speeds = [1, 1.25, 1.5];
+        let currentSpeedIdx = 0;
+        function cycleVideoSpeed() {
+            const video = document.getElementById('founderCinemaPlayer');
+            const btn = document.getElementById('btnCinemaSpeed');
+            currentSpeedIdx = (currentSpeedIdx + 1) % speeds.length;
+            const chosen = speeds[currentSpeedIdx];
+
+            if (video) video.playbackRate = chosen;
+            if (btn) btn.innerText = `⚡ ${chosen}x`;
+            if (typeof playSFX === 'function') playSFX('blip');
+        }
+
+        // Interaksi 4: Putar Ulang Video
+        function replayCinemaVideo() {
+            const video = document.getElementById('founderCinemaPlayer');
+            if (video) {
+                video.currentTime = 0;
+                video.play();
+                if (typeof playSFX === 'function') playSFX('click');
+            }
+        }
+    </script>
 </body>
 </html>
