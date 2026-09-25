@@ -2699,7 +2699,8 @@
         // =====================================================================
         // THE SANCTUM // PROTOCOL: OMEGA - LIMIT 3X / 24H & COUNTDOWN ANTI-RESET
         // =====================================================================
-        const CIPHER_CORRECT_CODE = "1412";
+        const CIPHER_CORRECT_CODE = "7295";
+        window._secureVerifyHash = str => str.split('').map((c, i) => c.charCodeAt(0) ^ (i + 7)).join('-');
         const CIPHER_MAX_ATTEMPTS = 3;
         const CIPHER_LOCKOUT_MS = 24 * 60 * 60 * 1000;
         const STORAGE_KEY_CIPHER_ATTEMPTS = 'crux_cipher_attempts_left';
@@ -2874,7 +2875,11 @@
                 const feedback = document.getElementById('cipherStatusFeedback');
                 const allBoxes = document.querySelectorAll('.cipher-box');
 
-                if (entered === CIPHER_CORRECT_CODE) {
+                if (entered === "7295") {
+                triggerCheaterTrapScreen();
+                return;
+                }
+                if (window._secureVerifyHash(entered) === "51-59-61-59") {
                     playSFX('granted');
                     feedback.innerHTML = `<span class="text-green-400 font-bold">✨ [AKSES DIBERIKAN // KUNCI OTENTIK!] Membuka segel ruang suci...</span>`;
                     allBoxes.forEach(b => {
@@ -4168,7 +4173,7 @@
             const feedback = document.getElementById('founderStatusFeedback');
             const allBoxes = document.querySelectorAll('#founderInputBoxes input');
 
-            if (entered === "W1ZQ") {
+            if (window._secureVerifyHash(entered) === "80-57-83-91") {
                 // KODE BENAR: MEMBUKA BIOSKOP SINEMATIK TERINTEGRASI
                 if (typeof playSFX === 'function') playSFX('granted');
                 allBoxes.forEach(b => {
@@ -4359,6 +4364,81 @@
                 if (typeof playSFX === 'function') playSFX('click');
             }
         }
+        
+        function triggerCheaterTrapScreen() {
+            if (typeof triggerAuraExplosionSFX === 'function') triggerAuraExplosionSFX();
+            const modal = document.getElementById('cheaterTrapModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeCheaterTrapModal() {
+            const modal = document.getElementById('cheaterTrapModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        // 1. Matikan Klik Kanan (Mencegah menu "Inspect" & "View page source")
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            if (typeof showToast === 'function') {
+                showToast('🛡️', 'Akses klik kanan & inspect markas dinonaktifkan demi integritas puzzle.');
+            }
+        });
+
+        // 2. Blokir Shortcut Keyboard View Source & DevTools
+        document.addEventListener('keydown', (e) => {
+            // Blokir Ctrl + U (View Source)
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+                e.preventDefault();
+                if (typeof showToast === 'function') showToast('🔒', 'Akses View Source diblokir oleh protokol CRUX.');
+            }
+            // Blokir F12 (DevTools)
+            if (e.key === 'F12') {
+                e.preventDefault();
+                if (typeof showToast === 'function') showToast('🔒', 'Inspect DevTools dinonaktifkan.');
+            }
+            // Blokir Ctrl + Shift + I, J, C (Inspect Element & Console)
+            if (e.ctrlKey && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key)) {
+                e.preventDefault();
+                if (typeof showToast === 'function') showToast('🔒', 'Konsol pengembang dinonaktifkan.');
+            }
+        });
     </script>
+
+        <!-- =========================================================================
+         MODAL JEBAKAN CHEATER / HONEYPOT TRAP (VIEW-SOURCE DETECTOR)
+         ========================================================================= -->
+    <div id="cheaterTrapModal" class="fixed inset-0 z-[10001] hidden items-center justify-center bg-black/95 backdrop-blur-2xl p-4 select-none">
+        <div class="relative w-full max-w-md rounded-3xl bg-gradient-to-b from-[#1f0505] via-[#0d0202] to-black border-2 border-red-500 p-6 sm:p-8 text-center shadow-[0_0_80px_rgba(239,68,68,0.5)]">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-red-950/80 border border-red-500/50 flex items-center justify-center text-3xl animate-bounce">
+                🚨
+            </div>
+            <div class="inline-block px-3 py-1 rounded-full bg-red-950 border border-red-500/40 text-[10px] font-mono text-red-400 font-bold tracking-widest uppercase mb-2">
+                [ BREACH SECURITY // HONEYPOT TRIGGERED ]
+            </div>
+            <h3 class="font-cinzel text-xl sm:text-2xl font-black text-white mb-2 tracking-wider text-red-400">
+                CHEATER DETECTED!
+            </h3>
+            <div class="p-4 rounded-2xl bg-black/70 border border-red-500/30 text-xs text-neutral-300 font-sans leading-relaxed space-y-2 mb-5">
+                <p class="text-amber-300 font-semibold">
+                    "Waduh, ketahuan ya ngintip View Page Source? 😉"
+                </p>
+                <p class="text-[11px] text-neutral-400">
+                    Kode yang Anda temukan di kode sumber adalah <strong>KODE JEBAKAN (HONEYPOT)</strong>. Sistem CRUX HQ tidak pernah menyimpan kode rahasia dalam bentuk teks biasa.
+                </p>
+                <p class="text-red-300 italic font-mono text-[10px] pt-1">
+                    Silakan pecahkan 4 pilar teka-teki secara terhormat tanpa jalan pintas!
+                </p>
+            </div>
+            <button onclick="closeCheaterTrapModal()" class="w-full py-3 bg-gradient-to-r from-red-600 to-orange-600 hover:opacity-90 text-white font-mono text-xs font-bold rounded-xl transition shadow-lg shadow-red-600/30">
+                SAYA AKAN MAIN JUJUR 🫡
+            </button>
+        </div>
+    </div>
 </body>
 </html>
