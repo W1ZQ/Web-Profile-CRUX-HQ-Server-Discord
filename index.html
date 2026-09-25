@@ -4364,7 +4364,7 @@
                 if (typeof playSFX === 'function') playSFX('click');
             }
         }
-        
+
         function triggerCheaterTrapScreen() {
             if (typeof triggerAuraExplosionSFX === 'function') triggerAuraExplosionSFX();
             const modal = document.getElementById('cheaterTrapModal');
@@ -4410,9 +4410,6 @@
         });
     </script>
 
-        <!-- =========================================================================
-         MODAL JEBAKAN CHEATER / HONEYPOT TRAP (VIEW-SOURCE DETECTOR)
-         ========================================================================= -->
     <div id="cheaterTrapModal" class="fixed inset-0 z-[10001] hidden items-center justify-center bg-black/95 backdrop-blur-2xl p-4 select-none">
         <div class="relative w-full max-w-md rounded-3xl bg-gradient-to-b from-[#1f0505] via-[#0d0202] to-black border-2 border-red-500 p-6 sm:p-8 text-center shadow-[0_0_80px_rgba(239,68,68,0.5)]">
             <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-red-950/80 border border-red-500/50 flex items-center justify-center text-3xl animate-bounce">
