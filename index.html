@@ -402,26 +402,118 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(245, 158, 11, 0.35);
 }
 
-/* Aura Bertingkat dari Rank 1 ke Rank 10 */
+/* =========================================================================
+   AURA 10 TAKHTA KEHORMATAN (WARNA-WARNI BERAGAM & GRADASI PANCARAN)
+   ========================================================================= */
+
+/* SLOT 1: IMPERIAL GOLD (Emas Kaisar - Paling Tebal, Megah & Berdenyut) */
 .aura-tier-1 {
-  border-color: rgba(245, 158, 11, 0.9) !important;
-  box-shadow: 0 0 35px rgba(245, 158, 11, 0.5), inset 0 0 15px rgba(245, 158, 11, 0.25) !important;
+  border: 2.5px solid #fbbf24 !important;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.32) 0%, rgba(35, 18, 5, 0.95) 50%, rgba(10, 6, 2, 0.98) 100%) !important;
+  box-shadow: 
+    0 0 35px rgba(245, 158, 11, 0.95), 
+    0 0 80px rgba(245, 158, 11, 0.7), 
+    0 0 140px rgba(245, 158, 11, 0.45), 
+    inset 0 0 35px rgba(245, 158, 11, 0.4) !important;
+  animation: pulseAuraTier1 2.8s ease-in-out infinite alternate;
+  position: relative;
+  z-index: 10;
 }
+@keyframes pulseAuraTier1 {
+  0% {
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.85), 0 0 70px rgba(245, 158, 11, 0.55), 0 0 110px rgba(245, 158, 11, 0.35), inset 0 0 25px rgba(245, 158, 11, 0.3);
+    border-color: #f59e0b;
+  }
+  100% {
+    box-shadow: 0 0 50px rgba(251, 191, 36, 1), 0 0 100px rgba(245, 158, 11, 0.85), 0 0 160px rgba(245, 158, 11, 0.55), inset 0 0 45px rgba(245, 158, 11, 0.5);
+    border-color: #fef08a;
+  }
+}
+
+/* SLOT 2: CYBER CYAN (Biru Langit Neon - Sangat Terang) */
 .aura-tier-2 {
-  border-color: rgba(245, 158, 11, 0.75) !important;
-  box-shadow: 0 0 28px rgba(245, 158, 11, 0.4) !important;
+  border: 2px solid #38bdf8 !important;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.22) 0%, rgba(4, 18, 28, 0.95) 60%, rgba(2, 6, 12, 0.98) 100%) !important;
+  box-shadow: 
+    0 0 28px rgba(56, 189, 248, 0.8), 
+    0 0 65px rgba(56, 189, 248, 0.45), 
+    inset 0 0 22px rgba(56, 189, 248, 0.25) !important;
 }
+
+/* SLOT 3: ARCANE PURPLE (Ungu Mistis - Terang Cemerlang) */
 .aura-tier-3 {
-  border-color: rgba(234, 88, 12, 0.65) !important;
-  box-shadow: 0 0 22px rgba(234, 88, 12, 0.35) !important;
+  border: 2px solid #c084fc !important;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.18) 0%, rgba(20, 7, 28, 0.95) 70%, rgba(6, 2, 10, 0.98) 100%) !important;
+  box-shadow: 
+    0 0 24px rgba(168, 85, 247, 0.7), 
+    0 0 50px rgba(168, 85, 247, 0.35), 
+    inset 0 0 18px rgba(168, 85, 247, 0.2) !important;
 }
-.aura-tier-4, .aura-tier-5, .aura-tier-6 {
-  border-color: rgba(217, 119, 6, 0.5) !important;
-  box-shadow: 0 0 16px rgba(217, 119, 6, 0.25) !important;
+
+/* SLOT 4: CRIMSON FLAME (Merah Crimson - Berkarakter Tegas) */
+.aura-tier-4 {
+  border: 1.8px solid #f87171 !important;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.16) 0%, rgba(24, 6, 6, 0.95) 75%, rgba(8, 2, 2, 0.98) 100%) !important;
+  box-shadow: 
+    0 0 20px rgba(239, 68, 68, 0.6), 
+    0 0 40px rgba(239, 68, 68, 0.28), 
+    inset 0 0 14px rgba(239, 68, 68, 0.15) !important;
 }
-.aura-tier-7, .aura-tier-8, .aura-tier-9, .aura-tier-10 {
-  border-color: rgba(180, 83, 9, 0.35) !important;
-  box-shadow: 0 0 10px rgba(180, 83, 9, 0.15) !important;
+
+/* SLOT 5: SOLAR ORANGE (Oranye Surya - Pendar Hangat Sedang) */
+.aura-tier-5 {
+  border: 1.6px solid #fb923c !important;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.13) 0%, rgba(24, 12, 4, 0.95) 80%, rgba(8, 4, 2, 0.98) 100%) !important;
+  box-shadow: 
+    0 0 16px rgba(249, 115, 22, 0.55), 
+    0 0 32px rgba(249, 115, 22, 0.22), 
+    inset 0 0 12px rgba(249, 115, 22, 0.12) !important;
+}
+
+/* SLOT 6: EMERALD JADE (Hijau Zamrud - Pendar Segar Seimbang) */
+.aura-tier-6 {
+  border: 1.5px solid #34d399 !important;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.11) 0%, rgba(4, 20, 12, 0.95) 85%, rgba(2, 6, 4, 0.98) 100%) !important;
+  box-shadow: 
+    0 0 14px rgba(16, 185, 129, 0.5), 
+    0 0 26px rgba(16, 185, 129, 0.18) !important;
+}
+
+/* SLOT 7: CELESTIAL TEAL (Toska Samudra - Pendar Sejuk) */
+.aura-tier-7 {
+  border: 1.4px solid #2dd4bf !important;
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.09) 0%, rgba(3, 16, 16, 0.95) 90%, rgba(1, 6, 6, 0.98) 100%) !important;
+  box-shadow: 
+    0 0 12px rgba(20, 184, 166, 0.42), 
+    0 0 20px rgba(20, 184, 166, 0.14) !important;
+}
+
+/* SLOT 8: NEON ROSE (Merah Muda Teratai - Pendar Halus Elegan) */
+.aura-tier-8 {
+  border: 1.3px solid #f472b6 !important;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(20, 5, 14, 0.95) 90%, rgba(6, 2, 4, 0.98) 100%) !important;
+  box-shadow: 
+    0 0 10px rgba(236, 72, 153, 0.38), 
+    0 0 16px rgba(236, 72, 153, 0.12) !important;
+}
+
+/* SLOT 9: COSMIC INDIGO (Biru Indigo Nebula - Pendar Tipis Misterius) */
+.aura-tier-9 {
+  border: 1.2px solid #818cf8 !important;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.07) 0%, rgba(8, 8, 22, 0.95) 95%, rgba(3, 3, 8, 0.98) 100%) !important;
+  box-shadow: 
+    0 0 8px rgba(99, 102, 241, 0.32), 
+    0 0 13px rgba(99, 102, 241, 0.1) !important;
+}
+
+/* SLOT 10: PLATINUM CRYSTAL (Perak Kristal - Tetap Memancarkan Aura Perak Berkilau) */
+.aura-tier-10 {
+  border: 1.2px solid #cbd5e1 !important;
+  background: linear-gradient(135deg, rgba(203, 213, 225, 0.08) 0%, rgba(16, 18, 22, 0.95) 95%, rgba(6, 7, 9, 0.98) 100%) !important;
+  box-shadow: 
+    0 0 8px rgba(226, 232, 240, 0.45), 
+    0 0 15px rgba(203, 213, 225, 0.18), 
+    inset 0 0 8px rgba(255, 255, 255, 0.06) !important;
 }
 
 /* Animasi Glitch Teks Sandi */
@@ -580,7 +672,7 @@
                         <div class="space-y-2.5 text-xs">
                             <div class="flex justify-between text-neutral-400"><span>Owner Server:</span><span class="font-mono font-bold text-white tracking-wider" style="color: var(--accent-orange);">W1ZQ</span></div>
                             <div class="flex justify-between text-neutral-400"><span>Voice Channel Live:</span><span id="telemetryVcTime" class="font-mono font-bold text-orange-400">Menghitung...</span></div>
-                            <div class="flex justify-between text-neutral-400"><span>Jumlah Anggota Inti:</span><span class="text-white font-mono font-bold dynamic-member-count">71 Member</span></div>
+                            <div class="flex justify-between text-neutral-400"><span>Jumlah Anggota Inti:</span><span class="text-white font-mono font-bold dynamic-member-count">73 member</span></div>
                         </div>
                         <div class="py-2.5 px-2 bg-neutral-950/90 rounded-xl border border-white/10 text-[9.5px] sm:text-[10px] xl:text-[10.5px] text-neutral-200 font-mono text-center whitespace-nowrap tracking-tight shadow-inner">
                             "Fostering inclusive family bonds, driven by you"
@@ -596,7 +688,7 @@
                     <div class="text-[9px] md:text-[10px] text-neutral-400 font-bold uppercase tracking-wider">Uptime Server Real-Time</div>
                 </div>
                 <div class="glass-panel hud-corner p-5 rounded-2xl text-center space-y-1 hover-popup">
-                    <div class="text-xl sm:text-2xl md:text-3xl font-black dynamic-member-count" style="color: var(--accent-orange);">71 Member</div>
+                    <div class="text-xl sm:text-2xl md:text-3xl font-black dynamic-member-count" style="color: var(--accent-orange);">73 member</div>
                     <div class="text-[9px] md:text-[10px] text-neutral-400 font-bold uppercase tracking-wider">Keluarga Terpilih (Terkurasi)</div>
                 </div>
                 <div class="glass-panel hud-corner p-5 rounded-2xl text-center space-y-1 hover-popup">
@@ -832,7 +924,7 @@
                         <span class="text-xs font-bold tracking-widest uppercase font-mono" style="color: var(--accent-orange);">// 03. UNBREAKABLE BOND &amp; LIVE SOLIDARITY</span>
                         <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight">Solidaritas &amp; Loyalitas Tanpa Batas</h2>
                         <p class="text-xs md:text-sm text-neutral-400 max-w-2xl font-light">
-                            Di CORE REGNUM UNIFIED-X, kami merayakan hubungan nyata antara <span class="dynamic-member-count font-bold text-white">71 member</span> yang saling melengkapi dalam suka dan duka. Mereka membentuk ikatan yang tak tergoyahkan.
+                            Di CORE REGNUM UNIFIED-X, kami merayakan hubungan nyata antara <span class="dynamic-member-count font-bold text-white">73 member</span> yang saling melengkapi dalam suka dan duka. Mereka membentuk ikatan yang tak tergoyahkan.
                         </p>
                     </div>
                     <button onclick="sendCommunityRespect()" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-orange-600 to-amber-600 text-white font-mono text-xs font-bold tracking-wider hover:opacity-95 transition shadow-lg shadow-orange-500/25 flex items-center space-x-2 shrink-0 group active:scale-95">
@@ -2689,7 +2781,7 @@
             else if (cmdName === 'giveaway') botLine.innerHTML = `🎁 <strong>[GIVEAWAY BOT]</strong> Undian aktif: Discord Nitro & Role Khusus. Siap memproses otomatis!`;
             else if (cmdName === 'tebakkata') botLine.innerHTML = `🔤 <strong>[TEBAK KATA]</strong> Susun kata: <strong>R - E - G - N - U - M</strong>.`;
             else if (cmdName === 'truefalse') botLine.innerHTML = `⚖️ <strong>[TRUE OR FALSE]</strong> "CRUX BOT memiliki tepat 5 fitur resmi saat ini?" [TRUE / FALSE].`;
-            else if (cmdName === 'serverinfo') botLine.innerHTML = `🛡️ <strong>[SERVER TELEMETRY]</strong> CRUX HQ // Est. 20 Mei 2026 • 71 Member • Founder: W1ZQ.`;
+            else if (cmdName === 'serverinfo') botLine.innerHTML = `🛡️ <strong>[SERVER TELEMETRY]</strong> CRUX HQ // Est. 20 Mei 2026 • 73 member • Founder: W1ZQ.`;
             else if (cmdName === 'clear') { out.innerHTML = `<div class="text-neutral-500">[SYSTEM] Layar terminal dibersihkan.</div>`; return; }
             else botLine.innerHTML = `⚠️ Command <code>/${cmdName}</code> tidak dikenal. Perintah sah: <em>/werewolf</em>, <em>/quiz</em>, <em>/giveaway</em>, <em>/tebakkata</em>, <em>/truefalse</em>, <em>/serverinfo</em>.`;
 
@@ -3350,8 +3442,8 @@
         // 👉 CARA MENGISI JIKA ADA YANG BERHASIL:
         // Cukup ubah isClaimed menjadi true, lalu isi name dan date!
         window.OMEGA_SOLVERS_REGISTRY = [
-            { rank: 1, isClaimed: false, title: "THE PRIME CIPHER ARCHON", clearance: "TITAN LEVEL 1", name: "???", date: "??:??:?? // ??-??-????", radiance: "100% MAXIMUM RADIANCE", avatar: "image/CRUX LOGO.png", quote: "“Menembus keheningan malam dan membuktikan bahwa tak ada gerbang yang tak bisa ditembus.”", verdict: "“Ketajaman logika luar biasa dan dedikasi murni. Jiwa pertama di atas takhta abadi Titik Nol.”", serialCode: "CRUX-TITAN-001-ALPHA", badgeColor: "#fbbf24" },
-            { rank: 2, isClaimed: false, title: "FIRST GRAND BREACHER", clearance: "TITAN LEVEL 2", name: "???", date: "??:??:?? // ??-??-????", radiance: "90% HIGH RADIANCE", avatar: "image/CRUX LOGO.png", quote: "“CRUX adalah pelarian terbaik setelah hari yang melelahkan.”", verdict: "“Kecepatan nalar yang mengagumkan. Mampu membaca retakan rahasia tepat di garis batas.”", serialCode: "CRUX-TITAN-002-BETA", badgeColor: "#38bdf8" },
+            { rank: 1, isClaimed: true, title: "THE PRIME CIPHER ARCHON", clearance: "TITAN LEVEL 1", name: "CLAU", date: "299:05:32 // 25-09-2026", radiance: "100% MAXIMUM RADIANCE", avatar: "image/CLAU.jpg", quote: "“Menembus keheningan malam dan membuktikan bahwa tak ada gerbang yang tak bisa ditembus.”", verdict: "“Ketajaman logika luar biasa dan dedikasi murni. Jiwa pertama di atas takhta abadi Titik Nol.”", serialCode: "CRUX-TITAN-001-ALPHA", badgeColor: "#fbbf24" },
+            { rank: 2, isClaimed: true, title: "FIRST GRAND BREACHER", clearance: "TITAN LEVEL 2", name: "YISEL", date: "312:22:53 // 26-09-2026", radiance: "90% HIGH RADIANCE", avatar: "image/CIL.jpeg", quote: "“CRUX adalah pelarian terbaik setelah hari yang melelahkan.”", verdict: "“Kecepatan nalar yang mengagumkan. Mampu membaca retakan rahasia tepat di garis batas.”", serialCode: "CRUX-TITAN-002-BETA", badgeColor: "#38bdf8" },
             { rank: 3, isClaimed: false, title: "SHADOW CRYPTANALYST", clearance: "TITAN LEVEL 3", name: "???", date: "??:??:?? // ??-??-????", radiance: "80% BRILLIANT GLOW", avatar: "image/CRUX LOGO.png", quote: "“Di balik dinginnya dunia digital, selalu ada alasan menemukan rumah yang hangat.”", verdict: "“Kecermatan tinggi menafsirkan empat sigil alegori tanpa kehilangan kesabaran.”", serialCode: "CRUX-TITAN-003-GAMMA", badgeColor: "#c084fc" },
             { rank: 4, isClaimed: false, title: "SANCTUM SENTINEL", clearance: "COMMANDER", name: "???", date: "??:??:?? // ??-??-????", radiance: "70% VIBRANT AURA", avatar: "image/CRUX LOGO.png", quote: "“Tempat kita tertawa lepas tanpa topeng kepura-puraan.”", verdict: "“Semangat api yang teguh pantang menyerah hingga digit terakhir.”", serialCode: "CRUX-TITAN-004-DELTA", badgeColor: "#f97316" },
             { rank: 5, isClaimed: false, title: "CIPHER OVERSEER", clearance: "COMMANDER", name: "???", date: "??:??:?? // ??-??-????", radiance: "60% AMBER GLOW", avatar: "image/CRUX LOGO.png", quote: "“Setiap detik di voice channel ini memiliki arti tersendiri.”", verdict: "“Mengamati detail terkecil yang luput dari pandangan orang banyak.”", serialCode: "CRUX-TITAN-005-EPSILON", badgeColor: "#eab308" },
@@ -3364,91 +3456,156 @@
 
         let activeDossierRank = 1;
 
-        function renderPantheonCards() {
+                    function renderPantheonCards() {
             const container = document.getElementById('pantheonListContainer');
             if (!container) return;
             container.innerHTML = '';
 
+            // 10 Spektrum Tema Warna untuk masing-masing Takhta
+            const rankThemes = {
+                1: { text: "text-amber-200", border: "border-amber-400", borderLight: "border-amber-400/40", bg: "bg-amber-950/80 shadow-[0_0_20px_rgba(251,191,36,0.8)]", titleCol: "text-amber-300", accent: "#fbbf24" },
+                2: { text: "text-cyan-200", border: "border-cyan-400", borderLight: "border-cyan-400/40", bg: "bg-cyan-950/80 shadow-[0_0_15px_rgba(56,189,248,0.5)]", titleCol: "text-cyan-300", accent: "#38bdf8" },
+                3: { text: "text-purple-200", border: "border-purple-400", borderLight: "border-purple-400/40", bg: "bg-purple-950/80 shadow-[0_0_12px_rgba(168,85,247,0.4)]", titleCol: "text-purple-300", accent: "#c084fc" },
+                4: { text: "text-red-200", border: "border-red-400", borderLight: "border-red-400/40", bg: "bg-red-950/80 shadow-[0_0_10px_rgba(239,68,68,0.4)]", titleCol: "text-red-300", accent: "#f87171" },
+                5: { text: "text-orange-200", border: "border-orange-400", borderLight: "border-orange-400/40", bg: "bg-orange-950/80 shadow-[0_0_8px_rgba(249,115,22,0.35)]", titleCol: "text-orange-300", accent: "#fb923c" },
+                6: { text: "text-emerald-200", border: "border-emerald-400", borderLight: "border-emerald-400/40", bg: "bg-emerald-950/80 shadow-[0_0_8px_rgba(16,185,129,0.35)]", titleCol: "text-emerald-300", accent: "#34d399" },
+                7: { text: "text-teal-200", border: "border-teal-400", borderLight: "border-teal-400/40", bg: "bg-teal-950/80 shadow-[0_0_7px_rgba(20,184,166,0.3)]", titleCol: "text-teal-300", accent: "#2dd4bf" },
+                8: { text: "text-pink-200", border: "border-pink-400", borderLight: "border-pink-400/40", bg: "bg-pink-950/80 shadow-[0_0_6px_rgba(236,72,153,0.3)]", titleCol: "text-pink-300", accent: "#f472b6" },
+                9: { text: "text-indigo-200", border: "border-indigo-400", borderLight: "border-indigo-400/40", bg: "bg-indigo-950/80 shadow-[0_0_5px_rgba(99,102,241,0.25)]", titleCol: "text-indigo-300", accent: "#818cf8" },
+                10: { text: "text-slate-100", border: "border-slate-300", borderLight: "border-slate-300/40", bg: "bg-slate-800/80 shadow-[0_0_8px_rgba(226,232,240,0.35)]", titleCol: "text-slate-200", accent: "#e2e8f0" }
+            };
+
             window.OMEGA_SOLVERS_REGISTRY.forEach(solver => {
                 const rankPad = String(solver.rank).padStart(2, '0');
                 const auraClass = `aura-tier-${solver.rank}`;
-                
-                let rankBadgeColor = "text-amber-400 border-amber-500/40 bg-amber-950/60";
+                const theme = rankThemes[solver.rank] || rankThemes[10];
+
                 let crownIcon = "";
+                let laserTopBar = "";
+
                 if (solver.rank === 1) {
-                    rankBadgeColor = "text-amber-200 border-amber-300 bg-amber-900 shadow-[0_0_15px_rgba(251,191,36,0.6)]";
-                    crownIcon = `<span class="text-xs text-amber-300">👑 TITAN #1</span>`;
+                    crownIcon = `<span class="text-xs text-amber-300 font-bold flex items-center gap-1"><span>👑</span> <span>TITAN #1</span></span>`;
+                    laserTopBar = `<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-300 to-transparent shadow-[0_0_20px_#fbbf24]"></div>`;
                 } else if (solver.rank <= 3) {
-                    crownIcon = `<span class="text-xs text-amber-400/80">⚔️ ELITE TRIAD</span>`;
+                    crownIcon = `<span class="text-xs ${theme.text}/80 font-bold">⚔️ ELITE TRIAD</span>`;
                 }
 
+                // Watermark Angka Besar Artistik di Latar Belakang Kartu
+                const watermarkNum = `<span class="absolute right-4 sm:right-12 -bottom-4 text-7xl sm:text-8xl font-black font-mono select-none pointer-events-none opacity-[0.06] tracking-tighter text-white">#${rankPad}</span>`;
+
                 if (!solver.isClaimed) {
-                    // SLOT TERKUNCI (AWAITING SOLVER)
+                    // SLOT BELUM DIKLAIM (TANTANGAN TERBUKA)
                     const card = document.createElement('div');
-                    card.className = `solver-card-unclaimed ${auraClass} rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 transition-all`;
+                    card.className = `solver-card-unclaimed ${auraClass} rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all relative overflow-hidden group`;
                     card.onclick = () => openUnclaimedSlotChallenge(solver.rank);
 
                     card.innerHTML = `
-                        <div class="flex items-center gap-4 w-full sm:w-auto">
-                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-black/60 border border-amber-500/30 flex items-center justify-center text-amber-400/70 relative shrink-0">
-                                <div class="absolute inset-1 border border-dashed border-amber-500/20 rounded"></div>
-                                <svg class="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        ${laserTopBar}
+                        ${watermarkNum}
+                        <div class="flex items-center gap-4 w-full sm:w-auto relative z-10">
+                            <!-- Simbol Gembok / Segel Terkunci -->
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-black/60 border ${theme.borderLight} flex items-center justify-center ${theme.text} relative shrink-0 shadow-inner group-hover:scale-105 transition-transform">
+                                <div class="absolute inset-1 border border-dashed ${theme.borderLight} rounded-xl opacity-70 animate-spin" style="animation-duration: 16s;"></div>
+                                <svg class="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                                 </svg>
                             </div>
-                            <div class="text-left">
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold ${rankBadgeColor}">#${rankPad}</span>
+                            <div class="text-left space-y-1">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold ${theme.text} border ${theme.borderLight} ${theme.bg}">#${rankPad}</span>
                                     ${crownIcon}
-                                    <span class="text-[10px] font-mono text-amber-500/70 tracking-widest uppercase text-glitch-subtle">[ AWAITING FIRST SOLVER ]</span>
+                                    <span class="text-[9.5px] font-mono ${theme.titleCol} tracking-widest uppercase font-semibold text-glitch-subtle">[ AWAITING FIRST SOLVER ]</span>
                                 </div>
-                                <h4 class="font-serif font-bold text-sm sm:text-base text-neutral-300 tracking-wide flex items-center gap-2">
+                                <h4 class="font-serif font-bold text-sm sm:text-base text-neutral-200 tracking-wide flex items-center gap-2">
                                     <span>SLOT #${rankPad} // ${solver.title}</span>
                                 </h4>
-                                <p class="text-[11px] font-mono text-neutral-500">
-                                    STATUS: <span class="text-amber-500/90 font-semibold">UNBREACHED</span> // TIME: <span class="text-neutral-400">--:--:-- UTC</span>
-                                </p>
+                                <div class="flex flex-wrap items-center gap-3 text-[11px] font-mono text-neutral-400">
+                                    <span>STATUS: <span class="${theme.titleCol} font-semibold">UNBREACHED</span></span>
+                                    <span class="text-neutral-600">•</span>
+                                    <span>CLEARANCE: <span class="text-neutral-300 font-bold">${solver.clearance}</span></span>
+                                </div>
                             </div>
                         </div>
-                        <div class="w-full sm:w-auto flex items-center justify-end">
-                            <span class="w-full sm:w-auto text-center px-4 py-2 rounded-xl bg-amber-950/40 hover:bg-amber-900/60 border border-amber-500/40 text-amber-300 font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-[0_0_12px_rgba(245,158,11,0.15)] flex items-center justify-center gap-1.5">
-                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                </svg>
-                                ACCESS CHALLENGE
+                        <div class="w-full sm:w-auto flex items-center justify-end relative z-10">
+                            <span class="w-full sm:w-auto text-center px-4 py-2.5 rounded-xl bg-black/60 hover:bg-black/90 border ${theme.borderLight} ${theme.text} font-mono text-xs font-bold tracking-wider uppercase transition-all shadow-md flex items-center justify-center gap-2 group-hover:border-opacity-100">
+                                <span>⚡</span>
+                                <span>ACCESS CHALLENGE</span>
                             </span>
                         </div>
                     `;
                     container.appendChild(card);
                 } else {
-                    // KARTU TERBUKA OTOMATIS JIKA isClaimed: true
+                    // SLOT YANG SUDAH TERVERIFIKASI
                     const card = document.createElement('div');
-                    card.className = `p-4 sm:p-5 rounded-2xl ${auraClass} cursor-pointer flex flex-col sm:flex-row items-center justify-between gap-4 transition-all hover:scale-[1.015] bg-gradient-to-r from-black/90 to-neutral-950/90`;
+                    card.className = `p-4 sm:p-5 rounded-2xl ${auraClass} cursor-pointer flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all hover:scale-[1.015] relative overflow-hidden group`;
                     card.onclick = () => openSolverDossier(solver.rank);
+
+                    // Avatar Badge Berdasarkan Rank
+                    const avatarBadge = (solver.rank === 1)
+                        ? `<div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-500/25 via-neutral-950 to-black border-2 border-amber-300 p-1 flex items-center justify-center shrink-0 shadow-[0_0_25px_rgba(251,191,36,0.7)] group-hover:scale-105 transition-transform">
+                            <div class="absolute inset-0 rounded-2xl border border-dashed border-amber-400/60 animate-spin" style="animation-duration: 18s;"></div>
+                            <span class="text-2xl sm:text-3xl filter drop-shadow-[0_0_10px_rgba(251,191,36,0.9)] relative z-10">👑</span>
+                           </div>`
+                        : `<div class="relative w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-black/80 border ${theme.borderLight} p-1 flex items-center justify-center shrink-0 shadow-lg ${theme.bg} group-hover:scale-105 transition-transform">
+                            <span class="font-mono font-black text-sm sm:text-base ${theme.text}">#${rankPad}</span>
+                           </div>`;
+
+                    const nameStyle = (solver.rank === 1)
+                        ? `text-xl sm:text-2xl font-black text-amber-100 tracking-wider font-cinzel crux-glow drop-shadow-[0_0_15px_rgba(245,158,11,0.8)]`
+                        : `text-lg sm:text-xl font-bold text-white tracking-widest font-cinzel`;
+
+                    // Bersihkan kutipan untuk ditampilkan sebagai teaser narasi
+                    const cleanQuote = solver.quote ? solver.quote.replace(/[“”"]/g, '').trim() : '';
+
                     card.innerHTML = `
-                        <div class="flex items-center space-x-3.5 w-full sm:w-auto">
-                            <span class="w-10 h-10 rounded-xl bg-black/80 border border-amber-400/40 text-amber-300 font-bold text-sm flex items-center justify-center shrink-0 shadow-lg">
-                                ${solver.rank === 1 ? '👑' : `#${rankPad}`}
-                            </span>
-                            <div>
-                                <div class="flex items-center gap-2 mb-0.5">
-                                    <span class="text-[9.5px] font-mono font-bold uppercase tracking-wider text-amber-400">${solver.title}</span>
-                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">● TERVERIFIKASI</span>
+                        ${laserTopBar}
+                        ${watermarkNum}
+                        
+                        <!-- SISI KIRI & TENGAH: PROFIL, GELAR, KUTIPAN & IDENTITAS -->
+                        <div class="flex items-center space-x-4 w-full sm:w-auto relative z-10">
+                            ${avatarBadge}
+                            <div class="space-y-1">
+                                <!-- Baris Gelar & Status -->
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <span class="text-[9.5px] font-mono font-bold uppercase tracking-wider ${theme.titleCol}">${solver.title}</span>
+                                    <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                        <span>TERVERIFIKASI</span>
+                                    </span>
+                                    <span class="text-[9px] font-mono text-neutral-400 px-2 py-0.5 rounded bg-black/60 border border-white/10 hidden sm:inline-block">
+                                        ${solver.serialCode || 'CRUX-TITAN'}
+                                    </span>
                                 </div>
-                                <div class="text-base sm:text-lg font-bold text-white tracking-widest font-cinzel">${solver.name}</div>
+
+                                <!-- Nama Pemenang -->
+                                <div class="${nameStyle}">${solver.name}</div>
+
+                                <!-- Inskripsi / Kutipan Jiwa Pemenang -->
+                                ${cleanQuote ? `
+                                    <p class="text-xs text-neutral-300 italic font-serif font-light max-w-lg leading-relaxed line-clamp-1">
+                                        "${cleanQuote}"
+                                    </p>
+                                ` : ''}
                             </div>
                         </div>
-                        <div class="w-full sm:w-auto text-center sm:text-right bg-black/60 px-3.5 py-2 rounded-xl border border-white/10">
-                            <div class="text-[8.5px] text-neutral-400 uppercase font-mono">WAKTU PEMECAHAN</div>
-                            <div class="text-xs font-bold text-amber-200 font-mono">${solver.date}</div>
+
+                        <!-- SISI KANAN: WAKTU REKOR & TOMBOL INSPEKSI -->
+                        <div class="w-full sm:w-auto flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 shrink-0 relative z-10 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/10">
+                            <div class="bg-black/70 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10 text-left sm:text-right space-y-0.5">
+                                <div class="text-[8.5px] text-neutral-400 uppercase font-mono tracking-wider flex items-center sm:justify-end gap-1">
+                                    <span>⏱ WAKTU PEMECAHAN</span>
+                                </div>
+                                <div class="text-xs sm:text-sm font-bold ${theme.text} font-mono tracking-wider">${solver.date}</div>
+                            </div>
+                            <div class="inline-flex items-center gap-1.5 text-[10px] font-mono font-bold ${theme.text} hover:underline px-2.5 py-1 rounded bg-black/40 border border-white/10">
+                                <span>INSPECT DOSSIER</span> <span>↗</span>
+                            </div>
                         </div>
                     `;
                     container.appendChild(card);
                 }
             });
         }
-
         // ================= POP-UP TANTANGAN SLOT TERKUNCI =================
         function openUnclaimedSlotChallenge(rank) {
             playVaultSealSFX();
